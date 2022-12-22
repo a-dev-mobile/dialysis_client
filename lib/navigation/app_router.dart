@@ -11,11 +11,11 @@ import 'package:dialysis/feature/onboarding/vew/vew.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
 import 'package:dialysis/feature/setting/setting_tab.dart';
 import 'package:dialysis/feature/splash/splash.dart';
+import 'package:dialysis/feature/welcome/view/welcome_p.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
-
   static final _pageNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter router = GoRouter(
@@ -32,6 +32,23 @@ class AppRouter {
           );
         },
         routes: [
+          GoRoute(
+            name: SplashPage.name,
+            path: SplashPage.path,
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const SplashPage(),
+            ),
+          ),
+          GoRoute(
+            name: WelcomePage.name,
+            path: WelcomePage.path,
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const WelcomePage(),
+            ),
+          ),
+
           // GoRoute(
           //   name: BottomNavBarPage.name,
           //   path: BottomNavBarPage.path,
@@ -72,14 +89,7 @@ class AppRouter {
               child: const DebugMenuPage(),
             ),
           ),
-          GoRoute(
-            name: SplashPage.name,
-            path: SplashPage.path,
-            pageBuilder: (context, state) => MaterialPage<void>(
-              key: state.pageKey,
-              child: const SplashPage(),
-            ),
-          ),
+
           GoRoute(
             name: OnBoardingPage.name,
             path: OnBoardingPage.path,

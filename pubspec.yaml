@@ -150,7 +150,7 @@ flutter_native_splash:
   ios: true
   web: true
   desktop: true
-  color: "#F5F8FC"
-  color_dark: "#141617"
+  color: "#141617"
+  # color_dark: "#141617"
   image: assets/icon_splash/splash.png
 

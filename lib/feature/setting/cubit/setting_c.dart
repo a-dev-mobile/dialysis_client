@@ -4,12 +4,10 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-
-import 'package:flutter/material.dart';
-
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/feature/common/enum.dart';
 import 'package:dialysis/navigation/navigation.dart';
+import 'package:flutter/material.dart';
 
 class SettingCubit extends Cubit<SettingState> {
   SettingCubit({
@@ -23,7 +21,7 @@ class SettingCubit extends Cubit<SettingState> {
   final LocaleCubit _cubitLocale;
   final ThemeCubit _cubitTheme;
 
-  void changeLocale(Locale locale) {
+  void changeLocale(LocaleEnum locale) {
     emit(state.copyWith(locale: locale));
 
     _cubitLocale.setLocale(locale);
@@ -39,7 +37,7 @@ class SettingCubit extends Cubit<SettingState> {
 @immutable
 class SettingState {
   // enum
-  final Locale locale;
+  final LocaleEnum locale;
   // enum
   final ThemeMode theme;
 
@@ -49,7 +47,7 @@ class SettingState {
   });
 
   SettingState copyWith({
-    Locale? locale,
+    LocaleEnum? locale,
     ThemeMode? theme,
   }) {
     return SettingState(
@@ -67,7 +65,7 @@ class SettingState {
 
   factory SettingState.fromMap(Map<String, dynamic> map) {
     return SettingState(
-      locale: Locale.values[map['locale'] as int],
+      locale: LocaleEnum.values[map['locale'] as int],
       theme: ThemeMode.values[map['theme'] as int],
     );
   }

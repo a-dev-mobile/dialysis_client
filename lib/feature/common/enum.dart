@@ -316,7 +316,7 @@ enum WeightCalculationType with Comparable<WeightCalculationType> {
 /// {@template enum}
 /// Locale enumeration
 /// {@endtemplate}
-enum Locale with Comparable<Locale> {
+enum LocaleEnum with Comparable<LocaleEnum> {
   /// runtimeType
   ru('ru'),
 
@@ -324,10 +324,10 @@ enum Locale with Comparable<Locale> {
   en('en');
 
   /// {@macro enum}
-  const Locale(this.value);
+  const LocaleEnum(this.value);
 
-  /// Creates a new instance of [Locale] from a given string.
-  static Locale fromValue(String? value, {Locale? fallback}) {
+  /// Creates a new instance of [LocaleEnum] from a given string.
+  static LocaleEnum fromValue(String? value, {LocaleEnum? fallback}) {
     switch (value) {
       case 'ru':
         return ru;
@@ -348,9 +348,9 @@ enum Locale with Comparable<Locale> {
     required T Function() en,
   }) {
     switch (this) {
-      case Locale.ru:
+      case LocaleEnum.ru:
         return ru();
-      case Locale.en:
+      case LocaleEnum.en:
         return en();
     }
   }
@@ -378,7 +378,7 @@ enum Locale with Comparable<Locale> {
       );
 
   @override
-  int compareTo(Locale other) => index.compareTo(other.index);
+  int compareTo(LocaleEnum other) => index.compareTo(other.index);
 
   @override
   String toString() => value;

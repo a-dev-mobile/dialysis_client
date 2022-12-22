@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:dialysis/feature/common/enum.dart';
 import 'package:dialysis/feature/setting/setting_tab.dart';
 import 'package:dialysis/l10n/l10n.dart';
 import 'package:dialysis/navigation/navigation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -54,13 +53,13 @@ class _SettingTabPage extends StatelessWidget {
                   spacing: 2,
                   children: [
                     _ChipThemeLang(
-                      onSelected: (v) => cubit.changeLocale(Locale.en),
-                      selected: state.locale == Locale.en,
+                      onSelected: (v) => cubit.changeLocale(LocaleEnum.en),
+                      selected: state.locale == LocaleEnum.en,
                       text: l.lang_en,
                     ),
                     _ChipThemeLang(
-                      onSelected: (v) => cubit.changeLocale(Locale.ru),
-                      selected: state.locale == Locale.ru,
+                      onSelected: (v) => cubit.changeLocale(LocaleEnum.ru),
+                      selected: state.locale == LocaleEnum.ru,
                       text: l.lang_ru,
                     ),
                   ],
