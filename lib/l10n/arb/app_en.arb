@@ -1,0 +1,39 @@
+{
+  "@@locale": "en",
+  "app_name": "Dialysis",
+  "continueTo": "Continue to",
+  "start": "Start",
+  "welcome": "Welcome.",
+  "no_internet": "No internet access",
+  "you_entered_1_3_characters": "You entered 1/3 characters",
+  "you_entered_2_3_characters": "You entered 2/3 characters",
+  "next": "Next",
+  "main": "Home",
+  "apply": "Apply",
+  "confirm": "Confirm",
+  "change": "Change",
+  "setting": "Settings",
+  "app_lang": "Application language",
+  "lang_ru": "Russian",
+  "lang_en": "English",
+  "generalError": "Oops, something happened!\nTry again",
+  "launch": "launch",
+  "load": "Loading...",
+  "thank_you": "Thank you for using our app",
+  "about": "About app",
+  "rate_app": "Rate app",
+  "feedback": "Feedback",
+  "exit_app": "Exit app",
+  "yes": "yes",
+  "no": "no",
+  "no_data": "No data",
+  "all_product": "All foods",
+  "app_theme": "App Theme",
+  "dark_theme": "Dark",
+  "light_theme": "Light",
+  "g": "g"
+
+
+  
+  
+}

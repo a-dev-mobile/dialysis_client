@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "233829405021",
+    "project_id": "prod--dialysis",
+    "storage_bucket": "prod--dialysis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233829405021:android:a6e4978edc5ba5d67d58b4",
+        "android_client_info": {
+          "package_name": "a.dev.mobile.dialysis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233829405021-ttcghe9nshvnnhk1lp97c7un2civ3gj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEdy1IcuZPsMZ08b2BI2diarA0kJ-urDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233829405021-ttcghe9nshvnnhk1lp97c7un2civ3gj3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "233829405021-56o47a1ioae21gkopp556erjatseaioq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fffghfgh"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
