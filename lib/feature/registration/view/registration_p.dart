@@ -1,48 +1,47 @@
 import 'package:dialysis/app/style/style.dart';
-import 'package:dialysis/core/widget/widget.dart';
-import 'package:dialysis/feature/welcome/welcome.dart';
-import 'package:dialysis/l10n/l10n.dart';
+import 'package:dialysis/feature/registration/registration.dart';
+
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
-  static const path = '/Welcome';
-  static const name = 'Welcome';
+class RegistrationPage extends StatelessWidget {
+  const RegistrationPage({super.key});
+  static const path = '/Registration';
+  static const name = 'Registration';
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => WelcomeCubit(
+          create: (context) => RegistrationCubit(
             router: context.read<AppRouter>(),
             cubitTheme: context.read(),
             cubitLocale: context.read(),
           )..load(),
         ),
       ],
-      child: const _WelcomePage(),
+      child: const _RegistrationPage(),
     );
   }
 }
 
-class _WelcomePage extends StatelessWidget {
-  const _WelcomePage();
+class _RegistrationPage extends StatelessWidget {
+  const _RegistrationPage();
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<WelcomeCubit>();
+    final cubit = context.read<RegistrationCubit>();
 
-    final l = context.l10n;
+    // final l = context.l10n;
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all( 10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Text(
-                l.welcome,
+                'l.registration',
                 style: AppTextStyles.h4(),
               ),
               Text(
@@ -50,9 +49,7 @@ class _WelcomePage extends StatelessWidget {
                 style: AppTextStyles.h6(),
               ),
               const Spacer(),
-              AppLogo(),
-              const Spacer(),
-              BlocBuilder<WelcomeCubit, WelcomeState>(
+              BlocBuilder<RegistrationCubit, RegistrationState>(
                 buildWhen: (p, c) => p.themeActive != c.themeActive,
                 builder: (context, state) {
                   return _BtnToggleText(
@@ -64,7 +61,7 @@ class _WelcomePage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20),
-              BlocBuilder<WelcomeCubit, WelcomeState>(
+              BlocBuilder<RegistrationCubit, RegistrationState>(
                 buildWhen: (p, c) => p.localeActive != c.localeActive,
                 builder: (context, state) {
                   return _BtnToggleText(
@@ -110,7 +107,7 @@ class _BtnToggleText extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppTextStyles.bodyText2(),
+              style: AppTextStyles.button(),
             ),
             const SizedBox(height: 10),
             ToggleButtons(

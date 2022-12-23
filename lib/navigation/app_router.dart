@@ -9,6 +9,7 @@ import 'package:dialysis/feature/debug_menu/debug_menu.dart';
 
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
+import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/feature/setting/setting_tab.dart';
 import 'package:dialysis/feature/splash/splash.dart';
 import 'package:dialysis/feature/welcome/view/welcome_p.dart';
@@ -48,7 +49,14 @@ class AppRouter {
               child: const WelcomePage(),
             ),
           ),
-
+          GoRoute(
+            name: RegistrationPage.name,
+            path: RegistrationPage.path,
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const RegistrationPage(),
+            ),
+          ),
           // GoRoute(
           //   name: BottomNavBarPage.name,
           //   path: BottomNavBarPage.path,

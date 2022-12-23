@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
+import 'package:dialysis/data_base/data_base.dart';
 import 'package:dialysis/feature/welcome/view/welcome_p.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +18,13 @@ class SplashCubit extends Cubit<SplashState> {
 
   Future<void> load() async {
     emit(state.copyWith(isLoad: true));
-    
-    await Future.delayed(Duration(seconds: 2));
-    
+
+    // copy DB
+    await DataBaseHelper.checkAndcopyDbFromAssets();
+
+    // load data
+    await DataBaseHelper.checkAndLoadUpdateDb();
+
     _go.router.goNamed(WelcomePage.name);
 
     emit(state.copyWith(isLoad: false));

@@ -1,7 +1,8 @@
+// ignore_for_file: unused_element, unused_local_variable
+
 import 'dart:async';
 
 import 'dart:io';
-
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dialysis/core/device/device.dart';
@@ -28,7 +29,7 @@ class DataBaseHelper {
     final databasesPath = await getDatabasesPath();
     final fullPathFileDb = join(databasesPath, _nameDb);
 
-    final db = await openDatabase(fullPathFileDb, password: APP_DB_PASSWORD);
+    var db = await openDatabase(fullPathFileDb, password: APP_DB_PASSWORD);
     final currentVersionDb = await db.getVersion();
     final newVersionDb = int.tryParse(await DeviceInfo.getBuildNumber()) ?? 0;
     if (currentVersionDb < newVersionDb) {
@@ -37,7 +38,6 @@ class DataBaseHelper {
       //delete the old database so you can copy the new one
       await deleteDatabase(fullPathFileDb);
 
-      // ignore: unused_local_variable
       final directory =
           await Directory(dirname(fullPathFileDb)).create(recursive: true);
 
@@ -48,17 +48,11 @@ class DataBaseHelper {
       );
       unawaited(AppStorage.setDbPatch(fullPathFileDb));
 
-      await openDatabase(fullPathFileDb, password: APP_DB_PASSWORD)
-        ..setVersion(newVersionDb)
-        ..close();
+      db = await openDatabase(fullPathFileDb, password: APP_DB_PASSWORD);
+      await db.setVersion(newVersionDb);
+      await db.close();
     }
-    // if db path not empty
-    // final localDbPath = await AppStorage.getDbPatch();
-    // if (localDbPath.isNotEmpty) return;
 
-    // if db file exist
-    // final exists = File(fullPathFileDb).existsSync();
-    // if (exists) return;
   }
 
   // получаю из firestore из app_build_number
@@ -116,44 +110,31 @@ class DataBaseHelper {
     // });
   }
 
-//   static Future<void> _jsonToDb() async {
-//     final dbFolderPath = await getDatabasesPath();
-//     final dbFilePatch = await AppStorage.getDbPatch();
+  static Future<void> _jsonToDb() async {
+    final dbFolderPath = await getDatabasesPath();
+    final dbFilePatch = await AppStorage.getDbPatch();
 
-//     final tables = await AppStorage.getNameJsonFiles();
-//     final pathJson = await AppStorage.getJsonFiles();
+    final tables = await AppStorage.getNameJsonFiles();
+    final pathJson = await AppStorage.getJsonFiles();
 
-//     final file = File('$dbFolderPath/${pathJson[0]}');
-//     final contents = await file.readAsString();
+    final file = File('$dbFolderPath/${pathJson[0]}');
+    final contents = await file.readAsString();
 
-//     // final decodedMap = await compute(parse, contents);
+    // final decodedMap = await compute(parse, contents);
 
-//     final db = await openDatabase(dbFilePatch, password: APP_DB_PASSWORD);
-//     // await db.insert(
-//     //   tables[0],
-//     //   decodedMap,
-//     //   conflictAlgorithm: ConflictAlgorithm.replace,
-//     // );
+    final db = await openDatabase(dbFilePatch, password: APP_DB_PASSWORD);
+    // await db.insert(
+    //   tables[0],
+    //   decodedMap,
+    //   conflictAlgorithm: ConflictAlgorithm.replace,
+    // );
 
-//     await db.close();
+    await db.close();
 
-//     // Read the file
 
-// //     for (final i in tables) {
-// // await db.insert(i, values)
+  }
 
-// //     }
 
-//     // final pathZipFile = '$pathZipFolder/$_nameZip';
-//   }
-
-  // static Future<void> _saveFilesJson(Archive archive) async {
-  //   final listPath = <String>[];
-  //   for (final path in archive.files) {
-  //     listPath.add(path.name);
-  //   }
-  //   await AppStorage.setJsonFiles(listPath);
-  // }
 }
 
 /* 

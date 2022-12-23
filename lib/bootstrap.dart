@@ -41,7 +41,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() app) async {
       Bloc.transformer = bloc_concurrency.sequential<Object?>();
       PlatformDispatcher.instance.onError = _onPlatformDispatcherError;
 
-      await _initStatusBar();
+      // await _initStatusBar();
 
       final _ = await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
@@ -89,17 +89,12 @@ Future<void> bootstrap(FutureOr<Widget> Function() app) async {
       }
     },
   );
-  // copy DB
-  await DataBaseHelper.checkAndcopyDbFromAssets();
-
-  // load data
-  await DataBaseHelper.checkAndLoadUpdateDb();
 
   FlutterNativeSplash.remove();
   log.v('** close NATIVE splash**');
 }
 
-// ignore: prefer-static-class
+// ignore: prefer-static-class, unused_element
 Future<void> _initStatusBar() async {
   await SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp],
