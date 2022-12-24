@@ -2,7 +2,7 @@
 
 import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/widget/widget.dart';
-import 'package:dialysis/feature/category/view/category_p.dart';
+
 import 'package:dialysis/feature/common/test_app/test_app.dart';
 import 'package:dialysis/feature/debug_menu/debug_menu.dart';
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
@@ -115,15 +115,15 @@ class AppRouter {
               child: const TestAppPage(),
             ),
           ),
-          GoRoute(
-            name: CategoryPage.name,
-            path: CategoryPage.path,
-            parentNavigatorKey: _pageNavigatorKey,
-            pageBuilder: (context, state) => MaterialPage<void>(
-              key: state.pageKey,
-              child: const CategoryPage(),
-            ),
-          ),
+          // GoRoute(
+          //   name: CategoryPage.name,
+          //   path: CategoryPage.path,
+          //   parentNavigatorKey: _pageNavigatorKey,
+          //   pageBuilder: (context, state) => MaterialPage<void>(
+          //     key: state.pageKey,
+          //     child: const CategoryPage(),
+          //   ),
+          // ),
           GoRoute(
             name: PdfPage.name,
             path: PdfPage.path,

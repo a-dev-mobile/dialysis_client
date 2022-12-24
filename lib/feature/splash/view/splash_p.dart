@@ -5,7 +5,6 @@ import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
@@ -18,6 +17,7 @@ class SplashPage extends StatelessWidget {
       lazy: false,
       create: (context) => SplashCubit(
         router: context.read<AppRouter>(),
+        db: context.read(),
       )..load(),
       child: const _SplashView(),
     );
@@ -39,7 +39,7 @@ class _SplashView extends StatelessWidget {
             bottom: 30,
             right: 0,
             left: 0,
-            child: PageLoad(),
+            child: AppPageProgressIndicator(),
           ),
         ],
       ),

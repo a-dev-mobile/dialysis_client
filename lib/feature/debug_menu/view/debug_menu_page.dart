@@ -32,6 +32,7 @@ class DebugMenuPage extends StatelessWidget {
 
     final go = context.read<AppRouter>();
     final cubitDebug = context.read<DebugCubit>();
+    final storage = context.read<AppStorage>();
 
     return Scaffold(
       appBar: AppBar(
@@ -143,7 +144,7 @@ class DebugMenuPage extends StatelessWidget {
                   OutlinedButton(
                     // ignore: prefer-extracting-callbacks
                     onPressed: () async {
-                      await AppStorage.clearAll();
+                      storage.clearAll();
 
                       await _hydratedClean();
 

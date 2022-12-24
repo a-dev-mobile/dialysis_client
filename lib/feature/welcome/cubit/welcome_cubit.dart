@@ -1,14 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, lines_longer_than_80_chars
 
-
 import 'package:bloc/bloc.dart';
+import 'package:dialysis/app/common_cubits/common_cubits.dart';
 
+import 'package:dialysis/feature/common/enums/enums.dart';
+import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:dialysis/app/common_cubits/common_cubits.dart';
-import 'package:dialysis/feature/common/enum.dart';
-import 'package:dialysis/navigation/navigation.dart';
+part 'welcome_cubit.freezed.dart';
 
 class WelcomeCubit extends Cubit<WelcomeState> {
   WelcomeCubit({
@@ -52,8 +53,7 @@ class WelcomeCubit extends Cubit<WelcomeState> {
   }
 
   void changeLocale(int index) {
-    final localeActive = index == 0 ? LocaleEnum.ru : LocaleEnum.en;
-
+    final localeActive = index == 0 ? LocaleEnum.en : LocaleEnum.ru;
 
     final boolsLocale = state.boolsLocale;
     final result = _forEachResult(boolsLocale, index);
@@ -83,53 +83,13 @@ class WelcomeCubit extends Cubit<WelcomeState> {
   }
 }
 
-@immutable
-class WelcomeState {
-  final List<bool> boolsLocale;
-  final List<bool> boolsTheme;
-  final LocaleEnum localeActive;
-  final ThemeMode themeActive;
-  const WelcomeState({
-    this.boolsLocale = const [],
-    this.boolsTheme = const [],
-    required this.localeActive,
-    required this.themeActive,
-  });
-
-  WelcomeState copyWith({
-    List<bool>? boolsLocale,
-    List<bool>? boolsTheme,
-    LocaleEnum? localeActive,
-    ThemeMode? themeActive,
-  }) {
-    return WelcomeState(
-      boolsLocale: boolsLocale ?? this.boolsLocale,
-      boolsTheme: boolsTheme ?? this.boolsTheme,
-      localeActive: localeActive ?? this.localeActive,
-      themeActive: themeActive ?? this.themeActive,
-    );
-  }
-
-  @override
-  String toString() {
-    return 'WelcomeState(boolsLocale: $boolsLocale, boolsTheme: $boolsTheme, localeActive: $localeActive, themeActive: $themeActive)';
-  }
-
-  @override
-  bool operator ==(covariant WelcomeState other) {
-    if (identical(this, other)) return true;
-
-    return listEquals(other.boolsLocale, boolsLocale) &&
-        listEquals(other.boolsTheme, boolsTheme) &&
-        other.localeActive == localeActive &&
-        other.themeActive == themeActive;
-  }
-
-  @override
-  int get hashCode {
-    return boolsLocale.hashCode ^
-        boolsTheme.hashCode ^
-        localeActive.hashCode ^
-        themeActive.hashCode;
-  }
+@freezed
+class WelcomeState with _$WelcomeState {
+  const factory WelcomeState({
+    @Default([]) List<bool> boolsLocale,
+    @Default([]) List<bool> boolsTheme,
+    required LocaleEnum localeActive,
+    required ThemeMode themeActive,
+  }) = _WelcomeState;
 }
+

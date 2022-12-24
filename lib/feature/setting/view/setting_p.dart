@@ -1,4 +1,5 @@
-import 'package:dialysis/feature/common/enum.dart';
+
+import 'package:dialysis/feature/common/enums/enums.dart';
 import 'package:dialysis/feature/setting/setting_tab.dart';
 import 'package:dialysis/l10n/l10n.dart';
 import 'package:dialysis/navigation/navigation.dart';

@@ -70,8 +70,8 @@ class _WelcomePage extends StatelessWidget {
                   return _BtnToggleText(
                     onPressed: cubit.changeLocale,
                     textList: const [
-                      'Руский',
                       'Английский',
+                      'Руский',
                     ],
                     isSelected: state.boolsLocale,
                     title: 'Выберите язык приложения',

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class PageLoad extends StatelessWidget {
-  const PageLoad({
+class AppPageProgressIndicator extends StatelessWidget {
+
+
+  const AppPageProgressIndicator({
     super.key,
     this.size,
     this.title,

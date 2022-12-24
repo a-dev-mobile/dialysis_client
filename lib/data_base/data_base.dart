@@ -1,3 +1,3 @@
-export 'app_db_repository.dart';
-export 'data_base_helper.dart';
+export 'app_db.dart';
+
 export 'models/models.dart';

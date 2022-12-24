@@ -1,8 +1,32 @@
 // ignore_for_file: constant_identifier_names
 
-enum SortAscDesc { asc, desc }
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 
-enum EnumNameTable { category, food, nutrient, nutrient_type, product, source }
+part 'enums.g.dart';
+
+class TestEnum extends EnumClass {
+  /// Example of how to make an [EnumClass] serializable.
+  ///
+  /// Declare a static final [Serializers] field called `serializer`.
+  /// The built_value code generator will provide the implementation. You need
+  /// to do this for every type you want to serialize.
+  static Serializer<TestEnum> get serializer => _$testEnumSerializer;
+
+  static const TestEnum yes = _$yes;
+  static const TestEnum no = _$no;
+  static const TestEnum maybe = _$maybe;
+
+  const TestEnum._(String name) : super(name);
+
+  static BuiltSet<TestEnum> get values => _$values;
+  static TestEnum valueOf(String name) => _$valueOf(name);
+}
+
+
+
+enum SortAscDesc { asc, desc }
 
 enum NutrientName {
   water,
@@ -308,77 +332,6 @@ enum WeightCalculationType with Comparable<WeightCalculationType> {
 
   @override
   int compareTo(WeightCalculationType other) => index.compareTo(other.index);
-
-  @override
-  String toString() => value;
-}
-
-/// {@template enum}
-/// Locale enumeration
-/// {@endtemplate}
-enum LocaleEnum with Comparable<LocaleEnum> {
-  /// runtimeType
-  ru('ru'),
-
-  /// en-
-  en('en');
-
-  /// {@macro enum}
-  const LocaleEnum(this.value);
-
-  /// Creates a new instance of [LocaleEnum] from a given string.
-  static LocaleEnum fromValue(String? value, {LocaleEnum? fallback}) {
-    switch (value) {
-      case 'ru':
-        return ru;
-      case 'en':
-        return en;
-
-      default:
-        return fallback ?? (throw ArgumentError.value(value));
-    }
-  }
-
-  /// Value of the enum
-  final String value;
-
-  /// Pattern matching
-  T map<T>({
-    required T Function() ru,
-    required T Function() en,
-  }) {
-    switch (this) {
-      case LocaleEnum.ru:
-        return ru();
-      case LocaleEnum.en:
-        return en();
-    }
-  }
-
-  /// Pattern matching
-  T maybeMap<T>({
-    required T Function() orElse,
-    T Function()? ru,
-    T Function()? en,
-  }) =>
-      map<T>(
-        ru: ru ?? orElse,
-        en: en ?? orElse,
-      );
-
-  /// Pattern matching
-  T? maybeMapOrNull<T>({
-    T Function()? ru,
-    T Function()? en,
-  }) =>
-      maybeMap<T?>(
-        orElse: () => null,
-        ru: ru,
-        en: en,
-      );
-
-  @override
-  int compareTo(LocaleEnum other) => index.compareTo(other.index);
 
   @override
   String toString() => value;

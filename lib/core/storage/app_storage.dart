@@ -1,20 +1,16 @@
-
 // ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
 import 'dart:developer';
 
-
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 
 /// LocalStorage Singleton class
 class AppStorage {
-  final bool _isShowLog;
   AppStorage({
     bool isShowLog = false,
   }) : _isShowLog = isShowLog;
+  final bool _isShowLog;
 
   static const String _info = '';
 
@@ -31,7 +27,6 @@ class AppStorage {
     return setBool(key: _firstStart, value: false);
   }
 // ******************************
-
 
   static const _completeOnboarding = 'completed_onboarding';
 
@@ -139,25 +134,25 @@ class AppStorage {
   }
 // ******************************
 
-  static const _json_file = '_json_file';
+  static const _path_db_update = '_path_db_update';
 
-  Future<List<String>> getJsonFiles() async {
-    return getStringList(key: _json_file);
+  Future<List<String>> getPathUpdateFilesDb() async {
+    return getStringList(key: _path_db_update);
   }
 
-  Future<List<String>> getNameJsonFiles() async {
-    final list = await getJsonFiles();
+  Future<List<String>> getNameUpdateFilesDb() async {
+    final list = await getPathUpdateFilesDb();
 
     final names = <String>[];
     for (final i in list) {
       names.add(i.split('/').last.split('.').first);
     }
 
-    return getStringList(key: _json_file);
+    return getStringList(key: _path_db_update);
   }
 
-  Future<void> setJsonFiles(List<String> value) {
-    return setStringList(key: _json_file, value: value);
+  Future<void> setPathUpdateFilesDb(List<String> value) {
+    return setStringList(key: _path_db_update, value: value);
   }
 // ******************************
 

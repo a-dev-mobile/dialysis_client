@@ -15,20 +15,18 @@ dependencies:
     sdk: flutter
 
   # SDK extensions
-  async: ^2.8.2
-  collection: ^1.15.0
   meta: ^1.7.0
 
   # System
-  path_provider: ^2.0.0
-  path: ^1.8.0
-  platform_info: ^3.1.0
+  path_provider: ^2.0.11
+  path: ^1.8.2
+  platform_info: ^3.2.0
   device_info_plus : ^8.0.0
   package_info_plus: ^3.0.2
   connectivity_plus: ^3.0.2
 
   # Data manipulation
-  stream_transform: ^2.0.0
+  stream_transform: ^2.1.0
 
   # BLoC
   bloc: ^8.1.0
@@ -38,14 +36,15 @@ dependencies:
   bloc_concurrency: ^0.2.0-dev.2
   hydrated_bloc: ^9.0.0
 
-  # Flutter integrations
+  # Flutter integrations bloc
   flutter_bloc: ^8.1.1
-  provider: ^6.0.2
+
 
   # Code generation
   freezed_annotation: ^2.2.0
   json_annotation: ^4.7.0
-
+  built_value: ^8.4.2
+  built_collection: ^5.1.1
 
   # Internationalization
   intl: ^0.17.0
@@ -61,7 +60,7 @@ dependencies:
 
   # Persistance
   shared_preferences: ^2.0.15
-  sqflite_sqlcipher: ^2.1.1
+  sqflite_sqlcipher: ^2.1.1+1
 
   # HTTP
   dio: ^4.0.6
@@ -102,7 +101,7 @@ dependencies:
   firebase_core: ^2.4.0
   firebase_crashlytics: ^3.0.8
   firebase_remote_config: ^3.0.8
-  firebase_messaging: ^14.2.0
+  # firebase_messaging: ^14.2.0
   cloud_firestore: ^4.3.0
   firebase_storage: ^11.0.9
   firebase_in_app_messaging: ^0.7.0+9
@@ -115,8 +114,7 @@ dependencies:
 
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+
 
 
   # Analyzer extensions
@@ -128,7 +126,7 @@ dev_dependencies:
   freezed: ^2.3.2
   build_runner: ^2.3.3
   json_serializable: ^6.5.4
-  flutter_gen_runner: ^5.1.0+1
+  built_value_generator: ^8.4.2
 
 # Tests
   #flutter_driver:
@@ -142,10 +140,6 @@ dev_dependencies:
   #bloc_test: ^8.1.0
   #mockito: ^5.1.0
   #build_test: ^2.1.5
-
-flutter_gen:
-  output: lib/core/gen/resource
-
 
 
 flutter:

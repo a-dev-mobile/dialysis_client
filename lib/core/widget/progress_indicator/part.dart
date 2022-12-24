@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class PartLoad extends StatelessWidget {
-  const PartLoad({
+class AppPartProgressIndicator extends StatelessWidget {
+  const AppPartProgressIndicator({
     super.key,
     this.width = 50,
   });

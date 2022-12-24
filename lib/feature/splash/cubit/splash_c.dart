@@ -10,25 +10,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SplashCubit extends Cubit<SplashState> {
   SplashCubit({
     required AppRouter router,
-  })  : _go = router,
+    required AppDb db,
+  })  : _db = db,
+        _go = router,
         super(SplashState.init());
 
   final AppRouter _go;
+  final AppDb _db;
 
   Future<void> load() async {
     emit(state.copyWith(isLoad: true));
-
+    await _db.load();
     // copy DB
-    await DataBaseHelper.checkAndCopyDbFromAssets();
+    await _db.checkAndCopyDbFromAssets();
 
     // load data
-    await DataBaseHelper.checkAndLoadUpdateDb();
+    await _db.checkAndLoadUpdateDb();
+    
+    // update data
+    await _db.checkAndUpdateDB();
 
     _go.router.goNamed(WelcomePage.name);
 
     emit(state.copyWith(isLoad: false));
-
-    // emit(state.copyWith(isLoad: false));
   }
 }
 

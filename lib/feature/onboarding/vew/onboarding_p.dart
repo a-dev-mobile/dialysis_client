@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({super.key});
 
@@ -17,7 +16,7 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OnboardingCubit(),
+      create: (context) => OnboardingCubit(storage: context.read()),
       child: const _OnBoardingView(),
     );
   }
