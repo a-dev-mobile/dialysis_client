@@ -10,6 +10,7 @@ import 'package:dialysis/app_bloc_observer.dart';
 import 'package:dialysis/core/device/device_info.dart';
 import 'package:dialysis/core/log/log.dart';
 import 'package:dialysis/core/network/network.dart';
+import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/data_base/data_base.dart';
 import 'package:dialysis/firebase_options.dart';
 import 'package:dialysis/global_const.dart';
@@ -71,10 +72,13 @@ Future<void> bootstrap(FutureOr<Widget> Function() app) async {
         MultiRepositoryProvider(
           providers: [
             RepositoryProvider(
-              create: (context) => AppRouter(),
+              create: (context) => AppStorage(isShowLog: true),
             ),
             RepositoryProvider(
-              create: (context) => AppDb(),
+              create: (context) => AppRouter(storage:  context.read()),
+            ),
+            RepositoryProvider(
+              create: (context) => AppDb(storage: context.read()),
             ),
           ],
           child: await app(),

@@ -22,16 +22,13 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(
-          create: (context) => LocaleCubit(
-         
-          )..load(),
+          create: (context) => LocaleCubit(storage: context.read())..load(),
         ),
         BlocProvider(create: (context) => InternetCubit()),
         BlocProvider(create: (context) => DebugCubit()),
         BlocProvider(
           lazy: false,
-          create: (context) =>
-              RemoteConfigCubit()..load(),
+          create: (context) => RemoteConfigCubit()..load(),
         ),
       ],
       child: const _MobileApp(),

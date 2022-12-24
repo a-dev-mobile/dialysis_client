@@ -1,65 +1,55 @@
-import 'dart:developer';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'dart:async';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dialysis/core/device/device.dart';
 import 'package:dialysis/core/storage/storage.dart';
-
 import 'package:dialysis/global_const.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_sqlcipher/sqflite.dart';
 
 /// AppDb repository
 class AppDb {
-  String _fullPathFileDb = '';
+  final AppStorage _storage;
+  AppDb({required AppStorage storage}) : _storage = storage;
 
-  Future<void> copyDb() async {
-    const nameDb = 'product.dbe';
+  static const _nameDb = 'product.dbe';
+  final String _fullPathFileDb = '';
+
+
+Future<void> checkAndCopyDbFromAssets() async {
+    const assetsPathDb = 'assets/db/$_nameDb';
 
     final databasesPath = await getDatabasesPath();
-    _fullPathFileDb = join(databasesPath, nameDb);
+    final fullPathFileDb = join(databasesPath, _nameDb);
 
-    final db = await _openDB();
+    var db = await openDatabase(fullPathFileDb, password: APP_DB_PASSWORD);
     final currentVersionDb = await db.getVersion();
-    final newVersionDb = await AppStorage.getDbUpdateVersion();
-
+    final newVersionDb = int.tryParse(await DeviceInfo.getBuildNumber()) ?? 0;
     if (currentVersionDb < newVersionDb) {
       await db.close();
 
       //delete the old database so you can copy the new one
-      await deleteDatabase(_fullPathFileDb);
+      await deleteDatabase(fullPathFileDb);
 
       // ignore: unused_local_variable
       final directory =
-          await Directory(dirname(_fullPathFileDb)).create(recursive: true);
+          await Directory(dirname(fullPathFileDb)).create(recursive: true);
 
-      final dbFile = FirebaseStorage.instance.ref().child('db').child(nameDb);
+      final data = await rootBundle.load(assetsPathDb);
+      final buffer = data.buffer;
+      await File(fullPathFileDb).writeAsBytes(
+        buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+      );
+      unawaited(_storage.setDbPatch(fullPathFileDb));
 
-      final downloadTask = dbFile.writeToFile(File(_fullPathFileDb));
-
-// ignore: avoid-ignoring-return-values
-      downloadTask.snapshotEvents.listen((taskSnapshot) async {
-        switch (taskSnapshot.state) {
-          case TaskState.running:
-            log('TaskState.running');
-            break;
-          case TaskState.paused:
-            log('TaskState.paused');
-            break;
-
-          case TaskState.canceled:
-            log('TaskState.canceled');
-            break;
-          case TaskState.error:
-            log('TaskState.error');
-            break;
-
-          case TaskState.success:
-            log('TaskState.success');
-
-            await _dbSetVersion(newVersionDb);
-            break;
-        }
-      });
+      db = await openDatabase(fullPathFileDb, password: APP_DB_PASSWORD);
+      await db.setVersion(newVersionDb);
+      await db.close();
     }
   }
 
@@ -73,6 +63,87 @@ class AppDb {
     return openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
   }
 
+
+
+   
+
+  // получаю из firestore из app_build_number
+   Future<int> _getOnlineVersionDb() async {
+    final db = FirebaseFirestore.instance;
+    final buildApp = await DeviceInfo.getBuildNumber();
+
+    final doc =
+        (await db.collection('app_build_number').doc(buildApp).get()).data();
+
+    final version = doc != null ? doc['db_update_version'].toString() : '0';
+
+    return int.tryParse(version) ?? 0;
+  }
+
+   Future<void> checkAndLoadUpdateDb() async {
+    final localDbUpdateVersion = await _storage.getDbUpdateVersion();
+    final onlineDbUpdateVersion = await _getOnlineVersionDb();
+    if (localDbUpdateVersion >= onlineDbUpdateVersion) return;
+
+    final buildNumber = await DeviceInfo.getBuildNumber();
+
+    final databasesPath = await getDatabasesPath();
+
+    final ref = FirebaseStorage.instance.ref().child('db_update/$buildNumber/');
+
+    for (final i in EnumNameTable.values) {
+      await ref
+          .child('${i.name}.json')
+          .writeToFile(File('$databasesPath/${i.name}.json'));
+    }
+    unawaited(_storage.setDbVersion(onlineDbUpdateVersion));
+
+    // downloadTask.snapshotEvents.listen((taskSnapshot) async {
+    //   switch (taskSnapshot.state) {
+    //     case TaskState.running:
+    //       log('TaskState.running');
+    //       break;
+    //     case TaskState.paused:
+    //       log('TaskState.paused');
+    //       break;
+
+    //     case TaskState.canceled:
+    //       log('TaskState.canceled');
+    //       break;
+    //     case TaskState.error:
+    //       log('TaskState.error');
+    //       break;
+
+    //     case TaskState.success:
+    //       log('TaskState.success');
+
+    //       break;
+    //   }
+    // });
+  }
+
+   Future<void> _jsonToDb() async {
+    final dbFolderPath = await getDatabasesPath();
+    final dbFilePatch = await _storage.getDbPatch();
+
+    final tables = await _storage.getNameJsonFiles();
+    final pathJson = await _storage.getJsonFiles();
+
+    final file = File('$dbFolderPath/${pathJson[0]}');
+    final contents = await file.readAsString();
+
+    // final decodedMap = await compute(parse, contents);
+
+    final db = await openDatabase(dbFilePatch, password: APP_DB_PASSWORD);
+    // await db.insert(
+    //   tables[0],
+    //   decodedMap,
+    //   conflictAlgorithm: ConflictAlgorithm.replace,
+    // );
+
+    await db.close();
+  }
+}
 // *******************************
 
 //   Future<SearchModel> getProduct({
@@ -82,7 +153,7 @@ class AppDb {
 //     final products = <FoodDbModel>[];
 //     final categories = <CategoryDbModel>[];
 //     //  getting favorite product and use only id product
-//     final favorites = await AppStorage.getFavorite();
+//     final favorites = await  _storage.getFavorite();
 //     final favoritesIdProduct = favorites.map((v) => v.idProduct).toList();
 
 //     final listEnumNutrient = [
@@ -256,9 +327,9 @@ class AppDb {
   //     final s = listFind[i];
 
   //     where = '''
-  //           $where 
+  //           $where
   //   (
-  //   p.${locale}_name LIKE "%${s.toLowerCase()}%" 
+  //   p.${locale}_name LIKE "%${s.toLowerCase()}%"
   //   OR
   //   p.${locale}_name LIKE "%${s.toCapitalized()}%"
   //   )''';

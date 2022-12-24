@@ -3,10 +3,9 @@ import 'dart:async';
 
 import 'package:dialysis/data_base/data_base.dart';
 import 'package:dialysis/feature/welcome/view/welcome_p.dart';
+import 'package:dialysis/navigation/app_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:dialysis/navigation/app_router.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   SplashCubit({
@@ -20,7 +19,7 @@ class SplashCubit extends Cubit<SplashState> {
     emit(state.copyWith(isLoad: true));
 
     // copy DB
-    await DataBaseHelper.checkAndcopyDbFromAssets();
+    await DataBaseHelper.checkAndCopyDbFromAssets();
 
     // load data
     await DataBaseHelper.checkAndLoadUpdateDb();

@@ -14,69 +14,88 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # SDK extensions
+  async: ^2.8.2
+  collection: ^1.15.0
+  meta: ^1.7.0
 
-  # for state manager
-  bloc: ^8.1.0
-  flutter_bloc: ^8.1.1
-  equatable: ^2.0.5
-  bloc_concurrency: ^0.2.0-dev.2
-
-  # info
-
+  # System
+  path_provider: ^2.0.0
+  path: ^1.8.0
+  platform_info: ^3.1.0
   device_info_plus : ^8.0.0
   package_info_plus: ^3.0.2
-  path_provider: ^2.0.11
-  logger: ^1.1.0
+  connectivity_plus: ^3.0.2
+
+  # Data manipulation
+  stream_transform: ^2.0.0
+
+  # BLoC
+  bloc: ^8.1.0
+
+  # Helper BLoC
+  equatable: ^2.0.5
+  bloc_concurrency: ^0.2.0-dev.2
+  hydrated_bloc: ^9.0.0
+
+  # Flutter integrations
+  flutter_bloc: ^8.1.1
+  provider: ^6.0.2
+
+  # Code generation
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.7.0
+
+
+  # Internationalization
   intl: ^0.17.0
-  path: ^1.8.2
+  flutter_localizations:
+    sdk: flutter 
+
+
+  logger: ^1.1.0
+  # Logging
+  sentry_flutter: ^6.18.1
+  # stack_trace: ^1.11.0
+
+
+  # Persistance
+  shared_preferences: ^2.0.15
+  sqflite_sqlcipher: ^2.1.1
+
+  # HTTP
+  dio: ^4.0.6
+  dio_log: ^2.0.4
+
+  # Navigation
+  go_router: ^6.0.0
+
+  # Native
+  url_launcher: ^6.1.7
+  share_plus: ^6.3.0
 
   
 
-  # helper for UI
+  # Helper for UI
   flash: ^2.0.5
   lottie: ^2.1.0
-  # google_fonts: ^3.0.1
   flutter_native_splash: ^2.2.16
-
-
   flutter_screenutil: ^5.6.0
   flutter_svg: ^1.1.6
   flex_color_scheme: ^6.1.1
   introduction_screen: ^3.1.1
+  syncfusion_flutter_pdfviewer: ^20.4.38
+  syncfusion_flutter_charts: ^20.4.38
+  google_fonts: ^3.0.1
 
-
-  # modal_bottom_sheet: ^2.1.2
-  #  for TEST
+  # TEST
   device_preview: ^1.1.0
   feedback: ^2.5.0
-  dio_log: ^2.0.4
 
- 
-  # Key-value local cache/db
-  shared_preferences: ^2.0.15
-  hydrated_bloc: ^9.0.0
-  # validation
+  # Validation
   formz: ^0.4.1
   mask_text_input_formatter: ^2.4.0
   crypto: ^3.0.2
-
-
-  #  Network
-  dio: ^4.0.6
-  connectivity_plus: ^3.0.2
-  # http: ^0.13.5
-
-  #   for navigation
-  go_router: ^6.0.0
-  #   for position
-  rect_getter: ^1.1.0
-  
-  # for models
-  freezed_annotation: ^2.2.0
-  json_annotation: ^4.7.0
-  json_serializable: ^6.5.4
-  archive: ^3.3.5
-
 
 
  # firebase
@@ -87,49 +106,50 @@ dependencies:
   cloud_firestore: ^4.3.0
   firebase_storage: ^11.0.9
   firebase_in_app_messaging: ^0.7.0+9
-
   firebase_analytics: ^10.0.8
 
 
-  
-  syncfusion_flutter_pdfviewer: ^20.4.38
-  syncfusion_flutter_charts: ^20.4.38
-  url_launcher: ^6.1.7
-  share_plus: ^6.3.0
-
-
-
-  # ******************************
-  #  local packages
-  # ******************************
-
- 
 
 
 
 
-
-  cupertino_icons: ^1.0.5
-  sqflite_sqlcipher: ^2.1.1
-  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # help lint
+
+
+  # Analyzer extensions
   dart_code_metrics: ^5.3.0
   very_good_analysis: ^3.1.0
 
 
-    # for models
+  # Code generation
   freezed: ^2.3.2
   build_runner: ^2.3.3
+  json_serializable: ^6.5.4
+  flutter_gen_runner: ^5.1.0+1
+
+# Tests
+  #flutter_driver:
+  #  sdk: flutter
+  #integration_test:
+  #  sdk: flutter
+  #flutter_test:
+  #  sdk: flutter
+  coverage: ^1.6.1
+  # test: ^1.22.1
+  #bloc_test: ^8.1.0
+  #mockito: ^5.1.0
+  #build_test: ^2.1.5
+
+flutter_gen:
+  output: lib/core/gen/resource
 
 
 
 flutter:
   generate: true
-
   uses-material-design: true
   assets:
     - assets/svg/
@@ -138,17 +158,13 @@ flutter:
     - assets/db/
 
 
-
-
-
-
 # flutter pub get && flutter pub run flutter_native_splash:create
-flutter_native_splash:
-  android: true
-  ios: true
-  web: true
-  desktop: true
-  color: "#141617"
-  # color_dark: "#141617"
-  image: assets/icon_splash/splash.png
+# flutter_native_splash:
+#   android: true
+#   ios: true
+#   web: true
+#   desktop: true
+#   color: "#141617"
+#   # color_dark: "#141617"
+#   image: assets/icon_splash/splash.png
 

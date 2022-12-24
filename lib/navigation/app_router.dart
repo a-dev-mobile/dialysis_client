@@ -1,12 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:dialysis/core/storage/app_storage.dart';
+import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/widget/widget.dart';
-
 import 'package:dialysis/feature/category/view/category_p.dart';
 import 'package:dialysis/feature/common/test_app/test_app.dart';
 import 'package:dialysis/feature/debug_menu/debug_menu.dart';
-
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
@@ -17,7 +15,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
+  AppRouter({required AppStorage storage}) : _storage = storage;
   static final _pageNavigatorKey = GlobalKey<NavigatorState>();
+
+  final AppStorage _storage;
 
   final GoRouter router = GoRouter(
     debugLogDiagnostics: true,
@@ -151,12 +152,12 @@ class AppRouter {
 
   // ignore: long-method
   Future<void> selectedRouter() async {
-    final isFirstTime = await AppStorage.isFirstStart();
+    final isFirstTime = await _storage.isFirstStart();
 
-    final isOnboardingCompleted = await AppStorage.isOnboardingCompleted();
+    final isOnboardingCompleted = await _storage.isOnboardingCompleted();
 
     if (isFirstTime || !isOnboardingCompleted) {
-      final _ = await AppStorage.completeFirstStart();
+      final _ = await _storage.completeFirstStart();
       router.goNamed(
         OnBoardingPage.name,
       );
@@ -171,9 +172,9 @@ class AppRouter {
   }
 
   Future<void> exitApp() async {
-    await AppStorage.clearAll();
-    await AppStorage.completeOnboarding();
-    await AppStorage.completeFirstStart();
+    await _storage.clearAll();
+    await _storage.completeOnboarding();
+    await _storage.completeFirstStart();
 
     router.goNamed(SplashPage.name);
   }
