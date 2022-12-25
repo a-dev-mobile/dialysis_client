@@ -9,9 +9,6 @@ linter:
     # constant_identifier_names: false
 
 
-
-
-
 analyzer:
   # errors:
     # argument_type_not_assignable: ignore

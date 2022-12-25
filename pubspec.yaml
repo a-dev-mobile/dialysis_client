@@ -43,8 +43,6 @@ dependencies:
   # Code generation
   freezed_annotation: ^2.2.0
   json_annotation: ^4.7.0
-  built_value: ^8.4.2
-  built_collection: ^5.1.1
 
   # Internationalization
   intl: ^0.17.0
@@ -126,7 +124,7 @@ dev_dependencies:
   freezed: ^2.3.2
   build_runner: ^2.3.3
   json_serializable: ^6.5.4
-  built_value_generator: ^8.4.2
+
 
 # Tests
   #flutter_driver:

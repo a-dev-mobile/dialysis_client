@@ -7,9 +7,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dialysis/core/device/device.dart';
 import 'package:dialysis/core/storage/storage.dart';
+import 'package:dialysis/core/utils/utils.dart';
 import 'package:dialysis/data_base/data_base.dart';
 
-import 'package:dialysis/feature/common/enums/enums.dart';
+import 'package:dialysis/feature/common/enums/table.dart';
 import 'package:dialysis/global_const.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
@@ -88,40 +89,49 @@ class AppDb {
     final buildNumber = await DeviceInfo.getBuildNumber();
 
     final ref = FirebaseStorage.instance.ref().child('db_update/$buildNumber/');
-    final listPathUpdateDb = <String>[];
+
     var pathUpdateDb = '';
-    for (final i in EnumTable.values) {
-      pathUpdateDb = '$_folderDB/${i.name}.json';
+    var fileUpdateDb = '';
+    for (final i in TableEnum.values) {
+      fileUpdateDb = i.name.addTypeJson();
+      pathUpdateDb = join(_folderDB, fileUpdateDb);
 
-      await ref.child('${i.name}.json').writeToFile(File(pathUpdateDb));
-
-      listPathUpdateDb.add(pathUpdateDb);
+      await ref.child(fileUpdateDb).writeToFile(File(pathUpdateDb));
     }
     unawaited(_storage.setDbVersion(onlineDbUpdateVersion));
-    await _storage.setPathUpdateFilesDb(listPathUpdateDb);
+    // await _storage.setPathUpdateFilesDb(listPathUpdateDb);
   }
 
   Future<void> checkAndUpdateDB() async {
-    final strTables = await _storage.getNameUpdateFilesDb();
-    final pathJson = await _storage.getPathUpdateFilesDb();
+    // final strTables = await _storage.getNameUpdateFilesDb();
+    // final pathJson = await _storage.getPathUpdateFilesDb();
 
     var file = File('');
     var content = '';
     // ignore: unused_local_variable
-    EnumTable table;
-    for (var i = 0; i < pathJson.length; i++) {
 
-      file = File(pathJson[i]);
+    var pathUpdateFile = '';
+    final listProduct = <ProductDbModel>[];
+
+    for (var i = 0; i < TableEnum.values.length; i++) {
+      pathUpdateFile = join(_folderDB, TableEnum.values[i].name.addTypeJson());
+
+      file = File(pathUpdateFile);
       content = await file.readAsString();
 
-      table = EnumTable.valueOf(strTables[i]);
       if (content.length < 10) continue;
 
       final list = json.decode(content) as List<dynamic>;
 
-      final profuct = ProductDbModel.fromJson(list[0] as Map<String, dynamic>);
+      TableEnum.values[i].maybeMapOrNull(
+        product: () {
+          for (var i in list) {
+            listProduct.add(ProductDbModel.fromMap(i as Map<String, dynamic>));
+          }
+        },
+      );
 
-      print(profuct);
+      print(listProduct);
     }
 
     // final decodedMap = await compute(parse, contents);

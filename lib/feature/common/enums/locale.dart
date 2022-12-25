@@ -1,20 +1,70 @@
-// ignore_for_file: constant_identifier_names
+/// {@template localeenum}
+/// LocaleEnum enumeration
+/// {@endtemplate}
 
-import 'package:built_collection/built_collection.dart';
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+enum LocaleEnum with Comparable<LocaleEnum> {
+  ru('ru'),
+  en('en');
 
-part 'locale.g.dart';
+  const LocaleEnum(this.value);
 
-class LocaleEnum extends EnumClass {
-  static Serializer<LocaleEnum> get serializer => _$localeEnumSerializer;
+  final String value;
 
-  static const LocaleEnum ru = _$ru;
-  static const LocaleEnum en = _$en;
+  static LocaleEnum fromValue(String? value, {LocaleEnum? fallback}) {
+    switch (value) {
+      case 'ru':
+        return ru;
+      case 'en':
+        return en;
 
+      default:
+        return fallback ?? (throw ArgumentError.value(value));
+    }
+  }
 
-  const LocaleEnum._(String name) : super(name);
+  /// Pattern matching
+  T map<T>({
+    required T Function() ru,
+    required T Function() en,
+  }) {
+    switch (this) {
+      case LocaleEnum.ru:
+        return ru();
+      case LocaleEnum.en:
+        return en();
+    }
+  }
 
-  static BuiltSet<LocaleEnum> get values => _$values;
-  static LocaleEnum valueOf(String name) => _$valueOf(name);
+  /// Pattern matching
+  T maybeMap<T>({
+    required T Function() orElse,
+    T Function()? ru,
+    T Function()? en,
+  }) =>
+      map<T>(
+        ru: ru ?? orElse,
+        en: en ?? orElse,
+      );
+
+  /// Pattern matching
+  T? maybeMapOrNull<T>({
+    T Function()? ru,
+    T Function()? en,
+  }) =>
+      maybeMap<T?>(
+        orElse: () => null,
+        ru: ru,
+        en: en,
+      );
+
+  @override
+  int compareTo(LocaleEnum other) => index.compareTo(other.index);
+
+  @override
+  String toString() => value;
 }
+  /*
+  enum LocaleEnum { ru, en }
+
+  */
+  

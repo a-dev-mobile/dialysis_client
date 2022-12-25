@@ -36,6 +36,12 @@ class SplashCubit extends Cubit<SplashState> {
   }
 }
 
+
+
+
+
+
+
 @immutable
 class SplashState {
   final bool isLoad;

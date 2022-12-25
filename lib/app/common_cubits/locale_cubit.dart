@@ -8,14 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LocaleCubit extends Cubit<LocaleEnum> {
   LocaleCubit({required AppStorage storage})
       : _storage = storage,
-        super(LocaleEnum.valueOf(Platform.localeName.split('_').first));
+        super(LocaleEnum.fromValue(Platform.localeName.split('_').first));
   final AppStorage _storage;
 
   Future<void> load() async {
     final selectedLocale = await _storage.getLocale();
 
     if (selectedLocale.isNotEmpty) {
-      setLocale(LocaleEnum.valueOf(selectedLocale));
+      setLocale(LocaleEnum.fromValue(selectedLocale));
     } else {
       setLocale(state);
     }
