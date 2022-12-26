@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dialysis/core/device/device.dart';
 import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/utils/utils.dart';
-import 'package:dialysis/data_base/data_base.dart';
+
 
 import 'package:dialysis/feature/common/enums/table.dart';
 import 'package:dialysis/global_const.dart';
@@ -35,8 +35,10 @@ class AppDb {
     }
   }
 
-  Future<void> checkAndCopyDbFromAssets() async {
+  Future<void> checkAndCopyDbFromAssets({bool isForceDelete = false}) async {
     const assetsPathDb = 'assets/db/$_nameDb';
+
+    if (isForceDelete) await deleteDatabase(_fullPathFileDb);
 
     var db = await openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
     final currentVersionDb = await db.getVersion();
@@ -64,9 +66,9 @@ class AppDb {
     }
   }
 
-  // Future<Database> _openDB() {
-  //   return openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
-  // }
+  Future<Database> _openDB() {
+    return openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
+  }
 
   // получаю из firestore из app_build_number
   Future<int> _getOnlineVersionDb() async {
@@ -82,9 +84,12 @@ class AppDb {
   }
 
   Future<void> checkAndLoadUpdateDb() async {
-    // final localDbUpdateVersion = await _storage.getDbUpdateVersion();
+    final localDbUpdateVersion = await _storage.getDbUpdateVersion();
     final onlineDbUpdateVersion = await _getOnlineVersionDb();
-    // if (localDbUpdateVersion >= onlineDbUpdateVersion) return;
+
+    if (localDbUpdateVersion >= onlineDbUpdateVersion) return;
+    // удаляем базу и заново копируем из assets
+    await checkAndCopyDbFromAssets(isForceDelete: true);
 
     final buildNumber = await DeviceInfo.getBuildNumber();
 
@@ -99,51 +104,66 @@ class AppDb {
       await ref.child(fileUpdateDb).writeToFile(File(pathUpdateDb));
     }
     unawaited(_storage.setDbVersion(onlineDbUpdateVersion));
-    // await _storage.setPathUpdateFilesDb(listPathUpdateDb);
+    await _updateDB();
   }
 
-  Future<void> checkAndUpdateDB() async {
-    // final strTables = await _storage.getNameUpdateFilesDb();
-    // final pathJson = await _storage.getPathUpdateFilesDb();
-
+  Future<void> _updateDB() async {
     var file = File('');
     var content = '';
-    // ignore: unused_local_variable
 
     var pathUpdateFile = '';
-    final listProduct = <ProductDbModel>[];
+
+    final db = await _openDB();
+    var nameTable = '';
 
     for (var i = 0; i < TableEnum.values.length; i++) {
-      pathUpdateFile = join(_folderDB, TableEnum.values[i].name.addTypeJson());
+      nameTable = TableEnum.values[i].name;
+      pathUpdateFile = join(_folderDB, nameTable.addTypeJson());
 
       file = File(pathUpdateFile);
       content = await file.readAsString();
-
+      // пропускать если символов мало
       if (content.length < 10) continue;
 
       final list = json.decode(content) as List<dynamic>;
 
-      TableEnum.values[i].maybeMapOrNull(
-        product: () {
-          for (var i in list) {
-            listProduct.add(ProductDbModel.fromMap(i as Map<String, dynamic>));
-          }
-        },
+      await TableEnum.values[i].map(
+        food: () => _updateOrInsetDB(db, nameTable, list),
+        source: () => _updateOrInsetDB(db, nameTable, list),
+        product: () => _updateOrInsetDB(db, nameTable, list),
+        category: () => _updateOrInsetDB(db, nameTable, list),
+        nutrient: () => _updateOrInsetDB(db, nameTable, list),
+        nutrient_type: () => _updateOrInsetDB(db, nameTable, list),
       );
-
-      print(listProduct);
     }
-
-    // final decodedMap = await compute(parse, contents);
-
-    final db = await openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
-    // await db.insert(
-    //   tables[0],
-    //   decodedMap,
-    //   conflictAlgorithm: ConflictAlgorithm.replace,
-    // );
-
     await db.close();
+  }
+
+  Future<void> _updateOrInsetDB(
+    Database db,
+    String nameTable,
+    List<dynamic> list,
+  ) async {
+    for (final i in list) {
+      i as Map<String, dynamic>;
+
+      final countUpdate = await db.update(
+        nameTable,
+        i,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+        where: 'id = ${i['id']}',
+      );
+      // print('__ update $nameTable  = $countUpdate');
+
+      if (countUpdate == 0) {
+        final _ = await db.insert(
+          nameTable,
+          i,
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+        // print('__ insert $nameTable  = $countUpdate');
+      }
+    }
   }
 }
 // *******************************

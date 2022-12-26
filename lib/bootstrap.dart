@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:appmetrica_plugin/appmetrica_plugin.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
 import 'package:crypto/crypto.dart';
 import 'package:dialysis/app_bloc_observer.dart';
@@ -43,7 +44,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() app) async {
       PlatformDispatcher.instance.onError = _onPlatformDispatcherError;
 
       // await _initStatusBar();
-
+      await AppMetrica.activate(
+        // ignore: prefer_single_quotes
+        const AppMetricaConfig("84f55135-e331-4ede-b732-52027497dd36"),
+      );
       final _ = await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
@@ -75,7 +79,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() app) async {
               create: (context) => AppStorage(isShowLog: true),
             ),
             RepositoryProvider(
-              create: (context) => AppRouter(storage:  context.read()),
+              create: (context) => AppRouter(storage: context.read()),
             ),
             RepositoryProvider(
               create: (context) => AppDb(storage: context.read()),

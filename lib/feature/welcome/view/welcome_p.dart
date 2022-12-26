@@ -1,3 +1,4 @@
+import 'package:appmetrica_plugin/appmetrica_plugin.dart';
 import 'package:dialysis/app/style/style.dart';
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/welcome/welcome.dart';
@@ -38,7 +39,7 @@ class _WelcomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all( 10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               Text(
@@ -82,7 +83,37 @@ class _WelcomePage extends StatelessWidget {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Text('Начать')))
+                      onPressed: () async {
+                        AppMetrica.reportEvent('My first AppMetrica event!');
+                        AppMetrica.reportError(
+                          message: '5555Error message',
+                          errorDescription:
+                              AppMetricaErrorDescription.fromCurrentStackTrace(
+                                  message: '111Error message', type: '444Error type'),
+                        ).ignore();
+
+                        AppMetrica.reportUnhandledException(
+                          AppMetricaErrorDescription.fromCurrentStackTrace(
+                              message: '222Error message', type: '333Error type'),
+                        );
+
+                        AppMetrica.reportAppOpen(
+                            'https://appmetrica.yandex.com');
+                            
+                        AppMetrica.reportReferralUrl(
+                            "https://appmetrica.yandex.com");
+                        AppMetrica.setLocationTracking(true);
+
+                        AppMetrica.sendEventsBuffer();
+
+                        final deviceId =
+                            await AppMetrica.requestAppMetricaDeviceID();
+                        print("DeviceId $deviceId");
+
+                        final version = await AppMetrica.libraryVersion;
+                        print("Library version $version");
+                      },
+                      child: const Text('Начать')))
             ],
           ),
         ),

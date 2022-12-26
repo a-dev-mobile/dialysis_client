@@ -50,11 +50,13 @@ dependencies:
     sdk: flutter 
 
 
-  logger: ^1.1.0
+
+
   # Logging
+  logger: ^1.1.0
   sentry_flutter: ^6.18.1
   # stack_trace: ^1.11.0
-
+  appmetrica_plugin: ^1.1.0
 
   # Persistance
   shared_preferences: ^2.0.15

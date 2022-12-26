@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  appmetrica_plugin:
+    dependency: "direct main"
+    description:
+      name: appmetrica_plugin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   archive:
     dependency: transitive
     description:
@@ -260,6 +267,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.8"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.2"
   device_frame:
     dependency: transitive
     description:
@@ -917,6 +931,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.2"
   sentry:
     dependency: transitive
     description:

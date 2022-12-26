@@ -2,23 +2,23 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'nutrient_type_db_m.freezed.dart';
-part 'nutrient_type_db_m.g.dart';
 
 
+part 'category_db_m.freezed.dart';
+part 'category_db_m.g.dart';
+
+/// CategoryM data class
 @freezed
-class NutrientTypeDbModel with _$NutrientTypeDbModel {
-  const factory NutrientTypeDbModel({
+class CategoryDbModel with _$CategoryDbModel {
+  const factory CategoryDbModel({
     required int id,
-    required int id_nutrient_type,
+    required int id_category,
     @Default('') String ru_name,
     @Default('') String en_name,
 
-  }) = _NutrientTypeDbModel;
+  }) = _CategoryDbModel;
 
   /// Generate CategoryM class from Map<String, Object?>
-  factory NutrientTypeDbModel.fromJson(Map<String, Object?> json) =>
-      _$NutrientTypeDbModelFromJson(json);
+  factory CategoryDbModel.fromJson(Map<String, Object?> json) =>
+      _$CategoryDbModelFromJson(json);
 }
-
-

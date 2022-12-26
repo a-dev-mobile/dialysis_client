@@ -24,23 +24,16 @@ class SplashCubit extends Cubit<SplashState> {
     // copy DB
     await _db.checkAndCopyDbFromAssets();
 
-    // load data
+    // load and update data
     await _db.checkAndLoadUpdateDb();
-    
-    // update data
-    await _db.checkAndUpdateDB();
+
+
 
     _go.router.goNamed(WelcomePage.name);
 
     emit(state.copyWith(isLoad: false));
   }
 }
-
-
-
-
-
-
 
 @immutable
 class SplashState {
