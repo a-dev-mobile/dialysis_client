@@ -86,7 +86,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^20.4.38
   syncfusion_flutter_charts: ^20.4.38
   google_fonts: ^3.0.1
-
+  flutter_typeahead: ^4.1.1
   # TEST
   device_preview: ^1.1.0
   feedback: ^2.5.0
@@ -108,6 +108,11 @@ dependencies:
   firebase_analytics: ^10.0.8
 
 
+  # ******************************
+  #  local packages
+  # ******************************
+  dadata:
+    path: packages/dadata
 
 
 

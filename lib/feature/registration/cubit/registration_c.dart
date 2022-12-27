@@ -1,134 +1,165 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, lines_longer_than_80_chars
 
-import 'package:bloc/bloc.dart';
-import 'package:dialysis/feature/common/enums/enums.dart';
+import 'dart:convert';
 
+import 'package:dadata/dadata.dart';
+import 'package:dialysis/feature/common/enums/enums.dart';
+import 'package:dialysis/feature/registration/registration.dart';
+import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:formz/formz.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import 'package:dialysis/app/common_cubits/common_cubits.dart';
-
-import 'package:dialysis/navigation/navigation.dart';
-
-class RegistrationCubit extends Cubit<RegistrationState> {
+class RegistrationCubit extends HydratedCubit<RegistrationState> {
   RegistrationCubit({
-    required ThemeCubit cubitTheme,
-    required LocaleCubit cubitLocale,
     required AppRouter router,
-  })  : _cubitTheme = cubitTheme,
-        _go = router,
-        _cubitLocale = cubitLocale,
+    required DaDataClient clienTips,
+  })  : _go = router,
+        _clienTips = clienTips,
         super(
-          RegistrationState(
-            localeActive: cubitLocale.state,
-            themeActive: cubitTheme.state,
-          ),
+          RegistrationState.init(),
         );
+  final DaDataClient _clienTips;
 
-  final ThemeCubit _cubitTheme;
-  final LocaleCubit _cubitLocale;
   // ignore: unused_field
   final AppRouter _go;
 
-  void load() {
-    final locale = _cubitLocale.state;
-    final theme = _cubitTheme.state;
-    var boolsLocale = state.boolsLocale;
-    var boolsTheme = state.boolsTheme;
+  void load() {}
 
-    if (theme == ThemeMode.light) {
-      boolsTheme = [true, false];
-    } else {
-      boolsTheme = [false, true];
-    }
+  Future<List<String>> getSuggestionsName(String value) async {
+    final result = await _clienTips.fetchFioTooltip(value, DaDataEnum.name);
 
-    if (locale == LocaleEnum.ru) {
-      boolsLocale = [true, false];
-    } else {
-      boolsLocale = [false, true];
-    }
-
-    emit(state.copyWith(boolsLocale: boolsLocale, boolsTheme: boolsTheme));
+    return _getTips(result);
   }
 
-  void changeLocale(int index) {
-    final localeActive = index == 0 ? LocaleEnum.ru : LocaleEnum.en;
+  void checkName(String value) {
+    final nameValid = NameValid.dirty(value);
 
-    final boolsLocale = state.boolsLocale;
-    final result = _forEachResult(boolsLocale, index);
-
-    emit(state.copyWith(boolsLocale: result, localeActive: localeActive));
-    _cubitLocale.setLocale(localeActive);
-  }
-
-  List<bool> _forEachResult(List<bool> bools, int index) {
-    for (var i = 0; i < bools.length; i++) {
-      bools[i] = i == index;
-    }
-    return bools;
-  }
-
-  void changeTheme(int index) {
-    final themeActive = index == 0 ? ThemeMode.light : ThemeMode.dark;
-
-    _cubitTheme.toggleTheme(
-      theme: themeActive,
+    emit(
+      state.copyWith(
+        nameValid: nameValid,
+        status: Formz.validate([
+          nameValid,
+          // state.genderValid,
+        ]),
+      ),
     );
 
-    final boolsTheme = state.boolsTheme;
-    final result = _forEachResult(boolsTheme, index);
+    // _sendState();
+  }
 
-    emit(state.copyWith(boolsTheme: result, themeActive: themeActive));
+  void checkGender(Gender value) {
+    final genderValid = GenderValid.dirty(value);
+
+    emit(
+      state.copyWith(
+        // genderValid: genderValid,
+        status: Formz.validate([
+          state.nameValid,
+          genderValid,
+        ]),
+      ),
+    );
+  }
+
+  bool isValid() {
+    return state.status.isValidated;
+  }
+
+  List<String> _getTips(FioTooltip result) {
+    final list = <String>[];
+    final length = result.suggestions.length;
+    if (length == 0) return list;
+
+    for (var i = 0; i < length; i++) {
+      list.add(
+        result.suggestions[i].value,
+      );
+    }
+
+    return list;
+  }
+
+  @override
+  RegistrationState? fromJson(Map<String, dynamic> json) {
+    return RegistrationState.fromMap(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(RegistrationState state) {
+    return state.toMap();
   }
 }
 
 @immutable
 class RegistrationState {
-  final List<bool> boolsLocale;
-  final List<bool> boolsTheme;
-  final LocaleEnum localeActive;
-  final ThemeMode themeActive;
+  final bool isLoad;
+  // enum
+  final FormzStatus status;
+  final NameValid nameValid;
+  // final GenderValid genderValid;
   const RegistrationState({
-    this.boolsLocale = const [],
-    this.boolsTheme = const [],
-    required this.localeActive,
-    required this.themeActive,
+    required this.isLoad,
+    required this.status,
+    required this.nameValid,
   });
 
+  factory RegistrationState.init() => const RegistrationState(
+        nameValid: NameValid.pure(),
+        isLoad: false,
+        // genderValid: GenderValid.pure(),
+        status: FormzStatus.pure,
+      );
+
   RegistrationState copyWith({
-    List<bool>? boolsLocale,
-    List<bool>? boolsTheme,
-    LocaleEnum? localeActive,
-    ThemeMode? themeActive,
+    bool? isLoad,
+    FormzStatus? status,
+    NameValid? nameValid,
   }) {
     return RegistrationState(
-      boolsLocale: boolsLocale ?? this.boolsLocale,
-      boolsTheme: boolsTheme ?? this.boolsTheme,
-      localeActive: localeActive ?? this.localeActive,
-      themeActive: themeActive ?? this.themeActive,
+      isLoad: isLoad ?? this.isLoad,
+      status: status ?? this.status,
+      nameValid: nameValid ?? this.nameValid,
+    );
+  }
+Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'isLoad': isLoad,
+      'status': status.index,
+      'nameValid': nameValid.value,
+      // 'genderValid': genderValid.value,
+    };
+  }
+
+  factory RegistrationState.fromMap(Map<String, dynamic> map) {
+    return RegistrationState(
+      isLoad: map['isLoad'] as bool,
+      status: FormzStatus.values[map['status'] as int],
+      nameValid: NameValid.dirty(map['nameValid'].toString()),
+      // genderValid:
+      //     GenderValid.dirty(Gender.fromValue(map['genderValid'].toString())),
     );
   }
 
+  String toJson() => json.encode(toMap());
+
+  factory RegistrationState.fromJson(String source) =>
+      RegistrationState.fromMap(json.decode(source) as Map<String, dynamic>);
+
   @override
-  String toString() {
-    return 'RegistrationState(boolsLocale: $boolsLocale, boolsTheme: $boolsTheme, localeActive: $localeActive, themeActive: $themeActive)';
-  }
+  String toString() => 'RegistrationState(isLoad: $isLoad, status: $status, nameValid: $nameValid)';
 
   @override
   bool operator ==(covariant RegistrationState other) {
     if (identical(this, other)) return true;
-
-    return listEquals(other.boolsLocale, boolsLocale) &&
-        listEquals(other.boolsTheme, boolsTheme) &&
-        other.localeActive == localeActive &&
-        other.themeActive == themeActive;
+  
+    return 
+      other.isLoad == isLoad &&
+      other.status == status &&
+      other.nameValid == nameValid;
   }
 
   @override
-  int get hashCode {
-    return boolsLocale.hashCode ^
-        boolsTheme.hashCode ^
-        localeActive.hashCode ^
-        themeActive.hashCode;
-  }
+  int get hashCode => isLoad.hashCode ^ status.hashCode ^ nameValid.hashCode;
 }

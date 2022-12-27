@@ -31,14 +31,13 @@ class _SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        alignment: Alignment.center,
         children: const [
           Align(
             child: AppLogo(),
           ),
           Positioned(
             bottom: 30,
-            right: 0,
-            left: 0,
             child: AppPageProgressIndicator(),
           ),
         ],

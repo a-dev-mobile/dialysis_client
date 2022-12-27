@@ -321,6 +321,18 @@ abstract class AppLocalizations {
   /// **'Любимые'**
   String get favorite;
 
+  /// No description provided for @enter_name.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это обязательное поле. Введите имя'**
+  String get enter_name;
+
+  /// No description provided for @max_text_length.
+  ///
+  /// In ru, this message translates to:
+  /// **'Максимальная длина текста'**
+  String get max_text_length;
+
   /// No description provided for @g.
   ///
   /// In ru, this message translates to:

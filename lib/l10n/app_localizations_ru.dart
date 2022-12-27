@@ -119,5 +119,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get favorite => 'Любимые';
 
   @override
+  String get enter_name => 'Это обязательное поле. Введите имя';
+
+  @override
+  String get max_text_length => 'Максимальная длина текста';
+
+  @override
   String get g => 'г';
 }

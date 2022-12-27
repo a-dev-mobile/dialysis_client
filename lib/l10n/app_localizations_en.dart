@@ -14,7 +14,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get start => 'Start';
 
   @override
-  String get welcome => 'Welcome.';
+  String get welcome => 'Welcome';
 
   @override
   String get no_internet => 'No internet access';
@@ -117,6 +117,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get favorite => 'Любимые';
+
+  @override
+  String get enter_name => 'Это обязательное поле. Введите имя';
+
+  @override
+  String get max_text_length => 'Максимальная длина текста';
 
   @override
   String get g => 'g';

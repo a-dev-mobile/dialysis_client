@@ -32,6 +32,8 @@ class SplashCubit extends Cubit<SplashState> {
     _go.router.goNamed(WelcomePage.name);
 
     emit(state.copyWith(isLoad: false));
+
+    
   }
 }
 

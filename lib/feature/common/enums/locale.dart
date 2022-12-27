@@ -63,8 +63,5 @@ enum LocaleEnum with Comparable<LocaleEnum> {
   @override
   String toString() => value;
 }
-  /*
-  enum LocaleEnum { ru, en }
 
-  */
   

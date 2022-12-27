@@ -21,6 +21,7 @@ class AppPageProgressIndicator extends StatelessWidget {
         : lottie;
 
     return Material(
+      color: Colors.transparent,
       child: Center(
         child: result,
       ),

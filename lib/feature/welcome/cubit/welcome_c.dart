@@ -5,10 +5,10 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/feature/common/enums/enums.dart';
+import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 
 class WelcomeCubit extends Cubit<WelcomeState> {
   WelcomeCubit({
@@ -43,9 +43,9 @@ class WelcomeCubit extends Cubit<WelcomeState> {
     }
 
     if (locale == LocaleEnum.ru) {
-      boolsLocale = [true, false];
-    } else {
       boolsLocale = [false, true];
+    } else {
+      boolsLocale = [true, false];
     }
 
     emit(state.copyWith(boolsLocale: boolsLocale, boolsTheme: boolsTheme));
@@ -79,6 +79,13 @@ class WelcomeCubit extends Cubit<WelcomeState> {
     final result = _forEachResult(boolsTheme, index);
 
     emit(state.copyWith(boolsTheme: result, themeActive: themeActive));
+  }
+
+  void nextPage() {
+
+    _go.router.goNamed(RegistrationPage.name);
+
+
   }
 }
 
