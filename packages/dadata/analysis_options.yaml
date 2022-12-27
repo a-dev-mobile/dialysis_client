@@ -1,8 +1,18 @@
+include: package:very_good_analysis/analysis_options.yaml
 
-include: package:lints/recommended.yaml
-
+linter:
+  rules:
+    public_member_api_docs: false
+    sort_pub_dependencies: false
+    # lines_longer_than_80_chars: false
+    # non_constant_identifier_names: false
+    # constant_identifier_names: false
 
 analyzer:
+  errors:
+    argument_type_not_assignable: ignore
+    invalid_assignment: ignore
+
   exclude:
     # Generated code
     - "**/*.g.dart"
@@ -18,7 +28,7 @@ analyzer:
     - "lib/src/common/localization/l10n.dart"
     # Tests
     - "test/**.mocks.dart"
-    # - "test/*.dart"
+    - "test/*.dart"
     - ".test_coverage.dart"
     # Web
     - "web/**"

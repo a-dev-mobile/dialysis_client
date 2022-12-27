@@ -8,7 +8,7 @@ part 'passport_code_name_m.g.dart';
 @freezed
 class PassportCodeName with _$PassportCodeName {
   const factory PassportCodeName(
-      List<PassportCodeNameSuggestions> suggestions) = _PassportCodeName;
+      List<PassportCodeNameSuggestions> suggestions,) = _PassportCodeName;
 
   factory PassportCodeName.fromJson(Map<String, dynamic> json) =>
       _$PassportCodeNameFromJson(json);

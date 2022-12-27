@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_dynamic_calls, parameter_assignments, lines_longer_than_80_chars
 import 'dart:convert';
 import 'dart:developer';
 
@@ -10,25 +10,25 @@ enum DaDataEnum { name, surname, patronymic, all }
 class DaDataClient {
   final String _apiKey;
   DaDataClient({
-    required apiKey,
+    required String apiKey,
   }) : _apiKey = apiKey;
 
   final String _baseUrl = 'suggestions.dadata.ru';
 
   Future<AddressTooltip> fetchAddressTooltip(String value) async {
-    var response = await http.post(
+    final response = await http.post(
         Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Token $_apiKey',
         },
-        body: jsonEncode({'query': value}));
+        body: jsonEncode({'query': value}),);
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
 
   Future<AddressTooltip> fetchCityTips(String value) async {
-    var response = await http.post(
+    final response = await http.post(
         Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
         headers: {
           'Content-Type': 'application/json',
@@ -37,17 +37,18 @@ class DaDataClient {
         body: jsonEncode({
           'query': value,
           // "count": 10,
-          "from_bound": {"value": "city"},
-          "to_bound": {"value": "settlement"},
-          "locations": [],
-          "restrict_value": true
-        }));
+          'from_bound': {'value': 'city'},
+          'to_bound': {'value': 'settlement'},
+          // ignore: inference_failure_on_collection_literal
+          'locations': [],
+          'restrict_value': true
+        }),);
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
 
   Future<AddressTooltip> fetchStreetTips(String value, String fiasId) async {
-    var response = await http.post(
+    final response = await http.post(
         Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
         headers: {
           'Content-Type': 'application/json',
@@ -56,13 +57,13 @@ class DaDataClient {
         body: jsonEncode({
           'query': value,
           // "count": 10,
-          "from_bound": {"value": "street"},
-          "to_bound": {"value": "street"},
-          "locations": [
-            {"fias_id": fiasId}
+          'from_bound': {'value': 'street'},
+          'to_bound': {'value': 'street'},
+          'locations': [
+            {'fias_id': fiasId}
           ],
-          "restrict_value": true
-        }));
+          'restrict_value': true
+        }),);
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
@@ -91,7 +92,7 @@ class DaDataClient {
         .trim();
     log('-- $search');
 
-    var response = await http.post(
+    final response = await http.post(
         Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
         headers: {
           'Content-Type': 'application/json',
@@ -99,18 +100,19 @@ class DaDataClient {
         },
         body: jsonEncode({
           'query': search,
-          "count": 10,
-          "from_bound": {"value": ""},
-          "to_bound": {"value": ""},
-          "locations": [],
-          "restrict_value": true
-        }));
+          'count': 10,
+          'from_bound': {'value': ''},
+          'to_bound': {'value': ''},
+          // ignore: inference_failure_on_collection_literal
+          'locations': [],
+          'restrict_value': true
+        }),);
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
 
   Future<List<String>> fetchSimpleTooltip(String value, DaDataEnum type) async {
-    final List<String> list = [];
+    final list = <String>[];
     dynamic result;
     switch (type) {
       case DaDataEnum.name:
@@ -119,7 +121,7 @@ class DaDataClient {
         result = await fetchFioTooltip(value, type);
         break;
       case DaDataEnum.all:
-        // TODO: Handle this case.
+      
         break;
     }
 
@@ -128,6 +130,7 @@ class DaDataClient {
 
     for (var i = 0; i < length; i++) {
       list.add(
+     
         result.suggestions[i].value,
       );
     }
@@ -151,7 +154,7 @@ class DaDataClient {
         typeFio = '';
         break;
     }
-    http.Response response = await http.post(
+    final response = await http.post(
         Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/fio'),
         headers: {
           'Content-Type': 'application/json',
@@ -164,13 +167,13 @@ class DaDataClient {
             : jsonEncode({
                 'query': value,
                 'parts': [typeFio],
-              }));
+              }),);
 
     return FioTooltip.fromJson(json.decode(response.body));
   }
 
   Future<PassportCodeName> fetchPassportTooltip(String value) async {
-    http.Response response = await http.post(
+    final response = await http.post(
         Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/fms_unit'),
         headers: {
           'Content-Type': 'application/json',
@@ -178,7 +181,7 @@ class DaDataClient {
         },
         body: jsonEncode({
           'query': value,
-        }));
+        }),);
 
     return PassportCodeName.fromJson(json.decode(response.body));
   }
