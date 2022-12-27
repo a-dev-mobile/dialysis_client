@@ -12,9 +12,9 @@ linter:
 
 
 analyzer:
-  # errors:
-    # argument_type_not_assignable: ignore
-    # invalid_assignment: ignore
+  errors:
+    argument_type_not_assignable: ignore
+    invalid_assignment: ignore
   plugins:
     - dart_code_metrics
   # strong-mode:
