@@ -6,7 +6,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dialysis/app/common_cubits/common_cubits.dart';
+import 'package:dialysis/app/common_cubits/common_c.dart';
 
 import 'package:dialysis/feature/common/enums/enums.dart';
 import 'package:dialysis/navigation/navigation.dart';

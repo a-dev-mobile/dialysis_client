@@ -125,5 +125,20 @@ class AppLocalizationsRu extends AppLocalizations {
   String get max_text_length => 'Максимальная длина текста';
 
   @override
+  String get name => 'Ваше имя';
+
+  @override
+  String get what_gender => 'Ваш пол';
+
+  @override
+  String get gender_not_selected => 'Пол не выбран';
+
+  @override
+  String get male => 'МУЖСКОЙ';
+
+  @override
+  String get female => 'ЖЕНСКИЙ';
+
+  @override
   String get g => 'г';
 }

@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:dialysis/app/common_cubits/common_cubits.dart';
+import 'package:dialysis/app/common_cubits/common_c.dart';
 import 'package:dialysis/feature/common/enums/enums.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/navigation/navigation.dart';
@@ -83,7 +83,7 @@ class WelcomeCubit extends Cubit<WelcomeState> {
 
   void nextPage() {
 
-    _go.router.goNamed(RegistrationPage.name);
+    _go.router.pushNamed(RegistrationPage.name);
 
 
   }

@@ -3,8 +3,8 @@
 /// {@endtemplate}
 
 enum Gender with Comparable<Gender> {
-  male('male'),
   female('female'),
+  male('male'),
   none('none');
 
   const Gender(this.value);
@@ -13,13 +13,12 @@ enum Gender with Comparable<Gender> {
 
   static Gender fromValue(String? value, {Gender? fallback}) {
     switch (value) {
-      case 'male':
-        return male;
       case 'female':
         return female;
+      case 'male':
+        return male;
       case 'none':
         return none;
-
       default:
         return fallback ?? (throw ArgumentError.value(value));
     }

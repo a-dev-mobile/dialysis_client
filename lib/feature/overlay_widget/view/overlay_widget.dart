@@ -2,7 +2,7 @@ import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:dialysis/app/common_cubits/common_cubits.dart';
+import 'package:dialysis/app/common_cubits/common_c.dart';
 import 'package:dialysis/app/style/style.dart';
 
 import 'package:dialysis/core/widget/widget.dart';

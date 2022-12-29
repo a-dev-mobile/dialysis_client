@@ -333,6 +333,36 @@ abstract class AppLocalizations {
   /// **'Максимальная длина текста'**
   String get max_text_length;
 
+  /// No description provided for @name.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваше имя'**
+  String get name;
+
+  /// No description provided for @what_gender.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваш пол'**
+  String get what_gender;
+
+  /// No description provided for @gender_not_selected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пол не выбран'**
+  String get gender_not_selected;
+
+  /// No description provided for @male.
+  ///
+  /// In ru, this message translates to:
+  /// **'МУЖСКОЙ'**
+  String get male;
+
+  /// No description provided for @female.
+  ///
+  /// In ru, this message translates to:
+  /// **'ЖЕНСКИЙ'**
+  String get female;
+
   /// No description provided for @g.
   ///
   /// In ru, this message translates to:

@@ -1,6 +1,8 @@
 import 'package:dialysis/app/style/style.dart';
+
+import 'package:dialysis/core/widget/clean_focus.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-import 'package:dialysis/l10n/l10n.dart';
+
 
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/material.dart';
@@ -33,43 +35,70 @@ class _RegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<RegistrationCubit>();
 
-    final l = context.l10n;
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                Text(
-                  'Здраствуйте! Расскажите о себе',
-                  style: AppTextStyles.h4(),
-                ),
-                const SizedBox(height: 20),
-                BlocBuilder<RegistrationCubit, RegistrationState>(
-                  buildWhen: (p, c) =>
-                      p.nameValid.pure != c.nameValid.pure ||
-                      p.nameValid.value != c.nameValid.value,
-                  builder: (context, state) {
-                    return FieldFio(
-                      errorText: errorValidName(state.nameValid, l),
-                      initValue: state.nameValid.value,
-                      labelText: 'Имя',
-                      suggestionsCallback: cubit.getSuggestionsName,
-                      onChanged: cubit.checkName,
-                    );
-                  },
-                ),
-                SizedBox(
+    // final l = context.l10n;
+    return ClearFocus(
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  const _TitleMain(),
+                  const SizedBox(height: 20),
+                  const _TitleSub(text: 'Введите имя'),
+                  const SizedBox(height: 10),
+                  NameField(cubit: cubit),
+                  const SizedBox(height: 20),
+                  const GenderChoose(),
+                  const SizedBox(height: 20),
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text('Начать')))
-              ],
+                      onPressed: () {
+                        cubit.checkAll();
+                      },
+                      child: const Text('Начать'),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _TitleSub extends StatelessWidget {
+  const _TitleSub({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: AppTextStyles.bodyText2(),
+      textAlign: TextAlign.center,
+    );
+  }
+}
+
+class _TitleMain extends StatelessWidget {
+  const _TitleMain({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Здраствуйте!\nРасскажите о себе',
+      style: AppTextStyles.h4(),
+      textAlign: TextAlign.center,
     );
   }
 }
