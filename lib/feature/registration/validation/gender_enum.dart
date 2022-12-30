@@ -2,16 +2,16 @@
 /// Gender enumeration
 /// {@endtemplate}
 
-enum Gender with Comparable<Gender> {
+enum GenderEnum with Comparable<GenderEnum> {
   female('female'),
   male('male'),
   none('none');
 
-  const Gender(this.value);
+  const GenderEnum(this.value);
 
   final String value;
 
-  static Gender fromValue(String? value, {Gender? fallback}) {
+  static GenderEnum fromValue(String? value, {GenderEnum? fallback}) {
     switch (value) {
       case 'female':
         return female;
@@ -31,11 +31,11 @@ enum Gender with Comparable<Gender> {
     required T Function() none,
   }) {
     switch (this) {
-      case Gender.male:
+      case GenderEnum.male:
         return male();
-      case Gender.female:
+      case GenderEnum.female:
         return female();
-      case Gender.none:
+      case GenderEnum.none:
         return none();
     }
   }
@@ -67,7 +67,7 @@ enum Gender with Comparable<Gender> {
       );
 
   @override
-  int compareTo(Gender other) => index.compareTo(other.index);
+  int compareTo(GenderEnum other) => index.compareTo(other.index);
 
   @override
   String toString() => value;

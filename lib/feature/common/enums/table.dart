@@ -1,14 +1,31 @@
+  // ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
+  /*
+  
+  enum TableEnum {
+  food,
+  source,
+  product,
+  category,
+  nutrient,
+  nutrient_type,
+  date,
+}
+ 
+  
+  */
 /// {@template tableenum}
 /// TableEnum enumeration
 /// {@endtemplate}
 
 enum TableEnum with Comparable<TableEnum> { 
-  category('category'),
   food('food'),
+  source('source'),
+  product('product'),
+  category('category'),
   nutrient('nutrient'),
   nutrient_type('nutrient_type'),
-  product('product'),
-  source('source');
+  date('date');
 
   const TableEnum(this.value);
 
@@ -16,18 +33,20 @@ enum TableEnum with Comparable<TableEnum> {
 
   static TableEnum fromValue(String? value, {TableEnum? fallback}) {
     switch (value) {
-      case 'category':
-        return category;
       case 'food':
         return food;
+      case 'source':
+        return source;
+      case 'product':
+        return product;
+      case 'category':
+        return category;
       case 'nutrient':
         return nutrient;
       case 'nutrient_type':
         return nutrient_type;
-      case 'product':
-        return product;
-      case 'source':
-        return source;
+      case 'date':
+        return date;
 
       default:
         return fallback ?? (throw ArgumentError.value(value));
@@ -36,68 +55,77 @@ enum TableEnum with Comparable<TableEnum> {
 
   /// Pattern matching
   T map<T>({
-    required T Function() category,
     required T Function() food,
+    required T Function() source,
+    required T Function() product,
+    required T Function() category,
     required T Function() nutrient,
     required T Function() nutrient_type,
-    required T Function() product,
-    required T Function() source,
+    required T Function() date,
 
   }) {
     switch (this) {
-      case TableEnum.category:
-        return category();     
       case TableEnum.food:
         return food();     
+      case TableEnum.source:
+        return source();     
+      case TableEnum.product:
+        return product();     
+      case TableEnum.category:
+        return category();     
       case TableEnum.nutrient:
         return nutrient();     
       case TableEnum.nutrient_type:
         return nutrient_type();     
-      case TableEnum.product:
-        return product();     
-      case TableEnum.source:
-        return source();     
+      case TableEnum.date:
+        return date();     
 
     }
   }
+  
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
-    T Function()? category,
     T Function()? food,
+    T Function()? source,
+    T Function()? product,
+    T Function()? category,
     T Function()? nutrient,
     T Function()? nutrient_type,
-    T Function()? product,
-    T Function()? source,
+    T Function()? date,
 
   }) =>
       map<T>(
-      category: category ?? orElse,     
       food: food ?? orElse,     
+      source: source ?? orElse,     
+      product: product ?? orElse,     
+      category: category ?? orElse,     
       nutrient: nutrient ?? orElse,     
       nutrient_type: nutrient_type ?? orElse,     
-      product: product ?? orElse,     
-      source: source ?? orElse,     
+      date: date ?? orElse,     
 
       );
+
   /// Pattern matching
   T? maybeMapOrNull<T>({
-    T Function()? category,
     T Function()? food,
+    T Function()? source,
+    T Function()? product,
+    T Function()? category,
     T Function()? nutrient,
     T Function()? nutrient_type,
-    T Function()? product,
-    T Function()? source,
+    T Function()? date,
 
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        category: category,  
         food: food,  
+        source: source,  
+        product: product,  
+        category: category,  
         nutrient: nutrient,  
         nutrient_type: nutrient_type,  
-        product: product,  
-        source: source,  
+        date: date,  
         
       );
 
@@ -107,15 +135,5 @@ enum TableEnum with Comparable<TableEnum> {
   @override
   String toString() => value;
    }
-  /*
-  enum TableEnum {
-  category,
-  food,
-  nutrient,
-  nutrient_type,
-  product,
-  source,
-}
 
-  */
   

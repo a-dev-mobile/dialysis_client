@@ -9,7 +9,6 @@ import 'package:dialysis/core/device/device.dart';
 import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/utils/utils.dart';
 
-
 import 'package:dialysis/feature/common/enums/table.dart';
 import 'package:dialysis/global_const.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -134,6 +133,7 @@ class AppDb {
         category: () => _updateOrInsetDB(db, nameTable, list),
         nutrient: () => _updateOrInsetDB(db, nameTable, list),
         nutrient_type: () => _updateOrInsetDB(db, nameTable, list),
+        date: () => _updateOrInsetDB(db, nameTable, list),
       );
     }
     await db.close();

@@ -3,7 +3,6 @@ import 'package:dialysis/app/style/style.dart';
 import 'package:dialysis/core/widget/clean_focus.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 
-
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +19,7 @@ class RegistrationPage extends StatelessWidget {
           create: (context) => RegistrationCubit(
             router: context.read<AppRouter>(),
             clienTips: context.read(),
+            storage: context.read(),
           )..load(),
         ),
       ],
@@ -52,6 +52,40 @@ class _RegistrationPage extends StatelessWidget {
                   NameField(cubit: cubit),
                   const SizedBox(height: 20),
                   const GenderChoose(),
+                  const SizedBox(height: 20),
+                  const ActivityChoose(),
+                  const SizedBox(height: 20),
+                  DropdownButton(
+                      hint: Text('ММ'),
+                      items: [
+                        DropdownMenuItem(
+                          child: Text('ЯНВ.1'),
+                          value: 1,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('ЯНВ.2'),
+                          value: 2,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('ЯНВ.3'),
+                          value: 3,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('ЯНВ.4'),
+                          value: 4,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('ЯНВ.5'),
+                          value: 5,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('ЯНВ.6'),
+                          value: 6,
+                        ),
+                      ],
+                      onChanged: (v) {
+                        print(v);
+                      }),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,

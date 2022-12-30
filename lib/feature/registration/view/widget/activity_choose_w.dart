@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/cubit/cubit.dart';
 import 'package:dialysis/feature/registration/validation/validation.dart';
@@ -7,10 +8,10 @@ import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ActitvityChoose extends StatelessWidget {
-  const ActitvityChoose({
-    Key? key,
-  }) : super(key: key);
+class ActivityChoose extends StatelessWidget {
+  const ActivityChoose({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +20,23 @@ class ActitvityChoose extends StatelessWidget {
 
     return BlocBuilder<RegistrationCubit, RegistrationState>(
       buildWhen: (p, c) =>
-          p.validGenderFormz.isPure != c.validGenderFormz.isPure ||
-          p.validGenderFormz.value != c.validGenderFormz.value,
+          p.validActivityFormz.isPure != c.validActivityFormz.isPure ||
+          p.validActivityFormz.value != c.validActivityFormz.value,
       builder: (context, state) {
-        final valid = state.validGenderFormz;
+        final valid = state.validActivityFormz;
 
         return BtnToggleText(
-          infoBottom:
-              'Пол влияет на скорость метаболизма. Вот почему эта информация нужна для расчета суточной нормы.',
-          textList: [l.female, l.male],
-          isSelected: state.genderSelected,
-          onPressed: cubit.checkGender,
+          textList: [l.light, l.normal],
+          isSelected: state.activitySelected,
+          onPressed: cubit.checkActivity,
+          dialogText:
+              'Физическая активность влияет для расчета суточной нормы нутриентов.',
           errorText: valid.isPure
               ? null
               : valid.error == valid.notSelected
-                  ? l.gender_not_selected
+                  ? l.activity_not_selected
                   : null,
-          title: 'Для человека какого пола следует рассчитывать рекомендации?',
+          title: 'Укажите свою физическую активность',
         );
       },
     );

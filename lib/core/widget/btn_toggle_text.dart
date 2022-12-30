@@ -1,5 +1,6 @@
 import 'package:dialysis/app/style/extensions/extensions.dart';
 import 'package:dialysis/app/style/theme/theme.dart';
+
 import 'package:flutter/material.dart';
 
 class BtnToggleText extends StatelessWidget {
@@ -11,10 +12,12 @@ class BtnToggleText extends StatelessWidget {
     required this.title,
     this.errorText,
     this.infoBottom,
+    this.dialogText,
   });
   final List<String> textList;
   final String title;
   final String? errorText;
+  final String? dialogText;
   final String? infoBottom;
   final List<bool> isSelected;
   final void Function(int)? onPressed;
@@ -24,12 +27,30 @@ class BtnToggleText extends StatelessWidget {
       builder: (context, constraint) {
         return Column(
           children: [
-            Text(
-              title,
-              style: AppTextStyles.bodyText2(),
-              textAlign: TextAlign.center,
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: AppTextStyles.bodyText2(),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                if (dialogText != null)
+                  Container(
+                    // transform: Matrix4.translationValues(0, -16, 0),
+                    child: IconButton(
+                        onPressed: () => _showInfoDialog(
+                            context: context, text: dialogText!),
+                        icon: Icon(
+                          Icons.info_outline,
+                          color: context.theme.colorScheme.primary,
+                        )),
+                  )
+              ],
             ),
-            const SizedBox(height: 10),
+            if (dialogText == null) const SizedBox(height: 10),
             ToggleButtons(
               constraints: BoxConstraints.expand(
                 width: (constraint.maxWidth / textList.length) - 3,
@@ -59,4 +80,17 @@ class BtnToggleText extends StatelessWidget {
       },
     );
   }
+}
+
+Future<void> _showInfoDialog(
+    {required BuildContext context, required String text}) async {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        icon: Icon(Icons.info_outline),
+        content: Text(text),
+      );
+    },
+  );
 }

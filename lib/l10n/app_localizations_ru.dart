@@ -119,7 +119,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get favorite => 'Любимые';
 
   @override
-  String get enter_name => 'Это обязательное поле. Введите имя';
+  String get enter_name => 'Введите имя';
 
   @override
   String get max_text_length => 'Максимальная длина текста';
@@ -134,10 +134,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get gender_not_selected => 'Пол не выбран';
 
   @override
+  String get activity_not_selected => 'Физическая активность не выбрана';
+
+  @override
   String get male => 'МУЖСКОЙ';
 
   @override
   String get female => 'ЖЕНСКИЙ';
+
+  @override
+  String get normal => 'ОБЫЧНАЯ';
+
+  @override
+  String get light => 'ЛЕГКАЯ';
 
   @override
   String get g => 'г';

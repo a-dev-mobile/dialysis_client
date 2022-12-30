@@ -38,12 +38,17 @@
   "data_source": "Источник",
   "weight": "Порция",
   "favorite": "Любимые",
-  "enter_name": "Это обязательное поле. Введите имя",
+  "enter_name": "Введите имя",
   "max_text_length": "Максимальная длина текста",
   "name": "Ваше имя",
   "what_gender": "Ваш пол",
   "gender_not_selected": "Пол не выбран",
+  "activity_not_selected": "Физическая активность не выбрана",
   "male": "МУЖСКОЙ",
   "female": "ЖЕНСКИЙ",
+  "normal": "ОБЫЧНАЯ",
+  "light": "ЛЕГКАЯ",
+
+
   "g": "г"
 }

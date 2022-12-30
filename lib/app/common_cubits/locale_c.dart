@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LocaleCubit extends Cubit<LocaleEnum> {
   LocaleCubit({required AppStorage storage})
       : _storage = storage,
-        super(LocaleEnum.fromValue(Platform.localeName.split('_').first));
+        super(LocaleEnum.fromValue(Platform.localeName));
   final AppStorage _storage;
 
   Future<void> load() async {
@@ -24,7 +24,7 @@ class LocaleCubit extends Cubit<LocaleEnum> {
   ///
   void setLocale(LocaleEnum locale) {
     emit(locale);
-    _storage.setLocale(locale.name);
+    _storage.setLocale(locale.value);
   }
 
   ///

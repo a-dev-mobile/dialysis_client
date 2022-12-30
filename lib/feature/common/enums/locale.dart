@@ -3,8 +3,8 @@
 /// {@endtemplate}
 
 enum LocaleEnum with Comparable<LocaleEnum> {
-  ru('ru'),
-  en('en');
+  ru('ru_RU'),
+  en('en_US');
 
   const LocaleEnum(this.value);
 
@@ -12,9 +12,9 @@ enum LocaleEnum with Comparable<LocaleEnum> {
 
   static LocaleEnum fromValue(String? value, {LocaleEnum? fallback}) {
     switch (value) {
-      case 'ru':
+      case 'ru_RU':
         return ru;
-      case 'en':
+      case 'en_US':
         return en;
 
       default:

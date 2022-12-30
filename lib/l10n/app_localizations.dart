@@ -324,7 +324,7 @@ abstract class AppLocalizations {
   /// No description provided for @enter_name.
   ///
   /// In ru, this message translates to:
-  /// **'Это обязательное поле. Введите имя'**
+  /// **'Введите имя'**
   String get enter_name;
 
   /// No description provided for @max_text_length.
@@ -351,6 +351,12 @@ abstract class AppLocalizations {
   /// **'Пол не выбран'**
   String get gender_not_selected;
 
+  /// No description provided for @activity_not_selected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Физическая активность не выбрана'**
+  String get activity_not_selected;
+
   /// No description provided for @male.
   ///
   /// In ru, this message translates to:
@@ -362,6 +368,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'ЖЕНСКИЙ'**
   String get female;
+
+  /// No description provided for @normal.
+  ///
+  /// In ru, this message translates to:
+  /// **'ОБЫЧНАЯ'**
+  String get normal;
+
+  /// No description provided for @light.
+  ///
+  /// In ru, this message translates to:
+  /// **'ЛЕГКАЯ'**
+  String get light;
 
   /// No description provided for @g.
   ///
