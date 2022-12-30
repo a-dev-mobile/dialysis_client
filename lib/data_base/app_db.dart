@@ -8,8 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dialysis/core/device/device.dart';
 import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/utils/utils.dart';
+import 'package:dialysis/data_base/data_base.dart';
 
-import 'package:dialysis/feature/common/enums/table.dart';
+
 import 'package:dialysis/global_const.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
@@ -65,7 +66,7 @@ class AppDb {
     }
   }
 
-  Future<Database> _openDB() {
+  Future<Database> openDB() {
     return openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
   }
 
@@ -112,7 +113,7 @@ class AppDb {
 
     var pathUpdateFile = '';
 
-    final db = await _openDB();
+    final db = await openDB();
     var nameTable = '';
 
     for (var i = 0; i < TableEnum.values.length; i++) {

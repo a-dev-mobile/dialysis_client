@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 /// {@template load_page}
 /// Widget with disabling user action during load
 /// {@endtemplate}
-class LoadPage extends StatelessWidget {
-  const LoadPage({super.key, this.isLoad = false, required this.child});
+class LoadNextPage extends StatelessWidget {
+  const LoadNextPage({super.key, this.isLoad = false, required this.child});
   final Widget child;
   final bool isLoad;
   @override
@@ -27,7 +27,7 @@ class LoadPage extends StatelessWidget {
                           filter: ui.ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                           child: const Center(
                             child: RepaintBoundary(
-                              child: AppPageProgressIndicator(),
+                              child: PageStartLoad(),
                             ),
                           ),
                         ),

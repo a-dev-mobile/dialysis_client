@@ -38,7 +38,7 @@ class _SplashView extends StatelessWidget {
           ),
           Positioned(
             bottom: 30,
-            child: AppPageProgressIndicator(),
+            child: PageStartLoad(),
           ),
         ],
       ),

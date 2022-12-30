@@ -2,7 +2,9 @@
 /// ColumnEnum enumeration
 /// {@endtemplate}
 
-enum ColumnEnum with Comparable<ColumnEnum> { 
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
+enum NutrientColumnEnum with Comparable<NutrientColumnEnum> { 
   water('water'),
   k_potassium('k_potassium'),
   na_sodium('na_sodium'),
@@ -168,11 +170,11 @@ enum ColumnEnum with Comparable<ColumnEnum> {
   omega_6_20_4('omega_6_20_4'),
   omega_3_geneico('omega_3_geneico');
 
-  const ColumnEnum(this.value);
+  const NutrientColumnEnum(this.value);
 
   final String value;
 
-  static ColumnEnum fromValue(String? value, {ColumnEnum? fallback}) {
+  static NutrientColumnEnum fromValue(String? value, {NutrientColumnEnum? fallback}) {
     switch (value) {
       case 'water':
         return water;
@@ -677,333 +679,333 @@ enum ColumnEnum with Comparable<ColumnEnum> {
 
   }) {
     switch (this) {
-      case ColumnEnum.water:
+      case NutrientColumnEnum.water:
         return water();     
-      case ColumnEnum.k_potassium:
+      case NutrientColumnEnum.k_potassium:
         return k_potassium();     
-      case ColumnEnum.na_sodium:
+      case NutrientColumnEnum.na_sodium:
         return na_sodium();     
-      case ColumnEnum.p_phosphorus:
+      case NutrientColumnEnum.p_phosphorus:
         return p_phosphorus();     
-      case ColumnEnum.ca_calcium:
+      case NutrientColumnEnum.ca_calcium:
         return ca_calcium();     
-      case ColumnEnum.proteins:
+      case NutrientColumnEnum.proteins:
         return proteins();     
-      case ColumnEnum.calorie:
+      case NutrientColumnEnum.calorie:
         return calorie();     
-      case ColumnEnum.carbohydrates:
+      case NutrientColumnEnum.carbohydrates:
         return carbohydrates();     
-      case ColumnEnum.fats:
+      case NutrientColumnEnum.fats:
         return fats();     
-      case ColumnEnum.feed_ash:
+      case NutrientColumnEnum.feed_ash:
         return feed_ash();     
-      case ColumnEnum.a_vitamin:
+      case NutrientColumnEnum.a_vitamin:
         return a_vitamin();     
-      case ColumnEnum.retinol:
+      case NutrientColumnEnum.retinol:
         return retinol();     
-      case ColumnEnum.beta_carotene:
+      case NutrientColumnEnum.beta_carotene:
         return beta_carotene();     
-      case ColumnEnum.b1_vitamin_thiamine:
+      case NutrientColumnEnum.b1_vitamin_thiamine:
         return b1_vitamin_thiamine();     
-      case ColumnEnum.b2_vitamin_riboflavin:
+      case NutrientColumnEnum.b2_vitamin_riboflavin:
         return b2_vitamin_riboflavin();     
-      case ColumnEnum.b5_vitamin:
+      case NutrientColumnEnum.b5_vitamin:
         return b5_vitamin();     
-      case ColumnEnum.b6_vitamin_pyridoxine:
+      case NutrientColumnEnum.b6_vitamin_pyridoxine:
         return b6_vitamin_pyridoxine();     
-      case ColumnEnum.b9_vitamin_folates:
+      case NutrientColumnEnum.b9_vitamin_folates:
         return b9_vitamin_folates();     
-      case ColumnEnum.b12_vitamin_cobalamin:
+      case NutrientColumnEnum.b12_vitamin_cobalamin:
         return b12_vitamin_cobalamin();     
-      case ColumnEnum.c_vitamin:
+      case NutrientColumnEnum.c_vitamin:
         return c_vitamin();     
-      case ColumnEnum.e_vitamin:
+      case NutrientColumnEnum.e_vitamin:
         return e_vitamin();     
-      case ColumnEnum.rr_vitamin:
+      case NutrientColumnEnum.rr_vitamin:
         return rr_vitamin();     
-      case ColumnEnum.niacin:
+      case NutrientColumnEnum.niacin:
         return niacin();     
-      case ColumnEnum.mg_magnesium:
+      case NutrientColumnEnum.mg_magnesium:
         return mg_magnesium();     
-      case ColumnEnum.s_sulfur:
+      case NutrientColumnEnum.s_sulfur:
         return s_sulfur();     
-      case ColumnEnum.cl_chlorine:
+      case NutrientColumnEnum.cl_chlorine:
         return cl_chlorine();     
-      case ColumnEnum.fe_iron:
+      case NutrientColumnEnum.fe_iron:
         return fe_iron();     
-      case ColumnEnum.i_iodine:
+      case NutrientColumnEnum.i_iodine:
         return i_iodine();     
-      case ColumnEnum.co_cobalt:
+      case NutrientColumnEnum.co_cobalt:
         return co_cobalt();     
-      case ColumnEnum.mn_manganese:
+      case NutrientColumnEnum.mn_manganese:
         return mn_manganese();     
-      case ColumnEnum.cu_copper:
+      case NutrientColumnEnum.cu_copper:
         return cu_copper();     
-      case ColumnEnum.mo_molybdenum:
+      case NutrientColumnEnum.mo_molybdenum:
         return mo_molybdenum();     
-      case ColumnEnum.ni_nickel:
+      case NutrientColumnEnum.ni_nickel:
         return ni_nickel();     
-      case ColumnEnum.se_selenium:
+      case NutrientColumnEnum.se_selenium:
         return se_selenium();     
-      case ColumnEnum.f_fluorine:
+      case NutrientColumnEnum.f_fluorine:
         return f_fluorine();     
-      case ColumnEnum.cr_chrome:
+      case NutrientColumnEnum.cr_chrome:
         return cr_chrome();     
-      case ColumnEnum.zh_zinc:
+      case NutrientColumnEnum.zh_zinc:
         return zh_zinc();     
-      case ColumnEnum.cholesterol:
+      case NutrientColumnEnum.cholesterol:
         return cholesterol();     
-      case ColumnEnum.saturated_fatty_acids:
+      case NutrientColumnEnum.saturated_fatty_acids:
         return saturated_fatty_acids();     
-      case ColumnEnum.myristina:
+      case NutrientColumnEnum.myristina:
         return myristina();     
-      case ColumnEnum.palmitic:
+      case NutrientColumnEnum.palmitic:
         return palmitic();     
-      case ColumnEnum.stearic:
+      case NutrientColumnEnum.stearic:
         return stearic();     
-      case ColumnEnum.arachinova:
+      case NutrientColumnEnum.arachinova:
         return arachinova();     
-      case ColumnEnum.mono_fatty_acids:
+      case NutrientColumnEnum.mono_fatty_acids:
         return mono_fatty_acids();     
-      case ColumnEnum.palmitoleic:
+      case NutrientColumnEnum.palmitoleic:
         return palmitoleic();     
-      case ColumnEnum.heptadecene:
+      case NutrientColumnEnum.heptadecene:
         return heptadecene();     
-      case ColumnEnum.omega_9_oleic:
+      case NutrientColumnEnum.omega_9_oleic:
         return omega_9_oleic();     
-      case ColumnEnum.omega_9_gadolein:
+      case NutrientColumnEnum.omega_9_gadolein:
         return omega_9_gadolein();     
-      case ColumnEnum.poly_fatty_acids:
+      case NutrientColumnEnum.poly_fatty_acids:
         return poly_fatty_acids();     
-      case ColumnEnum.linoleic:
+      case NutrientColumnEnum.linoleic:
         return linoleic();     
-      case ColumnEnum.linolenic:
+      case NutrientColumnEnum.linolenic:
         return linolenic();     
-      case ColumnEnum.arachidonic:
+      case NutrientColumnEnum.arachidonic:
         return arachidonic();     
-      case ColumnEnum.omega_3_epk:
+      case NutrientColumnEnum.omega_3_epk:
         return omega_3_epk();     
-      case ColumnEnum.omega_3_fatty_acids:
+      case NutrientColumnEnum.omega_3_fatty_acids:
         return omega_3_fatty_acids();     
-      case ColumnEnum.omega_3_dpc:
+      case NutrientColumnEnum.omega_3_dpc:
         return omega_3_dpc();     
-      case ColumnEnum.omega_6_fatty_acids:
+      case NutrientColumnEnum.omega_6_fatty_acids:
         return omega_6_fatty_acids();     
-      case ColumnEnum.dietary_fiber:
+      case NutrientColumnEnum.dietary_fiber:
         return dietary_fiber();     
-      case ColumnEnum.mono_di_saccharides:
+      case NutrientColumnEnum.mono_di_saccharides:
         return mono_di_saccharides();     
-      case ColumnEnum.organic_acids:
+      case NutrientColumnEnum.organic_acids:
         return organic_acids();     
-      case ColumnEnum.b4_vitamin:
+      case NutrientColumnEnum.b4_vitamin:
         return b4_vitamin();     
-      case ColumnEnum.d_Vitamin_calciferol:
+      case NutrientColumnEnum.d_Vitamin_calciferol:
         return d_Vitamin_calciferol();     
-      case ColumnEnum.h_vitamin_biotin:
+      case NutrientColumnEnum.h_vitamin_biotin:
         return h_vitamin_biotin();     
-      case ColumnEnum.k_vitamin_phylloquinone:
+      case NutrientColumnEnum.k_vitamin_phylloquinone:
         return k_vitamin_phylloquinone();     
-      case ColumnEnum.al_aluminium:
+      case NutrientColumnEnum.al_aluminium:
         return al_aluminium();     
-      case ColumnEnum.sn_tin:
+      case NutrientColumnEnum.sn_tin:
         return sn_tin();     
-      case ColumnEnum.sr_strontium:
+      case NutrientColumnEnum.sr_strontium:
         return sr_strontium();     
-      case ColumnEnum.galactose:
+      case NutrientColumnEnum.galactose:
         return galactose();     
-      case ColumnEnum.glucose_dextrose:
+      case NutrientColumnEnum.glucose_dextrose:
         return glucose_dextrose();     
-      case ColumnEnum.lactose:
+      case NutrientColumnEnum.lactose:
         return lactose();     
-      case ColumnEnum.essential_amino_acids:
+      case NutrientColumnEnum.essential_amino_acids:
         return essential_amino_acids();     
-      case ColumnEnum.arginine:
+      case NutrientColumnEnum.arginine:
         return arginine();     
-      case ColumnEnum.valin:
+      case NutrientColumnEnum.valin:
         return valin();     
-      case ColumnEnum.histidine:
+      case NutrientColumnEnum.histidine:
         return histidine();     
-      case ColumnEnum.isoleucine:
+      case NutrientColumnEnum.isoleucine:
         return isoleucine();     
-      case ColumnEnum.leucine:
+      case NutrientColumnEnum.leucine:
         return leucine();     
-      case ColumnEnum.lysine:
+      case NutrientColumnEnum.lysine:
         return lysine();     
-      case ColumnEnum.methionine:
+      case NutrientColumnEnum.methionine:
         return methionine();     
-      case ColumnEnum.methionine_cysteine:
+      case NutrientColumnEnum.methionine_cysteine:
         return methionine_cysteine();     
-      case ColumnEnum.threonine:
+      case NutrientColumnEnum.threonine:
         return threonine();     
-      case ColumnEnum.tryptophan:
+      case NutrientColumnEnum.tryptophan:
         return tryptophan();     
-      case ColumnEnum.phenylalanine:
+      case NutrientColumnEnum.phenylalanine:
         return phenylalanine();     
-      case ColumnEnum.phenylalanine_tyrosine:
+      case NutrientColumnEnum.phenylalanine_tyrosine:
         return phenylalanine_tyrosine();     
-      case ColumnEnum.substitutable_amino_acids:
+      case NutrientColumnEnum.substitutable_amino_acids:
         return substitutable_amino_acids();     
-      case ColumnEnum.alanine:
+      case NutrientColumnEnum.alanine:
         return alanine();     
-      case ColumnEnum.aspartica_acid:
+      case NutrientColumnEnum.aspartica_acid:
         return aspartica_acid();     
-      case ColumnEnum.glycine:
+      case NutrientColumnEnum.glycine:
         return glycine();     
-      case ColumnEnum.glutamic_acid:
+      case NutrientColumnEnum.glutamic_acid:
         return glutamic_acid();     
-      case ColumnEnum.proline:
+      case NutrientColumnEnum.proline:
         return proline();     
-      case ColumnEnum.serin:
+      case NutrientColumnEnum.serin:
         return serin();     
-      case ColumnEnum.tyrosine:
+      case NutrientColumnEnum.tyrosine:
         return tyrosine();     
-      case ColumnEnum.cysteine:
+      case NutrientColumnEnum.cysteine:
         return cysteine();     
-      case ColumnEnum.oil_4_0:
+      case NutrientColumnEnum.oil_4_0:
         return oil_4_0();     
-      case ColumnEnum.capron:
+      case NutrientColumnEnum.capron:
         return capron();     
-      case ColumnEnum.caprylic:
+      case NutrientColumnEnum.caprylic:
         return caprylic();     
-      case ColumnEnum.caprine:
+      case NutrientColumnEnum.caprine:
         return caprine();     
-      case ColumnEnum.laurin:
+      case NutrientColumnEnum.laurin:
         return laurin();     
-      case ColumnEnum.pentadecane:
+      case NutrientColumnEnum.pentadecane:
         return pentadecane();     
-      case ColumnEnum.margarine:
+      case NutrientColumnEnum.margarine:
         return margarine();     
-      case ColumnEnum.myristolein:
+      case NutrientColumnEnum.myristolein:
         return myristolein();     
-      case ColumnEnum.sucrose:
+      case NutrientColumnEnum.sucrose:
         return sucrose();     
-      case ColumnEnum.trans_fats:
+      case NutrientColumnEnum.trans_fats:
         return trans_fats();     
-      case ColumnEnum.starch_dextrins:
+      case NutrientColumnEnum.starch_dextrins:
         return starch_dextrins();     
-      case ColumnEnum.ethyl_alcohol:
+      case NutrientColumnEnum.ethyl_alcohol:
         return ethyl_alcohol();     
-      case ColumnEnum.si_silicon:
+      case NutrientColumnEnum.si_silicon:
         return si_silicon();     
-      case ColumnEnum.b_bohr:
+      case NutrientColumnEnum.b_bohr:
         return b_bohr();     
-      case ColumnEnum.v_vanadium:
+      case NutrientColumnEnum.v_vanadium:
         return v_vanadium();     
-      case ColumnEnum.li_lithium:
+      case NutrientColumnEnum.li_lithium:
         return li_lithium();     
-      case ColumnEnum.rb_rubidium:
+      case NutrientColumnEnum.rb_rubidium:
         return rb_rubidium();     
-      case ColumnEnum.zr_zirconium:
+      case NutrientColumnEnum.zr_zirconium:
         return zr_zirconium();     
-      case ColumnEnum.omega_9_eruca:
+      case NutrientColumnEnum.omega_9_eruca:
         return omega_9_eruca();     
-      case ColumnEnum.omega_3_stioride:
+      case NutrientColumnEnum.omega_3_stioride:
         return omega_3_stioride();     
-      case ColumnEnum.omega_3_Docosahexaeno:
+      case NutrientColumnEnum.omega_3_Docosahexaeno:
         return omega_3_Docosahexaeno();     
-      case ColumnEnum.beta_sitosterol:
+      case NutrientColumnEnum.beta_sitosterol:
         return beta_sitosterol();     
-      case ColumnEnum.begenova:
+      case NutrientColumnEnum.begenova:
         return begenova();     
-      case ColumnEnum.fructose:
+      case NutrientColumnEnum.fructose:
         return fructose();     
-      case ColumnEnum.maltose:
+      case NutrientColumnEnum.maltose:
         return maltose();     
-      case ColumnEnum.phytosterols:
+      case NutrientColumnEnum.phytosterols:
         return phytosterols();     
-      case ColumnEnum.ti_titan:
+      case NutrientColumnEnum.ti_titan:
         return ti_titan();     
-      case ColumnEnum.hydroxyproline:
+      case NutrientColumnEnum.hydroxyproline:
         return hydroxyproline();     
-      case ColumnEnum.lignoceric:
+      case NutrientColumnEnum.lignoceric:
         return lignoceric();     
-      case ColumnEnum.betaine:
+      case NutrientColumnEnum.betaine:
         return betaine();     
-      case ColumnEnum.monoun_trans_fats:
+      case NutrientColumnEnum.monoun_trans_fats:
         return monoun_trans_fats();     
-      case ColumnEnum.cis_16_1:
+      case NutrientColumnEnum.cis_16_1:
         return cis_16_1();     
-      case ColumnEnum.cis_18_1:
+      case NutrientColumnEnum.cis_18_1:
         return cis_18_1();     
-      case ColumnEnum.trance_18_1:
+      case NutrientColumnEnum.trance_18_1:
         return trance_18_1();     
-      case ColumnEnum.mixed_isomers:
+      case NutrientColumnEnum.mixed_isomers:
         return mixed_isomers();     
-      case ColumnEnum.omega_6_cis:
+      case NutrientColumnEnum.omega_6_cis:
         return omega_6_cis();     
-      case ColumnEnum.conjugated_linoleic_acid:
+      case NutrientColumnEnum.conjugated_linoleic_acid:
         return conjugated_linoleic_acid();     
-      case ColumnEnum.omega_3_alpha_linolenic:
+      case NutrientColumnEnum.omega_3_alpha_linolenic:
         return omega_3_alpha_linolenic();     
-      case ColumnEnum.d3_vitamin_cholecalciferol:
+      case NutrientColumnEnum.d3_vitamin_cholecalciferol:
         return d3_vitamin_cholecalciferol();     
-      case ColumnEnum.alpha_carotene:
+      case NutrientColumnEnum.alpha_carotene:
         return alpha_carotene();     
-      case ColumnEnum.cryptoxanthin_beta:
+      case NutrientColumnEnum.cryptoxanthin_beta:
         return cryptoxanthin_beta();     
-      case ColumnEnum.lutein_zeaxanthin:
+      case NutrientColumnEnum.lutein_zeaxanthin:
         return lutein_zeaxanthin();     
-      case ColumnEnum.beta_tocopherol:
+      case NutrientColumnEnum.beta_tocopherol:
         return beta_tocopherol();     
-      case ColumnEnum.gamma_tocopherol:
+      case NutrientColumnEnum.gamma_tocopherol:
         return gamma_tocopherol();     
-      case ColumnEnum.trance_16_1:
+      case NutrientColumnEnum.trance_16_1:
         return trance_16_1();     
-      case ColumnEnum.cis_22_1:
+      case NutrientColumnEnum.cis_22_1:
         return cis_22_1();     
-      case ColumnEnum.omega_9_nervone:
+      case NutrientColumnEnum.omega_9_nervone:
         return omega_9_nervone();     
-      case ColumnEnum.trans_isomer_undefined:
+      case NutrientColumnEnum.trans_isomer_undefined:
         return trans_isomer_undefined();     
-      case ColumnEnum.omega_6_gamma_linolenic:
+      case NutrientColumnEnum.omega_6_gamma_linolenic:
         return omega_6_gamma_linolenic();     
-      case ColumnEnum.trance_18_3:
+      case NutrientColumnEnum.trance_18_3:
         return trance_18_3();     
-      case ColumnEnum.omega_6_eicosadieno:
+      case NutrientColumnEnum.omega_6_eicosadieno:
         return omega_6_eicosadieno();     
-      case ColumnEnum.eicosatrieno:
+      case NutrientColumnEnum.eicosatrieno:
         return eicosatrieno();     
-      case ColumnEnum.omega_6_20_3:
+      case NutrientColumnEnum.omega_6_20_3:
         return omega_6_20_3();     
-      case ColumnEnum.omega_6_docosatetraeno:
+      case NutrientColumnEnum.omega_6_docosatetraeno:
         return omega_6_docosatetraeno();     
-      case ColumnEnum.lycopene:
+      case NutrientColumnEnum.lycopene:
         return lycopene();     
-      case ColumnEnum.tocopherol_delta:
+      case NutrientColumnEnum.tocopherol_delta:
         return tocopherol_delta();     
-      case ColumnEnum.polyun_trans_fats:
+      case NutrientColumnEnum.polyun_trans_fats:
         return polyun_trans_fats();     
-      case ColumnEnum.tridecane_13_0:
+      case NutrientColumnEnum.tridecane_13_0:
         return tridecane_13_0();     
-      case ColumnEnum.omega_3:
+      case NutrientColumnEnum.omega_3:
         return omega_3();     
-      case ColumnEnum.pentadecene:
+      case NutrientColumnEnum.pentadecene:
         return pentadecene();     
-      case ColumnEnum.caffeine:
+      case NutrientColumnEnum.caffeine:
         return caffeine();     
-      case ColumnEnum.theobromine:
+      case NutrientColumnEnum.theobromine:
         return theobromine();     
-      case ColumnEnum.trans_trans:
+      case NutrientColumnEnum.trans_trans:
         return trans_trans();     
-      case ColumnEnum.menaquinone_4:
+      case NutrientColumnEnum.menaquinone_4:
         return menaquinone_4();     
-      case ColumnEnum.campesterol:
+      case NutrientColumnEnum.campesterol:
         return campesterol();     
-      case ColumnEnum.stigmasterol:
+      case NutrientColumnEnum.stigmasterol:
         return stigmasterol();     
-      case ColumnEnum.e_vitamin_added:
+      case NutrientColumnEnum.e_vitamin_added:
         return e_vitamin_added();     
-      case ColumnEnum.b12_vitamin_added:
+      case NutrientColumnEnum.b12_vitamin_added:
         return b12_vitamin_added();     
-      case ColumnEnum.trance_22_1:
+      case NutrientColumnEnum.trance_22_1:
         return trance_22_1();     
-      case ColumnEnum.dihydrophylloquinone:
+      case NutrientColumnEnum.dihydrophylloquinone:
         return dihydrophylloquinone();     
-      case ColumnEnum.d2_vitamin_ergocalciferol:
+      case NutrientColumnEnum.d2_vitamin_ergocalciferol:
         return d2_vitamin_ergocalciferol();     
-      case ColumnEnum.omega_6_20_4:
+      case NutrientColumnEnum.omega_6_20_4:
         return omega_6_20_4();     
-      case ColumnEnum.omega_3_geneico:
+      case NutrientColumnEnum.omega_3_geneico:
         return omega_3_geneico();     
 
     }
@@ -1684,7 +1686,7 @@ enum ColumnEnum with Comparable<ColumnEnum> {
       );
 
   @override
-  int compareTo(ColumnEnum other) => index.compareTo(other.index);
+  int compareTo(NutrientColumnEnum other) => index.compareTo(other.index);
 
   @override
   String toString() => value;

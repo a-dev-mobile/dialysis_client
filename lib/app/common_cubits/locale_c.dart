@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
 
-import 'package:dialysis/feature/common/enums/enums.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LocaleCubit extends Cubit<LocaleEnum> {

@@ -1,6 +1,7 @@
 import 'package:dialysis/app/style/style.dart';
 
-import 'package:dialysis/core/widget/clean_focus.dart';
+
+import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:dialysis/navigation/navigation.dart';
@@ -20,6 +21,7 @@ class RegistrationPage extends StatelessWidget {
             router: context.read<AppRouter>(),
             clienTips: context.read(),
             storage: context.read(),
+            db: context.read(),
           )..load(),
         ),
       ],
@@ -39,66 +41,77 @@ class _RegistrationPage extends StatelessWidget {
     return ClearFocus(
       child: Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  const _TitleMain(),
-                  const SizedBox(height: 20),
-                  const _TitleSub(text: 'Введите имя'),
-                  const SizedBox(height: 10),
-                  NameField(cubit: cubit),
-                  const SizedBox(height: 20),
-                  const GenderChoose(),
-                  const SizedBox(height: 20),
-                  const ActivityChoose(),
-                  const SizedBox(height: 20),
-                  DropdownButton(
-                      hint: Text('ММ'),
-                      items: [
-                        DropdownMenuItem(
-                          child: Text('ЯНВ.1'),
-                          value: 1,
+          child: BlocBuilder<RegistrationCubit, RegistrationState>(
+            buildWhen: (p, c) =>
+                p.isLoadPage != c.isLoadPage ||
+                p.isLoadNextPage != c.isLoadNextPage,
+            builder: (context, state) {
+              if (state.isLoadPage) return const PageStartLoad();
+
+              return LoadNextPage(
+                isLoad: state.isLoadNextPage,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        const _TitleMain(),
+                        const SizedBox(height: 20),
+                        const _TitleSub(text: 'Введите имя'),
+                        const SizedBox(height: 10),
+                        NameField(cubit: cubit),
+                        const SizedBox(height: 20),
+                        const GenderChoose(),
+                        const SizedBox(height: 20),
+                        const ActivityChoose(),
+                        const SizedBox(height: 20),
+                        const _TitleSub(text: 'Укажите дату своего рождения'),
+                        BlocBuilder<RegistrationCubit, RegistrationState>(
+                          buildWhen: (p, c) =>
+                              p.daySelected != c.daySelected ||
+                              p.monthSelected != c.monthSelected ||
+                              p.yearSelected != c.yearSelected,
+                          builder: (context, state) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                _DateDropDown(
+                                  hint: 'ДЕНЬ',
+                                  value: state.daySelected,
+                                  onChanged: cubit.changeDay,
+                                  values: state.dateRegModel.days,
+                                ),
+                                _DateDropDown(
+                                  hint: 'MЕСЯЦ',
+                                  onChanged: cubit.changeMonth,
+                                  value: state.monthSelected,
+                                  values: state.dateRegModel.months,
+                                ),
+                                _DateDropDown(
+                                  hint: 'ГОД',
+                                  onChanged: cubit.changeYear,
+                                  value: state.yearSelected,
+                                  values: state.dateRegModel.years,
+                                ),
+                              ],
+                            );
+                          },
                         ),
-                        DropdownMenuItem(
-                          child: Text('ЯНВ.2'),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(
-                          child: Text('ЯНВ.3'),
-                          value: 3,
-                        ),
-                        DropdownMenuItem(
-                          child: Text('ЯНВ.4'),
-                          value: 4,
-                        ),
-                        DropdownMenuItem(
-                          child: Text('ЯНВ.5'),
-                          value: 5,
-                        ),
-                        DropdownMenuItem(
-                          child: Text('ЯНВ.6'),
-                          value: 6,
-                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: cubit.checkAll,
+                            child: const Text('Начать'),
+                          ),
+                        )
                       ],
-                      onChanged: (v) {
-                        print(v);
-                      }),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        cubit.checkAll();
-                      },
-                      child: const Text('Начать'),
                     ),
-                  )
-                ],
-              ),
-            ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -106,11 +119,44 @@ class _RegistrationPage extends StatelessWidget {
   }
 }
 
+class _DateDropDown extends StatelessWidget {
+  const _DateDropDown({
+    required this.values,
+    required this.hint,
+    required this.onChanged,
+    this.value,
+  });
+  final List<String> values;
+  final String hint;
+  final String? value;
+  final void Function(String?) onChanged;
+  @override
+  Widget build(BuildContext context) {
+    // проверка на ошибку 
+    var isError = false;
+    if (value != null) {
+      isError = !values.contains(value);
+    }
+
+    return DropdownButton<String>(
+      hint: Text(hint),
+      value: isError ? null : value,
+      items: [
+        for (final v in values)
+          DropdownMenuItem(
+            value: v,
+            child: Text(v),
+          )
+      ],
+      onChanged: onChanged,
+    );
+  }
+}
+
 class _TitleSub extends StatelessWidget {
   const _TitleSub({
-    Key? key,
     required this.text,
-  }) : super(key: key);
+  });
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -123,9 +169,7 @@ class _TitleSub extends StatelessWidget {
 }
 
 class _TitleMain extends StatelessWidget {
-  const _TitleMain({
-    Key? key,
-  }) : super(key: key);
+  const _TitleMain();
 
   @override
   Widget build(BuildContext context) {

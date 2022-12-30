@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -43,10 +44,15 @@ class _MobileApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final go = context.read<AppRouter>();
     final cubitDebugWatch = context.watch<DebugCubit>();
+    final cubitLocaleWatch = context.watch<LocaleCubit>();
 
     debugRepaintRainbowEnabled = cubitDebugWatch.state.isShowRepaintRainbow;
+   
     debugPaintSizeEnabled = cubitDebugWatch.state.isShowPaintSizeEnabled;
 
+    //  global
+    Intl.defaultLocale = cubitLocaleWatch.state.name;
+  
     return BetterFeedback(
       child: DevicePreview(
         enabled: cubitDebugWatch.state.isShowDevice,
@@ -70,7 +76,7 @@ class _MobileApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               supportedLocales: AppLocalizations.supportedLocales,
-              locale: Locale(context.watch<LocaleCubit>().state.name),
+              locale: Locale(cubitLocaleWatch.state.name),
               routerDelegate: go.router.routerDelegate,
               routeInformationParser: go.router.routeInformationParser,
               routeInformationProvider: go.router.routeInformationProvider,

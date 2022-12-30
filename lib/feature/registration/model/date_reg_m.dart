@@ -8,34 +8,55 @@ import 'package:flutter/foundation.dart';
 /// {@endtemplate}
 @immutable
 class DateRegModel {
-  final int daySelected;
-  final int yearSelected;
-  final String monthSelected;
+
 
   final List<String> months;
-  final List<int> days;
-  final List<int> years;
+  final List<String> days;
+  final List<String> years;
   const DateRegModel({
-    this.daySelected = -1,
-    this.yearSelected = -1,
-    this.monthSelected = '',
     this.months = const [],
-    this.days = const [],
+    this.days = const [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '10',
+      '11',
+      '12',
+      '13',
+      '14',
+      '15',
+      '16',
+      '17',
+      '18',
+      '19',
+      '20',
+      '21',
+      '22',
+      '23',
+      '24',
+      '25',
+      '26',
+      '27',
+      '28',
+      '29',
+      '30',
+      '31'
+    ],
     this.years = const [],
   });
 
   DateRegModel copyWith({
-    int? daySelected,
-    int? yearSelected,
-    String? monthSelected,
     List<String>? months,
-    List<int>? days,
-    List<int>? years,
+    List<String>? days,
+    List<String>? years,
   }) {
     return DateRegModel(
-      daySelected: daySelected ?? this.daySelected,
-      yearSelected: yearSelected ?? this.yearSelected,
-      monthSelected: monthSelected ?? this.monthSelected,
       months: months ?? this.months,
       days: days ?? this.days,
       years: years ?? this.years,
@@ -44,9 +65,6 @@ class DateRegModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'daySelected': daySelected,
-      'yearSelected': yearSelected,
-      'monthSelected': monthSelected,
       'months': months,
       'days': days,
       'years': years,
@@ -55,13 +73,9 @@ class DateRegModel {
 
   factory DateRegModel.fromMap(Map<String, dynamic> map) {
     return DateRegModel(
-      daySelected: (map['daySelected'] ?? 0) as int,
-      yearSelected: (map['yearSelected'] ?? 0) as int,
-      monthSelected: (map['monthSelected'] ?? '') as String,
-      months: List<String>.from(
-          (map['months'] ?? const <String>[]) as List<String>),
-      days: List<int>.from((map['days'] ?? const <int>[]) as List<int>),
-      years: List<int>.from((map['years'] ?? const <int>[]) as List<int>),
+      months: List<String>.from((map['months'] ?? const <String>[]) as List<String>),
+      days: List<String>.from((map['days'] ?? const <String>[]) as List<String>),
+      years: List<String>.from((map['years'] ?? const <String>[]) as List<String>),
     );
   }
 
@@ -71,29 +85,18 @@ class DateRegModel {
       DateRegModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'DateRegModel(daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, months: $months, days: $days, years: $years)';
-  }
+  String toString() => 'DateRegModel(months: $months, days: $days, years: $years)';
 
   @override
   bool operator ==(covariant DateRegModel other) {
     if (identical(this, other)) return true;
-
-    return other.daySelected == daySelected &&
-        other.yearSelected == yearSelected &&
-        other.monthSelected == monthSelected &&
-        listEquals(other.months, months) &&
-        listEquals(other.days, days) &&
-        listEquals(other.years, years);
+  
+    return 
+      listEquals(other.months, months) &&
+      listEquals(other.days, days) &&
+      listEquals(other.years, years);
   }
 
   @override
-  int get hashCode {
-    return daySelected.hashCode ^
-        yearSelected.hashCode ^
-        monthSelected.hashCode ^
-        months.hashCode ^
-        days.hashCode ^
-        years.hashCode;
-  }
+  int get hashCode => months.hashCode ^ days.hashCode ^ years.hashCode;
 }

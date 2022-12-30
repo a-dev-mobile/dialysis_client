@@ -10,15 +10,6 @@ linter:
 
 
 
-
-
-
-
-
-
-
-
-
 analyzer:
   errors:
     argument_type_not_assignable: ignore

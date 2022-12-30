@@ -38,16 +38,13 @@ class BtnToggleText extends StatelessWidget {
                   ),
                 ),
                 if (dialogText != null)
-                  Container(
-                    // transform: Matrix4.translationValues(0, -16, 0),
-                    child: IconButton(
+                  IconButton(
                         onPressed: () => _showInfoDialog(
-                            context: context, text: dialogText!),
+                            context: context, text: dialogText!,),
                         icon: Icon(
                           Icons.info_outline,
                           color: context.theme.colorScheme.primary,
-                        )),
-                  )
+                        ),)
               ],
             ),
             if (dialogText == null) const SizedBox(height: 10),
@@ -83,12 +80,13 @@ class BtnToggleText extends StatelessWidget {
 }
 
 Future<void> _showInfoDialog(
-    {required BuildContext context, required String text}) async {
+    {required BuildContext context, required String text,}) async {
   return showDialog<void>(
     context: context,
+    useRootNavigator: false,
     builder: (BuildContext context) {
       return AlertDialog(
-        icon: Icon(Icons.info_outline),
+      
         content: Text(text),
       );
     },
