@@ -1,16 +1,19 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names
 import 'dart:convert';
 
 import 'package:dadata/dadata.dart';
-import 'package:dialysis/app/common_cubits/common_cubits.dart';
-import 'package:dialysis/core/storage/app_storage.dart';
-
-import 'package:dialysis/data_base/data_base.dart';
-import 'package:dialysis/feature/registration/registration.dart';
-import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+
+import 'package:dialysis/app/common_cubits/common_cubits.dart';
+import 'package:dialysis/core/storage/app_storage.dart';
+import 'package:dialysis/data_base/data_base.dart';
+import 'package:dialysis/feature/registration/registration.dart';
+import 'package:dialysis/navigation/navigation.dart';
+
+const _MIN_AGE = 13;
+const _MAX_AGE = 100;
 
 class RegistrationCubit extends HydratedCubit<RegistrationState> {
   RegistrationCubit({
@@ -34,6 +37,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
             activitySelected: [false, false],
             dateRegModel: DateRegModel(),
             isLoadNextPage: false,
+            validBirthdayFormz: ValidBirthdayFormz.pure(),
           ),
         );
   final DaDataClient _clienTips;
@@ -56,8 +60,8 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     await _db.load();
 
     final db = await _db.openDB();
-    final result = await db.rawQuery('SELECT * from ${TableEnum.date.name}');
-
+    final result =
+        await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
 
     final listYear = <String>[];
     final listMonth = <String>[];
@@ -68,8 +72,8 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       // listDate.add(DateDbModel.fromJson(result[i]));
       row = result[i];
 
-      ruMonth = row[DateColumnEnum.ru_month.name];
-      enMonth = row[DateColumnEnum.en_month.name];
+      ruMonth = row[ColumnDateMonthEnum.ru_month.name];
+      enMonth = row[ColumnDateMonthEnum.en_month.name];
 
       if (ruMonth != null && enMonth != null) {
         _locale.map(
@@ -77,13 +81,17 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
           en: () => listMonth.add(enMonth!),
         );
       }
-      listYear.add(row[DateColumnEnum.year.name].toString());
+    }
+// calculate year
+    final yearStart = DateTime.now().year - _MAX_AGE;
+    final yearEnd = DateTime.now().year - _MIN_AGE;
+    for (var i = yearEnd; i > yearStart; i--) {
+      listYear.add(i.toString());
     }
 
     emit(
       state.copyWith(
         isLoadPage: false,
-        
         dateRegModel: DateRegModel(months: listMonth, years: listYear),
       ),
     );
@@ -93,11 +101,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     FioTooltip result;
 
     if (_locale == LocaleEnum.ru) {
- result = await _clienTips.fetchFioTooltip(value, DaDataEnum.name);
-    return _getTips(result);
+      result = await _clienTips.fetchFioTooltip(value, DaDataEnum.name);
+      return _getTips(result);
     }
-
-    
 
     return [];
   }
@@ -107,7 +113,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     emit(
       state.copyWith(
         validNameFormz: validNameFormz,
-        isValid: Formz.validate([validNameFormz, state.validNameFormz]),
+        // isValid: Formz.validate([validNameFormz, state.validNameFormz,state.]),
       ),
     );
   }
@@ -118,16 +124,44 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         ValidGenderFormz.dirty(state.validGenderFormz.value);
     final validActivityFormz =
         ValidActivityFormz.dirty(state.validActivityFormz.value);
+
+    final validBirthdayFormz = ValidBirthdayFormz.dirty(_getDateRaw());
+
+   
+
     emit(
       state.copyWith(
         validActivityFormz: validActivityFormz,
         validNameFormz: validNameFormz,
         validGenderFormz: validGenderFormz,
+        validBirthdayFormz: validBirthdayFormz,
         isValid: Formz.validate(
-          [validGenderFormz, validNameFormz, validActivityFormz],
+          [
+            validGenderFormz,
+            validNameFormz,
+            validActivityFormz,
+            validBirthdayFormz
+          ],
         ),
       ),
     );
+  }
+
+  String _getDateRaw() {
+    final day = state.daySelected;
+    final monthName = state.monthSelected;
+    final year = state.yearSelected;
+
+    if (day != null && monthName != null && year != null) {
+      var monthNumber =
+          (state.dateRegModel.months.indexOf(monthName) + 1).toString();
+      if (monthNumber.length == 1) {
+        monthNumber = '0$monthNumber';
+      }
+      return '$year-$monthNumber-$day';
+    }
+
+    return '';
   }
 
   void checkGender(int value) {
@@ -146,9 +180,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       state.copyWith(
         genderSelected: genderSelected,
         validGenderFormz: validGenderFormz,
-        isValid: Formz.validate(
-          [state.validNameFormz, validGenderFormz, state.validActivityFormz],
-        ),
+        // isValid: Formz.validate(
+        //   [state.validNameFormz, validGenderFormz, state.validActivityFormz],
+        // ),
       ),
     );
   }
@@ -169,9 +203,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       state.copyWith(
         activitySelected: activitySelected,
         validActivityFormz: validActivityFormz,
-        isValid: Formz.validate(
-          [state.validNameFormz, validActivityFormz, state.validGenderFormz],
-        ),
+        // isValid: Formz.validate(
+        //   [state.validNameFormz, validActivityFormz, state.validGenderFormz],
+        // ),
       ),
     );
   }
@@ -190,6 +224,27 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     return list;
   }
 
+  void _checkBridghday() {
+    final validBirthdayFormz = ValidBirthdayFormz.dirty(_getDateRaw());
+
+    emit(state.copyWith(validBirthdayFormz: validBirthdayFormz));
+  }
+
+  void changeDay(String? value) {
+    emit(state.copyWith(daySelected: value));
+    _checkBridghday();
+  }
+
+  void changeMonth(String? value) {
+    emit(state.copyWith(monthSelected: value));
+    _checkBridghday();
+  }
+
+  void changeYear(String? value) {
+    emit(state.copyWith(yearSelected: value));
+    _checkBridghday();
+  }
+
   @override
   RegistrationState? fromJson(Map<String, dynamic> json) {
     return RegistrationState.fromMap(json);
@@ -198,18 +253,6 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   @override
   Map<String, dynamic>? toJson(RegistrationState state) {
     return state.toMap();
-  }
-
-  void changeDay(String? value) {
-    emit(state.copyWith(daySelected: value));
-  }
-
-  void changeMonth(String? value) {
-    emit(state.copyWith(monthSelected: value));
-  }
-
-  void changeYear(String? value) {
-    emit(state.copyWith(yearSelected: value));
   }
 }
 
@@ -222,12 +265,15 @@ class RegistrationState {
   final String? daySelected;
   final String? yearSelected;
   final String? monthSelected;
+
   final List<bool> genderSelected;
   final List<bool> activitySelected;
   final DateRegModel dateRegModel;
+  //
   final ValidNameFormz validNameFormz;
   final ValidActivityFormz validActivityFormz;
   final ValidGenderFormz validGenderFormz;
+  final ValidBirthdayFormz validBirthdayFormz;
   // enum
   final FormzSubmissionStatus status;
   const RegistrationState({
@@ -243,6 +289,7 @@ class RegistrationState {
     required this.validNameFormz,
     required this.validActivityFormz,
     required this.validGenderFormz,
+    required this.validBirthdayFormz,
     required this.status,
   });
 
@@ -259,6 +306,7 @@ class RegistrationState {
     ValidNameFormz? validNameFormz,
     ValidActivityFormz? validActivityFormz,
     ValidGenderFormz? validGenderFormz,
+    ValidBirthdayFormz? validBirthdayFormz,
     FormzSubmissionStatus? status,
   }) {
     return RegistrationState(
@@ -274,6 +322,7 @@ class RegistrationState {
       validNameFormz: validNameFormz ?? this.validNameFormz,
       validActivityFormz: validActivityFormz ?? this.validActivityFormz,
       validGenderFormz: validGenderFormz ?? this.validGenderFormz,
+      validBirthdayFormz: validBirthdayFormz ?? this.validBirthdayFormz,
       status: status ?? this.status,
     );
   }
@@ -285,7 +334,7 @@ class RegistrationState {
 
   @override
   String toString() {
-    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, genderSelected: $genderSelected, activitySelected: $activitySelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, status: $status)';
+    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, genderSelected: $genderSelected, activitySelected: $activitySelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, status: $status)';
   }
 
   @override
@@ -304,6 +353,7 @@ class RegistrationState {
         other.validNameFormz == validNameFormz &&
         other.validActivityFormz == validActivityFormz &&
         other.validGenderFormz == validGenderFormz &&
+        other.validBirthdayFormz == validBirthdayFormz &&
         other.status == status;
   }
 
@@ -321,8 +371,98 @@ class RegistrationState {
         validNameFormz.hashCode ^
         validActivityFormz.hashCode ^
         validGenderFormz.hashCode ^
+        validBirthdayFormz.hashCode ^
         status.hashCode;
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'isLoadPage': isLoadPage,
+      'isLoadNextPage': isLoadNextPage,
+      'isValid': isValid,
+      'daySelected': daySelected,
+      'yearSelected': yearSelected,
+      'monthSelected': monthSelected,
+      'genderSelected': genderSelected,
+      'activitySelected': activitySelected,
+      'dateRegModel': dateRegModel.toMap(),
+      'validNameFormz': validNameFormz.value,
+      'validGenderFormz': validGenderFormz.value.name,
+      'validActivityFormz': validActivityFormz.value.name,
+      'validBirthdayFormz': validBirthdayFormz.value,
+      'status': status.index,
+    };
+  }
+
+  factory RegistrationState.fromMap(Map<String, dynamic> map) {
+    //
+    final valueGender = GenderEnum.fromValue(map['validGenderFormz']);
+    ValidGenderFormz validGenderFormz;
+    if (valueGender == GenderEnum.none) {
+      validGenderFormz = const ValidGenderFormz.pure();
+    } else {
+      validGenderFormz = ValidGenderFormz.dirty(valueGender);
+    }
+    //
+    final valueName = map['validNameFormz'].toString();
+    ValidNameFormz validNameFormz;
+    if (valueName.isEmpty) {
+      validNameFormz = const ValidNameFormz.pure();
+    } else {
+      validNameFormz = ValidNameFormz.dirty(valueName);
+    }
+    //
+    final validBirthday = map['validBirthdayFormz'].toString();
+    // ignore: unused_local_variable
+    ValidBirthdayFormz validBirthdayFormz;
+    if (validBirthday.isEmpty) {
+      validBirthdayFormz = const ValidBirthdayFormz.pure();
+    } else {
+      validBirthdayFormz = ValidBirthdayFormz.dirty(validBirthday);
+    }
+    //
+    final valueActivity = ActivityEnum.fromValue(map['validActivityFormz']);
+    ValidActivityFormz validActivityFormz;
+    if (valueActivity == ActivityEnum.none) {
+      validActivityFormz = const ValidActivityFormz.pure();
+    } else {
+      validActivityFormz = ValidActivityFormz.dirty(valueActivity);
+    }
+    return RegistrationState(
+      isLoadPage: (map['isLoad'] ?? false) as bool,
+      isLoadNextPage: (map['isLoadNextPage'] ?? false) as bool,
+      isValid: (map['isValid'] ?? false) as bool,
+      genderSelected: List<bool>.from(
+        (map['genderSelected'] ?? const <bool>[]) as List<bool>,
+      ),
+      // custom
+      validNameFormz: validNameFormz,
+      // custom
+      validGenderFormz: validGenderFormz,
+      // custom
+      validActivityFormz: validActivityFormz,
+      // custom
+      validBirthdayFormz: const ValidBirthdayFormz.pure(),
+      // validBirthdayFormz: validBirthdayFormz,
+      //
+      daySelected:
+          map['daySelected'] != null ? map['daySelected'] as String : null,
+      yearSelected:
+          map['yearSelected'] != null ? map['yearSelected'] as String : null,
+      monthSelected:
+          map['monthSelected'] != null ? map['monthSelected'] as String : null,
+
+      status: FormzSubmissionStatus.values[(map['status'] ?? 0) as int],
+      dateRegModel:
+          DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>),
+      activitySelected: List<bool>.from(
+        (map['activitySelected'] ?? const <bool>[]) as List<bool>,
+      ),
+    );
+  }
+}
+/* 
+
 
   factory RegistrationState.fromMap(Map<String, dynamic> map) {
     //
@@ -389,11 +529,11 @@ class RegistrationState {
       'isLoadNextPage': isLoadNextPage,
       'activitySelected': activitySelected,
       'genderSelected': genderSelected,
-      'validNameFormz': validNameFormz.value,
       'dateRegModel': dateRegModel.toMap(),
+      'validNameFormz': validNameFormz.value,
       'validGenderFormz': validGenderFormz.value.name,
       'validActivityFormz': validActivityFormz.value.name,
       'status': status.index,
     };
   }
-}
+ */

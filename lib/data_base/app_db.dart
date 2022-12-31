@@ -134,7 +134,7 @@ class AppDb {
         category: () => _updateOrInsetDB(db, nameTable, list),
         nutrient: () => _updateOrInsetDB(db, nameTable, list),
         nutrient_type: () => _updateOrInsetDB(db, nameTable, list),
-        date: () => _updateOrInsetDB(db, nameTable, list),
+        date_month: () => _updateOrInsetDB(db, nameTable, list),
       );
     }
     await db.close();

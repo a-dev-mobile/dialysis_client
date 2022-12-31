@@ -8,8 +8,6 @@ linter:
     # non_constant_identifier_names: false
     # constant_identifier_names: false
 
-
-
 analyzer:
   errors:
     argument_type_not_assignable: ignore
@@ -19,6 +17,9 @@ analyzer:
   # strong-mode:
     # implicit-dynamic: true
     # implicit-casts: true
+
+
+
 
     
   exclude:
@@ -30,8 +31,6 @@ analyzer:
    
     - "lib/**.gen.dart"
     - "lib/generated_plugin_registrant.dart"
-
-
 
     # Tests
     - "test/**.mocks.dart"

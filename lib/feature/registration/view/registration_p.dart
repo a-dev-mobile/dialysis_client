@@ -67,37 +67,7 @@ class _RegistrationPage extends StatelessWidget {
                         const ActivityChoose(),
                         const SizedBox(height: 20),
                         const _TitleSub(text: 'Укажите дату своего рождения'),
-                        BlocBuilder<RegistrationCubit, RegistrationState>(
-                          buildWhen: (p, c) =>
-                              p.daySelected != c.daySelected ||
-                              p.monthSelected != c.monthSelected ||
-                              p.yearSelected != c.yearSelected,
-                          builder: (context, state) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                _DateDropDown(
-                                  hint: 'ДЕНЬ',
-                                  value: state.daySelected,
-                                  onChanged: cubit.changeDay,
-                                  values: state.dateRegModel.days,
-                                ),
-                                _DateDropDown(
-                                  hint: 'MЕСЯЦ',
-                                  onChanged: cubit.changeMonth,
-                                  value: state.monthSelected,
-                                  values: state.dateRegModel.months,
-                                ),
-                                _DateDropDown(
-                                  hint: 'ГОД',
-                                  onChanged: cubit.changeYear,
-                                  value: state.yearSelected,
-                                  values: state.dateRegModel.years,
-                                ),
-                              ],
-                            );
-                          },
-                        ),
+                        const BirthdayChoose(),
                         const SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -119,39 +89,9 @@ class _RegistrationPage extends StatelessWidget {
   }
 }
 
-class _DateDropDown extends StatelessWidget {
-  const _DateDropDown({
-    required this.values,
-    required this.hint,
-    required this.onChanged,
-    this.value,
-  });
-  final List<String> values;
-  final String hint;
-  final String? value;
-  final void Function(String?) onChanged;
-  @override
-  Widget build(BuildContext context) {
-    // проверка на ошибку 
-    var isError = false;
-    if (value != null) {
-      isError = !values.contains(value);
-    }
 
-    return DropdownButton<String>(
-      hint: Text(hint),
-      value: isError ? null : value,
-      items: [
-        for (final v in values)
-          DropdownMenuItem(
-            value: v,
-            child: Text(v),
-          )
-      ],
-      onChanged: onChanged,
-    );
-  }
-}
+
+
 
 class _TitleSub extends StatelessWidget {
   const _TitleSub({
