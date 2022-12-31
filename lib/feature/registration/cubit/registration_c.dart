@@ -2,15 +2,15 @@
 import 'dart:convert';
 
 import 'package:dadata/dadata.dart';
-import 'package:flutter/foundation.dart';
-import 'package:formz/formz.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/data_base/data_base.dart';
 import 'package:dialysis/feature/registration/registration.dart';
+
 import 'package:dialysis/navigation/navigation.dart';
+import 'package:flutter/foundation.dart';
+import 'package:formz/formz.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 const _MIN_AGE = 13;
 const _MAX_AGE = 100;
@@ -38,6 +38,211 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
             dateRegModel: DateRegModel(),
             isLoadNextPage: false,
             validBirthdayFormz: ValidBirthdayFormz.pure(),
+            validHeightFormz: ValidHeightFormz.pure(),
+            heightList: [
+              '50',
+              '51',
+              '52',
+              '53',
+              '54',
+              '55',
+              '56',
+              '57',
+              '58',
+              '59',
+              '60',
+              '61',
+              '62',
+              '63',
+              '64',
+              '65',
+              '66',
+              '67',
+              '68',
+              '69',
+              '70',
+              '71',
+              '72',
+              '73',
+              '74',
+              '75',
+              '76',
+              '77',
+              '78',
+              '79',
+              '80',
+              '81',
+              '82',
+              '83',
+              '84',
+              '85',
+              '86',
+              '87',
+              '88',
+              '89',
+              '90',
+              '91',
+              '92',
+              '93',
+              '94',
+              '95',
+              '96',
+              '97',
+              '98',
+              '99',
+              '100',
+              '101',
+              '102',
+              '103',
+              '104',
+              '105',
+              '106',
+              '107',
+              '108',
+              '109',
+              '110',
+              '111',
+              '112',
+              '113',
+              '114',
+              '115',
+              '116',
+              '117',
+              '118',
+              '119',
+              '120',
+              '121',
+              '122',
+              '123',
+              '124',
+              '125',
+              '126',
+              '127',
+              '128',
+              '129',
+              '130',
+              '131',
+              '132',
+              '133',
+              '134',
+              '135',
+              '136',
+              '137',
+              '138',
+              '139',
+              '140',
+              '141',
+              '142',
+              '143',
+              '144',
+              '145',
+              '146',
+              '147',
+              '148',
+              '149',
+              '150',
+              '151',
+              '152',
+              '153',
+              '154',
+              '155',
+              '156',
+              '157',
+              '158',
+              '159',
+              '160',
+              '161',
+              '162',
+              '163',
+              '164',
+              '165',
+              '166',
+              '167',
+              '168',
+              '169',
+              '170',
+              '171',
+              '172',
+              '173',
+              '174',
+              '175',
+              '176',
+              '177',
+              '178',
+              '179',
+              '180',
+              '181',
+              '182',
+              '183',
+              '184',
+              '185',
+              '186',
+              '187',
+              '188',
+              '189',
+              '190',
+              '191',
+              '192',
+              '193',
+              '194',
+              '195',
+              '196',
+              '197',
+              '198',
+              '199',
+              '200',
+              '201',
+              '202',
+              '203',
+              '204',
+              '205',
+              '206',
+              '207',
+              '208',
+              '209',
+              '210',
+              '211',
+              '212',
+              '213',
+              '214',
+              '215',
+              '216',
+              '217',
+              '218',
+              '219',
+              '220',
+              '221',
+              '222',
+              '223',
+              '224',
+              '225',
+              '226',
+              '227',
+              '228',
+              '229',
+              '230',
+              '231',
+              '232',
+              '233',
+              '234',
+              '235',
+              '236',
+              '237',
+              '238',
+              '239',
+              '240',
+              '241',
+              '242',
+              '243',
+              '244',
+              '245',
+              '246',
+              '247',
+              '248',
+              '249',
+              '250'
+            ],
+            validWeightFormz: ValidWeightFormz.pure(),
           ),
         );
   final DaDataClient _clienTips;
@@ -108,6 +313,15 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     return [];
   }
 
+  void checkHeight(String? value) {
+    final valid = ValidHeightFormz.dirty(value);
+    emit(
+      state.copyWith(
+        validHeightFormz: valid,
+      ),
+    );
+  }
+
   void checkName(String value) {
     final validNameFormz = ValidNameFormz.dirty(value);
     emit(
@@ -120,14 +334,16 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
   void checkAll() {
     final validNameFormz = ValidNameFormz.dirty(state.validNameFormz.value);
+    final validWeightFormz =
+        ValidWeightFormz.dirty(value: state.validWeightFormz.value);
     final validGenderFormz =
         ValidGenderFormz.dirty(state.validGenderFormz.value);
     final validActivityFormz =
         ValidActivityFormz.dirty(state.validActivityFormz.value);
 
     final validBirthdayFormz = ValidBirthdayFormz.dirty(_getDateRaw());
-
-   
+    final validHeightFormz =
+        ValidHeightFormz.dirty(state.validHeightFormz.value);
 
     emit(
       state.copyWith(
@@ -135,12 +351,16 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         validNameFormz: validNameFormz,
         validGenderFormz: validGenderFormz,
         validBirthdayFormz: validBirthdayFormz,
+        validHeightFormz: validHeightFormz,
+        validWeightFormz: validWeightFormz,
         isValid: Formz.validate(
           [
             validGenderFormz,
             validNameFormz,
             validActivityFormz,
-            validBirthdayFormz
+            validBirthdayFormz,
+            validHeightFormz,
+            validWeightFormz
           ],
         ),
       ),
@@ -254,6 +474,109 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   Map<String, dynamic>? toJson(RegistrationState state) {
     return state.toMap();
   }
+
+  void checkWeight(String value) {
+
+
+    if (value.isEmpty) {
+      emit(
+        state.copyWith(
+          validWeightFormz: const ValidWeightFormz.dirty(
+            externalError: ValidWeightError.isEmpty,
+          ),
+        ),
+      );
+
+      return;
+    }
+    
+    final doubleValue = double.tryParse(value);
+
+    ValidWeightFormz validWeightFormz;
+
+    if (doubleValue == null) {
+      validWeightFormz = const ValidWeightFormz.dirty(
+        externalError: ValidWeightError.isNoValid,
+      );
+    } else {
+      validWeightFormz = ValidWeightFormz.dirty(value: doubleValue);
+    }
+
+    emit(
+      state.copyWith(
+        validWeightFormz: validWeightFormz,
+        // isValid: Formz.validate([validNameFormz, state.validNameFormz,state.]),
+      ),
+    );
+  }
+}
+
+ValidGenderFormz _getValueGender(Map<String, dynamic> map) {
+  final valueGender = GenderEnum.fromValue(map['validGenderFormz']);
+  ValidGenderFormz validGenderFormz;
+  if (valueGender == GenderEnum.none) {
+    validGenderFormz = const ValidGenderFormz.pure();
+  } else {
+    validGenderFormz = ValidGenderFormz.dirty(valueGender);
+  }
+  return validGenderFormz;
+}
+
+ValidNameFormz _getValueName(Map<String, dynamic> map) {
+  final valueName = map['validNameFormz'].toString();
+  ValidNameFormz validNameFormz;
+  if (valueName.isEmpty) {
+    validNameFormz = const ValidNameFormz.pure();
+  } else {
+    validNameFormz = ValidNameFormz.dirty(valueName);
+  }
+  return validNameFormz;
+}
+
+ValidWeightFormz _getValueWeight(Map<String, dynamic> map) {
+  final value = map['validWeightFormz'] as double?;
+  ValidWeightFormz valid;
+  if (value == null) {
+    valid = const ValidWeightFormz.pure();
+  } else {
+    valid = ValidWeightFormz.pure(value: value);
+  }
+  return valid;
+}
+
+// ignore: unused_element
+ValidBirthdayFormz _getValidBirthday(Map<String, dynamic> map) {
+  final validBirthday = map['validBirthdayFormz'].toString();
+  // ignore: unused_local_variable
+  ValidBirthdayFormz validBirthdayFormz;
+  if (validBirthday.isEmpty) {
+    validBirthdayFormz = const ValidBirthdayFormz.pure();
+  } else {
+    validBirthdayFormz = ValidBirthdayFormz.dirty(validBirthday);
+  }
+  return validBirthdayFormz;
+}
+
+ValidActivityFormz _getValueActivity(Map<String, dynamic> map) {
+  final valueActivity = ActivityEnum.fromValue(map['validActivityFormz']);
+  ValidActivityFormz validActivityFormz;
+  if (valueActivity == ActivityEnum.none) {
+    validActivityFormz = const ValidActivityFormz.pure();
+  } else {
+    validActivityFormz = ValidActivityFormz.dirty(valueActivity);
+  }
+  return validActivityFormz;
+}
+
+ValidHeightFormz _getValueHeight(Map<String, dynamic> map) {
+  final value = map['validHeightFormz'];
+  ValidHeightFormz valid;
+  if (value == null) {
+    valid = const ValidHeightFormz.pure();
+  } else {
+    valid = ValidHeightFormz.dirty(value.toString());
+  }
+  return valid;
 }
 
 @immutable
@@ -266,6 +589,7 @@ class RegistrationState {
   final String? yearSelected;
   final String? monthSelected;
 
+  final List<String> heightList;
   final List<bool> genderSelected;
   final List<bool> activitySelected;
   final DateRegModel dateRegModel;
@@ -274,6 +598,9 @@ class RegistrationState {
   final ValidActivityFormz validActivityFormz;
   final ValidGenderFormz validGenderFormz;
   final ValidBirthdayFormz validBirthdayFormz;
+  final ValidHeightFormz validHeightFormz;
+  final ValidWeightFormz validWeightFormz;
+
   // enum
   final FormzSubmissionStatus status;
   const RegistrationState({
@@ -283,6 +610,7 @@ class RegistrationState {
     this.daySelected,
     this.yearSelected,
     this.monthSelected,
+    required this.heightList,
     required this.genderSelected,
     required this.activitySelected,
     required this.dateRegModel,
@@ -290,6 +618,8 @@ class RegistrationState {
     required this.validActivityFormz,
     required this.validGenderFormz,
     required this.validBirthdayFormz,
+    required this.validHeightFormz,
+    required this.validWeightFormz,
     required this.status,
   });
 
@@ -300,6 +630,7 @@ class RegistrationState {
     String? daySelected,
     String? yearSelected,
     String? monthSelected,
+    List<String>? heightList,
     List<bool>? genderSelected,
     List<bool>? activitySelected,
     DateRegModel? dateRegModel,
@@ -307,6 +638,8 @@ class RegistrationState {
     ValidActivityFormz? validActivityFormz,
     ValidGenderFormz? validGenderFormz,
     ValidBirthdayFormz? validBirthdayFormz,
+    ValidHeightFormz? validHeightFormz,
+    ValidWeightFormz? validWeightFormz,
     FormzSubmissionStatus? status,
   }) {
     return RegistrationState(
@@ -316,6 +649,7 @@ class RegistrationState {
       daySelected: daySelected ?? this.daySelected,
       yearSelected: yearSelected ?? this.yearSelected,
       monthSelected: monthSelected ?? this.monthSelected,
+      heightList: heightList ?? this.heightList,
       genderSelected: genderSelected ?? this.genderSelected,
       activitySelected: activitySelected ?? this.activitySelected,
       dateRegModel: dateRegModel ?? this.dateRegModel,
@@ -323,6 +657,8 @@ class RegistrationState {
       validActivityFormz: validActivityFormz ?? this.validActivityFormz,
       validGenderFormz: validGenderFormz ?? this.validGenderFormz,
       validBirthdayFormz: validBirthdayFormz ?? this.validBirthdayFormz,
+      validHeightFormz: validHeightFormz ?? this.validHeightFormz,
+      validWeightFormz: validWeightFormz ?? this.validWeightFormz,
       status: status ?? this.status,
     );
   }
@@ -334,7 +670,7 @@ class RegistrationState {
 
   @override
   String toString() {
-    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, genderSelected: $genderSelected, activitySelected: $activitySelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, status: $status)';
+    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, genderSelected: $genderSelected, activitySelected: $activitySelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, status: $status)';
   }
 
   @override
@@ -347,6 +683,7 @@ class RegistrationState {
         other.daySelected == daySelected &&
         other.yearSelected == yearSelected &&
         other.monthSelected == monthSelected &&
+        listEquals(other.heightList, heightList) &&
         listEquals(other.genderSelected, genderSelected) &&
         listEquals(other.activitySelected, activitySelected) &&
         other.dateRegModel == dateRegModel &&
@@ -354,6 +691,8 @@ class RegistrationState {
         other.validActivityFormz == validActivityFormz &&
         other.validGenderFormz == validGenderFormz &&
         other.validBirthdayFormz == validBirthdayFormz &&
+        other.validHeightFormz == validHeightFormz &&
+        other.validWeightFormz == validWeightFormz &&
         other.status == status;
   }
 
@@ -365,6 +704,7 @@ class RegistrationState {
         daySelected.hashCode ^
         yearSelected.hashCode ^
         monthSelected.hashCode ^
+        heightList.hashCode ^
         genderSelected.hashCode ^
         activitySelected.hashCode ^
         dateRegModel.hashCode ^
@@ -372,6 +712,8 @@ class RegistrationState {
         validActivityFormz.hashCode ^
         validGenderFormz.hashCode ^
         validBirthdayFormz.hashCode ^
+        validHeightFormz.hashCode ^
+        validWeightFormz.hashCode ^
         status.hashCode;
   }
 
@@ -383,84 +725,65 @@ class RegistrationState {
       'daySelected': daySelected,
       'yearSelected': yearSelected,
       'monthSelected': monthSelected,
+      'heightList': heightList,
       'genderSelected': genderSelected,
       'activitySelected': activitySelected,
       'dateRegModel': dateRegModel.toMap(),
       'validNameFormz': validNameFormz.value,
-      'validGenderFormz': validGenderFormz.value.name,
       'validActivityFormz': validActivityFormz.value.name,
+      'validGenderFormz': validGenderFormz.value.name,
       'validBirthdayFormz': validBirthdayFormz.value,
+      'validHeightFormz': validHeightFormz.value,
+      'validWeightFormz': validWeightFormz.value,
       'status': status.index,
     };
   }
 
   factory RegistrationState.fromMap(Map<String, dynamic> map) {
-    //
-    final valueGender = GenderEnum.fromValue(map['validGenderFormz']);
-    ValidGenderFormz validGenderFormz;
-    if (valueGender == GenderEnum.none) {
-      validGenderFormz = const ValidGenderFormz.pure();
-    } else {
-      validGenderFormz = ValidGenderFormz.dirty(valueGender);
-    }
-    //
-    final valueName = map['validNameFormz'].toString();
-    ValidNameFormz validNameFormz;
-    if (valueName.isEmpty) {
-      validNameFormz = const ValidNameFormz.pure();
-    } else {
-      validNameFormz = ValidNameFormz.dirty(valueName);
-    }
-    //
-    final validBirthday = map['validBirthdayFormz'].toString();
-    // ignore: unused_local_variable
-    ValidBirthdayFormz validBirthdayFormz;
-    if (validBirthday.isEmpty) {
-      validBirthdayFormz = const ValidBirthdayFormz.pure();
-    } else {
-      validBirthdayFormz = ValidBirthdayFormz.dirty(validBirthday);
-    }
-    //
-    final valueActivity = ActivityEnum.fromValue(map['validActivityFormz']);
-    ValidActivityFormz validActivityFormz;
-    if (valueActivity == ActivityEnum.none) {
-      validActivityFormz = const ValidActivityFormz.pure();
-    } else {
-      validActivityFormz = ValidActivityFormz.dirty(valueActivity);
-    }
     return RegistrationState(
-      isLoadPage: (map['isLoad'] ?? false) as bool,
+      isLoadPage: (map['isLoadPage'] ?? false) as bool,
       isLoadNextPage: (map['isLoadNextPage'] ?? false) as bool,
       isValid: (map['isValid'] ?? false) as bool,
-      genderSelected: List<bool>.from(
-        (map['genderSelected'] ?? const <bool>[]) as List<bool>,
-      ),
-      // custom
-      validNameFormz: validNameFormz,
-      // custom
-      validGenderFormz: validGenderFormz,
-      // custom
-      validActivityFormz: validActivityFormz,
-      // custom
-      validBirthdayFormz: const ValidBirthdayFormz.pure(),
-      // validBirthdayFormz: validBirthdayFormz,
-      //
       daySelected:
           map['daySelected'] != null ? map['daySelected'] as String : null,
       yearSelected:
           map['yearSelected'] != null ? map['yearSelected'] as String : null,
       monthSelected:
           map['monthSelected'] != null ? map['monthSelected'] as String : null,
-
-      status: FormzSubmissionStatus.values[(map['status'] ?? 0) as int],
-      dateRegModel:
-          DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>),
+      heightList: List<String>.from(
+        (map['heightList'] ?? const <String>[]) as List<String>,
+      ),
+      genderSelected: List<bool>.from(
+        (map['genderSelected'] ?? const <bool>[]) as List<bool>,
+      ),
       activitySelected: List<bool>.from(
         (map['activitySelected'] ?? const <bool>[]) as List<bool>,
       ),
+      dateRegModel:
+          DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>),
+      // custom
+      validNameFormz: _getValueName(map),
+      // custom
+      validGenderFormz: _getValueGender(map),
+      // custom
+      validActivityFormz: _getValueActivity(map),
+      // custom
+      validBirthdayFormz: const ValidBirthdayFormz.pure(),
+      // validBirthdayFormz: validBirthdayFormz,
+      //
+      // custom
+      validWeightFormz: _getValueWeight(map),
+      // custom
+      validHeightFormz: _getValueHeight(map),
+      status: FormzSubmissionStatus.values[(map['status'] ?? 0) as int],
     );
   }
 }
+
+
+
+
+
 /* 
 
 

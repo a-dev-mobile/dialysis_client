@@ -39,64 +39,66 @@ class _WelcomePage extends StatelessWidget {
     final l = context.l10n;
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              const Spacer(),
-              Text(
-                l.welcome,
-                style: AppTextStyles.h4(),
-              ),
-              Text(
-                'Поздравляем! Вы сделали новый шаг на пути к более здоровому образу жизни',
-                style: AppTextStyles.h6(),
-              ),
-              const Spacer(),
-              const AppLogo(),
-              const Spacer(),
-              BlocBuilder<WelcomeCubit, WelcomeState>(
-                buildWhen: (p, c) => p.themeActive != c.themeActive,
-                builder: (context, state) {
-                  return BtnToggleText(
-                    onPressed: cubit.changeTheme,
-                    textList: const ['Светлая', 'Темная'],
-                    isSelected: state.boolsTheme,
-                    title: 'Выберите тему приложения',
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
-              BlocBuilder<WelcomeCubit, WelcomeState>(
-                buildWhen: (p, c) => p.localeActive != c.localeActive,
-                builder: (context, state) {
-                  return BtnToggleText(
-                    onPressed: cubit.changeLocale,
-                    textList: const [
-                      'Английский',
-                      'Руский',
-                    ],
-                    isSelected: state.boolsLocale,
-                    title: 'Выберите язык приложения',
-                  );
-                },
-              ),
-              const SizedBox(height: 5),
-              Text(
-                '(Вы можете изменить параметры в личном кабинете)',
-                style: AppTextStyles.caption(),
-                textAlign: TextAlign.center,
-              ),
-              const Spacer(),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: cubit.nextPage,
-                  child: const Text('Начать'),
+        child: ClearFocus(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                const Spacer(),
+                Text(
+                  l.welcome,
+                  style: AppTextStyles.h4(),
                 ),
-              )
-            ],
+                Text(
+                  'Поздравляем! Вы сделали новый шаг на пути к более здоровому образу жизни',
+                  style: AppTextStyles.h6(),
+                ),
+                const Spacer(),
+                const AppLogo(),
+                const Spacer(),
+                BlocBuilder<WelcomeCubit, WelcomeState>(
+                  buildWhen: (p, c) => p.themeActive != c.themeActive,
+                  builder: (context, state) {
+                    return BtnToggleText(
+                      onPressed: cubit.changeTheme,
+                      textList: const ['Светлая', 'Темная'],
+                      isSelected: state.boolsTheme,
+                      title: 'Выберите тему приложения',
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                BlocBuilder<WelcomeCubit, WelcomeState>(
+                  buildWhen: (p, c) => p.localeActive != c.localeActive,
+                  builder: (context, state) {
+                    return BtnToggleText(
+                      onPressed: cubit.changeLocale,
+                      textList: const [
+                        'Английский',
+                        'Руский',
+                      ],
+                      isSelected: state.boolsLocale,
+                      title: 'Выберите язык приложения',
+                    );
+                  },
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  '(Вы можете изменить параметры в личном кабинете)',
+                  style: AppTextStyles.caption(),
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: cubit.nextPage,
+                    child: const Text('Начать'),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

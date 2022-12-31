@@ -1,6 +1,5 @@
 import 'package:dialysis/app/style/style.dart';
 
-
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 
@@ -61,13 +60,20 @@ class _RegistrationPage extends StatelessWidget {
                         const _TitleSub(text: 'Введите имя'),
                         const SizedBox(height: 10),
                         NameField(cubit: cubit),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 10),
                         const GenderChoose(),
-                        const SizedBox(height: 20),
+                        // const SizedBox(height: 20),
                         const ActivityChoose(),
                         const SizedBox(height: 20),
                         const _TitleSub(text: 'Укажите дату своего рождения'),
                         const BirthdayChoose(),
+                        const SizedBox(height: 20),
+                        const _TitleSub(text: 'Укажите свой рост'),
+                        const HeightChoose(),
+                        const SizedBox(height: 20),
+                        const _TitleSub(text: 'Укажите свой текущий вес'),
+                        const SizedBox(height: 10),
+                        WeightField(cubit: cubit),
                         const SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -88,10 +94,6 @@ class _RegistrationPage extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 class _TitleSub extends StatelessWidget {
   const _TitleSub({

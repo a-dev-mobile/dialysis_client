@@ -28,19 +28,19 @@ class BirthdayChoose extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                DateDropDown(
+                AppDropDown(
                   hint: 'ДЕНЬ',
                   value: state.daySelected,
                   onChanged: cubit.changeDay,
                   values: state.dateRegModel.days,
                 ),
-                DateDropDown(
+                AppDropDown(
                   hint: 'MЕСЯЦ',
                   onChanged: cubit.changeMonth,
                   value: state.monthSelected,
                   values: state.dateRegModel.months,
                 ),
-                DateDropDown(
+                AppDropDown(
                   hint: 'ГОД',
                   onChanged: cubit.changeYear,
                   value: state.yearSelected,

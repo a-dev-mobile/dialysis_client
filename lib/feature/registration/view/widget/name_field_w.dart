@@ -1,3 +1,4 @@
+
 import 'package:dialysis/feature/registration/cubit/cubit.dart';
 import 'package:dialysis/feature/registration/validation/validation.dart';
 import 'package:dialysis/l10n/l10n.dart';
@@ -52,7 +53,9 @@ class _NameFieldState extends State<NameField> {
             controller: controller,
             onChanged: widget.cubit.checkName,
             keyboardType: TextInputType.name,
+                     textAlign: TextAlign.center,
             decoration: InputDecoration(
+              
               labelText: l.name,
               errorText: valid.isPure
                   ? null
@@ -77,4 +80,5 @@ class _NameFieldState extends State<NameField> {
       },
     );
   }
+  
 }
