@@ -1,16 +1,16 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names
+// ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names, lines_longer_than_80_chars
 import 'dart:convert';
 
 import 'package:dadata/dadata.dart';
+import 'package:flutter/foundation.dart';
+import 'package:formz/formz.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/data_base/data_base.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-
 import 'package:dialysis/navigation/navigation.dart';
-import 'package:flutter/foundation.dart';
-import 'package:formz/formz.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 const _MIN_AGE = 13;
 const _MAX_AGE = 100;
@@ -243,6 +243,16 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
               '250'
             ],
             validWeightFormz: ValidWeightFormz.pure(),
+            ckdSelected: [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+            ],
+            validCkdFormz: ValidCkdFormz.pure(),
           ),
         );
   final DaDataClient _clienTips;
@@ -344,7 +354,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     final validBirthdayFormz = ValidBirthdayFormz.dirty(_getDateRaw());
     final validHeightFormz =
         ValidHeightFormz.dirty(state.validHeightFormz.value);
-
+    final validCkdFormz = ValidCkdFormz.dirty(state.validCkdFormz.value);
     emit(
       state.copyWith(
         validActivityFormz: validActivityFormz,
@@ -353,6 +363,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         validBirthdayFormz: validBirthdayFormz,
         validHeightFormz: validHeightFormz,
         validWeightFormz: validWeightFormz,
+        validCkdFormz: validCkdFormz,
         isValid: Formz.validate(
           [
             validGenderFormz,
@@ -360,7 +371,8 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
             validActivityFormz,
             validBirthdayFormz,
             validHeightFormz,
-            validWeightFormz
+            validWeightFormz,
+            validCkdFormz
           ],
         ),
       ),
@@ -403,6 +415,37 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         // isValid: Formz.validate(
         //   [state.validNameFormz, validGenderFormz, state.validActivityFormz],
         // ),
+      ),
+    );
+  }
+
+  void checkCkd(int value) {
+    final ckdEnum = CkdEnum.values[value];
+
+    final validCkdFormz = ValidCkdFormz.dirty(ckdEnum);
+
+    var ckdSelected = <bool>[];
+    ckdEnum.map(
+      one: () => ckdSelected = [true, false, false, false, false, false, false],
+      two: () => ckdSelected = [false, true, false, false, false, false, false],
+      three: () =>
+          ckdSelected = [false, false, true, false, false, false, false],
+      four: () =>
+          ckdSelected = [false, false, false, true, false, false, false],
+      five_before_dialysis: () =>
+          ckdSelected = [false, false, false, false, true, false, false],
+      five_after_dialysis: () =>
+          ckdSelected = [false, false, false, false, false, true, false],
+      not_know: () =>
+          ckdSelected = [false, false, false, false, false, false, true],
+      none: () =>
+          ckdSelected = [false, false, false, false, false, false, false],
+    );
+
+    emit(
+      state.copyWith(
+        ckdSelected: ckdSelected,
+        validCkdFormz: validCkdFormz,
       ),
     );
   }
@@ -476,8 +519,6 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void checkWeight(String value) {
-
-
     if (value.isEmpty) {
       emit(
         state.copyWith(
@@ -489,7 +530,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
       return;
     }
-    
+
     final doubleValue = double.tryParse(value);
 
     ValidWeightFormz validWeightFormz;
@@ -520,6 +561,17 @@ ValidGenderFormz _getValueGender(Map<String, dynamic> map) {
     validGenderFormz = ValidGenderFormz.dirty(valueGender);
   }
   return validGenderFormz;
+}
+
+ValidCkdFormz _getValueCkd(Map<String, dynamic> map) {
+  final value = CkdEnum.fromValue(map['validCkdFormz']);
+  ValidCkdFormz valid;
+  if (value == CkdEnum.none) {
+    valid = const ValidCkdFormz.pure();
+  } else {
+    valid = ValidCkdFormz.dirty(value);
+  }
+  return valid;
 }
 
 ValidNameFormz _getValueName(Map<String, dynamic> map) {
@@ -592,6 +644,7 @@ class RegistrationState {
   final List<String> heightList;
   final List<bool> genderSelected;
   final List<bool> activitySelected;
+  final List<bool> ckdSelected;
   final DateRegModel dateRegModel;
   //
   final ValidNameFormz validNameFormz;
@@ -600,6 +653,7 @@ class RegistrationState {
   final ValidBirthdayFormz validBirthdayFormz;
   final ValidHeightFormz validHeightFormz;
   final ValidWeightFormz validWeightFormz;
+  final ValidCkdFormz validCkdFormz;
 
   // enum
   final FormzSubmissionStatus status;
@@ -613,6 +667,7 @@ class RegistrationState {
     required this.heightList,
     required this.genderSelected,
     required this.activitySelected,
+    required this.ckdSelected,
     required this.dateRegModel,
     required this.validNameFormz,
     required this.validActivityFormz,
@@ -620,6 +675,7 @@ class RegistrationState {
     required this.validBirthdayFormz,
     required this.validHeightFormz,
     required this.validWeightFormz,
+    required this.validCkdFormz,
     required this.status,
   });
 
@@ -633,6 +689,7 @@ class RegistrationState {
     List<String>? heightList,
     List<bool>? genderSelected,
     List<bool>? activitySelected,
+    List<bool>? ckdSelected,
     DateRegModel? dateRegModel,
     ValidNameFormz? validNameFormz,
     ValidActivityFormz? validActivityFormz,
@@ -640,6 +697,7 @@ class RegistrationState {
     ValidBirthdayFormz? validBirthdayFormz,
     ValidHeightFormz? validHeightFormz,
     ValidWeightFormz? validWeightFormz,
+    ValidCkdFormz? validCkdFormz,
     FormzSubmissionStatus? status,
   }) {
     return RegistrationState(
@@ -652,6 +710,7 @@ class RegistrationState {
       heightList: heightList ?? this.heightList,
       genderSelected: genderSelected ?? this.genderSelected,
       activitySelected: activitySelected ?? this.activitySelected,
+      ckdSelected: ckdSelected ?? this.ckdSelected,
       dateRegModel: dateRegModel ?? this.dateRegModel,
       validNameFormz: validNameFormz ?? this.validNameFormz,
       validActivityFormz: validActivityFormz ?? this.validActivityFormz,
@@ -659,6 +718,7 @@ class RegistrationState {
       validBirthdayFormz: validBirthdayFormz ?? this.validBirthdayFormz,
       validHeightFormz: validHeightFormz ?? this.validHeightFormz,
       validWeightFormz: validWeightFormz ?? this.validWeightFormz,
+      validCkdFormz: validCkdFormz ?? this.validCkdFormz,
       status: status ?? this.status,
     );
   }
@@ -670,7 +730,7 @@ class RegistrationState {
 
   @override
   String toString() {
-    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, genderSelected: $genderSelected, activitySelected: $activitySelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, status: $status)';
+    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, genderSelected: $genderSelected, activitySelected: $activitySelected, ckdSelected: $ckdSelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, validCkdFormz: $validCkdFormz, status: $status)';
   }
 
   @override
@@ -686,6 +746,7 @@ class RegistrationState {
         listEquals(other.heightList, heightList) &&
         listEquals(other.genderSelected, genderSelected) &&
         listEquals(other.activitySelected, activitySelected) &&
+        listEquals(other.ckdSelected, ckdSelected) &&
         other.dateRegModel == dateRegModel &&
         other.validNameFormz == validNameFormz &&
         other.validActivityFormz == validActivityFormz &&
@@ -693,6 +754,7 @@ class RegistrationState {
         other.validBirthdayFormz == validBirthdayFormz &&
         other.validHeightFormz == validHeightFormz &&
         other.validWeightFormz == validWeightFormz &&
+        other.validCkdFormz == validCkdFormz &&
         other.status == status;
   }
 
@@ -707,6 +769,7 @@ class RegistrationState {
         heightList.hashCode ^
         genderSelected.hashCode ^
         activitySelected.hashCode ^
+        ckdSelected.hashCode ^
         dateRegModel.hashCode ^
         validNameFormz.hashCode ^
         validActivityFormz.hashCode ^
@@ -714,6 +777,7 @@ class RegistrationState {
         validBirthdayFormz.hashCode ^
         validHeightFormz.hashCode ^
         validWeightFormz.hashCode ^
+        validCkdFormz.hashCode ^
         status.hashCode;
   }
 
@@ -728,6 +792,7 @@ class RegistrationState {
       'heightList': heightList,
       'genderSelected': genderSelected,
       'activitySelected': activitySelected,
+      'ckdSelected': ckdSelected,
       'dateRegModel': dateRegModel.toMap(),
       'validNameFormz': validNameFormz.value,
       'validActivityFormz': validActivityFormz.value.name,
@@ -735,6 +800,7 @@ class RegistrationState {
       'validBirthdayFormz': validBirthdayFormz.value,
       'validHeightFormz': validHeightFormz.value,
       'validWeightFormz': validWeightFormz.value,
+      'validCkdFormz': validCkdFormz.value.name,
       'status': status.index,
     };
   }
@@ -751,14 +817,13 @@ class RegistrationState {
       monthSelected:
           map['monthSelected'] != null ? map['monthSelected'] as String : null,
       heightList: List<String>.from(
-        (map['heightList'] ?? const <String>[]) as List<String>,
-      ),
+          (map['heightList'] ?? const <String>[]) as List<String>),
       genderSelected: List<bool>.from(
-        (map['genderSelected'] ?? const <bool>[]) as List<bool>,
-      ),
+          (map['genderSelected'] ?? const <bool>[]) as List<bool>),
       activitySelected: List<bool>.from(
-        (map['activitySelected'] ?? const <bool>[]) as List<bool>,
-      ),
+          (map['activitySelected'] ?? const <bool>[]) as List<bool>),
+      ckdSelected:
+          List<bool>.from((map['ckdSelected'] ?? const <bool>[]) as List<bool>),
       dateRegModel:
           DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>),
       // custom
@@ -775,6 +840,8 @@ class RegistrationState {
       validWeightFormz: _getValueWeight(map),
       // custom
       validHeightFormz: _getValueHeight(map),
+      // custom
+      validCkdFormz: _getValueCkd(map),
       status: FormzSubmissionStatus.values[(map['status'] ?? 0) as int],
     );
   }

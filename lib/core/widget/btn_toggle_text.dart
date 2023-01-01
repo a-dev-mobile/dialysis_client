@@ -9,13 +9,13 @@ class BtnToggleText extends StatelessWidget {
     required this.textList,
     required this.isSelected,
     required this.onPressed,
-    required this.title,
+    this.title,
     this.errorText,
     this.infoBottom,
     this.dialogText,
   });
   final List<String> textList;
-  final String title;
+  final String? title;
   final String? errorText;
   final String? dialogText;
   final String? infoBottom;
@@ -30,21 +30,25 @@ class BtnToggleText extends StatelessWidget {
             Row(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    title,
-                    style: AppTextStyles.bodyText2(),
-                    textAlign: TextAlign.center,
+                if (title != null)
+                  Expanded(
+                    child: Text(
+                      title!,
+                      style: AppTextStyles.bodyText2(),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
                 if (dialogText != null)
                   IconButton(
-                        onPressed: () => _showInfoDialog(
-                            context: context, text: dialogText!,),
-                        icon: Icon(
-                          Icons.info_outline,
-                          color: context.theme.colorScheme.primary,
-                        ),)
+                    onPressed: () => _showInfoDialog(
+                      context: context,
+                      text: dialogText!,
+                    ),
+                    icon: Icon(
+                      Icons.info_outline,
+                      color: context.theme.colorScheme.primary,
+                    ),
+                  )
               ],
             ),
             if (dialogText == null) const SizedBox(height: 10),
@@ -58,20 +62,22 @@ class BtnToggleText extends StatelessWidget {
                 for (var i in textList) Text(i),
               ],
             ),
-            const SizedBox(height: 6),
-            if (errorText != null)
+            if (errorText != null) ...[
+              const SizedBox(height: 6),
               Text(
                 errorText!,
                 style: context.textTheme.bodySmall!
                     .copyWith(color: context.theme.errorColor),
               ),
-            const SizedBox(height: 6),
-            if (infoBottom != null)
+            ],
+            if (infoBottom != null) ...[
+              const SizedBox(height: 6),
               Text(
                 infoBottom!,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.caption(),
               ),
+            ]
           ],
         );
       },
@@ -79,14 +85,15 @@ class BtnToggleText extends StatelessWidget {
   }
 }
 
-Future<void> _showInfoDialog(
-    {required BuildContext context, required String text,}) async {
+Future<void> _showInfoDialog({
+  required BuildContext context,
+  required String text,
+}) async {
   return showDialog<void>(
     context: context,
     useRootNavigator: false,
     builder: (BuildContext context) {
       return AlertDialog(
-      
         content: Text(text),
       );
     },

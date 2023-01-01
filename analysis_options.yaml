@@ -19,12 +19,6 @@ analyzer:
     # implicit-casts: true
 
 
-
-
-
-
-
-
     
   exclude:
     # Generated code

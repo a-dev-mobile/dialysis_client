@@ -74,6 +74,9 @@ class _RegistrationPage extends StatelessWidget {
                         const _TitleSub(text: 'Укажите свой текущий вес'),
                         const SizedBox(height: 10),
                         WeightField(cubit: cubit),
+                        const SizedBox(height: 10),
+                        const CkdChoose(),
+
                         const SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -81,7 +84,13 @@ class _RegistrationPage extends StatelessWidget {
                             onPressed: cubit.checkAll,
                             child: const Text('Начать'),
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 10),
+                        const Text('Нажимая далее вы соглашаетесь с'),
+                        TextButton(
+                            onPressed: () {},
+                            child: const Text('Политика конфиденциальности'),),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
