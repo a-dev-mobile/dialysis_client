@@ -57,7 +57,7 @@ class _RegistrationPage extends StatelessWidget {
                         const SizedBox(height: 10),
                         const _TitleMain(),
                         const SizedBox(height: 20),
-                        const _TitleSub(text: 'Введите имя'),
+                        const TitleSub(text: 'Введите имя'),
                         const SizedBox(height: 10),
                         NameField(cubit: cubit),
                         const SizedBox(height: 10),
@@ -65,18 +65,18 @@ class _RegistrationPage extends StatelessWidget {
                         // const SizedBox(height: 20),
                         const ActivityChoose(),
                         const SizedBox(height: 20),
-                        const _TitleSub(text: 'Укажите дату своего рождения'),
+                        const TitleSub(text: 'Укажите дату своего рождения'),
                         const BirthdayChoose(),
                         const SizedBox(height: 20),
-                        const _TitleSub(text: 'Укажите свой рост'),
+                        const TitleSub(text: 'Укажите свой рост'),
                         const HeightChoose(),
                         const SizedBox(height: 20),
-                        const _TitleSub(text: 'Укажите свой текущий вес'),
+                        const TitleSub(text: 'Укажите свой текущий вес'),
                         const SizedBox(height: 10),
                         WeightField(cubit: cubit),
                         const SizedBox(height: 10),
                         const CkdChoose(),
-
+                        CreatinineField(cubit: cubit),
                         const SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
@@ -104,20 +104,7 @@ class _RegistrationPage extends StatelessWidget {
   }
 }
 
-class _TitleSub extends StatelessWidget {
-  const _TitleSub({
-    required this.text,
-  });
-  final String text;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: AppTextStyles.bodyText2(),
-      textAlign: TextAlign.center,
-    );
-  }
-}
+
 
 class _TitleMain extends StatelessWidget {
   const _TitleMain();

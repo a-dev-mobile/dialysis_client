@@ -53,7 +53,7 @@ class _NameFieldState extends State<NameField> {
             controller: controller,
             onChanged: widget.cubit.checkName,
             keyboardType: TextInputType.name,
-                     textAlign: TextAlign.center,
+                    //  textAlign: TextAlign.center,
             decoration: InputDecoration(
               
               labelText: l.name,

@@ -40,207 +40,177 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
             validBirthdayFormz: ValidBirthdayFormz.pure(),
             validHeightFormz: ValidHeightFormz.pure(),
             heightList: [
-              '50',
-              '51',
-              '52',
-              '53',
-              '54',
-              '55',
-              '56',
-              '57',
-              '58',
-              '59',
-              '60',
-              '61',
-              '62',
-              '63',
-              '64',
-              '65',
-              '66',
-              '67',
-              '68',
-              '69',
-              '70',
-              '71',
-              '72',
-              '73',
-              '74',
-              '75',
-              '76',
-              '77',
-              '78',
-              '79',
-              '80',
-              '81',
-              '82',
-              '83',
-              '84',
-              '85',
-              '86',
-              '87',
-              '88',
-              '89',
-              '90',
-              '91',
-              '92',
-              '93',
-              '94',
-              '95',
-              '96',
-              '97',
-              '98',
-              '99',
-              '100',
-              '101',
-              '102',
-              '103',
-              '104',
-              '105',
-              '106',
-              '107',
-              '108',
-              '109',
-              '110',
-              '111',
-              '112',
-              '113',
-              '114',
-              '115',
-              '116',
-              '117',
-              '118',
-              '119',
-              '120',
-              '121',
-              '122',
-              '123',
-              '124',
-              '125',
-              '126',
-              '127',
-              '128',
-              '129',
-              '130',
-              '131',
-              '132',
-              '133',
-              '134',
-              '135',
-              '136',
-              '137',
-              '138',
-              '139',
-              '140',
-              '141',
-              '142',
-              '143',
-              '144',
-              '145',
-              '146',
-              '147',
-              '148',
-              '149',
-              '150',
-              '151',
-              '152',
-              '153',
-              '154',
-              '155',
-              '156',
-              '157',
-              '158',
-              '159',
-              '160',
-              '161',
-              '162',
-              '163',
-              '164',
-              '165',
-              '166',
-              '167',
-              '168',
-              '169',
-              '170',
-              '171',
-              '172',
-              '173',
-              '174',
-              '175',
-              '176',
-              '177',
-              '178',
-              '179',
-              '180',
-              '181',
-              '182',
-              '183',
-              '184',
-              '185',
-              '186',
-              '187',
-              '188',
-              '189',
-              '190',
-              '191',
-              '192',
-              '193',
-              '194',
-              '195',
-              '196',
-              '197',
-              '198',
-              '199',
-              '200',
-              '201',
-              '202',
-              '203',
-              '204',
-              '205',
-              '206',
-              '207',
-              '208',
-              '209',
-              '210',
-              '211',
-              '212',
-              '213',
-              '214',
-              '215',
-              '216',
-              '217',
-              '218',
-              '219',
-              '220',
-              '221',
-              '222',
-              '223',
-              '224',
-              '225',
-              '226',
-              '227',
-              '228',
-              '229',
               '230',
-              '231',
-              '232',
-              '233',
-              '234',
-              '235',
-              '236',
-              '237',
-              '238',
-              '239',
-              '240',
-              '241',
-              '242',
-              '243',
-              '244',
-              '245',
-              '246',
-              '247',
-              '248',
-              '249',
-              '250'
+              '229',
+              '228',
+              '227',
+              '226',
+              '225',
+              '224',
+              '223',
+              '222',
+              '221',
+              '220',
+              '219',
+              '218',
+              '217',
+              '216',
+              '215',
+              '214',
+              '213',
+              '212',
+              '211',
+              '210',
+              '209',
+              '208',
+              '207',
+              '206',
+              '205',
+              '204',
+              '203',
+              '202',
+              '201',
+              '200',
+              '199',
+              '198',
+              '197',
+              '196',
+              '195',
+              '194',
+              '193',
+              '192',
+              '191',
+              '190',
+              '189',
+              '188',
+              '187',
+              '186',
+              '185',
+              '184',
+              '183',
+              '182',
+              '181',
+              '180',
+              '179',
+              '178',
+              '177',
+              '176',
+              '175',
+              '174',
+              '173',
+              '172',
+              '171',
+              '170',
+              '169',
+              '168',
+              '167',
+              '166',
+              '165',
+              '164',
+              '163',
+              '162',
+              '161',
+              '160',
+              '159',
+              '158',
+              '157',
+              '156',
+              '155',
+              '154',
+              '153',
+              '152',
+              '151',
+              '150',
+              '149',
+              '148',
+              '147',
+              '146',
+              '145',
+              '144',
+              '143',
+              '142',
+              '141',
+              '140',
+              '139',
+              '138',
+              '137',
+              '136',
+              '135',
+              '134',
+              '133',
+              '132',
+              '131',
+              '130',
+              '129',
+              '128',
+              '127',
+              '126',
+              '125',
+              '124',
+              '123',
+              '122',
+              '121',
+              '120',
+              '119',
+              '118',
+              '117',
+              '116',
+              '115',
+              '114',
+              '113',
+              '112',
+              '111',
+              '110',
+              '109',
+              '108',
+              '107',
+              '106',
+              '105',
+              '104',
+              '103',
+              '102',
+              '101',
+              '100',
+              '99',
+              '98',
+              '97',
+              '96',
+              '95',
+              '94',
+              '93',
+              '92',
+              '91',
+              '90',
+              '89',
+              '88',
+              '87',
+              '86',
+              '85',
+              '84',
+              '83',
+              '82',
+              '81',
+              '80',
+              '79',
+              '78',
+              '77',
+              '76',
+              '75',
+              '74',
+              '73',
+              '72',
+              '71',
+              '70',
+              '69',
+              '68',
+              '67',
+              '66',
+              '65',
+              '64',
+              '63',
+              '62',
+              '61',
+              '60',
             ],
             validWeightFormz: ValidWeightFormz.pure(),
             ckdSelected: [
@@ -253,6 +223,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
               false,
             ],
             validCkdFormz: ValidCkdFormz.pure(),
+            validCreatinineFormz: ValidCreatinineFormz.pure(),
           ),
         );
   final DaDataClient _clienTips;
@@ -355,6 +326,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     final validHeightFormz =
         ValidHeightFormz.dirty(state.validHeightFormz.value);
     final validCkdFormz = ValidCkdFormz.dirty(state.validCkdFormz.value);
+
+    final validCreatinineFormz =
+        ValidCreatinineFormz.dirty(value: state.validCreatinineFormz.value);
     emit(
       state.copyWith(
         validActivityFormz: validActivityFormz,
@@ -364,6 +338,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         validHeightFormz: validHeightFormz,
         validWeightFormz: validWeightFormz,
         validCkdFormz: validCkdFormz,
+        validCreatinineFormz: validCreatinineFormz,
         isValid: Formz.validate(
           [
             validGenderFormz,
@@ -372,7 +347,8 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
             validBirthdayFormz,
             validHeightFormz,
             validWeightFormz,
-            validCkdFormz
+            validCkdFormz,
+            validCreatinineFormz,
           ],
         ),
       ),
@@ -550,6 +526,38 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       ),
     );
   }
+
+  void checkCreatinine(String value) {
+    if (value.isEmpty) {
+      emit(
+        state.copyWith(
+          validCreatinineFormz: const ValidCreatinineFormz.dirty(
+            externalError: ValidCreatinineError.isEmpty,
+          ),
+        ),
+      );
+
+      return;
+    }
+
+    final doubleValue = double.tryParse(value);
+
+    ValidCreatinineFormz validCreatinineFormz;
+
+    if (doubleValue == null) {
+      validCreatinineFormz = const ValidCreatinineFormz.dirty(
+        externalError: ValidCreatinineError.isNoValid,
+      );
+    } else {
+      validCreatinineFormz = ValidCreatinineFormz.dirty(value: doubleValue);
+    }
+
+    emit(
+      state.copyWith(
+        validCreatinineFormz: validCreatinineFormz,
+      ),
+    );
+  }
 }
 
 ValidGenderFormz _getValueGender(Map<String, dynamic> map) {
@@ -592,6 +600,17 @@ ValidWeightFormz _getValueWeight(Map<String, dynamic> map) {
     valid = const ValidWeightFormz.pure();
   } else {
     valid = ValidWeightFormz.pure(value: value);
+  }
+  return valid;
+}
+
+ValidCreatinineFormz _getValueCreatinine(Map<String, dynamic> map) {
+  final value = map['validCreatinineFormz'] as double?;
+  ValidCreatinineFormz valid;
+  if (value == null) {
+    valid = const ValidCreatinineFormz.pure();
+  } else {
+    valid = ValidCreatinineFormz.pure(value: value);
   }
   return valid;
 }
@@ -654,6 +673,7 @@ class RegistrationState {
   final ValidHeightFormz validHeightFormz;
   final ValidWeightFormz validWeightFormz;
   final ValidCkdFormz validCkdFormz;
+  final ValidCreatinineFormz validCreatinineFormz;
 
   // enum
   final FormzSubmissionStatus status;
@@ -676,6 +696,7 @@ class RegistrationState {
     required this.validHeightFormz,
     required this.validWeightFormz,
     required this.validCkdFormz,
+    required this.validCreatinineFormz,
     required this.status,
   });
 
@@ -698,6 +719,7 @@ class RegistrationState {
     ValidHeightFormz? validHeightFormz,
     ValidWeightFormz? validWeightFormz,
     ValidCkdFormz? validCkdFormz,
+    ValidCreatinineFormz? validCreatinineFormz,
     FormzSubmissionStatus? status,
   }) {
     return RegistrationState(
@@ -719,6 +741,7 @@ class RegistrationState {
       validHeightFormz: validHeightFormz ?? this.validHeightFormz,
       validWeightFormz: validWeightFormz ?? this.validWeightFormz,
       validCkdFormz: validCkdFormz ?? this.validCkdFormz,
+      validCreatinineFormz: validCreatinineFormz ?? this.validCreatinineFormz,
       status: status ?? this.status,
     );
   }
@@ -730,7 +753,7 @@ class RegistrationState {
 
   @override
   String toString() {
-    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, genderSelected: $genderSelected, activitySelected: $activitySelected, ckdSelected: $ckdSelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, validCkdFormz: $validCkdFormz, status: $status)';
+    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, genderSelected: $genderSelected, activitySelected: $activitySelected, ckdSelected: $ckdSelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, validCkdFormz: $validCkdFormz, validCreatinineFormz: $validCreatinineFormz, status: $status)';
   }
 
   @override
@@ -755,6 +778,7 @@ class RegistrationState {
         other.validHeightFormz == validHeightFormz &&
         other.validWeightFormz == validWeightFormz &&
         other.validCkdFormz == validCkdFormz &&
+        other.validCreatinineFormz == validCreatinineFormz &&
         other.status == status;
   }
 
@@ -778,6 +802,7 @@ class RegistrationState {
         validHeightFormz.hashCode ^
         validWeightFormz.hashCode ^
         validCkdFormz.hashCode ^
+        validCreatinineFormz.hashCode ^
         status.hashCode;
   }
 
@@ -801,6 +826,7 @@ class RegistrationState {
       'validHeightFormz': validHeightFormz.value,
       'validWeightFormz': validWeightFormz.value,
       'validCkdFormz': validCkdFormz.value.name,
+      'validCreatinineFormz': validCreatinineFormz.value,
       'status': status.index,
     };
   }
@@ -842,6 +868,8 @@ class RegistrationState {
       validHeightFormz: _getValueHeight(map),
       // custom
       validCkdFormz: _getValueCkd(map),
+      // custom
+      validCreatinineFormz: _getValueCreatinine(map),
       status: FormzSubmissionStatus.values[(map['status'] ?? 0) as int],
     );
   }

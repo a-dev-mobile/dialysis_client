@@ -54,7 +54,7 @@ class _WeightFieldState extends State<WeightField> {
             TextField(
               controller: controller,
               onChanged: widget.cubit.checkWeight,
-              textAlign: TextAlign.center,
+              // textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(6),
@@ -62,6 +62,7 @@ class _WeightFieldState extends State<WeightField> {
               decoration: InputDecoration(
                 suffixText: 'кг',
                 labelText: 'Вес',
+                        errorMaxLines: 2,
                 errorText: valid.isPure
                     ? null
                     : valid.error == valid.isEmpty
