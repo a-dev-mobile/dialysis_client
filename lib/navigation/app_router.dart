@@ -5,6 +5,7 @@ import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/common/test_app/test_app.dart';
 import 'package:dialysis/feature/debug_menu/debug_menu.dart';
+import 'package:dialysis/feature/food_info/food_info.dart';
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
@@ -16,17 +17,17 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   AppRouter({required AppStorage storage}) : _storage = storage;
-  static final _pageNavigatorKey = GlobalKey<NavigatorState>();
+  // static final _pageNavigatorKey = GlobalKey<NavigatorState>();
 
   final AppStorage _storage;
 
   final GoRouter router = GoRouter(
     debugLogDiagnostics: true,
-    // initialLocation: SearchPage.path,
     initialLocation: SplashPage.path,
+    // initialLocation: FoodInfoPage.path,
     routes: [
       ShellRoute(
-        navigatorKey: _pageNavigatorKey,
+        // navigatorKey: _pageNavigatorKey,
         builder: (_, GoRouterState state, child) {
           return OverlayWidget(
             goRouterState: state,
@@ -58,22 +59,15 @@ class AppRouter {
               child: const RegistrationPage(),
             ),
           ),
-          // GoRoute(
-          //   name: BottomNavBarPage.name,
-          //   path: BottomNavBarPage.path,
-          //   pageBuilder: (context, state) => MaterialPage<void>(
-          //     key: state.pageKey,
-          //     child: const BottomNavBarPage(),
-          //   ),
-          // ),
-          // GoRoute(
-          //   name: SearchPage.name,
-          //   path: SearchPage.path,
-          //   pageBuilder: (context, state) => MaterialPage<void>(
-          //     key: state.pageKey,
-          //     child: const SearchPage(),
-          //   ),
-          // ),
+              GoRoute(
+            name: FoodInfoPage.name,
+            path: FoodInfoPage.path,
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const FoodInfoPage(),
+            ),
+          ),
+      
           GoRoute(
             name: SettingPage.name,
             path: SettingPage.path,
@@ -127,7 +121,7 @@ class AppRouter {
           GoRoute(
             name: PdfPage.name,
             path: PdfPage.path,
-            parentNavigatorKey: _pageNavigatorKey,
+            // parentNavigatorKey: _pageNavigatorKey,
             pageBuilder: (context, state) {
               final url = state.extra ?? 'https://www.orimi.com/pdf-test.pdf';
 

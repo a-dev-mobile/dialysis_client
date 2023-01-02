@@ -57,24 +57,23 @@ class _RegistrationPage extends StatelessWidget {
                         const SizedBox(height: 10),
                         const _TitleMain(),
                         const SizedBox(height: 20),
-                        const TitleSub(text: 'Введите имя'),
-                        const SizedBox(height: 10),
+                       
+                      
                         NameField(cubit: cubit),
-                        const SizedBox(height: 10),
+                   
                         const GenderChoose(),
                         // const SizedBox(height: 20),
                         const ActivityChoose(),
-                        const SizedBox(height: 20),
-                        const TitleSub(text: 'Укажите дату своего рождения'),
+              
+                     
                         const BirthdayChoose(),
-                        const SizedBox(height: 20),
-                        const TitleSub(text: 'Укажите свой рост'),
+                 
+                   
                         const HeightChoose(),
-                        const SizedBox(height: 20),
-                        const TitleSub(text: 'Укажите свой текущий вес'),
-                        const SizedBox(height: 10),
+                 
+                 
                         WeightField(cubit: cubit),
-                        const SizedBox(height: 10),
+                     
                         const CkdChoose(),
                         CreatinineField(cubit: cubit),
                         const SizedBox(height: 20),
@@ -88,8 +87,9 @@ class _RegistrationPage extends StatelessWidget {
                         const SizedBox(height: 10),
                         const Text('Нажимая далее вы соглашаетесь с'),
                         TextButton(
-                            onPressed: () {},
-                            child: const Text('Политика конфиденциальности'),),
+                          onPressed: cubit.nextPage,
+                          child: const Text('Политика конфиденциальности'),
+                        ),
                         const SizedBox(height: 20),
                       ],
                     ),
@@ -103,8 +103,6 @@ class _RegistrationPage extends StatelessWidget {
     );
   }
 }
-
-
 
 class _TitleMain extends StatelessWidget {
   const _TitleMain();

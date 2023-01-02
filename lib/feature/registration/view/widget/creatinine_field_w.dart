@@ -56,41 +56,43 @@ class _CreatinineFieldState extends State<CreatinineField> {
 
         return Visibility(
           visible: state.validCkdFormz.value == CkdEnum.not_know,
-          child: Column(
-            children: [
-              // const SizedBox(height: 10),
-              const TitleSub(
-                text: 'Укажите свой креатинин',
-                dialogText:
-                    'Мы используем эти сведения для расчета клубочковой фильтрации',
-              ),
-              // const SizedBox(height: 10),
-              TextField(
-                controller: controller,
-                onChanged: widget.cubit.checkCreatinine,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(6),
-                ],
-                decoration: InputDecoration(
-                  suffixText: 'мкмоль/л',
-                  labelText: 'Креатинин',
-                  errorMaxLines: 2,
-                  errorText: valid.isPure
-                      ? null
-                      : valid.error == valid.isEmpty
-                          ? 'Креатинин не указан'
-                          : valid.error == valid.isMax
-                              ? 'Указанный креатинин не поддерживается приложением'
-                              : valid.error == valid.isMin
-                                  ? 'Указанный креатинин не поддерживается приложением'
-                                  : valid.error == valid.isNoValid
-                                      ? 'Неправильное значение'
-                                      : null,
+          child: CardCustom(
+            child: Column(
+              children: [
+                // const SizedBox(height: 10),
+                const TitleSub(
+                  text: 'Укажите свой креатинин',
+                  dialogText:
+                      'Мы используем эти сведения для расчета клубочковой фильтрации',
                 ),
-              ),
-            ],
+                // const SizedBox(height: 10),
+                TextField(
+                  controller: controller,
+                  onChanged: widget.cubit.checkCreatinine,
+                  // textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(6),
+                  ],
+                  decoration: InputDecoration(
+                    suffixText: 'мкмоль/л',
+                    labelText: 'Креатинин',
+                    errorMaxLines: 2,
+                    errorText: valid.isPure
+                        ? null
+                        : valid.error == valid.isEmpty
+                            ? 'Креатинин не указан'
+                            : valid.error == valid.isMax
+                                ? 'Указанный креатинин не поддерживается приложением'
+                                : valid.error == valid.isMin
+                                    ? 'Указанный креатинин не поддерживается приложением'
+                                    : valid.error == valid.isNoValid
+                                        ? 'Неправильное значение'
+                                        : null,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

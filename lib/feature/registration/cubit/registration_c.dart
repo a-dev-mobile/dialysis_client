@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names, lines_longer_than_80_chars
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dadata/dadata.dart';
+import 'package:dialysis/feature/food_info/food_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -248,7 +250,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     final db = await _db.openDB();
     final result =
         await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
-
+    unawaited(db.close());
     final listYear = <String>[];
     final listMonth = <String>[];
     var row = <String, dynamic>{};
@@ -311,6 +313,15 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         // isValid: Formz.validate([validNameFormz, state.validNameFormz,state.]),
       ),
     );
+  }
+
+  Future<void> nextPage() async {
+    emit(state.copyWith(isLoadNextPage: true));
+
+    await Future<void>.delayed(const Duration(seconds: 5));
+
+    _go.router.pushNamed(FoodInfoPage.name);
+    emit(state.copyWith(isLoadNextPage: false));
   }
 
   void checkAll() {

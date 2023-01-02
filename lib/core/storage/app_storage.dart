@@ -3,6 +3,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
+
+import 'package:dialysis/feature/food_info/food_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// LocalStorage Singleton class
@@ -42,7 +44,7 @@ class AppStorage {
   static const _locale = 'locale';
 
   Future<String> getLocale() {
-    return getString(key: _locale);
+    return getString(key: _locale, defaultValue: 'en_US');
   }
 
   Future<void> setLocale(String locale) {
@@ -167,6 +169,28 @@ class AppStorage {
 
   Future<void> setSelectedCategories(List<String> value) {
     return setStringList(key: _categories, value: value);
+  }
+
+// ******************************
+  static const _day_product = '_day_product';
+
+  Future<List<DayProductsModel>> getListDayProducts() async {
+    final listRaw = await getStringList(key: _day_product);
+    final listModel = <DayProductsModel>[];
+    for (final i in listRaw) {
+      listModel.add(DayProductsModel.fromJson(i));
+    }
+
+    return listModel;
+  }
+
+  Future<void> setDayProducts(List<DayProductsModel> value) {
+    final listString = <String>[];
+    for (final i in value) {
+      listString.add(i.toJson());
+    }
+
+    return setStringList(key: _day_product, value: listString);
   }
 
 // ******************************

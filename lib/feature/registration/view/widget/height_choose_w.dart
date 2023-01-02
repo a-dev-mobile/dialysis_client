@@ -13,36 +13,39 @@ class HeightChoose extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<RegistrationCubit>();
 
-    return BlocBuilder<RegistrationCubit, RegistrationState>(
-      buildWhen: (p, c) =>
-          p.validHeightFormz.isPure != c.validHeightFormz.isPure ||
-          p.validHeightFormz.value != c.validHeightFormz.value,
-      builder: (context, state) {
-        final valid = state.validHeightFormz;
-
-        return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AppDropDown(
-                  hint: 'Рост',
-                  value: state.validHeightFormz.value,
-                  onChanged: cubit.checkHeight,
-                  values: state.heightList,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  'см',
-                  style: AppTextStyles.caption(),
-                )
-              ],
-            ),
-            if (valid.error == valid.notSelected && !valid.isPure)
-              _buildError(context, 'Рост не выбран'),
-          ],
-        );
-      },
+    return CardCustom(
+      child: BlocBuilder<RegistrationCubit, RegistrationState>(
+        buildWhen: (p, c) =>
+            p.validHeightFormz.isPure != c.validHeightFormz.isPure ||
+            p.validHeightFormz.value != c.validHeightFormz.value,
+        builder: (context, state) {
+          final valid = state.validHeightFormz;
+    
+          return Column(
+            children: [
+                   const TitleSub(text: 'Укажите свой рост'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppDropDown(
+                    hint: 'Рост',
+                    value: state.validHeightFormz.value,
+                    onChanged: cubit.checkHeight,
+                    values: state.heightList,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'см',
+                    style: AppTextStyles.caption(),
+                  )
+                ],
+              ),
+              if (valid.error == valid.notSelected && !valid.isPure)
+                _buildError(context, 'Рост не выбран'),
+            ],
+          );
+        },
+      ),
     );
   }
 

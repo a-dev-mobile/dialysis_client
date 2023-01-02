@@ -1,6 +1,6 @@
 
-import 'package:dialysis/feature/registration/cubit/cubit.dart';
-import 'package:dialysis/feature/registration/validation/validation.dart';
+import 'package:dialysis/feature/registration/registration.dart';
+
 import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,40 +45,46 @@ class _NameFieldState extends State<NameField> {
       builder: (context, state) {
         final valid = state.validNameFormz;
 
-        return TypeAheadField(
-          hideOnEmpty: true,
-          hideOnLoading: true,
-          hideOnError: true,
-          textFieldConfiguration: TextFieldConfiguration(
-            controller: controller,
-            onChanged: widget.cubit.checkName,
-            keyboardType: TextInputType.name,
-                    //  textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              
-              labelText: l.name,
-              errorText: valid.isPure
-                  ? null
-                  : valid.error == valid.maxLength
-                      ? l.max_text_length
-                      : valid.error == valid.isEmpty
-                          ? l.enter_name
-                          : null,
-            ),
+        return CardCustom(
+          child: Column(
+            children: [
+              const TitleSub(text: 'Введите имя'),
+              const SizedBox(height: 10),
+              TypeAheadField(
+                hideOnEmpty: true,
+                hideOnLoading: true,
+                hideOnError: true,
+                textFieldConfiguration: TextFieldConfiguration(
+                  controller: controller,
+                  onChanged: widget.cubit.checkName,
+                  keyboardType: TextInputType.name,
+                  //  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    labelText: l.name,
+                    errorText: valid.isPure
+                        ? null
+                        : valid.error == valid.maxLength
+                            ? l.max_text_length
+                            : valid.error == valid.isEmpty
+                                ? l.enter_name
+                                : null,
+                  ),
+                ),
+                suggestionsCallback: widget.cubit.getSuggestionsName,
+                itemBuilder: (context, String suggestion) {
+                  return ListTile(
+                    title: Text(suggestion),
+                  );
+                },
+                onSuggestionSelected: (String suggestion) {
+                  widget.cubit.checkName(suggestion);
+                  controller.text = suggestion;
+                },
+              ),
+            ],
           ),
-          suggestionsCallback: widget.cubit.getSuggestionsName,
-          itemBuilder: (context, String suggestion) {
-            return ListTile(
-              title: Text(suggestion),
-            );
-          },
-          onSuggestionSelected: (String suggestion) {
-            widget.cubit.checkName(suggestion);
-            controller.text = suggestion;
-          },
         );
       },
     );
   }
-  
 }
