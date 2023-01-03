@@ -1,19 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 import 'package:dialysis/core/storage/app_storage.dart';
-import 'package:dialysis/feature/food_info/food_info.dart';
+import 'package:dialysis/feature/diary/diary.dart';
 
-class FoodInfoCubit extends Cubit<FoodInfoState> {
-  FoodInfoCubit({required AppStorage storage})
+class DiaryCubit extends Cubit<DiaryState> {
+  DiaryCubit({required AppStorage storage})
       : _storage = storage,
         super(
-          const FoodInfoState(
+          const DiaryState(
             listDayProducts: [],
             isLoadPage: true,
             currentFormatDay: '',
@@ -67,26 +66,26 @@ class FoodInfoCubit extends Cubit<FoodInfoState> {
 }
 
 @immutable
-class FoodInfoState {
+class DiaryState {
   final List<DayProductsModel> listDayProducts;
   final String currentFormatDay;
   final String currentDateStr;
   final bool isLoadPage;
 
-  const FoodInfoState({
+  const DiaryState({
     required this.listDayProducts,
     required this.currentFormatDay,
     required this.currentDateStr,
     required this.isLoadPage,
   });
 
-  FoodInfoState copyWith({
+  DiaryState copyWith({
     List<DayProductsModel>? listDayProducts,
     String? currentFormatDay,
     String? currentDateStr,
     bool? isLoadPage,
   }) {
-    return FoodInfoState(
+    return DiaryState(
       listDayProducts: listDayProducts ?? this.listDayProducts,
       currentFormatDay: currentFormatDay ?? this.currentFormatDay,
       currentDateStr: currentDateStr ?? this.currentDateStr,
@@ -103,8 +102,8 @@ class FoodInfoState {
     };
   }
 
-  factory FoodInfoState.fromMap(Map<String, dynamic> map) {
-    return FoodInfoState(
+  factory DiaryState.fromMap(Map<String, dynamic> map) {
+    return DiaryState(
       listDayProducts: List<DayProductsModel>.from(
         (map['listDayProducts'] as List<int>).map<DayProductsModel>(
           (x) => DayProductsModel.fromMap(x as Map<String, dynamic>),
@@ -118,16 +117,16 @@ class FoodInfoState {
 
   String toJson() => json.encode(toMap());
 
-  factory FoodInfoState.fromJson(String source) =>
-      FoodInfoState.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory DiaryState.fromJson(String source) =>
+      DiaryState.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'FoodInfoState(listDayProducts: $listDayProducts, currentFormatDay: $currentFormatDay, currentDateStr: $currentDateStr, isLoadPage: $isLoadPage)';
+    return 'DiaryState(listDayProducts: $listDayProducts, currentFormatDay: $currentFormatDay, currentDateStr: $currentDateStr, isLoadPage: $isLoadPage)';
   }
 
   @override
-  bool operator ==(covariant FoodInfoState other) {
+  bool operator ==(covariant DiaryState other) {
     if (identical(this, other)) return true;
 
     return listEquals(other.listDayProducts, listDayProducts) &&

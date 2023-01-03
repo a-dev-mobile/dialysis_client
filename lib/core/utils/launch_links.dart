@@ -1,14 +1,23 @@
-
-
 import 'package:url_launcher/url_launcher.dart';
 
-abstract class LaunchLinks {
-  static Future<void> launchEmail(String path,
-      {String? from, String? subject, String? body,}) async {
+/// LaunchLinks Singleton class
+class LaunchLinks {
+  factory LaunchLinks() => _internalSingleton;
+  LaunchLinks._internal();
+  static final LaunchLinks _internalSingleton = LaunchLinks._internal();
+
+  static Future<void> launchEmail(
+    String path, {
+    String? from,
+    String? subject,
+    String? body,
+  }) async {
     String? encodeQueryParameters(Map<String, String> params) {
       return params.entries
-          .map((MapEntry<String, String> e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',)
+          .map(
+            (MapEntry<String, String> e) =>
+                '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
+          )
           .join('&');
     }
 
@@ -30,6 +39,28 @@ abstract class LaunchLinks {
     if (!await launchUrl(uri)) {
       // ignore: only_throw_errors
       throw 'Could not launch $contactNumber';
+    }
+  }
+
+  static Future<void> urlExternal(String value) async {
+    final url = Uri.parse(value);
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      // ignore: only_throw_errors
+      throw 'Could not launch $value';
+    }
+  }
+  
+  static Future<void> urlInternal(String value) async {
+    final url = Uri.parse(value);
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+    )) {
+      // ignore: only_throw_errors
+      throw 'Could not launch $value';
     }
   }
 }

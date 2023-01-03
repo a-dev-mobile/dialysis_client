@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 
-import 'package:dialysis/feature/food_info/food_info.dart';
+import 'package:dialysis/feature/diary/diary.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// LocalStorage Singleton class

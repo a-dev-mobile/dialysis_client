@@ -3,16 +3,17 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dadata/dadata.dart';
-import 'package:dialysis/feature/food_info/food_info.dart';
+import 'package:dialysis/app/common_cubits/common_cubits.dart';
+import 'package:dialysis/core/storage/app_storage.dart';
+import 'package:dialysis/core/utils/launch_links.dart';
+import 'package:dialysis/data_base/data_base.dart';
+import 'package:dialysis/feature/diary/diary.dart';
+import 'package:dialysis/feature/registration/registration.dart';
+import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import 'package:dialysis/app/common_cubits/common_cubits.dart';
-import 'package:dialysis/core/storage/app_storage.dart';
-import 'package:dialysis/data_base/data_base.dart';
-import 'package:dialysis/feature/registration/registration.dart';
-import 'package:dialysis/navigation/navigation.dart';
 
 const _MIN_AGE = 13;
 const _MAX_AGE = 100;
@@ -305,6 +306,21 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     );
   }
 
+  Future<void> openPolicy() async {
+    const en =
+        'https://docs.google.com/document/d/1HfAqwOAMXT_ntykDdwwFJYO8njz3ZVQCcW51SuYZhD0/edit?usp=sharing';
+
+    const ru =
+        'https://docs.google.com/document/d/1M-WG6WJdVx3Y2OtUi_3XwG4h_J1rZnnPPn_a38q6-OE/edit?usp=sharing';
+
+    unawaited(
+      _locale.map(
+        ru: () => LaunchLinks.urlExternal(ru),
+        en: () => LaunchLinks.urlInternal(en),
+      ),
+    );
+  }
+
   void checkName(String value) {
     final validNameFormz = ValidNameFormz.dirty(value);
     emit(
@@ -320,11 +336,11 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
     await Future<void>.delayed(const Duration(seconds: 5));
 
-    _go.router.pushNamed(FoodInfoPage.name);
+    _go.router.pushNamed(DiaryPage.name);
     emit(state.copyWith(isLoadNextPage: false));
   }
 
-  void checkAll() {
+  void checkAllValid() {
     final validNameFormz = ValidNameFormz.dirty(state.validNameFormz.value);
     final validWeightFormz =
         ValidWeightFormz.dirty(value: state.validWeightFormz.value);
@@ -854,11 +870,14 @@ class RegistrationState {
       monthSelected:
           map['monthSelected'] != null ? map['monthSelected'] as String : null,
       heightList: List<String>.from(
-          (map['heightList'] ?? const <String>[]) as List<String>),
+        (map['heightList'] ?? const <String>[]) as List<String>,
+      ),
       genderSelected: List<bool>.from(
-          (map['genderSelected'] ?? const <bool>[]) as List<bool>),
+        (map['genderSelected'] ?? const <bool>[]) as List<bool>,
+      ),
       activitySelected: List<bool>.from(
-          (map['activitySelected'] ?? const <bool>[]) as List<bool>),
+        (map['activitySelected'] ?? const <bool>[]) as List<bool>,
+      ),
       ckdSelected:
           List<bool>.from((map['ckdSelected'] ?? const <bool>[]) as List<bool>),
       dateRegModel:

@@ -3,7 +3,6 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 
-
 version: 1.0.0+7
 
 environment:
@@ -39,7 +38,6 @@ dependencies:
   # Flutter integrations bloc
   flutter_bloc: ^8.1.1
 
-
   # Code generation
   freezed_annotation: ^2.2.0
   json_annotation: ^4.7.0
@@ -48,9 +46,6 @@ dependencies:
   intl: ^0.17.0
   flutter_localizations:
     sdk: flutter 
-
-
-
 
   # Logging
   logger: ^1.1.0
@@ -96,7 +91,6 @@ dependencies:
   mask_text_input_formatter: ^2.4.0
   crypto: ^3.0.2
 
-
  # firebase
   firebase_core: ^2.4.1
   firebase_crashlytics: ^3.0.9
@@ -107,31 +101,22 @@ dependencies:
   firebase_in_app_messaging: ^0.7.0+10
   firebase_analytics: ^10.1.0
 
-
   # ******************************
   #  local packages
   # ******************************
   dadata:
     path: packages/dadata
 
-
-
-
-
 dev_dependencies:
-
-
 
   # Analyzer extensions
   dart_code_metrics: ^5.3.0
   very_good_analysis: ^3.1.0
 
-
   # Code generation
   freezed: ^2.3.2
   build_runner: ^2.3.3
   json_serializable: ^6.5.4
-
 
 # Tests
   #flutter_driver:
@@ -146,7 +131,6 @@ dev_dependencies:
   #mockito: ^5.1.0
   #build_test: ^2.1.5
 
-
 flutter:
   generate: true
   uses-material-design: true
@@ -155,7 +139,6 @@ flutter:
     - assets/lottie/
     - assets/image/
     - assets/db/
-
 
 # flutter pub get && flutter pub run flutter_native_splash:create
 # flutter_native_splash:

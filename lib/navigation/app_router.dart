@@ -5,7 +5,7 @@ import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/common/test_app/test_app.dart';
 import 'package:dialysis/feature/debug_menu/debug_menu.dart';
-import 'package:dialysis/feature/food_info/food_info.dart';
+import 'package:dialysis/feature/diary/diary.dart';
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
@@ -24,7 +24,7 @@ class AppRouter {
   final GoRouter router = GoRouter(
     debugLogDiagnostics: true,
     initialLocation: SplashPage.path,
-    // initialLocation: FoodInfoPage.path,
+    // initialLocation: DiaryPage.path,
     routes: [
       ShellRoute(
         // navigatorKey: _pageNavigatorKey,
@@ -59,15 +59,15 @@ class AppRouter {
               child: const RegistrationPage(),
             ),
           ),
-              GoRoute(
-            name: FoodInfoPage.name,
-            path: FoodInfoPage.path,
+          GoRoute(
+            name: DiaryPage.name,
+            path: DiaryPage.path,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
-              child: const FoodInfoPage(),
+              child: const DiaryPage(),
             ),
           ),
-      
+
           GoRoute(
             name: SettingPage.name,
             path: SettingPage.path,

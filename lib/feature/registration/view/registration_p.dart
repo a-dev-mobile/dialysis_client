@@ -57,37 +57,38 @@ class _RegistrationPage extends StatelessWidget {
                         const SizedBox(height: 10),
                         const _TitleMain(),
                         const SizedBox(height: 20),
-                       
-                      
+
                         NameField(cubit: cubit),
-                   
+
                         const GenderChoose(),
                         // const SizedBox(height: 20),
                         const ActivityChoose(),
-              
-                     
+
                         const BirthdayChoose(),
-                 
-                   
+
                         const HeightChoose(),
-                 
-                 
+
                         WeightField(cubit: cubit),
-                     
+
                         const CkdChoose(),
                         CreatinineField(cubit: cubit),
                         const SizedBox(height: 20),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: cubit.checkAll,
+                            onPressed: () {
+                              cubit.checkAllValid();
+                              if (state.isValid) {
+                                cubit.nextPage();
+                              }
+                            },
                             child: const Text('Начать'),
                           ),
                         ),
                         const SizedBox(height: 10),
                         const Text('Нажимая далее вы соглашаетесь с'),
                         TextButton(
-                          onPressed: cubit.nextPage,
+                          onPressed: cubit.openPolicy,
                           child: const Text('Политика конфиденциальности'),
                         ),
                         const SizedBox(height: 20),

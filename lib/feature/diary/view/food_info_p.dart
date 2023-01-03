@@ -1,38 +1,38 @@
 import 'package:dialysis/app/style/extensions/extensions.dart';
 import 'package:dialysis/core/widget/progress_indicator/page.dart';
 
-import 'package:dialysis/feature/food_info/food_info.dart';
+import 'package:dialysis/feature/diary/diary.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FoodInfoPage extends StatelessWidget {
-  const FoodInfoPage({super.key});
-  static const path = '/foodInfo';
-  static const name = 'foodInfo';
+class DiaryPage extends StatelessWidget {
+  const DiaryPage({super.key});
+  static const path = '/diary';
+  static const name = 'diary';
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FoodInfoCubit(storage: context.read())..load(),
+          create: (context) => DiaryCubit(storage: context.read())..load(),
         ),
       ],
-      child: const _FoodInfoPage(),
+      child: const _DiaryPage(),
     );
   }
 }
 
-class _FoodInfoPage extends StatelessWidget {
-  const _FoodInfoPage();
+class _DiaryPage extends StatelessWidget {
+  const _DiaryPage();
   @override
   Widget build(BuildContext context) {
-    // final cubit = context.read<FoodInfoCubit>();
+    // final cubit = context.read<DiaryCubit>();
     // final l = context.l10n;
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<FoodInfoCubit, FoodInfoState>(
+        child: BlocBuilder<DiaryCubit, DiaryState>(
           buildWhen: (p, c) => p.isLoadPage != c.isLoadPage,
           builder: (context, state) {
             if (state.isLoadPage) return const PageStartLoad();
@@ -60,9 +60,9 @@ class TitleDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<FoodInfoCubit>();
+    final cubit = context.read<DiaryCubit>();
 
-    return BlocBuilder<FoodInfoCubit, FoodInfoState>(
+    return BlocBuilder<DiaryCubit, DiaryState>(
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
