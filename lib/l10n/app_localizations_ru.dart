@@ -86,6 +86,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get no => 'Нет';
 
   @override
+  String get yes_caps => 'ДА';
+
+  @override
+  String get no_caps => 'НЕТ';
+
+  @override
   String get no_data => 'Нет данных';
 
   @override
@@ -147,6 +153,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get light => 'ЛЕГКАЯ';
+
+  @override
+  String get info_diabets => 'Наличие диабета влияет на количество потребления нутриентов.';
+
+  @override
+  String get info_hypertension => 'Наличие гипертензии (высокое кровяное давление) влияет на количество потребления нутриентов.';
 
   @override
   String get g => 'г';

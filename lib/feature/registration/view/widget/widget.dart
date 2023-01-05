@@ -3,6 +3,7 @@ export 'birthday_choose_w.dart';
 export 'card_item_w.dart';
 export 'ckd_choose_w.dart';
 export 'creatinine_field_w.dart';
+export 'hypertension_choose_w.dart';
 export 'gender_choose_w.dart';
 export 'height_choose_w.dart';
 export 'name_field_w.dart';

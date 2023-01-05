@@ -4,7 +4,6 @@ import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/registration/registration.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,54 +23,31 @@ class CkdChoose extends StatelessWidget {
             p.validCkdFormz.isPure != c.validCkdFormz.isPure ||
             p.validCkdFormz.value != c.validCkdFormz.value,
         builder: (context, state) {
-          final valid = state.validCkdFormz;
           final booles = state.ckdSelected;
-      
+          final valid = state.validCkdFormz;
+
           return Column(
             children: [
               BtnToggleText(
                 dialogText:
                     'Установив данное приложение. Вы скорее уже знаете свою стадию ХБП, если нет - выберите последнее значение и введите свой креатинин',
                 title: 'Укажите стадию ХБП',
-                isSelected: [booles[0], booles[1]],
-                onPressed: (v) {
-                  cubit.checkCkd(v + 0);
-                },
-                textList: ['1', '2'],
+                isSelected: booles.sublist(0, booles.length - 1),
+                onPressed: cubit.checkCkd,
+                textList: ['1', '2', '3a', '3b', '4', '5'],
               ),
               BtnToggleText(
-                isSelected: [booles[2], booles[3]],
+                isSelected: booles.sublist(booles.length - 1, booles.length),
                 onPressed: (v) {
-                   cubit.checkCkd(v + 2);
-                },
-                textList: ['3', '4'],
-              ),
-              BtnToggleText(
-                isSelected: [booles[4]],
-                onPressed: (v) {
-                  cubit.checkCkd(v + 4);
-                },
-                textList: ['5 (до диализа)'],
-              ),
-              BtnToggleText(
-                isSelected: [booles[5]],
-                onPressed: (v) {
-                    cubit.checkCkd(v + 5);
-                },
-                textList: ['5 (на диализе)'],
-              ),
-              BtnToggleText(
-                isSelected: [booles[6]],
-                onPressed: (v) {
-                   cubit.checkCkd(v + 6);
+                  cubit.checkCkd(v + booles.length - 1);
                 },
                 textList: ['Я не знаю'],
-              
-              errorText: valid.isPure
-                ? null
-                : valid.error == valid.notSelected
-                    ? 'Стадия ХБП не выбрана'
-                    : null, ),
+                errorText: valid.isPure
+                    ? null
+                    : valid.error == valid.notSelected
+                        ? 'Стадия ХБП не выбрана'
+                        : null,
+              ),
             ],
           );
         },

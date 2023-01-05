@@ -255,6 +255,18 @@ abstract class AppLocalizations {
   /// **'Нет'**
   String get no;
 
+  /// No description provided for @yes_caps.
+  ///
+  /// In ru, this message translates to:
+  /// **'ДА'**
+  String get yes_caps;
+
+  /// No description provided for @no_caps.
+  ///
+  /// In ru, this message translates to:
+  /// **'НЕТ'**
+  String get no_caps;
+
   /// No description provided for @no_data.
   ///
   /// In ru, this message translates to:
@@ -380,6 +392,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'ЛЕГКАЯ'**
   String get light;
+
+  /// No description provided for @info_diabets.
+  ///
+  /// In ru, this message translates to:
+  /// **'Наличие диабета влияет на количество потребления нутриентов.'**
+  String get info_diabets;
+
+  /// No description provided for @info_hypertension.
+  ///
+  /// In ru, this message translates to:
+  /// **'Наличие гипертензии (высокое кровяное давление) влияет на количество потребления нутриентов.'**
+  String get info_hypertension;
 
   /// No description provided for @g.
   ///

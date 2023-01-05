@@ -5,6 +5,7 @@ import 'dart:developer';
 
 
 import 'package:dialysis/feature/diary/diary.dart';
+import 'package:dialysis/feature/registration/model/user_info_m.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// LocalStorage Singleton class
@@ -164,7 +165,7 @@ class AppStorage {
   static const _categories = 'categories';
 
   Future<List<String>> getSelectedCategories() async {
-    return await getStringList(key: _categories);
+    return  getStringList(key: _categories);
   }
 
   Future<void> setSelectedCategories(List<String> value) {
@@ -193,6 +194,18 @@ class AppStorage {
     return setStringList(key: _day_product, value: listString);
   }
 
+// ******************************
+  static const _user_info = '_user_info';
+
+  Future<UserInfoModel> getUserInfoModel() async {
+    return UserInfoModel.fromMap(await getJson(key: _user_info));
+  }
+
+  Future<void> setUserInfoModel(UserInfoModel value) {
+    return setJson(key: _user_info, value: value.toMap());
+  }
+
+// ******************************
 // ******************************
   /// SaveString.
   Future<void> setString({required String key, required String value}) async {

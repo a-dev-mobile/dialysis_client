@@ -2,6 +2,7 @@ import 'package:dialysis/app/style/style.dart';
 
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
+import 'package:dialysis/feature/registration/view/widget/diabetes_choose_w.dart';
 
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,8 @@ class _RegistrationPage extends StatelessWidget {
                         const GenderChoose(),
                         // const SizedBox(height: 20),
                         const ActivityChoose(),
-
+                        const HypertensionChoose(),
+                        const DiabetesChoose(),
                         const BirthdayChoose(),
 
                         const HeightChoose(),
@@ -77,8 +79,7 @@ class _RegistrationPage extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              cubit.checkAllValid();
-                              if (state.isValid) {
+                              if (cubit.isValid()) {
                                 cubit.nextPage();
                               }
                             },

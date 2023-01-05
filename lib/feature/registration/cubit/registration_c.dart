@@ -7,16 +7,18 @@ import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/core/utils/launch_links.dart';
 import 'package:dialysis/data_base/data_base.dart';
-import 'package:dialysis/feature/diary/diary.dart';
+
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-
 const _MIN_AGE = 13;
 const _MAX_AGE = 100;
+
+const _MIN_HEIGHT = 50;
+const _MAX_HEIGHT = 220;
 
 class RegistrationCubit extends HydratedCubit<RegistrationState> {
   RegistrationCubit({
@@ -36,197 +38,21 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
             validNameFormz: ValidNameFormz.pure(),
             validGenderFormz: ValidGenderFormz.pure(),
             validActivityFormz: ValidActivityFormz.pure(),
-            genderSelected: [false, false],
-            activitySelected: [false, false],
+            genderSelected: [],
+            activitySelected: [],
+            diabetesSelected: [],
+            hypertensionSelected: [],
             dateRegModel: DateRegModel(),
             isLoadNextPage: false,
             validBirthdayFormz: ValidBirthdayFormz.pure(),
             validHeightFormz: ValidHeightFormz.pure(),
-            heightList: [
-              '230',
-              '229',
-              '228',
-              '227',
-              '226',
-              '225',
-              '224',
-              '223',
-              '222',
-              '221',
-              '220',
-              '219',
-              '218',
-              '217',
-              '216',
-              '215',
-              '214',
-              '213',
-              '212',
-              '211',
-              '210',
-              '209',
-              '208',
-              '207',
-              '206',
-              '205',
-              '204',
-              '203',
-              '202',
-              '201',
-              '200',
-              '199',
-              '198',
-              '197',
-              '196',
-              '195',
-              '194',
-              '193',
-              '192',
-              '191',
-              '190',
-              '189',
-              '188',
-              '187',
-              '186',
-              '185',
-              '184',
-              '183',
-              '182',
-              '181',
-              '180',
-              '179',
-              '178',
-              '177',
-              '176',
-              '175',
-              '174',
-              '173',
-              '172',
-              '171',
-              '170',
-              '169',
-              '168',
-              '167',
-              '166',
-              '165',
-              '164',
-              '163',
-              '162',
-              '161',
-              '160',
-              '159',
-              '158',
-              '157',
-              '156',
-              '155',
-              '154',
-              '153',
-              '152',
-              '151',
-              '150',
-              '149',
-              '148',
-              '147',
-              '146',
-              '145',
-              '144',
-              '143',
-              '142',
-              '141',
-              '140',
-              '139',
-              '138',
-              '137',
-              '136',
-              '135',
-              '134',
-              '133',
-              '132',
-              '131',
-              '130',
-              '129',
-              '128',
-              '127',
-              '126',
-              '125',
-              '124',
-              '123',
-              '122',
-              '121',
-              '120',
-              '119',
-              '118',
-              '117',
-              '116',
-              '115',
-              '114',
-              '113',
-              '112',
-              '111',
-              '110',
-              '109',
-              '108',
-              '107',
-              '106',
-              '105',
-              '104',
-              '103',
-              '102',
-              '101',
-              '100',
-              '99',
-              '98',
-              '97',
-              '96',
-              '95',
-              '94',
-              '93',
-              '92',
-              '91',
-              '90',
-              '89',
-              '88',
-              '87',
-              '86',
-              '85',
-              '84',
-              '83',
-              '82',
-              '81',
-              '80',
-              '79',
-              '78',
-              '77',
-              '76',
-              '75',
-              '74',
-              '73',
-              '72',
-              '71',
-              '70',
-              '69',
-              '68',
-              '67',
-              '66',
-              '65',
-              '64',
-              '63',
-              '62',
-              '61',
-              '60',
-            ],
+            heightList: [],
             validWeightFormz: ValidWeightFormz.pure(),
-            ckdSelected: [
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ],
+            ckdSelected: [],
             validCkdFormz: ValidCkdFormz.pure(),
             validCreatinineFormz: ValidCreatinineFormz.pure(),
+            validDiabetesFormz: ValidDiabetesFormz.pure(),
+            validHypertensionFormz: ValidHypertensionFormz.pure(),
           ),
         );
   final DaDataClient _clienTips;
@@ -252,13 +78,32 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     final result =
         await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
     unawaited(db.close());
-    final listYear = <String>[];
+
+    emit(
+      state.copyWith(
+        ckdSelected: _getListBoolCkd(indexTrue: null),
+        heightList: _initHeight(),
+        genderSelected:
+            _getListBoolFalseValue(lenght: GenderEnum.values.length),
+        activitySelected:
+            _getListBoolFalseValue(lenght: ActivityEnum.values.length),
+        diabetesSelected:
+            _getListBoolFalseValue(lenght: DiabetesEnum.values.length),
+        hypertensionSelected:
+            _getListBoolFalseValue(lenght: HypertensionEnum.values.length),
+        dateRegModel:
+            DateRegModel(months: _initMonths(result), years: _initYears()),
+      ),
+    );
+    emit(state.copyWith(isLoadPage: false));
+  }
+
+  List<String> _initMonths(List<Map<String, Object?>> result) {
     final listMonth = <String>[];
     var row = <String, dynamic>{};
     String? ruMonth;
     String? enMonth;
     for (var i = 0; i < result.length; i++) {
-      // listDate.add(DateDbModel.fromJson(result[i]));
       row = result[i];
 
       ruMonth = row[ColumnDateMonthEnum.ru_month.name];
@@ -271,19 +116,25 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         );
       }
     }
-// calculate year
+    return listMonth;
+  }
+
+  List<String> _initYears() {
+    final listYear = <String>[];
     final yearStart = DateTime.now().year - _MAX_AGE;
     final yearEnd = DateTime.now().year - _MIN_AGE;
     for (var i = yearEnd; i > yearStart; i--) {
       listYear.add(i.toString());
     }
+    return listYear;
+  }
 
-    emit(
-      state.copyWith(
-        isLoadPage: false,
-        dateRegModel: DateRegModel(months: listMonth, years: listYear),
-      ),
-    );
+  List<String> _initHeight() {
+    final list = <String>[];
+    for (var i = _MAX_HEIGHT; i > _MIN_HEIGHT; i--) {
+      list.add(i.toString());
+    }
+    return list;
   }
 
   Future<List<String>> getSuggestionsName(String value) async {
@@ -333,19 +184,38 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
   Future<void> nextPage() async {
     emit(state.copyWith(isLoadNextPage: true));
+    final userInfo = UserInfoModel(
+      name: state.validNameFormz.value,
+      gender: state.validGenderFormz.value,
+      activity: state.validActivityFormz.value,
+      birthday: DateTime.parse(state.validBirthdayFormz.value),
+      height: int.tryParse(state.validHeightFormz.value ?? '0') ?? 0,
+      weight: state.validWeightFormz.value ?? 0,
+      ckd: state.validCkdFormz.value,
+      created: DateTime.now(),
+      creatinin: state.validCreatinineFormz.value ?? 0,
+      updated: DateTime.now(),
+    );
+    await _storage.setUserInfoModel(userInfo);
+    // await Future<void>.delayed(const Duration(seconds: 5));
 
-    await Future<void>.delayed(const Duration(seconds: 5));
-
-    _go.router.pushNamed(DiaryPage.name);
+    // _go.router.pushNamed(DiaryPage.name);
     emit(state.copyWith(isLoadNextPage: false));
   }
 
-  void checkAllValid() {
+  bool isValid() {
     final validNameFormz = ValidNameFormz.dirty(state.validNameFormz.value);
     final validWeightFormz =
         ValidWeightFormz.dirty(value: state.validWeightFormz.value);
     final validGenderFormz =
         ValidGenderFormz.dirty(state.validGenderFormz.value);
+
+    final validHypertensionFormz =
+        ValidHypertensionFormz.dirty(state.validHypertensionFormz.value);
+
+    final validDiabetesFormz =
+        ValidDiabetesFormz.dirty(state.validDiabetesFormz.value);
+
     final validActivityFormz =
         ValidActivityFormz.dirty(state.validActivityFormz.value);
 
@@ -353,14 +223,17 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     final validHeightFormz =
         ValidHeightFormz.dirty(state.validHeightFormz.value);
     final validCkdFormz = ValidCkdFormz.dirty(state.validCkdFormz.value);
-
-    final validCreatinineFormz =
-        ValidCreatinineFormz.dirty(value: state.validCreatinineFormz.value);
+// todo исправить узнать как считать
+    final validCreatinineFormz = ValidCreatinineFormz.dirty(
+      value: state.validCreatinineFormz.value ?? 0,
+    );
     emit(
       state.copyWith(
         validActivityFormz: validActivityFormz,
         validNameFormz: validNameFormz,
         validGenderFormz: validGenderFormz,
+        validDiabetesFormz: validDiabetesFormz,
+        validHypertensionFormz: validHypertensionFormz,
         validBirthdayFormz: validBirthdayFormz,
         validHeightFormz: validHeightFormz,
         validWeightFormz: validWeightFormz,
@@ -368,6 +241,8 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         validCreatinineFormz: validCreatinineFormz,
         isValid: Formz.validate(
           [
+            validHypertensionFormz,
+            validDiabetesFormz,
             validGenderFormz,
             validNameFormz,
             validActivityFormz,
@@ -380,6 +255,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         ),
       ),
     );
+    return state.isValid;
   }
 
   String _getDateRaw() {
@@ -422,35 +298,82 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     );
   }
 
+  void checkHypertension(int index) {
+    final value = HypertensionEnum.values[index];
+
+    final valid = ValidHypertensionFormz.dirty(value);
+
+    var listBool = <bool>[];
+    value.map(
+      yes: () => listBool = [true, false],
+      no: () => listBool = [false, true],
+      none: () => listBool = [false, false],
+    );
+
+    emit(
+      state.copyWith(
+        hypertensionSelected: listBool,
+        validHypertensionFormz: valid,
+      ),
+    );
+  }
+
+  void checkDiabetes(int index) {
+    final value = DiabetesEnum.values[index];
+
+    final valid = ValidDiabetesFormz.dirty(value);
+
+    var listBool = <bool>[];
+    value.map(
+      yes: () => listBool = [true, false],
+      no: () => listBool = [false, true],
+      none: () => listBool = [false, false],
+    );
+
+    emit(
+      state.copyWith(
+        diabetesSelected: listBool,
+        validDiabetesFormz: valid,
+      ),
+    );
+  }
+
   void checkCkd(int value) {
     final ckdEnum = CkdEnum.values[value];
 
     final validCkdFormz = ValidCkdFormz.dirty(ckdEnum);
 
     var ckdSelected = <bool>[];
-    ckdEnum.map(
-      one: () => ckdSelected = [true, false, false, false, false, false, false],
-      two: () => ckdSelected = [false, true, false, false, false, false, false],
-      three: () =>
-          ckdSelected = [false, false, true, false, false, false, false],
-      four: () =>
-          ckdSelected = [false, false, false, true, false, false, false],
-      five_before_dialysis: () =>
-          ckdSelected = [false, false, false, false, true, false, false],
-      five_after_dialysis: () =>
-          ckdSelected = [false, false, false, false, false, true, false],
-      not_know: () =>
-          ckdSelected = [false, false, false, false, false, false, true],
-      none: () =>
-          ckdSelected = [false, false, false, false, false, false, false],
-    );
 
+    ckdSelected = _getListBoolCkd(indexTrue: ckdEnum.index);
     emit(
       state.copyWith(
         ckdSelected: ckdSelected,
         validCkdFormz: validCkdFormz,
       ),
     );
+  }
+
+  List<bool> _getListBoolCkd({required int? indexTrue}) {
+    final list = <bool>[];
+
+    for (var i = 0; i < CkdEnum.values.length - 1; i++) {
+      if (i == indexTrue) {
+        list.add(true);
+      } else {
+        list.add(false);
+      }
+    }
+    return list;
+  }
+
+  List<bool> _getListBoolFalseValue({required int lenght}) {
+    final list = <bool>[];
+
+    for (var i = 0; i < lenght - 1; i++) {
+      list.add(false);
+    }
+    return list;
   }
 
   void checkActivity(int value) {
@@ -598,6 +521,28 @@ ValidGenderFormz _getValueGender(Map<String, dynamic> map) {
   return validGenderFormz;
 }
 
+ValidDiabetesFormz _getValueDiabetes(Map<String, dynamic> map) {
+  final value = DiabetesEnum.fromValue(map['validDiabetesFormz']);
+  ValidDiabetesFormz valid;
+  if (value == DiabetesEnum.none) {
+    valid = const ValidDiabetesFormz.pure();
+  } else {
+    valid = ValidDiabetesFormz.dirty(value);
+  }
+  return valid;
+}
+
+ValidHypertensionFormz _getValueHypertension(Map<String, dynamic> map) {
+  final value = HypertensionEnum.fromValue(map['validHypertensionFormz']);
+  ValidHypertensionFormz valid;
+  if (value == HypertensionEnum.none) {
+    valid = const ValidHypertensionFormz.pure();
+  } else {
+    valid = ValidHypertensionFormz.dirty(value);
+  }
+  return valid;
+}
+
 ValidCkdFormz _getValueCkd(Map<String, dynamic> map) {
   final value = CkdEnum.fromValue(map['validCkdFormz']);
   ValidCkdFormz valid;
@@ -682,15 +627,17 @@ class RegistrationState {
   final bool isLoadPage;
   final bool isLoadNextPage;
   final bool isValid;
-
+  //
+  final List<bool> activitySelected;
+  final List<bool> genderSelected;
   final String? daySelected;
   final String? yearSelected;
   final String? monthSelected;
-
   final List<String> heightList;
-  final List<bool> genderSelected;
-  final List<bool> activitySelected;
   final List<bool> ckdSelected;
+  final List<bool> hypertensionSelected;
+  final List<bool> diabetesSelected;
+
   final DateRegModel dateRegModel;
   //
   final ValidNameFormz validNameFormz;
@@ -701,6 +648,8 @@ class RegistrationState {
   final ValidWeightFormz validWeightFormz;
   final ValidCkdFormz validCkdFormz;
   final ValidCreatinineFormz validCreatinineFormz;
+  final ValidHypertensionFormz validHypertensionFormz;
+  final ValidDiabetesFormz validDiabetesFormz;
 
   // enum
   final FormzSubmissionStatus status;
@@ -708,13 +657,15 @@ class RegistrationState {
     required this.isLoadPage,
     required this.isLoadNextPage,
     required this.isValid,
+    required this.activitySelected,
+    required this.genderSelected,
     this.daySelected,
     this.yearSelected,
     this.monthSelected,
     required this.heightList,
-    required this.genderSelected,
-    required this.activitySelected,
     required this.ckdSelected,
+    required this.hypertensionSelected,
+    required this.diabetesSelected,
     required this.dateRegModel,
     required this.validNameFormz,
     required this.validActivityFormz,
@@ -724,6 +675,8 @@ class RegistrationState {
     required this.validWeightFormz,
     required this.validCkdFormz,
     required this.validCreatinineFormz,
+    required this.validHypertensionFormz,
+    required this.validDiabetesFormz,
     required this.status,
   });
 
@@ -731,13 +684,15 @@ class RegistrationState {
     bool? isLoadPage,
     bool? isLoadNextPage,
     bool? isValid,
+    List<bool>? activitySelected,
+    List<bool>? genderSelected,
     String? daySelected,
     String? yearSelected,
     String? monthSelected,
     List<String>? heightList,
-    List<bool>? genderSelected,
-    List<bool>? activitySelected,
     List<bool>? ckdSelected,
+    List<bool>? hypertensionSelected,
+    List<bool>? diabetesSelected,
     DateRegModel? dateRegModel,
     ValidNameFormz? validNameFormz,
     ValidActivityFormz? validActivityFormz,
@@ -747,19 +702,23 @@ class RegistrationState {
     ValidWeightFormz? validWeightFormz,
     ValidCkdFormz? validCkdFormz,
     ValidCreatinineFormz? validCreatinineFormz,
+    ValidHypertensionFormz? validHypertensionFormz,
+    ValidDiabetesFormz? validDiabetesFormz,
     FormzSubmissionStatus? status,
   }) {
     return RegistrationState(
       isLoadPage: isLoadPage ?? this.isLoadPage,
       isLoadNextPage: isLoadNextPage ?? this.isLoadNextPage,
       isValid: isValid ?? this.isValid,
+      activitySelected: activitySelected ?? this.activitySelected,
+      genderSelected: genderSelected ?? this.genderSelected,
       daySelected: daySelected ?? this.daySelected,
       yearSelected: yearSelected ?? this.yearSelected,
       monthSelected: monthSelected ?? this.monthSelected,
       heightList: heightList ?? this.heightList,
-      genderSelected: genderSelected ?? this.genderSelected,
-      activitySelected: activitySelected ?? this.activitySelected,
       ckdSelected: ckdSelected ?? this.ckdSelected,
+      hypertensionSelected: hypertensionSelected ?? this.hypertensionSelected,
+      diabetesSelected: diabetesSelected ?? this.diabetesSelected,
       dateRegModel: dateRegModel ?? this.dateRegModel,
       validNameFormz: validNameFormz ?? this.validNameFormz,
       validActivityFormz: validActivityFormz ?? this.validActivityFormz,
@@ -769,6 +728,9 @@ class RegistrationState {
       validWeightFormz: validWeightFormz ?? this.validWeightFormz,
       validCkdFormz: validCkdFormz ?? this.validCkdFormz,
       validCreatinineFormz: validCreatinineFormz ?? this.validCreatinineFormz,
+      validHypertensionFormz:
+          validHypertensionFormz ?? this.validHypertensionFormz,
+      validDiabetesFormz: validDiabetesFormz ?? this.validDiabetesFormz,
       status: status ?? this.status,
     );
   }
@@ -780,7 +742,7 @@ class RegistrationState {
 
   @override
   String toString() {
-    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, genderSelected: $genderSelected, activitySelected: $activitySelected, ckdSelected: $ckdSelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, validCkdFormz: $validCkdFormz, validCreatinineFormz: $validCreatinineFormz, status: $status)';
+    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, activitySelected: $activitySelected, genderSelected: $genderSelected, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, ckdSelected: $ckdSelected, hypertensionSelected: $hypertensionSelected, diabetesSelected: $diabetesSelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, validCkdFormz: $validCkdFormz, validCreatinineFormz: $validCreatinineFormz, validHypertensionFormz: $validHypertensionFormz, validDiabetesFormz: $validDiabetesFormz, status: $status)';
   }
 
   @override
@@ -790,13 +752,15 @@ class RegistrationState {
     return other.isLoadPage == isLoadPage &&
         other.isLoadNextPage == isLoadNextPage &&
         other.isValid == isValid &&
+        listEquals(other.activitySelected, activitySelected) &&
+        listEquals(other.genderSelected, genderSelected) &&
         other.daySelected == daySelected &&
         other.yearSelected == yearSelected &&
         other.monthSelected == monthSelected &&
         listEquals(other.heightList, heightList) &&
-        listEquals(other.genderSelected, genderSelected) &&
-        listEquals(other.activitySelected, activitySelected) &&
         listEquals(other.ckdSelected, ckdSelected) &&
+        listEquals(other.hypertensionSelected, hypertensionSelected) &&
+        listEquals(other.diabetesSelected, diabetesSelected) &&
         other.dateRegModel == dateRegModel &&
         other.validNameFormz == validNameFormz &&
         other.validActivityFormz == validActivityFormz &&
@@ -806,6 +770,8 @@ class RegistrationState {
         other.validWeightFormz == validWeightFormz &&
         other.validCkdFormz == validCkdFormz &&
         other.validCreatinineFormz == validCreatinineFormz &&
+        other.validHypertensionFormz == validHypertensionFormz &&
+        other.validDiabetesFormz == validDiabetesFormz &&
         other.status == status;
   }
 
@@ -814,13 +780,15 @@ class RegistrationState {
     return isLoadPage.hashCode ^
         isLoadNextPage.hashCode ^
         isValid.hashCode ^
+        activitySelected.hashCode ^
+        genderSelected.hashCode ^
         daySelected.hashCode ^
         yearSelected.hashCode ^
         monthSelected.hashCode ^
         heightList.hashCode ^
-        genderSelected.hashCode ^
-        activitySelected.hashCode ^
         ckdSelected.hashCode ^
+        hypertensionSelected.hashCode ^
+        diabetesSelected.hashCode ^
         dateRegModel.hashCode ^
         validNameFormz.hashCode ^
         validActivityFormz.hashCode ^
@@ -830,6 +798,8 @@ class RegistrationState {
         validWeightFormz.hashCode ^
         validCkdFormz.hashCode ^
         validCreatinineFormz.hashCode ^
+        validHypertensionFormz.hashCode ^
+        validDiabetesFormz.hashCode ^
         status.hashCode;
   }
 
@@ -838,13 +808,15 @@ class RegistrationState {
       'isLoadPage': isLoadPage,
       'isLoadNextPage': isLoadNextPage,
       'isValid': isValid,
+      'activitySelected': activitySelected,
+      'genderSelected': genderSelected,
       'daySelected': daySelected,
       'yearSelected': yearSelected,
       'monthSelected': monthSelected,
       'heightList': heightList,
-      'genderSelected': genderSelected,
-      'activitySelected': activitySelected,
       'ckdSelected': ckdSelected,
+      'hypertensionSelected': hypertensionSelected,
+      'diabetesSelected': diabetesSelected,
       'dateRegModel': dateRegModel.toMap(),
       'validNameFormz': validNameFormz.value,
       'validActivityFormz': validActivityFormz.value.name,
@@ -854,6 +826,8 @@ class RegistrationState {
       'validWeightFormz': validWeightFormz.value,
       'validCkdFormz': validCkdFormz.value.name,
       'validCreatinineFormz': validCreatinineFormz.value,
+      'validHypertensionFormz': validHypertensionFormz.value.name,
+      'validDiabetesFormz': validDiabetesFormz.value.name,
       'status': status.index,
     };
   }
@@ -863,6 +837,10 @@ class RegistrationState {
       isLoadPage: (map['isLoadPage'] ?? false) as bool,
       isLoadNextPage: (map['isLoadNextPage'] ?? false) as bool,
       isValid: (map['isValid'] ?? false) as bool,
+      activitySelected: List<bool>.from(
+          (map['activitySelected'] ?? const <bool>[]) as List<bool>),
+      genderSelected: List<bool>.from(
+          (map['genderSelected'] ?? const <bool>[]) as List<bool>),
       daySelected:
           map['daySelected'] != null ? map['daySelected'] as String : null,
       yearSelected:
@@ -870,16 +848,13 @@ class RegistrationState {
       monthSelected:
           map['monthSelected'] != null ? map['monthSelected'] as String : null,
       heightList: List<String>.from(
-        (map['heightList'] ?? const <String>[]) as List<String>,
-      ),
-      genderSelected: List<bool>.from(
-        (map['genderSelected'] ?? const <bool>[]) as List<bool>,
-      ),
-      activitySelected: List<bool>.from(
-        (map['activitySelected'] ?? const <bool>[]) as List<bool>,
-      ),
+          (map['heightList'] ?? const <String>[]) as List<String>),
       ckdSelected:
           List<bool>.from((map['ckdSelected'] ?? const <bool>[]) as List<bool>),
+      hypertensionSelected: List<bool>.from(
+          (map['hypertensionSelected'] ?? const <bool>[]) as List<bool>),
+      diabetesSelected: List<bool>.from(
+          (map['diabetesSelected'] ?? const <bool>[]) as List<bool>),
       dateRegModel:
           DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>),
       // custom
@@ -900,14 +875,14 @@ class RegistrationState {
       validCkdFormz: _getValueCkd(map),
       // custom
       validCreatinineFormz: _getValueCreatinine(map),
+      // custom
+      validHypertensionFormz: _getValueHypertension(map),
+      // custom
+      validDiabetesFormz: _getValueDiabetes(map),
       status: FormzSubmissionStatus.values[(map['status'] ?? 0) as int],
     );
   }
 }
-
-
-
-
 
 /* 
 
