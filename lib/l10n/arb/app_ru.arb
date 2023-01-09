@@ -52,7 +52,19 @@
   "light": "ЛЕГКАЯ",
   "info_diabets": "Наличие диабета влияет на количество потребления нутриентов.",
   "info_hypertension": "Наличие гипертензии (высокое кровяное давление) влияет на количество потребления нутриентов.",
-
+  "month_january":"Январь",
+  "month_february":"Февраль",
+  "month_march":"Март",
+  "month_april":"Апрель",
+  "month_may":"Май",
+  "month_june":"Июнь",
+  "month_july":"Июль",
+  "month_august":"Август",
+  "month_september":"Сентябрь",
+  "month_october":"Октябрь",
+  "month_november":"Ноябрь",
+  "month_december":"Декабрь",
+  
 
   "g": "г"
 }

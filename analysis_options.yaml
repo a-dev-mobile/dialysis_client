@@ -39,6 +39,9 @@ analyzer:
     # Assets
     - "assets/**"
 
+
+
+
 dart_code_metrics:
 
   rules:
@@ -59,10 +62,6 @@ dart_code_metrics:
     - prefer-extracting-callbacks
 
     - prefer-using-list-view
-
-
-
-
 
 
 # DART

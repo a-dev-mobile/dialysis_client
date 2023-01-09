@@ -20,10 +20,10 @@ class HeightChoose extends StatelessWidget {
             p.validHeightFormz.value != c.validHeightFormz.value,
         builder: (context, state) {
           final valid = state.validHeightFormz;
-    
+
           return Column(
             children: [
-                   const TitleSub(text: 'Укажите свой рост'),
+              const TitleSub(text: 'Укажите свой рост'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -9,48 +9,14 @@ import 'package:flutter/foundation.dart';
 @immutable
 class DateRegModel {
 
-
-  final List<String> months;
+  final  List<String> months;
   final List<String> days;
   final List<String> years;
   const DateRegModel({
-    this.months = const [],
-    this.days = const [
-      '01',
-      '02',
-      '03',
-      '04',
-      '05',
-      '06',
-      '07',
-      '08',
-      '09',
-      '10',
-      '11',
-      '12',
-      '13',
-      '14',
-      '15',
-      '16',
-      '17',
-      '18',
-      '19',
-      '20',
-      '21',
-      '22',
-      '23',
-      '24',
-      '25',
-      '26',
-      '27',
-      '28',
-      '29',
-      '30',
-      '31'
-    ],
-    this.years = const [],
+    required this.months,
+    required this.days,
+    required this.years,
   });
-
   DateRegModel copyWith({
     List<String>? months,
     List<String>? days,
@@ -85,7 +51,8 @@ class DateRegModel {
       DateRegModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'DateRegModel(months: $months, days: $days, years: $years)';
+  String toString() =>
+      'DateRegModel(months: $months, days: $days, years: $years)';
 
   @override
   bool operator ==(covariant DateRegModel other) {

@@ -161,5 +161,41 @@ class AppLocalizationsRu extends AppLocalizations {
   String get info_hypertension => 'Наличие гипертензии (высокое кровяное давление) влияет на количество потребления нутриентов.';
 
   @override
+  String get month_january => 'Январь';
+
+  @override
+  String get month_february => 'Февраль';
+
+  @override
+  String get month_march => 'Март';
+
+  @override
+  String get month_april => 'Апрель';
+
+  @override
+  String get month_may => 'Май';
+
+  @override
+  String get month_june => 'Июнь';
+
+  @override
+  String get month_july => 'Июль';
+
+  @override
+  String get month_august => 'Август';
+
+  @override
+  String get month_september => 'Сентябрь';
+
+  @override
+  String get month_october => 'Октябрь';
+
+  @override
+  String get month_november => 'Ноябрь';
+
+  @override
+  String get month_december => 'Декабрь';
+
+  @override
   String get g => 'г';
 }

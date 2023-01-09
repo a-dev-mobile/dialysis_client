@@ -405,6 +405,78 @@ abstract class AppLocalizations {
   /// **'Наличие гипертензии (высокое кровяное давление) влияет на количество потребления нутриентов.'**
   String get info_hypertension;
 
+  /// No description provided for @month_january.
+  ///
+  /// In ru, this message translates to:
+  /// **'Январь'**
+  String get month_january;
+
+  /// No description provided for @month_february.
+  ///
+  /// In ru, this message translates to:
+  /// **'Февраль'**
+  String get month_february;
+
+  /// No description provided for @month_march.
+  ///
+  /// In ru, this message translates to:
+  /// **'Март'**
+  String get month_march;
+
+  /// No description provided for @month_april.
+  ///
+  /// In ru, this message translates to:
+  /// **'Апрель'**
+  String get month_april;
+
+  /// No description provided for @month_may.
+  ///
+  /// In ru, this message translates to:
+  /// **'Май'**
+  String get month_may;
+
+  /// No description provided for @month_june.
+  ///
+  /// In ru, this message translates to:
+  /// **'Июнь'**
+  String get month_june;
+
+  /// No description provided for @month_july.
+  ///
+  /// In ru, this message translates to:
+  /// **'Июль'**
+  String get month_july;
+
+  /// No description provided for @month_august.
+  ///
+  /// In ru, this message translates to:
+  /// **'Август'**
+  String get month_august;
+
+  /// No description provided for @month_september.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сентябрь'**
+  String get month_september;
+
+  /// No description provided for @month_october.
+  ///
+  /// In ru, this message translates to:
+  /// **'Октябрь'**
+  String get month_october;
+
+  /// No description provided for @month_november.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ноябрь'**
+  String get month_november;
+
+  /// No description provided for @month_december.
+  ///
+  /// In ru, this message translates to:
+  /// **'Декабрь'**
+  String get month_december;
+
   /// No description provided for @g.
   ///
   /// In ru, this message translates to:

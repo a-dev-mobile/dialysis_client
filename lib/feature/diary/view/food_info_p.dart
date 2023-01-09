@@ -76,7 +76,7 @@ class TitleDate extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(Icons.keyboard_arrow_right),
-              onPressed: cubit.decrement,
+              onPressed: cubit.increment,
             ),
           ],
         );

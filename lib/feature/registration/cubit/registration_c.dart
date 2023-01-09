@@ -6,10 +6,12 @@ import 'package:dadata/dadata.dart';
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/core/utils/launch_links.dart';
-import 'package:dialysis/data_base/data_base.dart';
+import 'package:dialysis/feature/diary/diary.dart';
 
 import 'package:dialysis/feature/registration/registration.dart';
+
 import 'package:dialysis/navigation/navigation.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -25,101 +27,70 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     required AppRouter router,
     required DaDataClient clienTips,
     required AppStorage storage,
-    required AppDb db,
   })  : _go = router,
         _clienTips = clienTips,
-        _db = db,
         _storage = storage,
         super(
-          const RegistrationState(
-            isLoadPage: true,
-            isValid: false,
-            status: FormzSubmissionStatus.initial,
-            validNameFormz: ValidNameFormz.pure(),
-            validGenderFormz: ValidGenderFormz.pure(),
-            validActivityFormz: ValidActivityFormz.pure(),
-            genderSelected: [],
-            activitySelected: [],
-            diabetesSelected: [],
-            hypertensionSelected: [],
-            dateRegModel: DateRegModel(),
+          RegistrationState(
+            isLoadPage: false,
             isLoadNextPage: false,
-            validBirthdayFormz: ValidBirthdayFormz.pure(),
-            validHeightFormz: ValidHeightFormz.pure(),
-            heightList: [],
-            validWeightFormz: ValidWeightFormz.pure(),
-            ckdSelected: [],
-            validCkdFormz: ValidCkdFormz.pure(),
-            validCreatinineFormz: ValidCreatinineFormz.pure(),
-            validDiabetesFormz: ValidDiabetesFormz.pure(),
-            validHypertensionFormz: ValidHypertensionFormz.pure(),
+            isValid: false,
+            genderSelected:
+                _getListBoolFalseValue(lenght: GenderEnum.values.length),
+            activitySelected:
+                _getListBoolFalseValue(lenght: ActivityEnum.values.length),
+            diabetesSelected:
+                _getListBoolFalseValue(lenght: DiabetesEnum.values.length),
+            hypertensionSelected:
+                _getListBoolFalseValue(lenght: HypertensionEnum.values.length),
+            dateRegModel: DateRegModel(
+              months: _initDayMonth(start: 1, end: 12),
+              years: _initYears(),
+              days: _initDayMonth(start: 1, end: 31),
+            ),
+            status: FormzSubmissionStatus.initial,
+            validNameFormz: const ValidNameFormz.pure(),
+            validGenderFormz: const ValidGenderFormz.pure(),
+            validActivityFormz: const ValidActivityFormz.pure(),
+            heightList: _initHeight(),
+            ckdSelected: _getListBoolCkd(indexTrue: null),
+            validBirthdayFormz: const ValidBirthdayFormz.pure(),
+            validHeightFormz: const ValidHeightFormz.pure(),
+            validWeightFormz: const ValidWeightFormz.pure(),
+            validCkdFormz: const ValidCkdFormz.pure(),
+            validCreatinineFormz: const ValidCreatinineFormz.pure(),
+            validDiabetesFormz: const ValidDiabetesFormz.pure(),
+            validHypertensionFormz: const ValidHypertensionFormz.pure(),
           ),
         );
   final DaDataClient _clienTips;
 
-  // ignore: unused_field
-  final AppRouter _go;
-  // ignore: unused_field
-  final AppStorage _storage;
-  final AppDb _db;
 
-  LocaleEnum _locale = LocaleEnum.en;
+  final AppRouter _go;
+
+  final AppStorage _storage;
+
+   LocaleEnum _locale = LocaleEnum.en;
   Future<void> load() async {
     emit(state.copyWith(isLoadPage: true));
 
-    _locale = LocaleEnum.fromValue(
-      await _storage.getLocale(),
-      fallback: LocaleEnum.en,
-    );
+  _locale = LocaleEnum.fromValue(
+    await _storage.getLocale(),
+    fallback: LocaleEnum.en,
+  );
 
-    await _db.load();
+  // await _db.load();
 
-    final db = await _db.openDB();
-    final result =
-        await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
-    unawaited(db.close());
+  // final db = await _db.openDB();
+  // final result =
+  //     await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
+  // unawaited(db.close());
 
-    emit(
-      state.copyWith(
-        ckdSelected: _getListBoolCkd(indexTrue: null),
-        heightList: _initHeight(),
-        genderSelected:
-            _getListBoolFalseValue(lenght: GenderEnum.values.length),
-        activitySelected:
-            _getListBoolFalseValue(lenght: ActivityEnum.values.length),
-        diabetesSelected:
-            _getListBoolFalseValue(lenght: DiabetesEnum.values.length),
-        hypertensionSelected:
-            _getListBoolFalseValue(lenght: HypertensionEnum.values.length),
-        dateRegModel:
-            DateRegModel(months: _initMonths(result), years: _initYears()),
-      ),
-    );
+
     emit(state.copyWith(isLoadPage: false));
   }
 
-  List<String> _initMonths(List<Map<String, Object?>> result) {
-    final listMonth = <String>[];
-    var row = <String, dynamic>{};
-    String? ruMonth;
-    String? enMonth;
-    for (var i = 0; i < result.length; i++) {
-      row = result[i];
-
-      ruMonth = row[ColumnDateMonthEnum.ru_month.name];
-      enMonth = row[ColumnDateMonthEnum.en_month.name];
-
-      if (ruMonth != null && enMonth != null) {
-        _locale.map(
-          ru: () => listMonth.add(ruMonth!),
-          en: () => listMonth.add(enMonth!),
-        );
-      }
-    }
-    return listMonth;
-  }
-
-  List<String> _initYears() {
+  static List<String> _initYears() {
     final listYear = <String>[];
     final yearStart = DateTime.now().year - _MAX_AGE;
     final yearEnd = DateTime.now().year - _MIN_AGE;
@@ -129,7 +100,20 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     return listYear;
   }
 
-  List<String> _initHeight() {
+  static List<String> _initDayMonth({required int start, required int end}) {
+    final list = <String>[];
+    for (var i = start; i <= end; i++) {
+      if (i < 10) {
+        list.add('0$i');
+        continue;
+      }
+
+      list.add(i.toString());
+    }
+    return list;
+  }
+
+  static List<String> _initHeight() {
     final list = <String>[];
     for (var i = _MAX_HEIGHT; i > _MIN_HEIGHT; i--) {
       list.add(i.toString());
@@ -197,9 +181,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       updated: DateTime.now(),
     );
     await _storage.setUserInfoModel(userInfo);
-    // await Future<void>.delayed(const Duration(seconds: 5));
+    await Future<void>.delayed(const Duration(seconds: 5));
 
-    // _go.router.pushNamed(DiaryPage.name);
+    _go.router.pushNamed(DiaryPage.name);
     emit(state.copyWith(isLoadNextPage: false));
   }
 
@@ -260,15 +244,10 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
   String _getDateRaw() {
     final day = state.daySelected;
-    final monthName = state.monthSelected;
+    final monthNumber = state.monthSelected;
     final year = state.yearSelected;
 
-    if (day != null && monthName != null && year != null) {
-      var monthNumber =
-          (state.dateRegModel.months.indexOf(monthName) + 1).toString();
-      if (monthNumber.length == 1) {
-        monthNumber = '0$monthNumber';
-      }
+    if (day != null && monthNumber != null && year != null) {
       return '$year-$monthNumber-$day';
     }
 
@@ -354,7 +333,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     );
   }
 
-  List<bool> _getListBoolCkd({required int? indexTrue}) {
+  static List<bool> _getListBoolCkd({required int? indexTrue}) {
     final list = <bool>[];
 
     for (var i = 0; i < CkdEnum.values.length - 1; i++) {
@@ -367,7 +346,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     return list;
   }
 
-  List<bool> _getListBoolFalseValue({required int lenght}) {
+  static List<bool> _getListBoolFalseValue({required int lenght}) {
     final list = <bool>[];
 
     for (var i = 0; i < lenght - 1; i++) {
@@ -510,7 +489,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 }
 
-ValidGenderFormz _getValueGender(Map<String, dynamic> map) {
+ValidGenderFormz _getGender(Map<String, dynamic> map) {
   final valueGender = GenderEnum.fromValue(map['validGenderFormz']);
   ValidGenderFormz validGenderFormz;
   if (valueGender == GenderEnum.none) {
@@ -860,7 +839,7 @@ class RegistrationState {
       // custom
       validNameFormz: _getValueName(map),
       // custom
-      validGenderFormz: _getValueGender(map),
+      validGenderFormz: _getGender(map),
       // custom
       validActivityFormz: _getValueActivity(map),
       // custom

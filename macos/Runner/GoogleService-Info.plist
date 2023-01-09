@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>233829405021-6goplg67oca1blqissef5kt1lmpj9g95.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.233829405021-6goplg67oca1blqissef5kt1lmpj9g95</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD1xuPhMgKTMzA60clTNk-4S4k-Fr6eyow</string>
+	<key>GCM_SENDER_ID</key>
+	<string>233829405021</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>a.dev.mobile.dialysis</string>
+	<key>PROJECT_ID</key>
+	<string>prod--dialysis</string>
+	<key>STORAGE_BUCKET</key>
+	<string>prod--dialysis.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:233829405021:ios:d38e6d698ead0ada7d58b4</string>
+</dict>
+</plist>

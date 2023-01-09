@@ -4,6 +4,7 @@ import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/feature/registration/view/widget/diabetes_choose_w.dart';
 
+
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,7 @@ class RegistrationPage extends StatelessWidget {
             router: context.read<AppRouter>(),
             clienTips: context.read(),
             storage: context.read(),
-            db: context.read(),
+        
           )..load(),
         ),
       ],
