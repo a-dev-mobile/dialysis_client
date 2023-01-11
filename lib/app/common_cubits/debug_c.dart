@@ -2,39 +2,43 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-
+import 'package:flutter/cupertino.dart';
 
 class DebugCubit extends Cubit<DebugState> {
   DebugCubit()
-      : super(DebugState(
-            isShowBtnHttpLog: false,
+      : super(
+          const DebugState(
             isShowDevice: false,
+            isShowBtnHttpLog: false,
+            isShowRepaintRainbow: false,
             isShowPaintSizeEnabled: false,
-            isShowRepaintRainbow: false));
+          ),
+        );
 
-  void setDevicePreview(bool isShow) {
+  void setDevicePreview({required bool isShow}) {
     emit(state.copyWith(isShowDevice: isShow));
   }
 
-  void setShowBtnHttpLog(bool isShow) {
+  void setShowBtnHttpLog({required bool isShow}) {
     emit(state.copyWith(isShowBtnHttpLog: isShow));
   }
 
-  void setShowDebugRepaintRainbow(bool isShow) {
+  void setShowDebugRepaintRainbow({required bool isShow}) {
     emit(state.copyWith(isShowRepaintRainbow: isShow));
   }
 
-  void setShowPaintSizeEnabled(bool isShow) {
+  void setShowPaintSizeEnabled({required bool isShow}) {
     emit(state.copyWith(isShowPaintSizeEnabled: isShow));
   }
 }
 
+@immutable
 class DebugState {
   final bool isShowDevice;
   final bool isShowBtnHttpLog;
   final bool isShowRepaintRainbow;
   final bool isShowPaintSizeEnabled;
-  DebugState({
+  const DebugState({
     required this.isShowDevice,
     required this.isShowBtnHttpLog,
     required this.isShowRepaintRainbow,

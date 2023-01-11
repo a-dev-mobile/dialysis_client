@@ -1,11 +1,9 @@
+  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
   /*
   
-enum Activity { normal, light, none }
+enum ActivityEnum { normal, light, none }
 
   */
-/// {@template activity}
-/// Activity enumeration
-/// {@endtemplate}
 
 enum ActivityEnum with Comparable<ActivityEnum> { 
   normal('normal'),
@@ -16,7 +14,10 @@ enum ActivityEnum with Comparable<ActivityEnum> {
 
   final String value;
 
-  static ActivityEnum fromValue(String? value, {ActivityEnum? fallback}) {
+  static ActivityEnum fromValue(
+    String? value, {
+    ActivityEnum? fallback,
+  }) {
     switch (value) {
       case 'normal':
         return normal;
@@ -84,5 +85,3 @@ enum ActivityEnum with Comparable<ActivityEnum> {
   @override
   String toString() => value;
    }
-
-  

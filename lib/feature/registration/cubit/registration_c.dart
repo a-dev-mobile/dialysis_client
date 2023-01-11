@@ -6,7 +6,8 @@ import 'package:dadata/dadata.dart';
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/core/utils/launch_links.dart';
-import 'package:dialysis/feature/diary/diary.dart';
+import 'package:dialysis/feature/dashboard/dashboard.dart';
+
 
 import 'package:dialysis/feature/registration/registration.dart';
 
@@ -65,27 +66,25 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         );
   final DaDataClient _clienTips;
 
-
   final AppRouter _go;
 
   final AppStorage _storage;
 
-   LocaleEnum _locale = LocaleEnum.en;
+  LocaleEnum _locale = LocaleEnum.en;
   Future<void> load() async {
     emit(state.copyWith(isLoadPage: true));
 
-  _locale = LocaleEnum.fromValue(
-    await _storage.getLocale(),
-    fallback: LocaleEnum.en,
-  );
+    _locale = LocaleEnum.fromValue(
+      await _storage.getLocale(),
+      fallback: LocaleEnum.en,
+    );
 
-  // await _db.load();
+    // await _db.load();
 
-  // final db = await _db.openDB();
-  // final result =
-  //     await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
-  // unawaited(db.close());
-
+    // final db = await _db.openDB();
+    // final result =
+    //     await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
+    // unawaited(db.close());
 
     emit(state.copyWith(isLoadPage: false));
   }
@@ -141,7 +140,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     );
   }
 
-  Future<void> openPolicy() async {
+  void openPolicy() {
     const en =
         'https://docs.google.com/document/d/1HfAqwOAMXT_ntykDdwwFJYO8njz3ZVQCcW51SuYZhD0/edit?usp=sharing';
 
@@ -176,15 +175,15 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       height: int.tryParse(state.validHeightFormz.value ?? '0') ?? 0,
       weight: state.validWeightFormz.value ?? 0,
       ckd: state.validCkdFormz.value,
-      created: DateTime.now(),
       creatinin: state.validCreatinineFormz.value ?? 0,
+      created: DateTime.now(),
       updated: DateTime.now(),
     );
     await _storage.setUserInfoModel(userInfo);
     await Future<void>.delayed(const Duration(seconds: 5));
 
-    _go.router.pushNamed(DiaryPage.name);
-    emit(state.copyWith(isLoadNextPage: false));
+    _go.router.goNamed(DashBoardPage.name);
+    // emit(state.copyWith(isLoadNextPage: false));
   }
 
   bool isValid() {
@@ -259,11 +258,10 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
     final validGenderFormz = ValidGenderFormz.dirty(gender);
 
-    var genderSelected = <bool>[];
-    gender.map(
-      male: () => genderSelected = [false, true],
-      female: () => genderSelected = [true, false],
-      none: () => genderSelected = [false, false],
+    final genderSelected = gender.map(
+      male: () => [false, true],
+      female: () => [true, false],
+      none: () => [false, false],
     );
 
     emit(
@@ -282,11 +280,10 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
     final valid = ValidHypertensionFormz.dirty(value);
 
-    var listBool = <bool>[];
-    value.map(
-      yes: () => listBool = [true, false],
-      no: () => listBool = [false, true],
-      none: () => listBool = [false, false],
+    final listBool = value.map(
+      yes: () => [true, false],
+      no: () => [false, true],
+      none: () => [false, false],
     );
 
     emit(
@@ -302,11 +299,10 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
     final valid = ValidDiabetesFormz.dirty(value);
 
-    var listBool = <bool>[];
-    value.map(
-      yes: () => listBool = [true, false],
-      no: () => listBool = [false, true],
-      none: () => listBool = [false, false],
+    final listBool = value.map(
+      yes: () => [true, false],
+      no: () => [false, true],
+      none: () => [false, false],
     );
 
     emit(
@@ -360,11 +356,10 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
     final validActivityFormz = ValidActivityFormz.dirty(enumValue);
 
-    var activitySelected = <bool>[];
-    enumValue.map(
-      light: () => activitySelected = [false, true],
-      normal: () => activitySelected = [true, false],
-      none: () => activitySelected = [false, false],
+    final activitySelected = enumValue.map(
+      light: () => [false, true],
+      normal: () => [true, false],
+      none: () => [false, false],
     );
 
     emit(
@@ -490,7 +485,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 }
 
 ValidGenderFormz _getGender(Map<String, dynamic> map) {
-  final valueGender = GenderEnum.fromValue(map['validGenderFormz']);
+  final valueGender = GenderEnum.fromValue(map['validGenderFormz'].toString());
   ValidGenderFormz validGenderFormz;
   if (valueGender == GenderEnum.none) {
     validGenderFormz = const ValidGenderFormz.pure();
@@ -501,7 +496,7 @@ ValidGenderFormz _getGender(Map<String, dynamic> map) {
 }
 
 ValidDiabetesFormz _getValueDiabetes(Map<String, dynamic> map) {
-  final value = DiabetesEnum.fromValue(map['validDiabetesFormz']);
+  final value = DiabetesEnum.fromValue(map['validDiabetesFormz'].toString());
   ValidDiabetesFormz valid;
   if (value == DiabetesEnum.none) {
     valid = const ValidDiabetesFormz.pure();
@@ -512,7 +507,8 @@ ValidDiabetesFormz _getValueDiabetes(Map<String, dynamic> map) {
 }
 
 ValidHypertensionFormz _getValueHypertension(Map<String, dynamic> map) {
-  final value = HypertensionEnum.fromValue(map['validHypertensionFormz']);
+  final value =
+      HypertensionEnum.fromValue(map['validHypertensionFormz'].toString());
   ValidHypertensionFormz valid;
   if (value == HypertensionEnum.none) {
     valid = const ValidHypertensionFormz.pure();
@@ -523,7 +519,7 @@ ValidHypertensionFormz _getValueHypertension(Map<String, dynamic> map) {
 }
 
 ValidCkdFormz _getValueCkd(Map<String, dynamic> map) {
-  final value = CkdEnum.fromValue(map['validCkdFormz']);
+  final value = CkdEnum.fromValue(map['validCkdFormz'].toString());
   ValidCkdFormz valid;
   if (value == CkdEnum.none) {
     valid = const ValidCkdFormz.pure();
@@ -580,7 +576,8 @@ ValidBirthdayFormz _getValidBirthday(Map<String, dynamic> map) {
 }
 
 ValidActivityFormz _getValueActivity(Map<String, dynamic> map) {
-  final valueActivity = ActivityEnum.fromValue(map['validActivityFormz']);
+  final valueActivity =
+      ActivityEnum.fromValue(map['validActivityFormz'].toString());
   ValidActivityFormz validActivityFormz;
   if (valueActivity == ActivityEnum.none) {
     validActivityFormz = const ValidActivityFormz.pure();
@@ -816,47 +813,40 @@ class RegistrationState {
       isLoadPage: (map['isLoadPage'] ?? false) as bool,
       isLoadNextPage: (map['isLoadNextPage'] ?? false) as bool,
       isValid: (map['isValid'] ?? false) as bool,
-      activitySelected: List<bool>.from(
-          (map['activitySelected'] ?? const <bool>[]) as List<bool>),
-      genderSelected: List<bool>.from(
-          (map['genderSelected'] ?? const <bool>[]) as List<bool>),
+      activitySelected: List<bool>.of(
+        (map['activitySelected'] ?? const <bool>[]) as List<bool>,
+      ),
+      genderSelected: List<bool>.of(
+        (map['genderSelected'] ?? const <bool>[]) as List<bool>,
+      ),
       daySelected:
           map['daySelected'] != null ? map['daySelected'] as String : null,
       yearSelected:
           map['yearSelected'] != null ? map['yearSelected'] as String : null,
       monthSelected:
           map['monthSelected'] != null ? map['monthSelected'] as String : null,
-      heightList: List<String>.from(
-          (map['heightList'] ?? const <String>[]) as List<String>),
+      heightList: List<String>.of(
+        (map['heightList'] ?? const <String>[]) as List<String>,
+      ),
       ckdSelected:
-          List<bool>.from((map['ckdSelected'] ?? const <bool>[]) as List<bool>),
-      hypertensionSelected: List<bool>.from(
-          (map['hypertensionSelected'] ?? const <bool>[]) as List<bool>),
-      diabetesSelected: List<bool>.from(
-          (map['diabetesSelected'] ?? const <bool>[]) as List<bool>),
+          List<bool>.of((map['ckdSelected'] ?? const <bool>[]) as List<bool>),
+      hypertensionSelected: List<bool>.of(
+        (map['hypertensionSelected'] ?? const <bool>[]) as List<bool>,
+      ),
+      diabetesSelected: List<bool>.of(
+        (map['diabetesSelected'] ?? const <bool>[]) as List<bool>,
+      ),
       dateRegModel:
           DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>),
-      // custom
       validNameFormz: _getValueName(map),
-      // custom
-      validGenderFormz: _getGender(map),
-      // custom
       validActivityFormz: _getValueActivity(map),
-      // custom
+      validGenderFormz: _getGender(map),
       validBirthdayFormz: const ValidBirthdayFormz.pure(),
-      // validBirthdayFormz: validBirthdayFormz,
-      //
-      // custom
-      validWeightFormz: _getValueWeight(map),
-      // custom
       validHeightFormz: _getValueHeight(map),
-      // custom
+      validWeightFormz: _getValueWeight(map),
       validCkdFormz: _getValueCkd(map),
-      // custom
       validCreatinineFormz: _getValueCreatinine(map),
-      // custom
       validHypertensionFormz: _getValueHypertension(map),
-      // custom
       validDiabetesFormz: _getValueDiabetes(map),
       status: FormzSubmissionStatus.values[(map['status'] ?? 0) as int],
     );

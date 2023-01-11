@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
-import 'package:dio_log/interceptor/dio_log_interceptor.dart';
 import 'package:dialysis/core/log/log.dart';
 import 'package:dialysis/core/network/network.dart';
+import 'package:dio/dio.dart';
+import 'package:dio_log/interceptor/dio_log_interceptor.dart';
 
 class NetworkClient {
   NetworkClient({
@@ -9,9 +9,9 @@ class NetworkClient {
     required String userAgent,
   }) : _dio = Dio(
           BaseOptions(
-            baseUrl: baseUrl,
             connectTimeout: 30000,
             receiveTimeout: 30000,
+            baseUrl: baseUrl,
           ),
         )..interceptors.addAll([
             DioLogInterceptor(),

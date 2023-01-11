@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 
-import 'package:dialysis/feature/diary/diary.dart';
+import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:dialysis/feature/registration/model/user_info_m.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -110,7 +110,7 @@ class AppStorage {
 
   static const _favoriteList = '_favoriteList';
 
-  Future<List<String>> getFavorite() async {
+  Future<List<String>> getFavorite()  {
     return getStringList(key: _favoriteList);
   }
 
@@ -139,7 +139,7 @@ class AppStorage {
 
   static const _path_db_update = '_path_db_update';
 
-  Future<List<String>> getPathUpdateFilesDb() async {
+  Future<List<String>> getPathUpdateFilesDb()  {
     return getStringList(key: _path_db_update);
   }
 
@@ -164,7 +164,7 @@ class AppStorage {
 
   static const _categories = 'categories';
 
-  Future<List<String>> getSelectedCategories() async {
+  Future<List<String>> getSelectedCategories()  {
     return  getStringList(key: _categories);
   }
 

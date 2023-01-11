@@ -2,11 +2,10 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:dialysis/core/storage/app_storage.dart';
+import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
-
-import 'package:dialysis/core/storage/app_storage.dart';
-import 'package:dialysis/feature/diary/diary.dart';
 
 class DiaryCubit extends Cubit<DiaryState> {
   DiaryCubit({required AppStorage storage})
@@ -104,7 +103,7 @@ class DiaryState {
 
   factory DiaryState.fromMap(Map<String, dynamic> map) {
     return DiaryState(
-      listDayProducts: List<DayProductsModel>.from(
+      listDayProducts: List<DayProductsModel>.of(
         (map['listDayProducts'] as List<int>).map<DayProductsModel>(
           (x) => DayProductsModel.fromMap(x as Map<String, dynamic>),
         ),

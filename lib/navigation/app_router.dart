@@ -4,147 +4,137 @@ import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/common/test_app/test_app.dart';
+import 'package:dialysis/feature/dashboard/dashboard.dart';
 import 'package:dialysis/feature/debug_menu/debug_menu.dart';
-import 'package:dialysis/feature/diary/diary.dart';
+
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/feature/setting/setting_tab.dart';
 import 'package:dialysis/feature/splash/splash.dart';
 import 'package:dialysis/feature/welcome/view/welcome_p.dart';
+import 'package:dialysis/global.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   AppRouter({required AppStorage storage}) : _storage = storage;
-  // static final _pageNavigatorKey = GlobalKey<NavigatorState>();
+
+  // private navigators
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final _pageNavigatorKey = GlobalKey<NavigatorState>();
 
   final AppStorage _storage;
 
   final GoRouter router = GoRouter(
-    debugLogDiagnostics: true,
-    initialLocation: SplashPage.path,
-    // initialLocation: DiaryPage.path,
     routes: [
       ShellRoute(
-        // navigatorKey: _pageNavigatorKey,
         builder: (_, GoRouterState state, child) {
-          return OverlayWidget(
-            goRouterState: state,
-            child: child,
-          );
+          return OverlayWidget(goRouterState: state, child: child);
         },
         routes: [
           GoRoute(
-            name: SplashPage.name,
             path: SplashPage.path,
+            name: SplashPage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const SplashPage(),
             ),
           ),
           GoRoute(
-            name: WelcomePage.name,
             path: WelcomePage.path,
+            name: WelcomePage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const WelcomePage(),
             ),
           ),
           GoRoute(
-            name: RegistrationPage.name,
             path: RegistrationPage.path,
+            name: RegistrationPage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const RegistrationPage(),
             ),
           ),
           GoRoute(
-            name: DiaryPage.name,
             path: DiaryPage.path,
+            name: DiaryPage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const DiaryPage(),
             ),
           ),
-
           GoRoute(
-            name: SettingPage.name,
+            path: DashBoardPage.path,
+            name: DashBoardPage.name,
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const DashBoardPage(),
+            ),
+          ),
+          GoRoute(
             path: SettingPage.path,
+            name: SettingPage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const SettingPage(),
             ),
           ),
-          // GoRoute(
-          //   name: FavoritePage.name,
-          //   path: FavoritePage.path,
-          //   pageBuilder: (context, state) => MaterialPage<void>(
-          //     key: state.pageKey,
-          //     child: const FavoritePage(),
-          //   ),
-          // ),
           GoRoute(
-            name: DebugMenuPage.name,
             path: DebugMenuPage.path,
+            name: DebugMenuPage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const DebugMenuPage(),
             ),
           ),
-
           GoRoute(
-            name: OnBoardingPage.name,
             path: OnBoardingPage.path,
+            name: OnBoardingPage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const OnBoardingPage(),
             ),
           ),
           GoRoute(
-            name: TestAppPage.name,
             path: TestAppPage.path,
+            name: TestAppPage.name,
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const TestAppPage(),
             ),
           ),
-          // GoRoute(
-          //   name: CategoryPage.name,
-          //   path: CategoryPage.path,
-          //   parentNavigatorKey: _pageNavigatorKey,
-          //   pageBuilder: (context, state) => MaterialPage<void>(
-          //     key: state.pageKey,
-          //     child: const CategoryPage(),
-          //   ),
-          // ),
           GoRoute(
-            name: PdfPage.name,
             path: PdfPage.path,
-            // parentNavigatorKey: _pageNavigatorKey,
+            name: PdfPage.name,
             pageBuilder: (context, state) {
               final url = state.extra ?? 'https://www.orimi.com/pdf-test.pdf';
 
               return MaterialPage<void>(
                 key: state.pageKey,
-                child: PdfPage(
-                  url: url.toString(),
-                ),
+                child: PdfPage(url: url.toString()),
               );
             },
           ),
         ],
+        navigatorKey: _pageNavigatorKey,
       ),
     ],
     errorPageBuilder: (context, state) => NoTransitionPage<void>(
       key: state.pageKey,
-      child: Center(
-        child: Text(state.error.toString()),
-      ),
+      child: Center(child: Text(state.error.toString())),
     ),
+    initialLocation: SplashPage.path,
+    observers: <NavigatorObserver>[
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ],
+    // ignore: avoid_redundant_argument_values
+    debugLogDiagnostics: DartDefine.IS_DEBUG,
+    navigatorKey: _rootNavigatorKey,
   );
 
-  // ignore: long-method
   Future<void> selectedRouter() async {
     final isFirstTime = await _storage.isFirstStart();
 

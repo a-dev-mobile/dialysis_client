@@ -1,9 +1,8 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:flutter/material.dart';
-
 import 'package:dialysis/app/style/style.dart';
 import 'package:dialysis/core/widget/widget.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UpdateAppPage extends StatelessWidget {

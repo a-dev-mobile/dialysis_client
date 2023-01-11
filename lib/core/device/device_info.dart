@@ -7,9 +7,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 /// DeviceInfo Singleton class
 class DeviceInfo {
-  static final DeviceInfo _internalSingleton = DeviceInfo._internal();
   factory DeviceInfo() => _internalSingleton;
   DeviceInfo._internal();
+  static final DeviceInfo _internalSingleton = DeviceInfo._internal();
 
   static Future<String> getUserAgent() async {
     final deviceInfo = DeviceInfoPlugin();

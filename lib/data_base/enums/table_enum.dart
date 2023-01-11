@@ -1,7 +1,6 @@
-    // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-
-  
+  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
   /*
+  
   enum TableEnum {
   food,
   source,
@@ -9,13 +8,9 @@
   category,
   nutrient,
   nutrient_type,
-  date_month,
+
 }
- 
   */
-/// {@template tableenum}
-/// TableEnum enumeration
-/// {@endtemplate}
 
 enum TableEnum with Comparable<TableEnum> { 
   food('food'),
@@ -23,14 +18,16 @@ enum TableEnum with Comparable<TableEnum> {
   product('product'),
   category('category'),
   nutrient('nutrient'),
-  nutrient_type('nutrient_type'),
-  date_month('date_month');
+  nutrient_type('nutrient_type');
 
   const TableEnum(this.value);
 
   final String value;
 
-  static TableEnum fromValue(String? value, {TableEnum? fallback}) {
+  static TableEnum fromValue(
+    String? value, {
+    TableEnum? fallback,
+  }) {
     switch (value) {
       case 'food':
         return food;
@@ -44,8 +41,6 @@ enum TableEnum with Comparable<TableEnum> {
         return nutrient;
       case 'nutrient_type':
         return nutrient_type;
-      case 'date_month':
-        return date_month;
 
       default:
         return fallback ?? (throw ArgumentError.value(value));
@@ -60,7 +55,6 @@ enum TableEnum with Comparable<TableEnum> {
     required T Function() category,
     required T Function() nutrient,
     required T Function() nutrient_type,
-    required T Function() date_month,
 
   }) {
     switch (this) {
@@ -76,8 +70,6 @@ enum TableEnum with Comparable<TableEnum> {
         return nutrient();     
       case TableEnum.nutrient_type:
         return nutrient_type();     
-      case TableEnum.date_month:
-        return date_month();     
 
     }
   }
@@ -91,7 +83,6 @@ enum TableEnum with Comparable<TableEnum> {
     T Function()? category,
     T Function()? nutrient,
     T Function()? nutrient_type,
-    T Function()? date_month,
 
   }) =>
       map<T>(
@@ -101,7 +92,6 @@ enum TableEnum with Comparable<TableEnum> {
       category: category ?? orElse,     
       nutrient: nutrient ?? orElse,     
       nutrient_type: nutrient_type ?? orElse,     
-      date_month: date_month ?? orElse,     
 
       );
 
@@ -113,7 +103,6 @@ enum TableEnum with Comparable<TableEnum> {
     T Function()? category,
     T Function()? nutrient,
     T Function()? nutrient_type,
-    T Function()? date_month,
 
   }) =>
       maybeMap<T?>(
@@ -124,7 +113,6 @@ enum TableEnum with Comparable<TableEnum> {
         category: category,  
         nutrient: nutrient,  
         nutrient_type: nutrient_type,  
-        date_month: date_month,  
         
       );
 
@@ -134,5 +122,3 @@ enum TableEnum with Comparable<TableEnum> {
   @override
   String toString() => value;
    }
-
-  

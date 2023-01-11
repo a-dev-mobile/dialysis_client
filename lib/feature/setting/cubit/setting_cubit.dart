@@ -1,20 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: avoid_unused_constructor_parameters
 
-
-
 import 'package:bloc/bloc.dart';
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
-import 'package:flutter/material.dart';
-
-
-
-
 import 'package:dialysis/navigation/navigation.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'setting_cubit.freezed.dart';
+
 class SettingCubit extends Cubit<SettingState> {
   SettingCubit({
     required AppRouter router,
@@ -43,8 +37,10 @@ class SettingCubit extends Cubit<SettingState> {
 /// SettingState data class
 @freezed
 class SettingState with _$SettingState {
-  const factory SettingState(
-      {required LocaleEnum locale, required ThemeMode theme}) = _SettingState;
+  const factory SettingState({
+    required LocaleEnum locale,
+    required ThemeMode theme,
+  }) = _SettingState;
 
   const SettingState._();
 }

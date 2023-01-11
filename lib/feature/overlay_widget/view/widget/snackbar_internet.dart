@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
 import 'package:dialysis/app/style/style.dart';
 import 'package:dialysis/l10n/l10n.dart';
+import 'package:flutter/material.dart';
 
 class SnackbarInternet extends StatelessWidget {
   const SnackbarInternet({super.key, this.isVisible});

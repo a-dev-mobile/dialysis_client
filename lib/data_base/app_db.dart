@@ -10,8 +10,7 @@ import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/utils/utils.dart';
 import 'package:dialysis/data_base/data_base.dart';
 
-
-import 'package:dialysis/global_const.dart';
+import 'package:dialysis/global.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -38,16 +37,16 @@ class AppDb {
   Future<void> checkAndCopyDbFromAssets({bool isForceDelete = false}) async {
     const assetsPathDb = 'assets/db/$_nameDb';
 
-    if (isForceDelete) await deleteDatabase(_fullPathFileDb);
+    if (isForceDelete) await _deleteDb();
 
-    var db = await openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
+    var db = await openDB();
     final currentVersionDb = await db.getVersion();
     final newVersionDb = int.tryParse(await DeviceInfo.getBuildNumber()) ?? 0;
     if (currentVersionDb < newVersionDb) {
       await db.close();
 
       //delete the old database so you can copy the new one
-      await deleteDatabase(_fullPathFileDb);
+      await _deleteDb();
 
       // ignore: unused_local_variable
       final directory =
@@ -55,19 +54,21 @@ class AppDb {
 
       final data = await rootBundle.load(assetsPathDb);
       final buffer = data.buffer;
-      await File(_fullPathFileDb).writeAsBytes(
+      final _ = await File(_fullPathFileDb).writeAsBytes(
         buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
       );
       unawaited(_storage.setDbPatch(_fullPathFileDb));
 
-      db = await openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
+      db = await openDB();
       await db.setVersion(newVersionDb);
       await db.close();
     }
   }
 
+  Future<void> _deleteDb() => deleteDatabase(_fullPathFileDb);
+
   Future<Database> openDB() {
-    return openDatabase(_fullPathFileDb, password: APP_DB_PASSWORD);
+    return openDatabase(_fullPathFileDb, password: DartDefine.APP_DB_PASSWORD);
   }
 
   // получаю из firestore из app_build_number
@@ -101,7 +102,7 @@ class AppDb {
       fileUpdateDb = i.name.addTypeJson();
       pathUpdateDb = join(_folderDB, fileUpdateDb);
 
-      await ref.child(fileUpdateDb).writeToFile(File(pathUpdateDb));
+      final _ = await ref.child(fileUpdateDb).writeToFile(File(pathUpdateDb));
     }
     unawaited(_storage.setDbVersion(onlineDbUpdateVersion));
     await _updateDB();
@@ -123,19 +124,12 @@ class AppDb {
       file = File(pathUpdateFile);
       content = await file.readAsString();
       // пропускать если символов мало
-      if (content.length < 10) continue;
+      const maxSymbol = 10;
+      if (content.length < maxSymbol) continue;
 
       final list = json.decode(content) as List<dynamic>;
 
-      await TableEnum.values[i].map(
-        food: () => _updateOrInsetDB(db, nameTable, list),
-        source: () => _updateOrInsetDB(db, nameTable, list),
-        product: () => _updateOrInsetDB(db, nameTable, list),
-        category: () => _updateOrInsetDB(db, nameTable, list),
-        nutrient: () => _updateOrInsetDB(db, nameTable, list),
-        nutrient_type: () => _updateOrInsetDB(db, nameTable, list),
-        date_month: () => _updateOrInsetDB(db, nameTable, list),
-      );
+      await _updateOrInsetDB(db, nameTable, list);
     }
     await db.close();
   }
@@ -364,4 +358,3 @@ class AppDb {
 
   //   return where;
   // }
-

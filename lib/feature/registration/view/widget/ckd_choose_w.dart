@@ -19,9 +19,6 @@ class CkdChoose extends StatelessWidget {
 
     return CardCustom(
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
-        buildWhen: (p, c) =>
-            p.validCkdFormz.isPure != c.validCkdFormz.isPure ||
-            p.validCkdFormz.value != c.validCkdFormz.value,
         builder: (context, state) {
           final booles = state.ckdSelected;
           final valid = state.validCkdFormz;
@@ -29,21 +26,23 @@ class CkdChoose extends StatelessWidget {
           return Column(
             children: [
               BtnToggleText(
-                dialogText:
-                    'Установив данное приложение. Вы скорее уже знаете свою стадию ХБП, если нет - выберите последнее значение и введите свой креатинин',
-                title: 'Укажите стадию ХБП',
+                textList: const ['1', '2', '3a', '3b', '4', '5'],
                 isSelected: booles.sublist(0, booles.length - 1),
                 onPressed: cubit.checkCkd,
-                textList: ['1', '2', '3a', '3b', '4', '5'],
+                title: 'Укажите стадию ХБП',
+                dialogText:
+                    'Установив данное приложение. Вы скорее уже знаете свою стадию ХБП, если нет - выберите последнее значение и введите свой креатинин',
               ),
               BtnToggleText(
+                textList: const ['Я не знаю'],
                 isSelected: booles.sublist(booles.length - 1, booles.length),
+                // ignore: prefer-extracting-callbacks
                 onPressed: (v) {
                   cubit.checkCkd(v + booles.length - 1);
                 },
-                textList: ['Я не знаю'],
                 errorText: valid.isPure
                     ? null
+                    // ignore: avoid-nested-conditional-expressions
                     : valid.error == valid.notSelected
                         ? 'Стадия ХБП не выбрана'
                         : null,
@@ -51,6 +50,9 @@ class CkdChoose extends StatelessWidget {
             ],
           );
         },
+        buildWhen: (p, c) =>
+            p.validCkdFormz.isPure != c.validCkdFormz.isPure ||
+            p.validCkdFormz.value != c.validCkdFormz.value,
       ),
     );
   }

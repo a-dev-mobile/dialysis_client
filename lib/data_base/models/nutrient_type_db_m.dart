@@ -20,5 +20,3 @@ class NutrientTypeDbModel with _$NutrientTypeDbModel {
   factory NutrientTypeDbModel.fromJson(Map<String, Object?> json) =>
       _$NutrientTypeDbModelFromJson(json);
 }
-
-

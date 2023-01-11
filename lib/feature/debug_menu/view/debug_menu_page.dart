@@ -29,7 +29,6 @@ class DebugMenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final go = context.read<AppRouter>();
     final cubitDebug = context.read<DebugCubit>();
     final storage = context.read<AppStorage>();
@@ -47,32 +46,34 @@ class DebugMenuPage extends StatelessWidget {
                 children: [
                   const Center(child: Text('---Setting---')),
                   SwitchListTile(
-                    visualDensity: const VisualDensity(vertical: -3),
-                    dense: true,
-                    title: const Text('Show device preview'),
                     value: state.isShowDevice,
-                    onChanged: cubitDebug.setDevicePreview,
+                    onChanged: (v) => cubitDebug.setDevicePreview(isShow: v),
+                    title: const Text('Show device preview'),
+                    dense: true,
+                    visualDensity: const VisualDensity(vertical: -3),
                   ),
                   SwitchListTile(
-                    visualDensity: const VisualDensity(vertical: -3),
-                    dense: true,
-                    title: const Text('Show button http log'),
                     value: state.isShowBtnHttpLog,
-                    onChanged: cubitDebug.setShowBtnHttpLog,
+                    onChanged: (v) => cubitDebug.setShowBtnHttpLog(isShow: v),
+                    title: const Text('Show button http log'),
+                    dense: true,
+                    visualDensity: const VisualDensity(vertical: -3),
                   ),
                   SwitchListTile(
-                    visualDensity: const VisualDensity(vertical: -3),
-                    dense: true,
-                    title: const Text('debugRepaintRainbowEnabled'),
                     value: state.isShowRepaintRainbow,
-                    onChanged: cubitDebug.setShowDebugRepaintRainbow,
+                    onChanged: (v) =>
+                        cubitDebug.setShowDebugRepaintRainbow(isShow: v),
+                    title: const Text('debugRepaintRainbowEnabled'),
+                    dense: true,
+                    visualDensity: const VisualDensity(vertical: -3),
                   ),
                   SwitchListTile(
-                    visualDensity: const VisualDensity(vertical: -3),
-                    dense: true,
-                    title: const Text('debugPaintSizeEnabled'),
                     value: state.isShowPaintSizeEnabled,
-                    onChanged: cubitDebug.setShowPaintSizeEnabled,
+                    onChanged: (v) =>
+                        cubitDebug.setShowPaintSizeEnabled(isShow: v),
+                    title: const Text('debugPaintSizeEnabled'),
+                    dense: true,
+                    visualDensity: const VisualDensity(vertical: -3),
                   ),
                   const Center(child: Text('---Начало---')),
                   Wrap(
@@ -115,42 +116,34 @@ class DebugMenuPage extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 50,
               color: Theme.of(context).colorScheme.background,
+              height: 50,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   OutlinedButton(
                     // ignore: prefer-extracting-callbacks
-                    onPressed: () async {
+                    onPressed: () {
                       if (go.router.canPop()) {
                         go.router.pop();
                       }
-
-                      BetterFeedback.of(context).show(
-                        (feedback) async {
-                          final screenshotFilePath =
-                              await writeImageToStorage(feedback.screenshot);
-
-                          final _ = await Share.shareXFiles(
-                            [XFile(screenshotFilePath)],
-                            text: feedback.text,
-                          );
-                        },
-                      );
+                      BetterFeedback.of(context).show((feedback) async {
+                        final screenshotFilePath =
+                            await writeImageToStorage(feedback.screenshot);
+                        final _ = await Share.shareXFiles(
+                          [XFile(screenshotFilePath)],
+                          text: feedback.text,
+                        );
+                      });
                     },
                     child: const Text('FEEDBACK'),
                   ),
                   OutlinedButton(
                     // ignore: prefer-extracting-callbacks
-                    onPressed: () async {
+                    onPressed: () {
                       storage.clearAll();
-
-                      await _hydratedClean();
-
-                      go.router.goNamed(
-                        OnBoardingPage.name,
-                      );
+                      _hydratedClean();
+                      go.router.goNamed(OnBoardingPage.name);
                     },
                     child: const Text('RESTART'),
                   ),

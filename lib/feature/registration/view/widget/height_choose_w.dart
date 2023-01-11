@@ -37,28 +37,15 @@ class HeightChoose extends StatelessWidget {
                   Text(
                     'см',
                     style: AppTextStyles.caption(),
-                  )
+                  ),
                 ],
               ),
               if (valid.error == valid.notSelected && !valid.isPure)
-                _buildError(context, 'Рост не выбран'),
+                const ErrorMsg(error: 'Рост не выбран'),
             ],
           );
         },
       ),
-    );
-  }
-
-  Widget _buildError(BuildContext context, String error) {
-    return Column(
-      children: [
-        const SizedBox(height: 6),
-        Text(
-          error,
-          style: context.textTheme.bodySmall!
-              .copyWith(color: context.theme.errorColor),
-        ),
-      ],
     );
   }
 }

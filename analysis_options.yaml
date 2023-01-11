@@ -4,19 +4,20 @@ linter:
   rules:
     public_member_api_docs: false
     sort_pub_dependencies: false
-    # lines_longer_than_80_chars: false
+    lines_longer_than_80_chars: false
     # non_constant_identifier_names: false
     # constant_identifier_names: false
 
 analyzer:
-  errors:
-    argument_type_not_assignable: ignore
-    invalid_assignment: ignore
+  # errors:
+    # argument_type_not_assignable: ignore
+    # invalid_assignment: ignore
   plugins:
     - dart_code_metrics
   # strong-mode:
-    # implicit-dynamic: true
-    # implicit-casts: true
+  # implicit-dynamic: true
+  # implicit-casts: true
+
 
   exclude:
     # Generated code
@@ -24,7 +25,7 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "lib/l10n/**"
-   
+
     - "lib/**.gen.dart"
     - "lib/generated_plugin_registrant.dart"
 
@@ -39,90 +40,97 @@ analyzer:
     # Assets
     - "assets/**"
 
-
-
-
 dart_code_metrics:
-
+  extends:
+    - package:dart_code_metrics/presets/all.yaml
   rules:
+    - member-ordering: false
+    - prefer-match-file-name: false
+    - avoid-dynamic: false
+    - format-comment: false
+    - prefer-commenting-analyzer-ignores: false
+    - avoid-non-ascii-symbols: false
     - prefer-single-widget-per-file:
         ignore-private-widgets: true
-    # flutter 
-    - always-remove-listener
-    - avoid-border-all
-    - avoid-returning-widgets
-    - avoid-shrink-wrap-in-lists
-    - avoid-unnecessary-setstate
-    - avoid-expanded-as-spacer
-    - avoid-wrapping-in-padding
-    - check-for-equals-in-render-object-setters
-    - consistent-update-render-object
-    - prefer-const-border-radius
-    - prefer-correct-edge-insets-constructor
-    - prefer-extracting-callbacks
-
-    - prefer-using-list-view
-
-
-# DART
-    - avoid-banned-imports
-    - avoid-cascade-after-if-null
-    - avoid-collection-methods-with-unrelated-types
-    - avoid-duplicate-exports
-    
-    # - avoid-dynamic
-    - avoid-global-state
-    - avoid-ignoring-return-values
-    # - avoid-late-keyword
-
-    
-    - avoid-missing-enum-constant-in-map
-    # - avoid-nested-conditional-expressions
-    # когда будешь переводить включи
-    # - avoid-non-ascii-symbols
-    # - avoid-non-null-assertion
-    # - avoid-passing-async-when-sync-expected
-    - avoid-redundant-async
-    - avoid-throw-in-catch-block
-    - avoid-top-level-members-in-tests
-    - avoid-unnecessary-type-assertions
-    - avoid-unnecessary-type-casts
-    - avoid-unrelated-type-assertions
-    - avoid-unused-parameters
-    - ban-name
-    
-    - binary-expression-operand-order
-    - double-literal-format
-    # - format-comment
-    # - member-ordering
-    - newline-before-return
-    - no-boolean-literal-compare
-    - no-empty-block
-    # - no-equal-arguments
-    - no-equal-then-else
-    # - no-magic-number
-    - no-object-declaration
-    - prefer-async-await
-    # - prefer-commenting-analyzer-ignores
-    - prefer-conditional-expressions
-    # - prefer-correct-identifier-length:
-    #     exceptions: ["i",'e','l','_']
-    #     min-identifier-length: 2
-    #     max-identifier-length: 40
-    - prefer-correct-test-file-name
-    - prefer-correct-type-name
-    - prefer-enums-by-name
-    - prefer-first
-    - prefer-immediate-return
-    - prefer-iterable-of
-    - prefer-last
-    # - prefer-match-file-name
-    - prefer-moving-to-variable
-    - prefer-static-class
-
+    - prefer-correct-identifier-length: false
     - prefer-moving-to-variable:
         allowed-duplicated-chains: 3
-    - prefer-trailing-comma
-    - prefer-trailing-comma
-    - tag-name
+    - arguments-ordering:
+        child-last: true
+        buildWhen-last: false
 
+    # # flutter
+    # - always-remove-listener
+    # - avoid-border-all
+    # - avoid-returning-widgets
+    # - avoid-shrink-wrap-in-lists
+    # - avoid-unnecessary-setstate
+    # - avoid-expanded-as-spacer
+    # - avoid-wrapping-in-padding
+    # - check-for-equals-in-render-object-setters
+    # - consistent-update-render-object
+    # - prefer-const-border-radius
+    # - prefer-correct-edge-insets-constructor
+    # - prefer-extracting-callbacks
+
+    # - prefer-using-list-view
+
+    # # DART
+
+    # - avoid-cascade-after-if-null
+    # - avoid-collection-methods-with-unrelated-types
+    # - avoid-duplicate-exports
+
+    # # - avoid-dynamic
+    # - avoid-global-state
+    # - avoid-ignoring-return-values
+    # # - avoid-late-keyword
+
+    # - avoid-missing-enum-constant-in-map
+    # # - avoid-nested-conditional-expressions
+
+    # # - avoid-non-ascii-symbols
+    # # - avoid-non-null-assertion
+    # # - avoid-passing-async-when-sync-expected
+    # - avoid-redundant-async
+    # - avoid-throw-in-catch-block
+    # - avoid-top-level-members-in-tests
+    # - avoid-unnecessary-type-assertions
+    # - avoid-unnecessary-type-casts
+    # - avoid-unrelated-type-assertions
+    # - avoid-unused-parameters
+
+
+    # - binary-expression-operand-order
+    # - double-literal-format
+    # # - format-comment
+    # # - member-ordering
+    # - newline-before-return
+    # - no-boolean-literal-compare
+    # - no-empty-block
+    # # - no-equal-arguments
+    # - no-equal-then-else
+    # # - no-magic-number
+    # - no-object-declaration
+    # - prefer-async-await
+    # # - prefer-commenting-analyzer-ignores
+    # - prefer-conditional-expressions
+    # # - prefer-correct-identifier-length:
+    # #     exceptions: ["i",'e','l','_']
+    # #     min-identifier-length: 2
+    # #     max-identifier-length: 40
+    # - prefer-correct-test-file-name
+    # - prefer-correct-type-name
+    # - prefer-enums-by-name
+    # - prefer-first
+    # - prefer-immediate-return
+    # - prefer-iterable-of
+    # - prefer-last
+    # # - prefer-match-file-name
+    # - prefer-moving-to-variable
+    # - prefer-static-class
+
+    # - prefer-moving-to-variable
+    # - prefer-trailing-comma
+    # - prefer-trailing-comma
+    # - tag-name

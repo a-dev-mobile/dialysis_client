@@ -20,4 +20,3 @@ class ProductDbModel with _$ProductDbModel {
   factory ProductDbModel.fromJson(Map<String, Object?> json) =>
       _$ProductDbModelFromJson(json);
 }
-

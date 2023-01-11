@@ -129,8 +129,8 @@ class WelcomeState {
 
   factory WelcomeState.fromMap(Map<String, dynamic> map) {
     return WelcomeState(
-      boolsLocale: List<bool>.from(map['boolsLocale'] as List<bool>),
-      boolsTheme: List<bool>.from(map['boolsTheme'] as List<bool>),
+      boolsLocale: List<bool>.of(map['boolsLocale'] as List<bool>),
+      boolsTheme: List<bool>.of(map['boolsTheme'] as List<bool>),
       localeActive: LocaleEnum.values[map['localeActive'] as int],
       themeActive: ThemeMode.values[map['themeActive'] as int],
     );
@@ -177,4 +177,3 @@ class WelcomeState {
 //     required ThemeMode themeActive,
 //   }) = _WelcomeState;
 // }
-

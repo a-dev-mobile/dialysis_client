@@ -1,7 +1,7 @@
 import 'package:dialysis/app/style/extensions/extensions.dart';
 import 'package:dialysis/core/widget/progress_indicator/page.dart';
 
-import 'package:dialysis/feature/diary/diary.dart';
+import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:flutter/material.dart';
@@ -33,30 +33,29 @@ class _DiaryPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<DiaryCubit, DiaryState>(
-          buildWhen: (p, c) => p.isLoadPage != c.isLoadPage,
           builder: (context, state) {
             if (state.isLoadPage) return const PageStartLoad();
+
             return Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  TitleDate(),
+                  const _TitleDate(),
                   Placeholder(fallbackHeight: context.heightPx / 4),
-                  Pages(),
+                  const _Pages(),
                 ],
               ),
             );
           },
+          buildWhen: (p, c) => p.isLoadPage != c.isLoadPage,
         ),
       ),
     );
   }
 }
 
-class TitleDate extends StatelessWidget {
-  const TitleDate({
-    Key? key,
-  }) : super(key: key);
+class _TitleDate extends StatelessWidget {
+  const _TitleDate();
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +67,15 @@ class TitleDate extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: const Icon(Icons.keyboard_arrow_left),
               onPressed: cubit.decrement,
+              icon: const Icon(Icons.keyboard_arrow_left),
             ),
             Text(
               state.currentFormatDay,
             ),
             IconButton(
-              icon: const Icon(Icons.keyboard_arrow_right),
               onPressed: cubit.increment,
+              icon: const Icon(Icons.keyboard_arrow_right),
             ),
           ],
         );
@@ -85,31 +84,30 @@ class TitleDate extends StatelessWidget {
   }
 }
 
-class Pages extends StatelessWidget {
-  const Pages({
-    super.key,
-  });
+class _Pages extends StatelessWidget {
+  const _Pages();
 
   @override
   Widget build(BuildContext context) {
-    print('build');
+    
+
     return Column(
       children: <Widget>[
         CardCustom(
           child: ListTile(
             title: const Text('1 Завтрак'),
-            trailing: IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+            trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
           ),
         ),
         CardCustom(
           child: ListTile(
             title: const Text('2 Завтрак'),
-            trailing: IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+            trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
           ),
         ),
         ListTile(
           title: const Text('Обед'),
-          trailing: IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+          trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
         ),
       ],
     );

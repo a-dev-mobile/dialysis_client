@@ -1,7 +1,7 @@
+import 'package:dialysis/app/style/style.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:dialysis/app/style/style.dart';
 
 class MySnackBar {
   static void show({

@@ -8,8 +8,7 @@ import 'package:flutter/foundation.dart';
 /// {@endtemplate}
 @immutable
 class DateRegModel {
-
-  final  List<String> months;
+  final List<String> months;
   final List<String> days;
   final List<String> years;
   const DateRegModel({
@@ -39,9 +38,11 @@ class DateRegModel {
 
   factory DateRegModel.fromMap(Map<String, dynamic> map) {
     return DateRegModel(
-      months: List<String>.from((map['months'] ?? const <String>[]) as List<String>),
-      days: List<String>.from((map['days'] ?? const <String>[]) as List<String>),
-      years: List<String>.from((map['years'] ?? const <String>[]) as List<String>),
+      months:
+          List<String>.of((map['months'] ?? const <String>[]) as List<String>),
+      days: List<String>.of((map['days'] ?? const <String>[]) as List<String>),
+      years:
+          List<String>.of((map['years'] ?? const <String>[]) as List<String>),
     );
   }
 
@@ -57,11 +58,10 @@ class DateRegModel {
   @override
   bool operator ==(covariant DateRegModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      listEquals(other.months, months) &&
-      listEquals(other.days, days) &&
-      listEquals(other.years, years);
+
+    return listEquals(other.months, months) &&
+        listEquals(other.days, days) &&
+        listEquals(other.years, years);
   }
 
   @override

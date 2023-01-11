@@ -3,18 +3,15 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:dialysis/global_const.dart';
+import 'package:dialysis/global.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-
-
-
 class RemoteConfigCubit extends Cubit<RemoteConfigState> {
   RemoteConfigCubit()
-      : super(RemoteConfigState(isLoad: true, isNeedUpdate: false));
+      : super(const RemoteConfigState(isLoad: true, isNeedUpdate: false));
 
   static const _devAndroidMinVersionKey = 'dev_android_min_version';
   static const _prodAndroidMinVersionKey = 'prod_android_min_version';
@@ -22,13 +19,13 @@ class RemoteConfigCubit extends Cubit<RemoteConfigState> {
   Future<void> load() async {
     emit(state.copyWith(isLoad: true));
 
-    //Get Latest version info from firebase config
+    // Get Latest version info from firebase config
     final remoteConfig = FirebaseRemoteConfig.instance;
     var versionAppKey = _prodAndroidMinVersionKey;
 
     try {
       //
-      if (IS_DEBUG) {
+      if (DartDefine.IS_DEBUG) {
         await remoteConfig.setConfigSettings(
           RemoteConfigSettings(
             fetchTimeout: Duration.zero,

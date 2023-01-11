@@ -8,8 +8,9 @@ import 'package:feedback/feedback.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ignore: depend_on_referenced_packages
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -28,8 +29,8 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => InternetCubit()),
         BlocProvider(create: (context) => DebugCubit()),
         BlocProvider(
-          lazy: false,
           create: (context) => RemoteConfigCubit()..load(),
+          lazy: false,
         ),
       ],
       child: const _MobileApp(),
@@ -39,49 +40,44 @@ class App extends StatelessWidget {
 
 class _MobileApp extends StatelessWidget {
   const _MobileApp();
+  void initStatusBar({required ThemeMode themeMode}) {
+    Brightness? statusBarIconBrightness;
+
+    statusBarIconBrightness =
+        themeMode == ThemeMode.light ? Brightness.dark : Brightness.light;
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarIconBrightness: statusBarIconBrightness,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final go = context.read<AppRouter>();
     final cubitDebugWatch = context.watch<DebugCubit>();
     final cubitLocaleWatch = context.watch<LocaleCubit>();
-
+    final cubitTheme = context.watch<ThemeCubit>();
     debugRepaintRainbowEnabled = cubitDebugWatch.state.isShowRepaintRainbow;
-   
+
     debugPaintSizeEnabled = cubitDebugWatch.state.isShowPaintSizeEnabled;
 
     //  global
     Intl.defaultLocale = cubitLocaleWatch.state.name;
-  
+    initStatusBar(themeMode: cubitTheme.state);
+
     return BetterFeedback(
       child: DevicePreview(
-        enabled: cubitDebugWatch.state.isShowDevice,
         builder: (context) => ScreenUtilInit(
-          designSize: const Size(320, 568),
-          minTextAdapt: true,
-          splitScreenMode: true,
           builder: (BuildContext context, Widget? child) {
             return MaterialApp.router(
-              onGenerateTitle: (context) =>
-                  AppLocalizations.of(context).app_name,
-              themeMode: context.watch<ThemeCubit>().state,
-              theme: AppTheme.lightThemeData(),
-              darkTheme: AppTheme.darkThemeData(),
-              title: 'Product',
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: AppLocalizations.supportedLocales,
-              locale: Locale(cubitLocaleWatch.state.name),
-              routerDelegate: go.router.routerDelegate,
-              routeInformationParser: go.router.routeInformationParser,
               routeInformationProvider: go.router.routeInformationProvider,
-              builder: (context, _) {
-                var child = _!;
+              routeInformationParser: go.router.routeInformationParser,
+              routerDelegate: go.router.routerDelegate,
+              // routerConfig: go.router,
+              builder: (context, widget) {
+                var child = widget ?? const SizedBox.shrink();
                 final theme = Theme.of(context);
                 final isThemeDark = theme.brightness == Brightness.dark;
                 child = Toast(
@@ -89,7 +85,6 @@ class _MobileApp extends StatelessWidget {
                   child: child,
                 );
 
-                // toast snackbar dialog
                 return FlashTheme(
                   flashBarTheme: isThemeDark
                       ? const FlashBarThemeData.dark()
@@ -101,9 +96,27 @@ class _MobileApp extends StatelessWidget {
                   ),
                 );
               },
+              onGenerateTitle: (context) =>
+                  AppLocalizations.of(context).app_name,
+              theme: AppTheme.lightThemeData(),
+              darkTheme: AppTheme.darkThemeData(),
+              themeMode: cubitTheme.state,
+              locale: Locale(cubitLocaleWatch.state.name),
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              debugShowCheckedModeBanner: false,
             );
           },
+          designSize: const Size(320, 568),
+          splitScreenMode: true,
+          minTextAdapt: true,
         ),
+        enabled: cubitDebugWatch.state.isShowDevice,
       ),
     );
   }

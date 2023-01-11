@@ -1,4 +1,4 @@
-import 'package:dialysis/app/style/style.dart';
+
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/l10n/l10n.dart';
@@ -52,29 +52,18 @@ class BirthdayChoose extends StatelessWidget {
                 ],
               ),
               if (valid.error == valid.isNoValid && !valid.isPure)
-                _buildError(context, 'Дата рождения указана некорректно.'),
+                const ErrorMsg(error: 'Дата рождения указана некорректно.'),
               if (valid.error == valid.isEmpty && !valid.isPure)
-                _buildError(context, 'Дата рождения не выбрана'),
+                const ErrorMsg(error: 'Дата рождения не выбрана'),
             ],
           );
         },
       ),
     );
   }
-
-  Widget _buildError(BuildContext context, String error) {
-    return Column(
-      children: [
-        const SizedBox(height: 6),
-        Text(
-          error,
-          style: context.textTheme.bodySmall!
-              .copyWith(color: context.theme.errorColor),
-        ),
-      ],
-    );
-  }
 }
+
+
 
 class _DropDownMonth extends StatelessWidget {
   const _DropDownMonth({
