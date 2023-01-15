@@ -1,10 +1,7 @@
-/// {@template columnenum}
-/// ColumnEnum enumeration
-/// {@endtemplate}
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
 
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
-enum NutrientColumnEnum with Comparable<NutrientColumnEnum> { 
+enum NutrientColumnEnum with Comparable<NutrientColumnEnum> {
   water('water'),
   k_potassium('k_potassium'),
   na_sodium('na_sodium'),
@@ -174,7 +171,10 @@ enum NutrientColumnEnum with Comparable<NutrientColumnEnum> {
 
   final String value;
 
-  static NutrientColumnEnum fromValue(String? value, {NutrientColumnEnum? fallback}) {
+  static NutrientColumnEnum fromValue(
+    String? value, {
+    NutrientColumnEnum? fallback,
+  }) {
     switch (value) {
       case 'water':
         return water;
@@ -676,341 +676,339 @@ enum NutrientColumnEnum with Comparable<NutrientColumnEnum> {
     required T Function() d2_vitamin_ergocalciferol,
     required T Function() omega_6_20_4,
     required T Function() omega_3_geneico,
-
   }) {
     switch (this) {
       case NutrientColumnEnum.water:
-        return water();     
+        return water();
       case NutrientColumnEnum.k_potassium:
-        return k_potassium();     
+        return k_potassium();
       case NutrientColumnEnum.na_sodium:
-        return na_sodium();     
+        return na_sodium();
       case NutrientColumnEnum.p_phosphorus:
-        return p_phosphorus();     
+        return p_phosphorus();
       case NutrientColumnEnum.ca_calcium:
-        return ca_calcium();     
+        return ca_calcium();
       case NutrientColumnEnum.proteins:
-        return proteins();     
+        return proteins();
       case NutrientColumnEnum.calorie:
-        return calorie();     
+        return calorie();
       case NutrientColumnEnum.carbohydrates:
-        return carbohydrates();     
+        return carbohydrates();
       case NutrientColumnEnum.fats:
-        return fats();     
+        return fats();
       case NutrientColumnEnum.feed_ash:
-        return feed_ash();     
+        return feed_ash();
       case NutrientColumnEnum.a_vitamin:
-        return a_vitamin();     
+        return a_vitamin();
       case NutrientColumnEnum.retinol:
-        return retinol();     
+        return retinol();
       case NutrientColumnEnum.beta_carotene:
-        return beta_carotene();     
+        return beta_carotene();
       case NutrientColumnEnum.b1_vitamin_thiamine:
-        return b1_vitamin_thiamine();     
+        return b1_vitamin_thiamine();
       case NutrientColumnEnum.b2_vitamin_riboflavin:
-        return b2_vitamin_riboflavin();     
+        return b2_vitamin_riboflavin();
       case NutrientColumnEnum.b5_vitamin:
-        return b5_vitamin();     
+        return b5_vitamin();
       case NutrientColumnEnum.b6_vitamin_pyridoxine:
-        return b6_vitamin_pyridoxine();     
+        return b6_vitamin_pyridoxine();
       case NutrientColumnEnum.b9_vitamin_folates:
-        return b9_vitamin_folates();     
+        return b9_vitamin_folates();
       case NutrientColumnEnum.b12_vitamin_cobalamin:
-        return b12_vitamin_cobalamin();     
+        return b12_vitamin_cobalamin();
       case NutrientColumnEnum.c_vitamin:
-        return c_vitamin();     
+        return c_vitamin();
       case NutrientColumnEnum.e_vitamin:
-        return e_vitamin();     
+        return e_vitamin();
       case NutrientColumnEnum.rr_vitamin:
-        return rr_vitamin();     
+        return rr_vitamin();
       case NutrientColumnEnum.niacin:
-        return niacin();     
+        return niacin();
       case NutrientColumnEnum.mg_magnesium:
-        return mg_magnesium();     
+        return mg_magnesium();
       case NutrientColumnEnum.s_sulfur:
-        return s_sulfur();     
+        return s_sulfur();
       case NutrientColumnEnum.cl_chlorine:
-        return cl_chlorine();     
+        return cl_chlorine();
       case NutrientColumnEnum.fe_iron:
-        return fe_iron();     
+        return fe_iron();
       case NutrientColumnEnum.i_iodine:
-        return i_iodine();     
+        return i_iodine();
       case NutrientColumnEnum.co_cobalt:
-        return co_cobalt();     
+        return co_cobalt();
       case NutrientColumnEnum.mn_manganese:
-        return mn_manganese();     
+        return mn_manganese();
       case NutrientColumnEnum.cu_copper:
-        return cu_copper();     
+        return cu_copper();
       case NutrientColumnEnum.mo_molybdenum:
-        return mo_molybdenum();     
+        return mo_molybdenum();
       case NutrientColumnEnum.ni_nickel:
-        return ni_nickel();     
+        return ni_nickel();
       case NutrientColumnEnum.se_selenium:
-        return se_selenium();     
+        return se_selenium();
       case NutrientColumnEnum.f_fluorine:
-        return f_fluorine();     
+        return f_fluorine();
       case NutrientColumnEnum.cr_chrome:
-        return cr_chrome();     
+        return cr_chrome();
       case NutrientColumnEnum.zh_zinc:
-        return zh_zinc();     
+        return zh_zinc();
       case NutrientColumnEnum.cholesterol:
-        return cholesterol();     
+        return cholesterol();
       case NutrientColumnEnum.saturated_fatty_acids:
-        return saturated_fatty_acids();     
+        return saturated_fatty_acids();
       case NutrientColumnEnum.myristina:
-        return myristina();     
+        return myristina();
       case NutrientColumnEnum.palmitic:
-        return palmitic();     
+        return palmitic();
       case NutrientColumnEnum.stearic:
-        return stearic();     
+        return stearic();
       case NutrientColumnEnum.arachinova:
-        return arachinova();     
+        return arachinova();
       case NutrientColumnEnum.mono_fatty_acids:
-        return mono_fatty_acids();     
+        return mono_fatty_acids();
       case NutrientColumnEnum.palmitoleic:
-        return palmitoleic();     
+        return palmitoleic();
       case NutrientColumnEnum.heptadecene:
-        return heptadecene();     
+        return heptadecene();
       case NutrientColumnEnum.omega_9_oleic:
-        return omega_9_oleic();     
+        return omega_9_oleic();
       case NutrientColumnEnum.omega_9_gadolein:
-        return omega_9_gadolein();     
+        return omega_9_gadolein();
       case NutrientColumnEnum.poly_fatty_acids:
-        return poly_fatty_acids();     
+        return poly_fatty_acids();
       case NutrientColumnEnum.linoleic:
-        return linoleic();     
+        return linoleic();
       case NutrientColumnEnum.linolenic:
-        return linolenic();     
+        return linolenic();
       case NutrientColumnEnum.arachidonic:
-        return arachidonic();     
+        return arachidonic();
       case NutrientColumnEnum.omega_3_epk:
-        return omega_3_epk();     
+        return omega_3_epk();
       case NutrientColumnEnum.omega_3_fatty_acids:
-        return omega_3_fatty_acids();     
+        return omega_3_fatty_acids();
       case NutrientColumnEnum.omega_3_dpc:
-        return omega_3_dpc();     
+        return omega_3_dpc();
       case NutrientColumnEnum.omega_6_fatty_acids:
-        return omega_6_fatty_acids();     
+        return omega_6_fatty_acids();
       case NutrientColumnEnum.dietary_fiber:
-        return dietary_fiber();     
+        return dietary_fiber();
       case NutrientColumnEnum.mono_di_saccharides:
-        return mono_di_saccharides();     
+        return mono_di_saccharides();
       case NutrientColumnEnum.organic_acids:
-        return organic_acids();     
+        return organic_acids();
       case NutrientColumnEnum.b4_vitamin:
-        return b4_vitamin();     
+        return b4_vitamin();
       case NutrientColumnEnum.d_Vitamin_calciferol:
-        return d_Vitamin_calciferol();     
+        return d_Vitamin_calciferol();
       case NutrientColumnEnum.h_vitamin_biotin:
-        return h_vitamin_biotin();     
+        return h_vitamin_biotin();
       case NutrientColumnEnum.k_vitamin_phylloquinone:
-        return k_vitamin_phylloquinone();     
+        return k_vitamin_phylloquinone();
       case NutrientColumnEnum.al_aluminium:
-        return al_aluminium();     
+        return al_aluminium();
       case NutrientColumnEnum.sn_tin:
-        return sn_tin();     
+        return sn_tin();
       case NutrientColumnEnum.sr_strontium:
-        return sr_strontium();     
+        return sr_strontium();
       case NutrientColumnEnum.galactose:
-        return galactose();     
+        return galactose();
       case NutrientColumnEnum.glucose_dextrose:
-        return glucose_dextrose();     
+        return glucose_dextrose();
       case NutrientColumnEnum.lactose:
-        return lactose();     
+        return lactose();
       case NutrientColumnEnum.essential_amino_acids:
-        return essential_amino_acids();     
+        return essential_amino_acids();
       case NutrientColumnEnum.arginine:
-        return arginine();     
+        return arginine();
       case NutrientColumnEnum.valin:
-        return valin();     
+        return valin();
       case NutrientColumnEnum.histidine:
-        return histidine();     
+        return histidine();
       case NutrientColumnEnum.isoleucine:
-        return isoleucine();     
+        return isoleucine();
       case NutrientColumnEnum.leucine:
-        return leucine();     
+        return leucine();
       case NutrientColumnEnum.lysine:
-        return lysine();     
+        return lysine();
       case NutrientColumnEnum.methionine:
-        return methionine();     
+        return methionine();
       case NutrientColumnEnum.methionine_cysteine:
-        return methionine_cysteine();     
+        return methionine_cysteine();
       case NutrientColumnEnum.threonine:
-        return threonine();     
+        return threonine();
       case NutrientColumnEnum.tryptophan:
-        return tryptophan();     
+        return tryptophan();
       case NutrientColumnEnum.phenylalanine:
-        return phenylalanine();     
+        return phenylalanine();
       case NutrientColumnEnum.phenylalanine_tyrosine:
-        return phenylalanine_tyrosine();     
+        return phenylalanine_tyrosine();
       case NutrientColumnEnum.substitutable_amino_acids:
-        return substitutable_amino_acids();     
+        return substitutable_amino_acids();
       case NutrientColumnEnum.alanine:
-        return alanine();     
+        return alanine();
       case NutrientColumnEnum.aspartica_acid:
-        return aspartica_acid();     
+        return aspartica_acid();
       case NutrientColumnEnum.glycine:
-        return glycine();     
+        return glycine();
       case NutrientColumnEnum.glutamic_acid:
-        return glutamic_acid();     
+        return glutamic_acid();
       case NutrientColumnEnum.proline:
-        return proline();     
+        return proline();
       case NutrientColumnEnum.serin:
-        return serin();     
+        return serin();
       case NutrientColumnEnum.tyrosine:
-        return tyrosine();     
+        return tyrosine();
       case NutrientColumnEnum.cysteine:
-        return cysteine();     
+        return cysteine();
       case NutrientColumnEnum.oil_4_0:
-        return oil_4_0();     
+        return oil_4_0();
       case NutrientColumnEnum.capron:
-        return capron();     
+        return capron();
       case NutrientColumnEnum.caprylic:
-        return caprylic();     
+        return caprylic();
       case NutrientColumnEnum.caprine:
-        return caprine();     
+        return caprine();
       case NutrientColumnEnum.laurin:
-        return laurin();     
+        return laurin();
       case NutrientColumnEnum.pentadecane:
-        return pentadecane();     
+        return pentadecane();
       case NutrientColumnEnum.margarine:
-        return margarine();     
+        return margarine();
       case NutrientColumnEnum.myristolein:
-        return myristolein();     
+        return myristolein();
       case NutrientColumnEnum.sucrose:
-        return sucrose();     
+        return sucrose();
       case NutrientColumnEnum.trans_fats:
-        return trans_fats();     
+        return trans_fats();
       case NutrientColumnEnum.starch_dextrins:
-        return starch_dextrins();     
+        return starch_dextrins();
       case NutrientColumnEnum.ethyl_alcohol:
-        return ethyl_alcohol();     
+        return ethyl_alcohol();
       case NutrientColumnEnum.si_silicon:
-        return si_silicon();     
+        return si_silicon();
       case NutrientColumnEnum.b_bohr:
-        return b_bohr();     
+        return b_bohr();
       case NutrientColumnEnum.v_vanadium:
-        return v_vanadium();     
+        return v_vanadium();
       case NutrientColumnEnum.li_lithium:
-        return li_lithium();     
+        return li_lithium();
       case NutrientColumnEnum.rb_rubidium:
-        return rb_rubidium();     
+        return rb_rubidium();
       case NutrientColumnEnum.zr_zirconium:
-        return zr_zirconium();     
+        return zr_zirconium();
       case NutrientColumnEnum.omega_9_eruca:
-        return omega_9_eruca();     
+        return omega_9_eruca();
       case NutrientColumnEnum.omega_3_stioride:
-        return omega_3_stioride();     
+        return omega_3_stioride();
       case NutrientColumnEnum.omega_3_Docosahexaeno:
-        return omega_3_Docosahexaeno();     
+        return omega_3_Docosahexaeno();
       case NutrientColumnEnum.beta_sitosterol:
-        return beta_sitosterol();     
+        return beta_sitosterol();
       case NutrientColumnEnum.begenova:
-        return begenova();     
+        return begenova();
       case NutrientColumnEnum.fructose:
-        return fructose();     
+        return fructose();
       case NutrientColumnEnum.maltose:
-        return maltose();     
+        return maltose();
       case NutrientColumnEnum.phytosterols:
-        return phytosterols();     
+        return phytosterols();
       case NutrientColumnEnum.ti_titan:
-        return ti_titan();     
+        return ti_titan();
       case NutrientColumnEnum.hydroxyproline:
-        return hydroxyproline();     
+        return hydroxyproline();
       case NutrientColumnEnum.lignoceric:
-        return lignoceric();     
+        return lignoceric();
       case NutrientColumnEnum.betaine:
-        return betaine();     
+        return betaine();
       case NutrientColumnEnum.monoun_trans_fats:
-        return monoun_trans_fats();     
+        return monoun_trans_fats();
       case NutrientColumnEnum.cis_16_1:
-        return cis_16_1();     
+        return cis_16_1();
       case NutrientColumnEnum.cis_18_1:
-        return cis_18_1();     
+        return cis_18_1();
       case NutrientColumnEnum.trance_18_1:
-        return trance_18_1();     
+        return trance_18_1();
       case NutrientColumnEnum.mixed_isomers:
-        return mixed_isomers();     
+        return mixed_isomers();
       case NutrientColumnEnum.omega_6_cis:
-        return omega_6_cis();     
+        return omega_6_cis();
       case NutrientColumnEnum.conjugated_linoleic_acid:
-        return conjugated_linoleic_acid();     
+        return conjugated_linoleic_acid();
       case NutrientColumnEnum.omega_3_alpha_linolenic:
-        return omega_3_alpha_linolenic();     
+        return omega_3_alpha_linolenic();
       case NutrientColumnEnum.d3_vitamin_cholecalciferol:
-        return d3_vitamin_cholecalciferol();     
+        return d3_vitamin_cholecalciferol();
       case NutrientColumnEnum.alpha_carotene:
-        return alpha_carotene();     
+        return alpha_carotene();
       case NutrientColumnEnum.cryptoxanthin_beta:
-        return cryptoxanthin_beta();     
+        return cryptoxanthin_beta();
       case NutrientColumnEnum.lutein_zeaxanthin:
-        return lutein_zeaxanthin();     
+        return lutein_zeaxanthin();
       case NutrientColumnEnum.beta_tocopherol:
-        return beta_tocopherol();     
+        return beta_tocopherol();
       case NutrientColumnEnum.gamma_tocopherol:
-        return gamma_tocopherol();     
+        return gamma_tocopherol();
       case NutrientColumnEnum.trance_16_1:
-        return trance_16_1();     
+        return trance_16_1();
       case NutrientColumnEnum.cis_22_1:
-        return cis_22_1();     
+        return cis_22_1();
       case NutrientColumnEnum.omega_9_nervone:
-        return omega_9_nervone();     
+        return omega_9_nervone();
       case NutrientColumnEnum.trans_isomer_undefined:
-        return trans_isomer_undefined();     
+        return trans_isomer_undefined();
       case NutrientColumnEnum.omega_6_gamma_linolenic:
-        return omega_6_gamma_linolenic();     
+        return omega_6_gamma_linolenic();
       case NutrientColumnEnum.trance_18_3:
-        return trance_18_3();     
+        return trance_18_3();
       case NutrientColumnEnum.omega_6_eicosadieno:
-        return omega_6_eicosadieno();     
+        return omega_6_eicosadieno();
       case NutrientColumnEnum.eicosatrieno:
-        return eicosatrieno();     
+        return eicosatrieno();
       case NutrientColumnEnum.omega_6_20_3:
-        return omega_6_20_3();     
+        return omega_6_20_3();
       case NutrientColumnEnum.omega_6_docosatetraeno:
-        return omega_6_docosatetraeno();     
+        return omega_6_docosatetraeno();
       case NutrientColumnEnum.lycopene:
-        return lycopene();     
+        return lycopene();
       case NutrientColumnEnum.tocopherol_delta:
-        return tocopherol_delta();     
+        return tocopherol_delta();
       case NutrientColumnEnum.polyun_trans_fats:
-        return polyun_trans_fats();     
+        return polyun_trans_fats();
       case NutrientColumnEnum.tridecane_13_0:
-        return tridecane_13_0();     
+        return tridecane_13_0();
       case NutrientColumnEnum.omega_3:
-        return omega_3();     
+        return omega_3();
       case NutrientColumnEnum.pentadecene:
-        return pentadecene();     
+        return pentadecene();
       case NutrientColumnEnum.caffeine:
-        return caffeine();     
+        return caffeine();
       case NutrientColumnEnum.theobromine:
-        return theobromine();     
+        return theobromine();
       case NutrientColumnEnum.trans_trans:
-        return trans_trans();     
+        return trans_trans();
       case NutrientColumnEnum.menaquinone_4:
-        return menaquinone_4();     
+        return menaquinone_4();
       case NutrientColumnEnum.campesterol:
-        return campesterol();     
+        return campesterol();
       case NutrientColumnEnum.stigmasterol:
-        return stigmasterol();     
+        return stigmasterol();
       case NutrientColumnEnum.e_vitamin_added:
-        return e_vitamin_added();     
+        return e_vitamin_added();
       case NutrientColumnEnum.b12_vitamin_added:
-        return b12_vitamin_added();     
+        return b12_vitamin_added();
       case NutrientColumnEnum.trance_22_1:
-        return trance_22_1();     
+        return trance_22_1();
       case NutrientColumnEnum.dihydrophylloquinone:
-        return dihydrophylloquinone();     
+        return dihydrophylloquinone();
       case NutrientColumnEnum.d2_vitamin_ergocalciferol:
-        return d2_vitamin_ergocalciferol();     
+        return d2_vitamin_ergocalciferol();
       case NutrientColumnEnum.omega_6_20_4:
-        return omega_6_20_4();     
+        return omega_6_20_4();
       case NutrientColumnEnum.omega_3_geneico:
-        return omega_3_geneico();     
-
+        return omega_3_geneico();
     }
   }
-  
+
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
@@ -1178,174 +1176,172 @@ enum NutrientColumnEnum with Comparable<NutrientColumnEnum> {
     T Function()? d2_vitamin_ergocalciferol,
     T Function()? omega_6_20_4,
     T Function()? omega_3_geneico,
-
   }) =>
       map<T>(
-      water: water ?? orElse,     
-      k_potassium: k_potassium ?? orElse,     
-      na_sodium: na_sodium ?? orElse,     
-      p_phosphorus: p_phosphorus ?? orElse,     
-      ca_calcium: ca_calcium ?? orElse,     
-      proteins: proteins ?? orElse,     
-      calorie: calorie ?? orElse,     
-      carbohydrates: carbohydrates ?? orElse,     
-      fats: fats ?? orElse,     
-      feed_ash: feed_ash ?? orElse,     
-      a_vitamin: a_vitamin ?? orElse,     
-      retinol: retinol ?? orElse,     
-      beta_carotene: beta_carotene ?? orElse,     
-      b1_vitamin_thiamine: b1_vitamin_thiamine ?? orElse,     
-      b2_vitamin_riboflavin: b2_vitamin_riboflavin ?? orElse,     
-      b5_vitamin: b5_vitamin ?? orElse,     
-      b6_vitamin_pyridoxine: b6_vitamin_pyridoxine ?? orElse,     
-      b9_vitamin_folates: b9_vitamin_folates ?? orElse,     
-      b12_vitamin_cobalamin: b12_vitamin_cobalamin ?? orElse,     
-      c_vitamin: c_vitamin ?? orElse,     
-      e_vitamin: e_vitamin ?? orElse,     
-      rr_vitamin: rr_vitamin ?? orElse,     
-      niacin: niacin ?? orElse,     
-      mg_magnesium: mg_magnesium ?? orElse,     
-      s_sulfur: s_sulfur ?? orElse,     
-      cl_chlorine: cl_chlorine ?? orElse,     
-      fe_iron: fe_iron ?? orElse,     
-      i_iodine: i_iodine ?? orElse,     
-      co_cobalt: co_cobalt ?? orElse,     
-      mn_manganese: mn_manganese ?? orElse,     
-      cu_copper: cu_copper ?? orElse,     
-      mo_molybdenum: mo_molybdenum ?? orElse,     
-      ni_nickel: ni_nickel ?? orElse,     
-      se_selenium: se_selenium ?? orElse,     
-      f_fluorine: f_fluorine ?? orElse,     
-      cr_chrome: cr_chrome ?? orElse,     
-      zh_zinc: zh_zinc ?? orElse,     
-      cholesterol: cholesterol ?? orElse,     
-      saturated_fatty_acids: saturated_fatty_acids ?? orElse,     
-      myristina: myristina ?? orElse,     
-      palmitic: palmitic ?? orElse,     
-      stearic: stearic ?? orElse,     
-      arachinova: arachinova ?? orElse,     
-      mono_fatty_acids: mono_fatty_acids ?? orElse,     
-      palmitoleic: palmitoleic ?? orElse,     
-      heptadecene: heptadecene ?? orElse,     
-      omega_9_oleic: omega_9_oleic ?? orElse,     
-      omega_9_gadolein: omega_9_gadolein ?? orElse,     
-      poly_fatty_acids: poly_fatty_acids ?? orElse,     
-      linoleic: linoleic ?? orElse,     
-      linolenic: linolenic ?? orElse,     
-      arachidonic: arachidonic ?? orElse,     
-      omega_3_epk: omega_3_epk ?? orElse,     
-      omega_3_fatty_acids: omega_3_fatty_acids ?? orElse,     
-      omega_3_dpc: omega_3_dpc ?? orElse,     
-      omega_6_fatty_acids: omega_6_fatty_acids ?? orElse,     
-      dietary_fiber: dietary_fiber ?? orElse,     
-      mono_di_saccharides: mono_di_saccharides ?? orElse,     
-      organic_acids: organic_acids ?? orElse,     
-      b4_vitamin: b4_vitamin ?? orElse,     
-      d_Vitamin_calciferol: d_Vitamin_calciferol ?? orElse,     
-      h_vitamin_biotin: h_vitamin_biotin ?? orElse,     
-      k_vitamin_phylloquinone: k_vitamin_phylloquinone ?? orElse,     
-      al_aluminium: al_aluminium ?? orElse,     
-      sn_tin: sn_tin ?? orElse,     
-      sr_strontium: sr_strontium ?? orElse,     
-      galactose: galactose ?? orElse,     
-      glucose_dextrose: glucose_dextrose ?? orElse,     
-      lactose: lactose ?? orElse,     
-      essential_amino_acids: essential_amino_acids ?? orElse,     
-      arginine: arginine ?? orElse,     
-      valin: valin ?? orElse,     
-      histidine: histidine ?? orElse,     
-      isoleucine: isoleucine ?? orElse,     
-      leucine: leucine ?? orElse,     
-      lysine: lysine ?? orElse,     
-      methionine: methionine ?? orElse,     
-      methionine_cysteine: methionine_cysteine ?? orElse,     
-      threonine: threonine ?? orElse,     
-      tryptophan: tryptophan ?? orElse,     
-      phenylalanine: phenylalanine ?? orElse,     
-      phenylalanine_tyrosine: phenylalanine_tyrosine ?? orElse,     
-      substitutable_amino_acids: substitutable_amino_acids ?? orElse,     
-      alanine: alanine ?? orElse,     
-      aspartica_acid: aspartica_acid ?? orElse,     
-      glycine: glycine ?? orElse,     
-      glutamic_acid: glutamic_acid ?? orElse,     
-      proline: proline ?? orElse,     
-      serin: serin ?? orElse,     
-      tyrosine: tyrosine ?? orElse,     
-      cysteine: cysteine ?? orElse,     
-      oil_4_0: oil_4_0 ?? orElse,     
-      capron: capron ?? orElse,     
-      caprylic: caprylic ?? orElse,     
-      caprine: caprine ?? orElse,     
-      laurin: laurin ?? orElse,     
-      pentadecane: pentadecane ?? orElse,     
-      margarine: margarine ?? orElse,     
-      myristolein: myristolein ?? orElse,     
-      sucrose: sucrose ?? orElse,     
-      trans_fats: trans_fats ?? orElse,     
-      starch_dextrins: starch_dextrins ?? orElse,     
-      ethyl_alcohol: ethyl_alcohol ?? orElse,     
-      si_silicon: si_silicon ?? orElse,     
-      b_bohr: b_bohr ?? orElse,     
-      v_vanadium: v_vanadium ?? orElse,     
-      li_lithium: li_lithium ?? orElse,     
-      rb_rubidium: rb_rubidium ?? orElse,     
-      zr_zirconium: zr_zirconium ?? orElse,     
-      omega_9_eruca: omega_9_eruca ?? orElse,     
-      omega_3_stioride: omega_3_stioride ?? orElse,     
-      omega_3_Docosahexaeno: omega_3_Docosahexaeno ?? orElse,     
-      beta_sitosterol: beta_sitosterol ?? orElse,     
-      begenova: begenova ?? orElse,     
-      fructose: fructose ?? orElse,     
-      maltose: maltose ?? orElse,     
-      phytosterols: phytosterols ?? orElse,     
-      ti_titan: ti_titan ?? orElse,     
-      hydroxyproline: hydroxyproline ?? orElse,     
-      lignoceric: lignoceric ?? orElse,     
-      betaine: betaine ?? orElse,     
-      monoun_trans_fats: monoun_trans_fats ?? orElse,     
-      cis_16_1: cis_16_1 ?? orElse,     
-      cis_18_1: cis_18_1 ?? orElse,     
-      trance_18_1: trance_18_1 ?? orElse,     
-      mixed_isomers: mixed_isomers ?? orElse,     
-      omega_6_cis: omega_6_cis ?? orElse,     
-      conjugated_linoleic_acid: conjugated_linoleic_acid ?? orElse,     
-      omega_3_alpha_linolenic: omega_3_alpha_linolenic ?? orElse,     
-      d3_vitamin_cholecalciferol: d3_vitamin_cholecalciferol ?? orElse,     
-      alpha_carotene: alpha_carotene ?? orElse,     
-      cryptoxanthin_beta: cryptoxanthin_beta ?? orElse,     
-      lutein_zeaxanthin: lutein_zeaxanthin ?? orElse,     
-      beta_tocopherol: beta_tocopherol ?? orElse,     
-      gamma_tocopherol: gamma_tocopherol ?? orElse,     
-      trance_16_1: trance_16_1 ?? orElse,     
-      cis_22_1: cis_22_1 ?? orElse,     
-      omega_9_nervone: omega_9_nervone ?? orElse,     
-      trans_isomer_undefined: trans_isomer_undefined ?? orElse,     
-      omega_6_gamma_linolenic: omega_6_gamma_linolenic ?? orElse,     
-      trance_18_3: trance_18_3 ?? orElse,     
-      omega_6_eicosadieno: omega_6_eicosadieno ?? orElse,     
-      eicosatrieno: eicosatrieno ?? orElse,     
-      omega_6_20_3: omega_6_20_3 ?? orElse,     
-      omega_6_docosatetraeno: omega_6_docosatetraeno ?? orElse,     
-      lycopene: lycopene ?? orElse,     
-      tocopherol_delta: tocopherol_delta ?? orElse,     
-      polyun_trans_fats: polyun_trans_fats ?? orElse,     
-      tridecane_13_0: tridecane_13_0 ?? orElse,     
-      omega_3: omega_3 ?? orElse,     
-      pentadecene: pentadecene ?? orElse,     
-      caffeine: caffeine ?? orElse,     
-      theobromine: theobromine ?? orElse,     
-      trans_trans: trans_trans ?? orElse,     
-      menaquinone_4: menaquinone_4 ?? orElse,     
-      campesterol: campesterol ?? orElse,     
-      stigmasterol: stigmasterol ?? orElse,     
-      e_vitamin_added: e_vitamin_added ?? orElse,     
-      b12_vitamin_added: b12_vitamin_added ?? orElse,     
-      trance_22_1: trance_22_1 ?? orElse,     
-      dihydrophylloquinone: dihydrophylloquinone ?? orElse,     
-      d2_vitamin_ergocalciferol: d2_vitamin_ergocalciferol ?? orElse,     
-      omega_6_20_4: omega_6_20_4 ?? orElse,     
-      omega_3_geneico: omega_3_geneico ?? orElse,     
-
+        water: water ?? orElse,
+        k_potassium: k_potassium ?? orElse,
+        na_sodium: na_sodium ?? orElse,
+        p_phosphorus: p_phosphorus ?? orElse,
+        ca_calcium: ca_calcium ?? orElse,
+        proteins: proteins ?? orElse,
+        calorie: calorie ?? orElse,
+        carbohydrates: carbohydrates ?? orElse,
+        fats: fats ?? orElse,
+        feed_ash: feed_ash ?? orElse,
+        a_vitamin: a_vitamin ?? orElse,
+        retinol: retinol ?? orElse,
+        beta_carotene: beta_carotene ?? orElse,
+        b1_vitamin_thiamine: b1_vitamin_thiamine ?? orElse,
+        b2_vitamin_riboflavin: b2_vitamin_riboflavin ?? orElse,
+        b5_vitamin: b5_vitamin ?? orElse,
+        b6_vitamin_pyridoxine: b6_vitamin_pyridoxine ?? orElse,
+        b9_vitamin_folates: b9_vitamin_folates ?? orElse,
+        b12_vitamin_cobalamin: b12_vitamin_cobalamin ?? orElse,
+        c_vitamin: c_vitamin ?? orElse,
+        e_vitamin: e_vitamin ?? orElse,
+        rr_vitamin: rr_vitamin ?? orElse,
+        niacin: niacin ?? orElse,
+        mg_magnesium: mg_magnesium ?? orElse,
+        s_sulfur: s_sulfur ?? orElse,
+        cl_chlorine: cl_chlorine ?? orElse,
+        fe_iron: fe_iron ?? orElse,
+        i_iodine: i_iodine ?? orElse,
+        co_cobalt: co_cobalt ?? orElse,
+        mn_manganese: mn_manganese ?? orElse,
+        cu_copper: cu_copper ?? orElse,
+        mo_molybdenum: mo_molybdenum ?? orElse,
+        ni_nickel: ni_nickel ?? orElse,
+        se_selenium: se_selenium ?? orElse,
+        f_fluorine: f_fluorine ?? orElse,
+        cr_chrome: cr_chrome ?? orElse,
+        zh_zinc: zh_zinc ?? orElse,
+        cholesterol: cholesterol ?? orElse,
+        saturated_fatty_acids: saturated_fatty_acids ?? orElse,
+        myristina: myristina ?? orElse,
+        palmitic: palmitic ?? orElse,
+        stearic: stearic ?? orElse,
+        arachinova: arachinova ?? orElse,
+        mono_fatty_acids: mono_fatty_acids ?? orElse,
+        palmitoleic: palmitoleic ?? orElse,
+        heptadecene: heptadecene ?? orElse,
+        omega_9_oleic: omega_9_oleic ?? orElse,
+        omega_9_gadolein: omega_9_gadolein ?? orElse,
+        poly_fatty_acids: poly_fatty_acids ?? orElse,
+        linoleic: linoleic ?? orElse,
+        linolenic: linolenic ?? orElse,
+        arachidonic: arachidonic ?? orElse,
+        omega_3_epk: omega_3_epk ?? orElse,
+        omega_3_fatty_acids: omega_3_fatty_acids ?? orElse,
+        omega_3_dpc: omega_3_dpc ?? orElse,
+        omega_6_fatty_acids: omega_6_fatty_acids ?? orElse,
+        dietary_fiber: dietary_fiber ?? orElse,
+        mono_di_saccharides: mono_di_saccharides ?? orElse,
+        organic_acids: organic_acids ?? orElse,
+        b4_vitamin: b4_vitamin ?? orElse,
+        d_Vitamin_calciferol: d_Vitamin_calciferol ?? orElse,
+        h_vitamin_biotin: h_vitamin_biotin ?? orElse,
+        k_vitamin_phylloquinone: k_vitamin_phylloquinone ?? orElse,
+        al_aluminium: al_aluminium ?? orElse,
+        sn_tin: sn_tin ?? orElse,
+        sr_strontium: sr_strontium ?? orElse,
+        galactose: galactose ?? orElse,
+        glucose_dextrose: glucose_dextrose ?? orElse,
+        lactose: lactose ?? orElse,
+        essential_amino_acids: essential_amino_acids ?? orElse,
+        arginine: arginine ?? orElse,
+        valin: valin ?? orElse,
+        histidine: histidine ?? orElse,
+        isoleucine: isoleucine ?? orElse,
+        leucine: leucine ?? orElse,
+        lysine: lysine ?? orElse,
+        methionine: methionine ?? orElse,
+        methionine_cysteine: methionine_cysteine ?? orElse,
+        threonine: threonine ?? orElse,
+        tryptophan: tryptophan ?? orElse,
+        phenylalanine: phenylalanine ?? orElse,
+        phenylalanine_tyrosine: phenylalanine_tyrosine ?? orElse,
+        substitutable_amino_acids: substitutable_amino_acids ?? orElse,
+        alanine: alanine ?? orElse,
+        aspartica_acid: aspartica_acid ?? orElse,
+        glycine: glycine ?? orElse,
+        glutamic_acid: glutamic_acid ?? orElse,
+        proline: proline ?? orElse,
+        serin: serin ?? orElse,
+        tyrosine: tyrosine ?? orElse,
+        cysteine: cysteine ?? orElse,
+        oil_4_0: oil_4_0 ?? orElse,
+        capron: capron ?? orElse,
+        caprylic: caprylic ?? orElse,
+        caprine: caprine ?? orElse,
+        laurin: laurin ?? orElse,
+        pentadecane: pentadecane ?? orElse,
+        margarine: margarine ?? orElse,
+        myristolein: myristolein ?? orElse,
+        sucrose: sucrose ?? orElse,
+        trans_fats: trans_fats ?? orElse,
+        starch_dextrins: starch_dextrins ?? orElse,
+        ethyl_alcohol: ethyl_alcohol ?? orElse,
+        si_silicon: si_silicon ?? orElse,
+        b_bohr: b_bohr ?? orElse,
+        v_vanadium: v_vanadium ?? orElse,
+        li_lithium: li_lithium ?? orElse,
+        rb_rubidium: rb_rubidium ?? orElse,
+        zr_zirconium: zr_zirconium ?? orElse,
+        omega_9_eruca: omega_9_eruca ?? orElse,
+        omega_3_stioride: omega_3_stioride ?? orElse,
+        omega_3_Docosahexaeno: omega_3_Docosahexaeno ?? orElse,
+        beta_sitosterol: beta_sitosterol ?? orElse,
+        begenova: begenova ?? orElse,
+        fructose: fructose ?? orElse,
+        maltose: maltose ?? orElse,
+        phytosterols: phytosterols ?? orElse,
+        ti_titan: ti_titan ?? orElse,
+        hydroxyproline: hydroxyproline ?? orElse,
+        lignoceric: lignoceric ?? orElse,
+        betaine: betaine ?? orElse,
+        monoun_trans_fats: monoun_trans_fats ?? orElse,
+        cis_16_1: cis_16_1 ?? orElse,
+        cis_18_1: cis_18_1 ?? orElse,
+        trance_18_1: trance_18_1 ?? orElse,
+        mixed_isomers: mixed_isomers ?? orElse,
+        omega_6_cis: omega_6_cis ?? orElse,
+        conjugated_linoleic_acid: conjugated_linoleic_acid ?? orElse,
+        omega_3_alpha_linolenic: omega_3_alpha_linolenic ?? orElse,
+        d3_vitamin_cholecalciferol: d3_vitamin_cholecalciferol ?? orElse,
+        alpha_carotene: alpha_carotene ?? orElse,
+        cryptoxanthin_beta: cryptoxanthin_beta ?? orElse,
+        lutein_zeaxanthin: lutein_zeaxanthin ?? orElse,
+        beta_tocopherol: beta_tocopherol ?? orElse,
+        gamma_tocopherol: gamma_tocopherol ?? orElse,
+        trance_16_1: trance_16_1 ?? orElse,
+        cis_22_1: cis_22_1 ?? orElse,
+        omega_9_nervone: omega_9_nervone ?? orElse,
+        trans_isomer_undefined: trans_isomer_undefined ?? orElse,
+        omega_6_gamma_linolenic: omega_6_gamma_linolenic ?? orElse,
+        trance_18_3: trance_18_3 ?? orElse,
+        omega_6_eicosadieno: omega_6_eicosadieno ?? orElse,
+        eicosatrieno: eicosatrieno ?? orElse,
+        omega_6_20_3: omega_6_20_3 ?? orElse,
+        omega_6_docosatetraeno: omega_6_docosatetraeno ?? orElse,
+        lycopene: lycopene ?? orElse,
+        tocopherol_delta: tocopherol_delta ?? orElse,
+        polyun_trans_fats: polyun_trans_fats ?? orElse,
+        tridecane_13_0: tridecane_13_0 ?? orElse,
+        omega_3: omega_3 ?? orElse,
+        pentadecene: pentadecene ?? orElse,
+        caffeine: caffeine ?? orElse,
+        theobromine: theobromine ?? orElse,
+        trans_trans: trans_trans ?? orElse,
+        menaquinone_4: menaquinone_4 ?? orElse,
+        campesterol: campesterol ?? orElse,
+        stigmasterol: stigmasterol ?? orElse,
+        e_vitamin_added: e_vitamin_added ?? orElse,
+        b12_vitamin_added: b12_vitamin_added ?? orElse,
+        trance_22_1: trance_22_1 ?? orElse,
+        dihydrophylloquinone: dihydrophylloquinone ?? orElse,
+        d2_vitamin_ergocalciferol: d2_vitamin_ergocalciferol ?? orElse,
+        omega_6_20_4: omega_6_20_4 ?? orElse,
+        omega_3_geneico: omega_3_geneico ?? orElse,
       );
 
   /// Pattern matching
@@ -1514,175 +1510,173 @@ enum NutrientColumnEnum with Comparable<NutrientColumnEnum> {
     T Function()? d2_vitamin_ergocalciferol,
     T Function()? omega_6_20_4,
     T Function()? omega_3_geneico,
-
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        water: water,  
-        k_potassium: k_potassium,  
-        na_sodium: na_sodium,  
-        p_phosphorus: p_phosphorus,  
-        ca_calcium: ca_calcium,  
-        proteins: proteins,  
-        calorie: calorie,  
-        carbohydrates: carbohydrates,  
-        fats: fats,  
-        feed_ash: feed_ash,  
-        a_vitamin: a_vitamin,  
-        retinol: retinol,  
-        beta_carotene: beta_carotene,  
-        b1_vitamin_thiamine: b1_vitamin_thiamine,  
-        b2_vitamin_riboflavin: b2_vitamin_riboflavin,  
-        b5_vitamin: b5_vitamin,  
-        b6_vitamin_pyridoxine: b6_vitamin_pyridoxine,  
-        b9_vitamin_folates: b9_vitamin_folates,  
-        b12_vitamin_cobalamin: b12_vitamin_cobalamin,  
-        c_vitamin: c_vitamin,  
-        e_vitamin: e_vitamin,  
-        rr_vitamin: rr_vitamin,  
-        niacin: niacin,  
-        mg_magnesium: mg_magnesium,  
-        s_sulfur: s_sulfur,  
-        cl_chlorine: cl_chlorine,  
-        fe_iron: fe_iron,  
-        i_iodine: i_iodine,  
-        co_cobalt: co_cobalt,  
-        mn_manganese: mn_manganese,  
-        cu_copper: cu_copper,  
-        mo_molybdenum: mo_molybdenum,  
-        ni_nickel: ni_nickel,  
-        se_selenium: se_selenium,  
-        f_fluorine: f_fluorine,  
-        cr_chrome: cr_chrome,  
-        zh_zinc: zh_zinc,  
-        cholesterol: cholesterol,  
-        saturated_fatty_acids: saturated_fatty_acids,  
-        myristina: myristina,  
-        palmitic: palmitic,  
-        stearic: stearic,  
-        arachinova: arachinova,  
-        mono_fatty_acids: mono_fatty_acids,  
-        palmitoleic: palmitoleic,  
-        heptadecene: heptadecene,  
-        omega_9_oleic: omega_9_oleic,  
-        omega_9_gadolein: omega_9_gadolein,  
-        poly_fatty_acids: poly_fatty_acids,  
-        linoleic: linoleic,  
-        linolenic: linolenic,  
-        arachidonic: arachidonic,  
-        omega_3_epk: omega_3_epk,  
-        omega_3_fatty_acids: omega_3_fatty_acids,  
-        omega_3_dpc: omega_3_dpc,  
-        omega_6_fatty_acids: omega_6_fatty_acids,  
-        dietary_fiber: dietary_fiber,  
-        mono_di_saccharides: mono_di_saccharides,  
-        organic_acids: organic_acids,  
-        b4_vitamin: b4_vitamin,  
-        d_Vitamin_calciferol: d_Vitamin_calciferol,  
-        h_vitamin_biotin: h_vitamin_biotin,  
-        k_vitamin_phylloquinone: k_vitamin_phylloquinone,  
-        al_aluminium: al_aluminium,  
-        sn_tin: sn_tin,  
-        sr_strontium: sr_strontium,  
-        galactose: galactose,  
-        glucose_dextrose: glucose_dextrose,  
-        lactose: lactose,  
-        essential_amino_acids: essential_amino_acids,  
-        arginine: arginine,  
-        valin: valin,  
-        histidine: histidine,  
-        isoleucine: isoleucine,  
-        leucine: leucine,  
-        lysine: lysine,  
-        methionine: methionine,  
-        methionine_cysteine: methionine_cysteine,  
-        threonine: threonine,  
-        tryptophan: tryptophan,  
-        phenylalanine: phenylalanine,  
-        phenylalanine_tyrosine: phenylalanine_tyrosine,  
-        substitutable_amino_acids: substitutable_amino_acids,  
-        alanine: alanine,  
-        aspartica_acid: aspartica_acid,  
-        glycine: glycine,  
-        glutamic_acid: glutamic_acid,  
-        proline: proline,  
-        serin: serin,  
-        tyrosine: tyrosine,  
-        cysteine: cysteine,  
-        oil_4_0: oil_4_0,  
-        capron: capron,  
-        caprylic: caprylic,  
-        caprine: caprine,  
-        laurin: laurin,  
-        pentadecane: pentadecane,  
-        margarine: margarine,  
-        myristolein: myristolein,  
-        sucrose: sucrose,  
-        trans_fats: trans_fats,  
-        starch_dextrins: starch_dextrins,  
-        ethyl_alcohol: ethyl_alcohol,  
-        si_silicon: si_silicon,  
-        b_bohr: b_bohr,  
-        v_vanadium: v_vanadium,  
-        li_lithium: li_lithium,  
-        rb_rubidium: rb_rubidium,  
-        zr_zirconium: zr_zirconium,  
-        omega_9_eruca: omega_9_eruca,  
-        omega_3_stioride: omega_3_stioride,  
-        omega_3_Docosahexaeno: omega_3_Docosahexaeno,  
-        beta_sitosterol: beta_sitosterol,  
-        begenova: begenova,  
-        fructose: fructose,  
-        maltose: maltose,  
-        phytosterols: phytosterols,  
-        ti_titan: ti_titan,  
-        hydroxyproline: hydroxyproline,  
-        lignoceric: lignoceric,  
-        betaine: betaine,  
-        monoun_trans_fats: monoun_trans_fats,  
-        cis_16_1: cis_16_1,  
-        cis_18_1: cis_18_1,  
-        trance_18_1: trance_18_1,  
-        mixed_isomers: mixed_isomers,  
-        omega_6_cis: omega_6_cis,  
-        conjugated_linoleic_acid: conjugated_linoleic_acid,  
-        omega_3_alpha_linolenic: omega_3_alpha_linolenic,  
-        d3_vitamin_cholecalciferol: d3_vitamin_cholecalciferol,  
-        alpha_carotene: alpha_carotene,  
-        cryptoxanthin_beta: cryptoxanthin_beta,  
-        lutein_zeaxanthin: lutein_zeaxanthin,  
-        beta_tocopherol: beta_tocopherol,  
-        gamma_tocopherol: gamma_tocopherol,  
-        trance_16_1: trance_16_1,  
-        cis_22_1: cis_22_1,  
-        omega_9_nervone: omega_9_nervone,  
-        trans_isomer_undefined: trans_isomer_undefined,  
-        omega_6_gamma_linolenic: omega_6_gamma_linolenic,  
-        trance_18_3: trance_18_3,  
-        omega_6_eicosadieno: omega_6_eicosadieno,  
-        eicosatrieno: eicosatrieno,  
-        omega_6_20_3: omega_6_20_3,  
-        omega_6_docosatetraeno: omega_6_docosatetraeno,  
-        lycopene: lycopene,  
-        tocopherol_delta: tocopherol_delta,  
-        polyun_trans_fats: polyun_trans_fats,  
-        tridecane_13_0: tridecane_13_0,  
-        omega_3: omega_3,  
-        pentadecene: pentadecene,  
-        caffeine: caffeine,  
-        theobromine: theobromine,  
-        trans_trans: trans_trans,  
-        menaquinone_4: menaquinone_4,  
-        campesterol: campesterol,  
-        stigmasterol: stigmasterol,  
-        e_vitamin_added: e_vitamin_added,  
-        b12_vitamin_added: b12_vitamin_added,  
-        trance_22_1: trance_22_1,  
-        dihydrophylloquinone: dihydrophylloquinone,  
-        d2_vitamin_ergocalciferol: d2_vitamin_ergocalciferol,  
-        omega_6_20_4: omega_6_20_4,  
-        omega_3_geneico: omega_3_geneico,  
-        
+        water: water,
+        k_potassium: k_potassium,
+        na_sodium: na_sodium,
+        p_phosphorus: p_phosphorus,
+        ca_calcium: ca_calcium,
+        proteins: proteins,
+        calorie: calorie,
+        carbohydrates: carbohydrates,
+        fats: fats,
+        feed_ash: feed_ash,
+        a_vitamin: a_vitamin,
+        retinol: retinol,
+        beta_carotene: beta_carotene,
+        b1_vitamin_thiamine: b1_vitamin_thiamine,
+        b2_vitamin_riboflavin: b2_vitamin_riboflavin,
+        b5_vitamin: b5_vitamin,
+        b6_vitamin_pyridoxine: b6_vitamin_pyridoxine,
+        b9_vitamin_folates: b9_vitamin_folates,
+        b12_vitamin_cobalamin: b12_vitamin_cobalamin,
+        c_vitamin: c_vitamin,
+        e_vitamin: e_vitamin,
+        rr_vitamin: rr_vitamin,
+        niacin: niacin,
+        mg_magnesium: mg_magnesium,
+        s_sulfur: s_sulfur,
+        cl_chlorine: cl_chlorine,
+        fe_iron: fe_iron,
+        i_iodine: i_iodine,
+        co_cobalt: co_cobalt,
+        mn_manganese: mn_manganese,
+        cu_copper: cu_copper,
+        mo_molybdenum: mo_molybdenum,
+        ni_nickel: ni_nickel,
+        se_selenium: se_selenium,
+        f_fluorine: f_fluorine,
+        cr_chrome: cr_chrome,
+        zh_zinc: zh_zinc,
+        cholesterol: cholesterol,
+        saturated_fatty_acids: saturated_fatty_acids,
+        myristina: myristina,
+        palmitic: palmitic,
+        stearic: stearic,
+        arachinova: arachinova,
+        mono_fatty_acids: mono_fatty_acids,
+        palmitoleic: palmitoleic,
+        heptadecene: heptadecene,
+        omega_9_oleic: omega_9_oleic,
+        omega_9_gadolein: omega_9_gadolein,
+        poly_fatty_acids: poly_fatty_acids,
+        linoleic: linoleic,
+        linolenic: linolenic,
+        arachidonic: arachidonic,
+        omega_3_epk: omega_3_epk,
+        omega_3_fatty_acids: omega_3_fatty_acids,
+        omega_3_dpc: omega_3_dpc,
+        omega_6_fatty_acids: omega_6_fatty_acids,
+        dietary_fiber: dietary_fiber,
+        mono_di_saccharides: mono_di_saccharides,
+        organic_acids: organic_acids,
+        b4_vitamin: b4_vitamin,
+        d_Vitamin_calciferol: d_Vitamin_calciferol,
+        h_vitamin_biotin: h_vitamin_biotin,
+        k_vitamin_phylloquinone: k_vitamin_phylloquinone,
+        al_aluminium: al_aluminium,
+        sn_tin: sn_tin,
+        sr_strontium: sr_strontium,
+        galactose: galactose,
+        glucose_dextrose: glucose_dextrose,
+        lactose: lactose,
+        essential_amino_acids: essential_amino_acids,
+        arginine: arginine,
+        valin: valin,
+        histidine: histidine,
+        isoleucine: isoleucine,
+        leucine: leucine,
+        lysine: lysine,
+        methionine: methionine,
+        methionine_cysteine: methionine_cysteine,
+        threonine: threonine,
+        tryptophan: tryptophan,
+        phenylalanine: phenylalanine,
+        phenylalanine_tyrosine: phenylalanine_tyrosine,
+        substitutable_amino_acids: substitutable_amino_acids,
+        alanine: alanine,
+        aspartica_acid: aspartica_acid,
+        glycine: glycine,
+        glutamic_acid: glutamic_acid,
+        proline: proline,
+        serin: serin,
+        tyrosine: tyrosine,
+        cysteine: cysteine,
+        oil_4_0: oil_4_0,
+        capron: capron,
+        caprylic: caprylic,
+        caprine: caprine,
+        laurin: laurin,
+        pentadecane: pentadecane,
+        margarine: margarine,
+        myristolein: myristolein,
+        sucrose: sucrose,
+        trans_fats: trans_fats,
+        starch_dextrins: starch_dextrins,
+        ethyl_alcohol: ethyl_alcohol,
+        si_silicon: si_silicon,
+        b_bohr: b_bohr,
+        v_vanadium: v_vanadium,
+        li_lithium: li_lithium,
+        rb_rubidium: rb_rubidium,
+        zr_zirconium: zr_zirconium,
+        omega_9_eruca: omega_9_eruca,
+        omega_3_stioride: omega_3_stioride,
+        omega_3_Docosahexaeno: omega_3_Docosahexaeno,
+        beta_sitosterol: beta_sitosterol,
+        begenova: begenova,
+        fructose: fructose,
+        maltose: maltose,
+        phytosterols: phytosterols,
+        ti_titan: ti_titan,
+        hydroxyproline: hydroxyproline,
+        lignoceric: lignoceric,
+        betaine: betaine,
+        monoun_trans_fats: monoun_trans_fats,
+        cis_16_1: cis_16_1,
+        cis_18_1: cis_18_1,
+        trance_18_1: trance_18_1,
+        mixed_isomers: mixed_isomers,
+        omega_6_cis: omega_6_cis,
+        conjugated_linoleic_acid: conjugated_linoleic_acid,
+        omega_3_alpha_linolenic: omega_3_alpha_linolenic,
+        d3_vitamin_cholecalciferol: d3_vitamin_cholecalciferol,
+        alpha_carotene: alpha_carotene,
+        cryptoxanthin_beta: cryptoxanthin_beta,
+        lutein_zeaxanthin: lutein_zeaxanthin,
+        beta_tocopherol: beta_tocopherol,
+        gamma_tocopherol: gamma_tocopherol,
+        trance_16_1: trance_16_1,
+        cis_22_1: cis_22_1,
+        omega_9_nervone: omega_9_nervone,
+        trans_isomer_undefined: trans_isomer_undefined,
+        omega_6_gamma_linolenic: omega_6_gamma_linolenic,
+        trance_18_3: trance_18_3,
+        omega_6_eicosadieno: omega_6_eicosadieno,
+        eicosatrieno: eicosatrieno,
+        omega_6_20_3: omega_6_20_3,
+        omega_6_docosatetraeno: omega_6_docosatetraeno,
+        lycopene: lycopene,
+        tocopherol_delta: tocopherol_delta,
+        polyun_trans_fats: polyun_trans_fats,
+        tridecane_13_0: tridecane_13_0,
+        omega_3: omega_3,
+        pentadecene: pentadecene,
+        caffeine: caffeine,
+        theobromine: theobromine,
+        trans_trans: trans_trans,
+        menaquinone_4: menaquinone_4,
+        campesterol: campesterol,
+        stigmasterol: stigmasterol,
+        e_vitamin_added: e_vitamin_added,
+        b12_vitamin_added: b12_vitamin_added,
+        trance_22_1: trance_22_1,
+        dihydrophylloquinone: dihydrophylloquinone,
+        d2_vitamin_ergocalciferol: d2_vitamin_ergocalciferol,
+        omega_6_20_4: omega_6_20_4,
+        omega_3_geneico: omega_3_geneico,
       );
 
   @override
@@ -1690,173 +1684,4 @@ enum NutrientColumnEnum with Comparable<NutrientColumnEnum> {
 
   @override
   String toString() => value;
-   }
-  /*
-  enum ColumnEnum {
-  water,
-  k_potassium,
-  na_sodium,
-  p_phosphorus,
-  ca_calcium,
-  proteins,
-  calorie,
-  carbohydrates,
-  fats,
-  feed_ash,
-  a_vitamin,
-  retinol,
-  beta_carotene,
-  b1_vitamin_thiamine,
-  b2_vitamin_riboflavin,
-  b5_vitamin,
-  b6_vitamin_pyridoxine,
-  b9_vitamin_folates,
-  b12_vitamin_cobalamin,
-  c_vitamin,
-  e_vitamin,
-  rr_vitamin,
-  niacin,
-  mg_magnesium,
-  s_sulfur,
-  cl_chlorine,
-  fe_iron,
-  i_iodine,
-  co_cobalt,
-  mn_manganese,
-  cu_copper,
-  mo_molybdenum,
-  ni_nickel,
-  se_selenium,
-  f_fluorine,
-  cr_chrome,
-  zh_zinc,
-  cholesterol,
-  saturated_fatty_acids,
-  myristina,
-  palmitic,
-  stearic,
-  arachinova,
-  mono_fatty_acids,
-  palmitoleic,
-  heptadecene,
-  omega_9_oleic,
-  omega_9_gadolein,
-  poly_fatty_acids,
-  linoleic,
-  linolenic,
-  arachidonic,
-  omega_3_epk,
-  omega_3_fatty_acids,
-  omega_3_dpc,
-  omega_6_fatty_acids,
-  dietary_fiber,
-  mono_di_saccharides,
-  organic_acids,
-  b4_vitamin,
-  d_Vitamin_calciferol,
-  h_vitamin_biotin,
-  k_vitamin_phylloquinone,
-  al_aluminium,
-  sn_tin,
-  sr_strontium,
-  galactose,
-  glucose_dextrose,
-  lactose,
-  essential_amino_acids,
-  arginine,
-  valin,
-  histidine,
-  isoleucine,
-  leucine,
-  lysine,
-  methionine,
-  methionine_cysteine,
-  threonine,
-  tryptophan,
-  phenylalanine,
-  phenylalanine_tyrosine,
-  substitutable_amino_acids,
-  alanine,
-  aspartica_acid,
-  glycine,
-  glutamic_acid,
-  proline,
-  serin,
-  tyrosine,
-  cysteine,
-  oil_4_0,
-  capron,
-  caprylic,
-  caprine,
-  laurin,
-  pentadecane,
-  margarine,
-  myristolein,
-  sucrose,
-  trans_fats,
-  starch_dextrins,
-  ethyl_alcohol,
-  si_silicon,
-  b_bohr,
-  v_vanadium,
-  li_lithium,
-  rb_rubidium,
-  zr_zirconium,
-  omega_9_eruca,
-  omega_3_stioride,
-  omega_3_Docosahexaeno,
-  beta_sitosterol,
-  begenova,
-  fructose,
-  maltose,
-  phytosterols,
-  ti_titan,
-  hydroxyproline,
-  lignoceric,
-  betaine,
-  monoun_trans_fats,
-  cis_16_1,
-  cis_18_1,
-  trance_18_1,
-  mixed_isomers,
-  omega_6_cis,
-  conjugated_linoleic_acid,
-  omega_3_alpha_linolenic,
-  d3_vitamin_cholecalciferol,
-  alpha_carotene,
-  cryptoxanthin_beta,
-  lutein_zeaxanthin,
-  beta_tocopherol,
-  gamma_tocopherol,
-  trance_16_1,
-  cis_22_1,
-  omega_9_nervone,
-  trans_isomer_undefined,
-  omega_6_gamma_linolenic,
-  trance_18_3,
-  omega_6_eicosadieno,
-  eicosatrieno,
-  omega_6_20_3,
-  omega_6_docosatetraeno,
-  lycopene,
-  tocopherol_delta,
-  polyun_trans_fats,
-  tridecane_13_0,
-  omega_3,
-  pentadecene,
-  caffeine,
-  theobromine,
-  trans_trans,
-  menaquinone_4,
-  campesterol,
-  stigmasterol,
-  e_vitamin_added,
-  b12_vitamin_added,
-  trance_22_1,
-  dihydrophylloquinone,
-  d2_vitamin_ergocalciferol,
-  omega_6_20_4,
-  omega_3_geneico
 }
-  */
-  

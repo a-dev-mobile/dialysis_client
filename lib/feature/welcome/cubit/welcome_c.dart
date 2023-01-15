@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, lines_longer_than_80_chars
 
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+
 
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 
@@ -10,6 +10,9 @@ import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/navigation/navigation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'welcome_c.freezed.dart';
+part 'welcome_c.g.dart';
 
 class WelcomeCubit extends Cubit<WelcomeState> {
   WelcomeCubit({
@@ -21,6 +24,8 @@ class WelcomeCubit extends Cubit<WelcomeState> {
         _cubitLocale = cubitLocale,
         super(
           WelcomeState(
+            boolsLocale: const [],
+            boolsTheme: const [],
             localeActive: cubitLocale.state,
             themeActive: cubitTheme.state,
           ),
@@ -37,17 +42,9 @@ class WelcomeCubit extends Cubit<WelcomeState> {
     var boolsLocale = state.boolsLocale;
     var boolsTheme = state.boolsTheme;
 
-    if (theme == ThemeMode.light) {
-      boolsTheme = [true, false];
-    } else {
-      boolsTheme = [false, true];
-    }
+    boolsTheme = theme == ThemeMode.light ? [true, false] : [false, true];
 
-    if (locale == LocaleEnum.ru) {
-      boolsLocale = [false, true];
-    } else {
-      boolsLocale = [true, false];
-    }
+    boolsLocale = locale == LocaleEnum.ru ? [false, true] : [true, false];
 
     emit(state.copyWith(boolsLocale: boolsLocale, boolsTheme: boolsTheme));
   }
@@ -66,6 +63,7 @@ class WelcomeCubit extends Cubit<WelcomeState> {
     for (var i = 0; i < bools.length; i++) {
       bools[i] = i == index;
     }
+
     return bools;
   }
 
@@ -83,97 +81,21 @@ class WelcomeCubit extends Cubit<WelcomeState> {
   }
 
   void nextPage() {
-
     _go.router.pushNamed(RegistrationPage.name);
-
-
   }
 }
 
-@immutable
-class WelcomeState {
-  final List<bool> boolsLocale;
-  final List<bool> boolsTheme;
-  final LocaleEnum localeActive;
+@Freezed(makeCollectionsUnmodifiable: false)
+class WelcomeState with _$WelcomeState {
+  const factory WelcomeState({
+    required List<bool> boolsLocale,
+    required List<bool> boolsTheme,
+    required LocaleEnum localeActive,
+    required ThemeMode themeActive,
+  }) = _WelcomeState;
 
-  final ThemeMode themeActive;
-  const WelcomeState({
-    this.boolsLocale = const [],
-    this.boolsTheme = const [],
-    required this.localeActive,
-    required this.themeActive,
-  });
 
-  WelcomeState copyWith({
-    List<bool>? boolsLocale,
-    List<bool>? boolsTheme,
-    LocaleEnum? localeActive,
-    ThemeMode? themeActive,
-  }) {
-    return WelcomeState(
-      boolsLocale: boolsLocale ?? this.boolsLocale,
-      boolsTheme: boolsTheme ?? this.boolsTheme,
-      localeActive: localeActive ?? this.localeActive,
-      themeActive: themeActive ?? this.themeActive,
-    );
-  }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'boolsLocale': boolsLocale,
-      'boolsTheme': boolsTheme,
-      'localeActive': localeActive.index,
-      'themeActive': themeActive.index,
-    };
-  }
-
-  factory WelcomeState.fromMap(Map<String, dynamic> map) {
-    return WelcomeState(
-      boolsLocale: List<bool>.of(map['boolsLocale'] as List<bool>),
-      boolsTheme: List<bool>.of(map['boolsTheme'] as List<bool>),
-      localeActive: LocaleEnum.values[map['localeActive'] as int],
-      themeActive: ThemeMode.values[map['themeActive'] as int],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory WelcomeState.fromJson(String source) =>
-      WelcomeState.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'WelcomeState(boolsLocale: $boolsLocale, boolsTheme: $boolsTheme, localeActive: $localeActive, themeActive: $themeActive)';
-  }
-
-  @override
-  bool operator ==(covariant WelcomeState other) {
-    if (identical(this, other)) return true;
-
-    return listEquals(other.boolsLocale, boolsLocale) &&
-        listEquals(other.boolsTheme, boolsTheme) &&
-        other.localeActive == localeActive &&
-        other.themeActive == themeActive;
-  }
-
-  @override
-  int get hashCode {
-    return boolsLocale.hashCode ^
-        boolsTheme.hashCode ^
-        localeActive.hashCode ^
-        themeActive.hashCode;
-  }
+  factory WelcomeState.fromJson(Map<String, Object?> json) =>
+      _$WelcomeStateFromJson(json);
 }
-
-
-
-
-// @freezed
-// class WelcomeState with _$WelcomeState {
-//   const factory WelcomeState({
-//     @Default([]) List<bool> boolsLocale,
-//     @Default([]) List<bool> boolsTheme,
-//     required LocaleEnum localeActive,
-//     required ThemeMode themeActive,
-//   }) = _WelcomeState;
-// }

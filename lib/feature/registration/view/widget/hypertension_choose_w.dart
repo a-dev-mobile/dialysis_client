@@ -1,6 +1,5 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-
 import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/registration/registration.dart';
@@ -22,16 +21,17 @@ class HypertensionChoose extends StatelessWidget {
     return CardCustom(
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
         buildWhen: (p, c) =>
-            p.validHypertensionFormz.isPure != c.validHypertensionFormz.isPure ||
+            p.validHypertensionFormz.isPure !=
+                c.validHypertensionFormz.isPure ||
             p.validHypertensionFormz.value != c.validHypertensionFormz.value,
         builder: (context, state) {
           final valid = state.validHypertensionFormz;
-    
+
           return BtnToggleText(
             textList: [l.yes_caps, l.no_caps],
             isSelected: state.hypertensionSelected,
             onPressed: cubit.checkHypertension,
-            dialogText:l.info_hypertension,
+            dialogText: l.info_hypertension,
             errorText: valid.isPure
                 ? null
                 : valid.error == valid.notSelected

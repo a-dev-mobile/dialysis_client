@@ -1,4 +1,3 @@
-
 import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:dialysis/l10n/l10n.dart';

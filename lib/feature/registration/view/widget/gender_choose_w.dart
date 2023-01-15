@@ -1,6 +1,5 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-
 import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/registration/registration.dart';
@@ -26,7 +25,7 @@ class GenderChoose extends StatelessWidget {
             p.validGenderFormz.value != c.validGenderFormz.value,
         builder: (context, state) {
           final valid = state.validGenderFormz;
-    
+
           return BtnToggleText(
             textList: [l.female, l.male],
             isSelected: state.genderSelected,
@@ -38,7 +37,8 @@ class GenderChoose extends StatelessWidget {
                 : valid.error == valid.notSelected
                     ? l.gender_not_selected
                     : null,
-            title: 'Для человека какого пола следует рассчитывать рекомендации?',
+            title:
+                'Для человека какого пола следует рассчитывать рекомендации?',
           );
         },
       ),

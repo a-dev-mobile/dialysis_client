@@ -1,20 +1,17 @@
-// ignore_for_file: lines_longer_than_80_chars
-// // ignore_for_file: lines_longer_than_80_chars
+
 
 // import 'dart:developer';
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:dialysis/app/style/style.dart';
+
 
 // import 'package:dialysis/core/storage/app_storage.dart';
 // import 'package:dialysis/core/widget/clean_focus.dart';
-// import 'package:dialysis/core/widget/page_load.dart';
-// import 'package:dialysis/data_base/data_base.dart';
-// import 'package:dialysis/feature/search/search.dart';
+
 // import 'package:dialysis/l10n/l10n.dart';
 // import 'package:dialysis/navigation/app_router.dart';
-// import 'package:rect_getter/rect_getter.dart';
+
 
 // class SearchPage extends StatelessWidget {
 //   const SearchPage({super.key});

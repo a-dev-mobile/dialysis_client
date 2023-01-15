@@ -1,53 +1,53 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
-/*
-  
+  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
+  /*
   enum CkdEnum {
   one,
   two,
-  three_a,
-  three_b,
+  threeA,
+  threeB,
   four,
   five,
-  not_know,
-  none
+  notKnow,
+  none,
 }
 
-
   */
-/// {@template ckdenum}
-/// CkdEnum enumeration
-/// {@endtemplate}
+  
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
-enum CkdEnum with Comparable<CkdEnum> {
+enum CkdEnum with Comparable<CkdEnum> { 
   one('one'),
   two('two'),
-  three_a('three_a'),
-  three_b('three_b'),
+  threeA('threeA'),
+  threeB('threeB'),
   four('four'),
   five('five'),
-  not_know('not_know'),
+  notKnow('notKnow'),
   none('none');
 
   const CkdEnum(this.value);
 
   final String value;
 
-  static CkdEnum fromValue(String? value, {CkdEnum? fallback}) {
+  static CkdEnum fromValue(
+    String? value, {
+    CkdEnum? fallback,
+  }) {
     switch (value) {
       case 'one':
         return one;
       case 'two':
         return two;
-      case 'three_a':
-        return three_a;
-      case 'three_b':
-        return three_b;
+      case 'threeA':
+        return threeA;
+      case 'threeB':
+        return threeB;
       case 'four':
         return four;
       case 'five':
         return five;
-      case 'not_know':
-        return not_know;
+      case 'notKnow':
+        return notKnow;
       case 'none':
         return none;
 
@@ -60,77 +60,83 @@ enum CkdEnum with Comparable<CkdEnum> {
   T map<T>({
     required T Function() one,
     required T Function() two,
-    required T Function() three_a,
-    required T Function() three_b,
+    required T Function() threeA,
+    required T Function() threeB,
     required T Function() four,
     required T Function() five,
-    required T Function() not_know,
+    required T Function() notKnow,
     required T Function() none,
+
   }) {
     switch (this) {
       case CkdEnum.one:
-        return one();
+        return one();     
       case CkdEnum.two:
-        return two();
-      case CkdEnum.three_a:
-        return three_a();
-      case CkdEnum.three_b:
-        return three_b();
+        return two();     
+      case CkdEnum.threeA:
+        return threeA();     
+      case CkdEnum.threeB:
+        return threeB();     
       case CkdEnum.four:
-        return four();
+        return four();     
       case CkdEnum.five:
-        return five();
-      case CkdEnum.not_know:
-        return not_know();
+        return five();     
+      case CkdEnum.notKnow:
+        return notKnow();     
       case CkdEnum.none:
-        return none();
+        return none();     
+
     }
   }
-
+  
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
     T Function()? one,
     T Function()? two,
-    T Function()? three_a,
-    T Function()? three_b,
+    T Function()? threeA,
+    T Function()? threeB,
     T Function()? four,
     T Function()? five,
-    T Function()? not_know,
+    T Function()? notKnow,
     T Function()? none,
+
   }) =>
       map<T>(
-        one: one ?? orElse,
-        two: two ?? orElse,
-        three_a: three_a ?? orElse,
-        three_b: three_b ?? orElse,
-        four: four ?? orElse,
-        five: five ?? orElse,
-        not_know: not_know ?? orElse,
-        none: none ?? orElse,
+      one: one ?? orElse,     
+      two: two ?? orElse,     
+      threeA: threeA ?? orElse,     
+      threeB: threeB ?? orElse,     
+      four: four ?? orElse,     
+      five: five ?? orElse,     
+      notKnow: notKnow ?? orElse,     
+      none: none ?? orElse,     
+
       );
 
   /// Pattern matching
   T? maybeMapOrNull<T>({
     T Function()? one,
     T Function()? two,
-    T Function()? three_a,
-    T Function()? three_b,
+    T Function()? threeA,
+    T Function()? threeB,
     T Function()? four,
     T Function()? five,
-    T Function()? not_know,
+    T Function()? notKnow,
     T Function()? none,
+
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        one: one,
-        two: two,
-        three_a: three_a,
-        three_b: three_b,
-        four: four,
-        five: five,
-        not_know: not_know,
-        none: none,
+        one: one,  
+        two: two,  
+        threeA: threeA,  
+        threeB: threeB,  
+        four: four,  
+        five: five,  
+        notKnow: notKnow,  
+        none: none,  
+        
       );
 
   @override
@@ -138,4 +144,4 @@ enum CkdEnum with Comparable<CkdEnum> {
 
   @override
   String toString() => value;
-}
+   }

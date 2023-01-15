@@ -1,4 +1,3 @@
-
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/l10n/l10n.dart';
@@ -62,8 +61,6 @@ class BirthdayChoose extends StatelessWidget {
     );
   }
 }
-
-
 
 class _DropDownMonth extends StatelessWidget {
   const _DropDownMonth({

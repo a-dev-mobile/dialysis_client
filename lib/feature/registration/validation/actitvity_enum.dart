@@ -4,6 +4,8 @@
 enum ActivityEnum { normal, light, none }
 
   */
+  
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
 enum ActivityEnum with Comparable<ActivityEnum> { 
   normal('normal'),

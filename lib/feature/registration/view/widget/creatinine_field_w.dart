@@ -1,8 +1,6 @@
-// ignore_for_file: lines_longer_than_80_chars
-
+// ignore_for_file:  avoid-nested-conditional-expressions, lines_longer_than_80_chars
 
 import 'package:dialysis/feature/registration/registration.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,38 +44,23 @@ class _CreatinineFieldState extends State<CreatinineField> {
     // final l = context.l10n;
 
     return BlocBuilder<RegistrationCubit, RegistrationState>(
-      buildWhen: (p, c) =>
-          p.validCreatinineFormz.isPure != c.validCreatinineFormz.isPure ||
-          p.validCreatinineFormz.value != c.validCreatinineFormz.value ||
-          // for visible
-          p.validCkdFormz.value != c.validCkdFormz.value,
       builder: (context, state) {
         final valid = state.validCreatinineFormz;
 
         return Visibility(
-          visible: state.validCkdFormz.value == CkdEnum.not_know,
+          visible: state.validCkdFormz.value == CkdEnum.notKnow,
           child: CardCustom(
             child: Column(
               children: [
-                // const SizedBox(height: 10),
                 const TitleSub(
                   text: 'Укажите свой креатинин',
                   dialogText:
                       'Мы используем эти сведения для расчета клубочковой фильтрации',
                 ),
-                // const SizedBox(height: 10),
                 TextField(
                   controller: controller,
-                  onChanged: widget.cubit.checkCreatinine,
-                  // textAlign: TextAlign.center,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(6),
-                  ],
                   decoration: InputDecoration(
-                    suffixText: 'мкмоль/л',
                     labelText: 'Креатинин',
-                    errorMaxLines: 2,
                     errorText: valid.isPure
                         ? null
                         : valid.error == valid.isEmpty
@@ -89,13 +72,22 @@ class _CreatinineFieldState extends State<CreatinineField> {
                                     : valid.error == valid.isNoValid
                                         ? 'Неправильное значение'
                                         : null,
+                    errorMaxLines: 2,
+                    suffixText: 'мкмоль/л',
                   ),
+                  keyboardType: TextInputType.number,
+                  onChanged: widget.cubit.checkCreatinine,
+                  inputFormatters: [LengthLimitingTextInputFormatter(6)],
                 ),
               ],
             ),
           ),
         );
       },
+      buildWhen: (p, c) =>
+          p.validCreatinineFormz.isPure != c.validCreatinineFormz.isPure ||
+          p.validCreatinineFormz.value != c.validCreatinineFormz.value ||
+          p.validCkdFormz.value != c.validCkdFormz.value,
     );
   }
 }
