@@ -1,4 +1,5 @@
 import 'package:dialysis/app/style/style.dart';
+import 'package:dialysis/core/storage/app_storage.dart';
 
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
@@ -19,7 +20,7 @@ class RegistrationPage extends StatelessWidget {
           create: (context) => RegistrationCubit(
             router: context.read<AppRouter>(),
             clienTips: context.read(),
-            storage: context.read(),
+            storage: context.read<AppStorage>(),
           )..load(),
         ),
       ],

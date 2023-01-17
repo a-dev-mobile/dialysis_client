@@ -5,7 +5,7 @@ import 'dart:developer';
 
 
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
-import 'package:dialysis/feature/registration/model/user_info_m.dart';
+import 'package:dialysis/feature/registration/model/user_info_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// LocalStorage Singleton class
@@ -179,7 +179,7 @@ class AppStorage {
     final listRaw = await getStringList(key: _day_product);
     final listModel = <DayProductsModel>[];
     for (final i in listRaw) {
-      listModel.add(DayProductsModel.fromJson(i));
+      listModel.add(DayProductsModel.fromJson( i as Map<String, dynamic>));
     }
 
     return listModel;
@@ -188,7 +188,7 @@ class AppStorage {
   Future<void> setDayProducts(List<DayProductsModel> value) {
     final listString = <String>[];
     for (final i in value) {
-      listString.add(i.toJson());
+      listString.add(i.toJson().toString());
     }
 
     return setStringList(key: _day_product, value: listString);
@@ -198,11 +198,11 @@ class AppStorage {
   static const _user_info = '_user_info';
 
   Future<UserInfoModel> getUserInfoModel() async {
-    return UserInfoModel.fromMap(await getJson(key: _user_info));
+    return UserInfoModel.fromJson(await getJson(key: _user_info));
   }
 
   Future<void> setUserInfoModel(UserInfoModel value) {
-    return setJson(key: _user_info, value: value.toMap());
+    return setJson(key: _user_info, value: value.toJson());
   }
 
 // ******************************

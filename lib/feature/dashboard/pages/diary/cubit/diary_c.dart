@@ -1,9 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+
 
 import 'package:bloc/bloc.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
@@ -65,7 +65,7 @@ class DiaryCubit extends Cubit<DiaryState> {
 }
 
 @immutable
-class DiaryState {
+class DiaryState extends Equatable {
   final List<DayProductsModel> listDayProducts;
   final String currentFormatDay;
   final String currentDateStr;
@@ -92,53 +92,10 @@ class DiaryState {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'listDayProducts': listDayProducts.map((x) => x.toMap()).toList(),
-      'currentFormatDay': currentFormatDay,
-      'currentDateStr': currentDateStr,
-      'isLoadPage': isLoadPage,
-    };
-  }
-
-  factory DiaryState.fromMap(Map<String, dynamic> map) {
-    return DiaryState(
-      listDayProducts: List<DayProductsModel>.of(
-        (map['listDayProducts'] as List<int>).map<DayProductsModel>(
-          (x) => DayProductsModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      currentFormatDay: (map['currentFormatDay'] ?? '') as String,
-      currentDateStr: (map['currentDateStr'] ?? '') as String,
-      isLoadPage: (map['isLoadPage'] ?? false) as bool,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory DiaryState.fromJson(String source) =>
-      DiaryState.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'DiaryState(listDayProducts: $listDayProducts, currentFormatDay: $currentFormatDay, currentDateStr: $currentDateStr, isLoadPage: $isLoadPage)';
-  }
+  bool get stringify => true;
 
   @override
-  bool operator ==(covariant DiaryState other) {
-    if (identical(this, other)) return true;
-
-    return listEquals(other.listDayProducts, listDayProducts) &&
-        other.currentFormatDay == currentFormatDay &&
-        other.currentDateStr == currentDateStr &&
-        other.isLoadPage == isLoadPage;
-  }
-
-  @override
-  int get hashCode {
-    return listDayProducts.hashCode ^
-        currentFormatDay.hashCode ^
-        currentDateStr.hashCode ^
-        isLoadPage.hashCode;
-  }
+  List<Object> get props => [listDayProducts, currentFormatDay, currentDateStr, isLoadPage];
 }
