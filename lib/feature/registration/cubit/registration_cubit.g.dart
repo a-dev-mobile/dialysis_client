@@ -84,41 +84,50 @@ _$_RegistrationState _$$_RegistrationStateFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$_RegistrationStateToJson(
-        _$_RegistrationState instance) =>
-    <String, dynamic>{
-      'isLoadPage': instance.isLoadPage,
-      'isLoadNextPage': instance.isLoadNextPage,
-      'isValid': instance.isValid,
-      'activitySelected': instance.activitySelected,
-      'genderSelected': instance.genderSelected,
-      'hypertensionSelected': instance.hypertensionSelected,
-      'diabetesSelected': instance.diabetesSelected,
-      'dateRegModel': instance.dateRegModel,
-      'validNameFormz': const _ValidNameConv().toJson(instance.validNameFormz),
-      'validActivityFormz':
-          const _ValidActivityConv().toJson(instance.validActivityFormz),
-      'validGenderFormz':
-          const _ValidGenderConv().toJson(instance.validGenderFormz),
-      'validBirthdayFormz':
-          const _ValidBirthdayConv().toJson(instance.validBirthdayFormz),
-      'validHeightFormz':
-          const _ValidHeightConv().toJson(instance.validHeightFormz),
-      'validWeightFormz':
-          const _ValidWeightConv().toJson(instance.validWeightFormz),
-      'validCkdFormz': const _ValidCkdConv().toJson(instance.validCkdFormz),
-      'validCreatinineFormz':
-          const _ValidCreatinineConv().toJson(instance.validCreatinineFormz),
-      'validHypertensionFormz': const _ValidHypertensionConv()
-          .toJson(instance.validHypertensionFormz),
-      'validDiabetesFormz':
-          const _ValidDiabetesConv().toJson(instance.validDiabetesFormz),
-      'status': _$FormzSubmissionStatusEnumMap[instance.status]!,
-      'daySelected': instance.daySelected,
-      'yearSelected': instance.yearSelected,
-      'monthSelected': instance.monthSelected,
-      'heightList': instance.heightList,
-      'ckdSelected': instance.ckdSelected,
-    };
+    _$_RegistrationState instance) {
+  final val = <String, dynamic>{
+    'isLoadPage': instance.isLoadPage,
+    'isLoadNextPage': instance.isLoadNextPage,
+    'isValid': instance.isValid,
+    'activitySelected': instance.activitySelected,
+    'genderSelected': instance.genderSelected,
+    'hypertensionSelected': instance.hypertensionSelected,
+    'diabetesSelected': instance.diabetesSelected,
+    'dateRegModel': instance.dateRegModel.toJson(),
+    'validNameFormz': const _ValidNameConv().toJson(instance.validNameFormz),
+    'validActivityFormz':
+        const _ValidActivityConv().toJson(instance.validActivityFormz),
+    'validGenderFormz':
+        const _ValidGenderConv().toJson(instance.validGenderFormz),
+    'validBirthdayFormz':
+        const _ValidBirthdayConv().toJson(instance.validBirthdayFormz),
+    'validHeightFormz':
+        const _ValidHeightConv().toJson(instance.validHeightFormz),
+    'validWeightFormz':
+        const _ValidWeightConv().toJson(instance.validWeightFormz),
+    'validCkdFormz': const _ValidCkdConv().toJson(instance.validCkdFormz),
+    'validCreatinineFormz':
+        const _ValidCreatinineConv().toJson(instance.validCreatinineFormz),
+    'validHypertensionFormz':
+        const _ValidHypertensionConv().toJson(instance.validHypertensionFormz),
+    'validDiabetesFormz':
+        const _ValidDiabetesConv().toJson(instance.validDiabetesFormz),
+    'status': _$FormzSubmissionStatusEnumMap[instance.status]!,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('daySelected', instance.daySelected);
+  writeNotNull('yearSelected', instance.yearSelected);
+  writeNotNull('monthSelected', instance.monthSelected);
+  val['heightList'] = instance.heightList;
+  val['ckdSelected'] = instance.ckdSelected;
+  return val;
+}
 
 const _$FormzSubmissionStatusEnumMap = {
   FormzSubmissionStatus.initial: 'initial',

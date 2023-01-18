@@ -32,12 +32,13 @@ _$_DayProductsModel _$$_DayProductsModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_DayProductsModelToJson(_$_DayProductsModel instance) =>
     <String, dynamic>{
       'date': instance.date,
-      'firstBreakfast': instance.firstBreakfast,
-      'secondBreakfast': instance.secondBreakfast,
-      'lunch': instance.lunch,
-      'afternoonSnack': instance.afternoonSnack,
-      'dinner': instance.dinner,
-      'bedtimeSnack': instance.bedtimeSnack,
+      'firstBreakfast': instance.firstBreakfast.map((e) => e.toJson()).toList(),
+      'secondBreakfast':
+          instance.secondBreakfast.map((e) => e.toJson()).toList(),
+      'lunch': instance.lunch.map((e) => e.toJson()).toList(),
+      'afternoonSnack': instance.afternoonSnack.map((e) => e.toJson()).toList(),
+      'dinner': instance.dinner.map((e) => e.toJson()).toList(),
+      'bedtimeSnack': instance.bedtimeSnack.map((e) => e.toJson()).toList(),
     };
 
 _$_AddedProductSubModel _$$_AddedProductSubModelFromJson(

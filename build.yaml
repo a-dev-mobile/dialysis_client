@@ -1,42 +1,24 @@
-# targets:
-#   $default:
-#     builders:
-#       json_serializable:
-#         enabled: true
-#         generate_for:
-#           include:
-#             - lib/**_m.dart
-#             - lib/**_b.dart
-#             - lib/**_c.dart
-
-#         options:
-#           # explicit_to_json: true
-#           # include_if_null: false
-#       freezed|freezed:
-#         enabled: true
-#         generate_for:
-#           include:
-#             - lib/**_m.dart
-#             - lib/**_b.dart
-#             - lib/**_c.dart
-# targets:
-#   $default:
-#     sources:
-#       - $package$
-#       - asset/**
-#       - lib/**
-#       - test/**
-#       - pubspec.yaml
-#     builders:
-#       json_serializable:
-#         enabled: true
-#         generate_for:
-#           include:
-#             - lib/**
-#             - test/**
-#       freezed:
-#         enabled: true
-#         generate_for:
-#           include:
-#             - lib/**
-#             - test/**
+targets:
+  $default:
+    sources:
+      - $package$
+      - asset/**
+      - lib/**
+      - test/**
+      - pubspec.yaml
+    builders:
+      json_serializable:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**
+            - test/**
+        options:
+          explicit_to_json: true
+          include_if_null: false
+      freezed:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**
+            - test/**

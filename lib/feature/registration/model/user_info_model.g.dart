@@ -22,19 +22,28 @@ _$_UserInfoModel _$$_UserInfoModelFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updated'] as String),
     );
 
-Map<String, dynamic> _$$_UserInfoModelToJson(_$_UserInfoModel instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'gender': _$GenderEnumEnumMap[instance.gender]!,
-      'activity': _$ActivityEnumEnumMap[instance.activity]!,
-      'birthday': instance.birthday.toIso8601String(),
-      'height': instance.height,
-      'weight': instance.weight,
-      'ckd': _$CkdEnumEnumMap[instance.ckd]!,
-      'creatinin': instance.creatinin,
-      'created': instance.created.toIso8601String(),
-      'updated': instance.updated?.toIso8601String(),
-    };
+Map<String, dynamic> _$$_UserInfoModelToJson(_$_UserInfoModel instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'gender': _$GenderEnumEnumMap[instance.gender]!,
+    'activity': _$ActivityEnumEnumMap[instance.activity]!,
+    'birthday': instance.birthday.toIso8601String(),
+    'height': instance.height,
+    'weight': instance.weight,
+    'ckd': _$CkdEnumEnumMap[instance.ckd]!,
+    'creatinin': instance.creatinin,
+    'created': instance.created.toIso8601String(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('updated', instance.updated?.toIso8601String());
+  return val;
+}
 
 const _$GenderEnumEnumMap = {
   GenderEnum.female: 'female',

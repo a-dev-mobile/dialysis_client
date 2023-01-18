@@ -28,6 +28,19 @@ class AppRouter {
   final AppStorage _storage;
 
   final GoRouter router = GoRouter(
+    errorPageBuilder: (context, state) => NoTransitionPage<void>(
+      key: state.pageKey,
+      child: Center(child: Text(state.error.toString())),
+    ),
+    // initialLocation: SplashPage.path,
+    initialLocation: DashBoardPage.path,
+    observers: <NavigatorObserver>[
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ],
+    // ignore: avoid_redundant_argument_values
+    debugLogDiagnostics: DartDefine.IS_DEBUG,
+    navigatorKey: _rootNavigatorKey,
+
     routes: [
       ShellRoute(
         builder: (_, GoRouterState state, child) {
@@ -122,17 +135,6 @@ class AppRouter {
         navigatorKey: _pageNavigatorKey,
       ),
     ],
-    errorPageBuilder: (context, state) => NoTransitionPage<void>(
-      key: state.pageKey,
-      child: Center(child: Text(state.error.toString())),
-    ),
-    initialLocation: SplashPage.path,
-    observers: <NavigatorObserver>[
-      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-    ],
-    // ignore: avoid_redundant_argument_values
-    debugLogDiagnostics: DartDefine.IS_DEBUG,
-    navigatorKey: _rootNavigatorKey,
   );
 
   Future<void> selectedRouter() async {

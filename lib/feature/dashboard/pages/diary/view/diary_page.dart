@@ -1,11 +1,13 @@
 import 'package:dialysis/app/style/extensions/extensions.dart';
 import 'package:dialysis/core/widget/progress_indicator/page.dart';
+import 'package:dialysis/feature/common/common.dart';
 
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
-import 'package:dialysis/feature/registration/registration.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class DiaryPage extends StatelessWidget {
   const DiaryPage({super.key});
@@ -17,6 +19,9 @@ class DiaryPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => DiaryCubit(storage: context.read())..load(),
+        ),
+        BlocProvider(
+          create: (context) => WaterCubit()..load(),
         ),
       ],
       child: const _DiaryPage(),
@@ -30,6 +35,7 @@ class _DiaryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final cubit = context.read<DiaryCubit>();
     // final l = context.l10n;
+
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<DiaryCubit, DiaryState>(
@@ -38,10 +44,11 @@ class _DiaryPage extends StatelessWidget {
 
             return Padding(
               padding: const EdgeInsets.all(10),
-              child: Column(
+              child: ListView(
                 children: [
                   const _TitleDate(),
                   Placeholder(fallbackHeight: context.heightPx / 4),
+                  const WaterWidget(),
                   const _Pages(),
                 ],
               ),
@@ -53,6 +60,8 @@ class _DiaryPage extends StatelessWidget {
     );
   }
 }
+
+
 
 class _TitleDate extends StatelessWidget {
   const _TitleDate();
@@ -89,8 +98,6 @@ class _Pages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Column(
       children: <Widget>[
         CardCustom(

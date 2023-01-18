@@ -1,12 +1,10 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:dialysis/core/widget/widget.dart';
-
+import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class CkdChoose extends StatelessWidget {
   const CkdChoose({
     super.key,

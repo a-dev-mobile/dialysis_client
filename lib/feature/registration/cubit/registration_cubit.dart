@@ -67,7 +67,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     //     await db.rawQuery('SELECT * from ${TableEnum.date_month.name}');
     // unawaited(db.close());
 
-    emit(state.copyWith(isLoadPage: false));
+    emit(state.copyWith(isLoadPage: false, isLoadNextPage: false));
   }
 
   static List<String> _initYears() {

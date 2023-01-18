@@ -1,3 +1,4 @@
+import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:dialysis/l10n/l10n.dart';
@@ -38,9 +39,6 @@ class _NameFieldState extends State<NameField> {
     final l = context.l10n;
 
     return BlocBuilder<RegistrationCubit, RegistrationState>(
-      buildWhen: (p, c) =>
-          p.validNameFormz.isPure != c.validNameFormz.isPure ||
-          p.validNameFormz.value != c.validNameFormz.value,
       builder: (context, state) {
         final valid = state.validNameFormz;
 
@@ -50,14 +48,18 @@ class _NameFieldState extends State<NameField> {
               const TitleSub(text: 'Введите имя'),
               const SizedBox(height: 10),
               TypeAheadField(
-                hideOnEmpty: true,
-                hideOnLoading: true,
-                hideOnError: true,
+                suggestionsCallback: widget.cubit.getSuggestionsName,
+                itemBuilder: (context, String suggestion) {
+                  return ListTile(title: Text(suggestion));
+                },
+                onSuggestionSelected: (String suggestion) {
+                  widget.cubit.checkName(suggestion);
+                  controller.text = suggestion;
+                },
                 textFieldConfiguration: TextFieldConfiguration(
                   controller: controller,
                   onChanged: widget.cubit.checkName,
                   keyboardType: TextInputType.name,
-                  //  textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     labelText: l.name,
                     errorText: valid.isPure
@@ -69,21 +71,17 @@ class _NameFieldState extends State<NameField> {
                                 : null,
                   ),
                 ),
-                suggestionsCallback: widget.cubit.getSuggestionsName,
-                itemBuilder: (context, String suggestion) {
-                  return ListTile(
-                    title: Text(suggestion),
-                  );
-                },
-                onSuggestionSelected: (String suggestion) {
-                  widget.cubit.checkName(suggestion);
-                  controller.text = suggestion;
-                },
+                hideOnLoading: true,
+                hideOnEmpty: true,
+                hideOnError: true,
               ),
             ],
           ),
         );
       },
+      buildWhen: (p, c) =>
+          p.validNameFormz.isPure != c.validNameFormz.isPure ||
+          p.validNameFormz.value != c.validNameFormz.value,
     );
   }
 }
