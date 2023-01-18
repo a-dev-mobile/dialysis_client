@@ -1,5 +1,5 @@
 
-import 'package:dialysis/feature/dashboard/dashboard.dart';
+import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

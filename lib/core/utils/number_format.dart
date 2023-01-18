@@ -12,7 +12,10 @@ class MyNumberFormat {
   static String weight(int value) {
     return _formatterWeight.format(value).replaceAll(',', ' ');
   }
+ static String removeTrailingZerosAndNumberfy(num v) {
 
+    return v.truncateToDouble() == v ? v.toInt().toString() : v.toString();
+  }
   static String nutrient(double value) {
     return _formatterNutrient
         .format(value)

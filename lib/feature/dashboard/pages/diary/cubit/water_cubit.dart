@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:bloc/bloc.dart';
-import 'package:dialysis/feature/dashboard/dashboard.dart';
+import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
+
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -45,7 +46,7 @@ class WaterCubit extends Cubit<WaterState> {
   void _resultCurrentWater({required bool isIncrement}) {
     final sumFullGlass =
         isIncrement ? state.sumFullGlass + 1 : state.sumFullGlass - 1;
-    if (sumFullGlass <= 0) return;
+    if (sumFullGlass < 0) return;
     final volumeGlass = state.volumeGlass;
 
     final glassList = <GlassState>[];

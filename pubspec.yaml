@@ -81,8 +81,9 @@ dependencies:
   flutter_svg: ^1.1.6
   flex_color_scheme: ^6.1.2
   introduction_screen: ^3.1.4
-  syncfusion_flutter_pdfviewer: ^20.4.43
-  syncfusion_flutter_charts: ^20.4.43
+  syncfusion_flutter_pdfviewer: ^20.4.44
+  syncfusion_flutter_charts: ^20.4.44
+  syncfusion_flutter_calendar: ^20.4.44
   google_fonts: ^3.0.1
   flutter_typeahead: ^4.1.1
   # TEST

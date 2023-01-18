@@ -56,15 +56,8 @@ dart_code_metrics:
     - prefer-correct-identifier-length: false
     - prefer-moving-to-variable:
         allowed-duplicated-chains: 3
-    - arguments-ordering:
-        child-last: true
-        buildWhen-last: false
+    - arguments-ordering: false
     - avoid-late-keyword: false
-
-
-
-
-
 
 
 

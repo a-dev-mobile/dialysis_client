@@ -1,3 +1,4 @@
+import 'package:dialysis/core/utils/app_utils.dart';
 import 'package:dialysis/core/widget/progress_indicator/page.dart';
 import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
@@ -18,16 +19,22 @@ class WaterWidget extends StatelessWidget {
       builder: (context, state) {
         if (state.isLoadPage) return const PageStartLoad();
 
+        final maxWaterFormat =
+            AppUtilsNumber.getFormatNumber(num: cubitWater.state.maxWater);
+
         return CardCustom(
           child: SizedBox(
             width: double.infinity,
             child: Column(
               children: [
-                const Text('Вода'),
-                Text('Цель ${cubitWater.state.maxWater} мл'),
+                const Text('Потребление воды'),
+                Text('Цель $maxWaterFormat мл'),
                 BlocBuilder<WaterCubit, WaterState>(
                   builder: (context, state) {
-                    return Text('${state.currentWater} мл');
+                    final currentWater =
+                        AppUtilsNumber.getFormatNumber(num: state.currentWater);
+
+                    return Text('$currentWater мл');
                   },
                   buildWhen: (p, c) => p.currentWater != c.currentWater,
                 ),

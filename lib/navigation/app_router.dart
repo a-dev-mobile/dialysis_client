@@ -4,7 +4,10 @@ import 'package:dialysis/core/storage/storage.dart';
 import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/common/test_app/test_app.dart';
-import 'package:dialysis/feature/dashboard/dashboard.dart';
+
+import 'package:dialysis/feature/dashboard/pages/calendar/calendar.dart';
+import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
+import 'package:dialysis/feature/dashboard/view/view.dart';
 import 'package:dialysis/feature/debug_menu/debug_menu.dart';
 
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
@@ -18,6 +21,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+
+
 class AppRouter {
   AppRouter({required AppStorage storage}) : _storage = storage;
 
@@ -28,19 +33,6 @@ class AppRouter {
   final AppStorage _storage;
 
   final GoRouter router = GoRouter(
-    errorPageBuilder: (context, state) => NoTransitionPage<void>(
-      key: state.pageKey,
-      child: Center(child: Text(state.error.toString())),
-    ),
-    // initialLocation: SplashPage.path,
-    initialLocation: DashBoardPage.path,
-    observers: <NavigatorObserver>[
-      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-    ],
-    // ignore: avoid_redundant_argument_values
-    debugLogDiagnostics: DartDefine.IS_DEBUG,
-    navigatorKey: _rootNavigatorKey,
-
     routes: [
       ShellRoute(
         builder: (_, GoRouterState state, child) {
@@ -77,6 +69,14 @@ class AppRouter {
             pageBuilder: (context, state) => MaterialPage<void>(
               key: state.pageKey,
               child: const DiaryPage(),
+            ),
+          ),
+          GoRoute(
+            path: CalendarPage.path,
+            name: CalendarPage.name,
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const CalendarPage(),
             ),
           ),
           GoRoute(
@@ -135,6 +135,17 @@ class AppRouter {
         navigatorKey: _pageNavigatorKey,
       ),
     ],
+    errorPageBuilder: (context, state) => NoTransitionPage<void>(
+      key: state.pageKey,
+      child: Center(child: Text(state.error.toString())),
+    ),
+    initialLocation: DashBoardPage.path,
+    observers: <NavigatorObserver>[
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ],
+    // ignore: avoid_redundant_argument_values
+    debugLogDiagnostics: DartDefine.IS_DEBUG,
+    navigatorKey: _rootNavigatorKey,
   );
 
   Future<void> selectedRouter() async {

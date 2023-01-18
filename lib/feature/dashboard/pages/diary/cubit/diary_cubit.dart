@@ -1,23 +1,24 @@
-
-
 import 'package:bloc/bloc.dart';
 import 'package:dialysis/core/storage/app_storage.dart';
+import 'package:dialysis/feature/dashboard/pages/calendar/calendar.dart';
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
+import 'package:dialysis/navigation/app_router.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class DiaryCubit extends Cubit<DiaryState> {
-  DiaryCubit({required AppStorage storage})
+  DiaryCubit({required AppStorage storage, required AppRouter go})
       : _storage = storage,
+        _go = go,
         super(
           const DiaryState(
-            listDayProducts: [],
-            isLoadPage: true,
-            currentFormatDay: '',
-            currentDateStr: '',
-          ),
+              listDayProducts: [],
+              currentFormatDay: '',
+              currentDateStr: '',
+              isLoadPage: true,),
         );
+  final AppRouter _go;
   final AppStorage _storage;
   DateFormat _formatDate = DateFormat();
   Future<void> load() async {
@@ -62,6 +63,10 @@ class DiaryCubit extends Cubit<DiaryState> {
       ),
     );
   }
+
+  void goCalendar() {
+    _go.router.pushNamed(CalendarPage.name);
+  }
 }
 
 @immutable
@@ -92,10 +97,10 @@ class DiaryState extends Equatable {
     );
   }
 
-
   @override
   bool get stringify => true;
 
   @override
-  List<Object> get props => [listDayProducts, currentFormatDay, currentDateStr, isLoadPage];
+  List<Object> get props =>
+      [listDayProducts, currentFormatDay, currentDateStr, isLoadPage];
 }
