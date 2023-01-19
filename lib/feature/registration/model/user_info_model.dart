@@ -1,8 +1,7 @@
-
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 
 part 'user_info_model.freezed.dart';
 part 'user_info_model.g.dart';
@@ -11,24 +10,102 @@ part 'user_info_model.g.dart';
 @freezed
 class UserInfoModel with _$UserInfoModel {
   const factory UserInfoModel({
+    required String s,
+
     
-    required String name,
-    required GenderEnum gender,
-    required ActivityEnum activity,
-    required DateTime birthday,
-    required int height,
-    required double weight,
-    required CkdEnum ckd,
-    required double creatinin,
-    required DateTime created,
-    DateTime? updated,
-  
-  
-  
-  
+    required String? s_can_null,
+    required bool b,
+    required bool? b_can_null,
+    required int i,
+    required int? i_can_null,
+    required double d,
+    required double? d_can_null,
+    required num n,
+    required num? n_can_null,
+    required List l,
+    required List? l_can_null,
+    required List<bool> lb,
+    required List<bool?> lb_null,
+    required List<bool>? lb_can_null,
+    required List<bool?>? lb_null_can_null,
+    required List<int> li,
+    required List<int?> li_null,
+    required List<int>? li_can_null,
+    required List<int?>? li_null_can_null,
+    required List<String> ls,
+    required List<String?> ls_null,
+    required List<String>? ls_can_null,
+    required List<String?>? ls_null_can_null,
+    required List<double> ld,
+    required List<double?> ld_null,
+    required List<double>? ld_can_null,
+    required List<double?>? ld_null_can_null,
+    required List<Map<int, String>> l_map_i_s,
+    required List<Map<int, String?>> l_map_i_s_null,
+    required List<Map<int, dynamic>> l_map_i_dyn,
+    required List<Map<int, dynamic>>? l_map_i_dyn_can_null,
+    required Set set,
+    required Set? set_can_null,
+    required Set<String> set_s,
+    required Set<String?> set_s_null,
+    required Set<String>? set_s_can_null,
+    required Set<String?>? set_s_null_can_null,
+    required Set<int> set_i,
+    required Set<int?> set_i_null,
+    required Set<int>? set_i_can_null,
+    required Set<int?>? set_i_null_can_null,
+    required Set<bool> set_bool,
+    required Set<bool?> set_bool_null,
+    required Set<bool>? set_bool_can_null,
+    required Set<bool?>? set_bool_null_can_null,
+    required Set<double> set_d,
+    required Set<double?> set_d_null,
+    required Set<double>? set_d_can_null,
+    required Set<double?>? set_d_null_can_null,
+    required Map m,
+    required Map? m_can_null,
+    required Map<String, dynamic> m_s_dyn,
+    required Map<String, dynamic>? m_s_dyn_can_null,
+    required Map<String, bool> m_s_b,
+    required Map<String, bool?> m_s_b_null,
+    required Map<String, bool>? m_s_b_can_null,
+    required Map<String, bool?>? m_s_b_null_can_null,
+    required Map<String, int> m_s_i,
+    required Map<String, int?> m_s_i_null,
+    required Map<String, int>? m_s_i_can_null,
+    required Map<String, int?>? m_s_i_null_can_null,
+    required Map<String, String> m_s_s,
+    required Map<String, String?> m_s_s_null,
+    required Map<String, String>? m_s_s_can_null,
+    required Map<String, String?>? m_s_s_null_can_null,
+    required Map<String, double> m_s_d,
+    required Map<String, double?> m_s_d_null,
+    required Map<String, double>? m_s_d_can_null,
+    required Map<String, double?>? m_s_d_null_can_null,
+    required Map<int, double> m_i_d,
+    required Map<int, double?> m_i_d_null,
+    required Map<int, double>? m_i_d_can_null,
+    required Map<int, double?>? m_i_d_null_can_null,
+    required Map<int, String> m_i_s,
+    required Map<int, String?> m_i_s_null,
+    required Map<int, String>? m_i_s_can_null,
+    required Map<int, String?>? m_i_s_null_can_null,
+    required Map<int, bool> m_i_b,
+    required Map<int, bool?> m_i_b_null,
+    required Map<int, bool>? m_i_b_can_null,
+    required Map<int, bool?>? m_i_b_null_can_null,
+    required Map<int, dynamic> m_i_dyn,
+    required Map<int, dynamic>? m_i_dyn_can_null,
+    required Map<dynamic, dynamic> m_dyn_dyn,
+    required Map<dynamic, dynamic>? m_dyn_dyn_can_null,
+    required List<dynamic>? ldyn_canNull,
+    required List<Map<int, String>>? l_map_i_s_can_null,
+    required List<Map<int, String?>>? l_map_i_s_null_can_null,
+    required DateTime date_time,
+    required DateTime? date_time_canNull,
+
   }) = _UserInfoModel;
-  
 
-
-  factory UserInfoModel.fromJson(Map<String, Object?> json) => _$UserInfoModelFromJson(json);
+  factory UserInfoModel.fromJson(Map<String, Object?> json) =>
+      _$UserInfoModelFromJson(json);
 }
