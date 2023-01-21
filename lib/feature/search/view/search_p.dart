@@ -1,17 +1,13 @@
-
-
 // import 'dart:developer';
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 // import 'package:dialysis/core/storage/app_storage.dart';
 // import 'package:dialysis/core/widget/clean_focus.dart';
 
 // import 'package:dialysis/l10n/l10n.dart';
 // import 'package:dialysis/navigation/app_router.dart';
-
 
 // class SearchPage extends StatelessWidget {
 //   const SearchPage({super.key});

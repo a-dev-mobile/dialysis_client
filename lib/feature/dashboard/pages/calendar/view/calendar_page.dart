@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-
 class CalendarPage extends StatelessWidget {
   const CalendarPage({super.key});
   static const path = '/test_calendar';
@@ -34,7 +33,7 @@ class _CalendarPage extends StatelessWidget {
         child: SfCalendar(
           view: CalendarView.month,
           showDatePickerButton: true,
-      
+
           showNavigationArrow: true,
           // showWeekNumber: true,
           // переход при нажатии на день в календарь дня
@@ -43,7 +42,7 @@ class _CalendarPage extends StatelessWidget {
           initialSelectedDate: DateTime.now().add(const Duration(days: 5)),
           // начальное отображение недели месяца и года
           // initialDisplayDate: DateTime.now().subtract(Duration(days: 50)),
-        
+
           allowedViews: const [
             CalendarView.day,
             CalendarView.week,

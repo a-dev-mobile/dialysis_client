@@ -3,7 +3,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'water_cubit.freezed.dart';

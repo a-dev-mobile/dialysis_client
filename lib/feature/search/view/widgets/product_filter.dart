@@ -15,13 +15,13 @@ class ProductFilter extends StatelessWidget {
       right: 0,
       left: 0,
       child: ElevatedButton(
-            onPressed: onSort,
-            style: ElevatedButton.styleFrom(
-              fixedSize: const Size(60, 40),
-              shape: const CircleBorder(),
-            ),
-            child: const Icon(Icons.swap_vert),
-          ),
+        onPressed: onSort,
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(60, 40),
+          shape: const CircleBorder(),
+        ),
+        child: const Icon(Icons.swap_vert),
+      ),
     );
   }
 }

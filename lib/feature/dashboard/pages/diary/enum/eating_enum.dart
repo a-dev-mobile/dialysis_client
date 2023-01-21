@@ -1,4 +1,4 @@
-  /*
+/*
   enum EatingEnum {
   firstBreakfast,
   secondBreakfast,
@@ -13,7 +13,7 @@
 /// EatingEnum enumeration
 /// {@endtemplate}
 
-enum EatingEnum with Comparable<EatingEnum> { 
+enum EatingEnum with Comparable<EatingEnum> {
   firstBreakfast('firstBreakfast'),
   secondBreakfast('secondBreakfast'),
   lunch('lunch'),
@@ -53,25 +53,23 @@ enum EatingEnum with Comparable<EatingEnum> {
     required T Function() afternoonSnack,
     required T Function() dinner,
     required T Function() bedtimeSnack,
-
   }) {
     switch (this) {
       case EatingEnum.firstBreakfast:
-        return firstBreakfast();     
+        return firstBreakfast();
       case EatingEnum.secondBreakfast:
-        return secondBreakfast();     
+        return secondBreakfast();
       case EatingEnum.lunch:
-        return lunch();     
+        return lunch();
       case EatingEnum.afternoonSnack:
-        return afternoonSnack();     
+        return afternoonSnack();
       case EatingEnum.dinner:
-        return dinner();     
+        return dinner();
       case EatingEnum.bedtimeSnack:
-        return bedtimeSnack();     
-
+        return bedtimeSnack();
     }
   }
-  
+
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
@@ -81,16 +79,14 @@ enum EatingEnum with Comparable<EatingEnum> {
     T Function()? afternoonSnack,
     T Function()? dinner,
     T Function()? bedtimeSnack,
-
   }) =>
       map<T>(
-      firstBreakfast: firstBreakfast ?? orElse,     
-      secondBreakfast: secondBreakfast ?? orElse,     
-      lunch: lunch ?? orElse,     
-      afternoonSnack: afternoonSnack ?? orElse,     
-      dinner: dinner ?? orElse,     
-      bedtimeSnack: bedtimeSnack ?? orElse,     
-
+        firstBreakfast: firstBreakfast ?? orElse,
+        secondBreakfast: secondBreakfast ?? orElse,
+        lunch: lunch ?? orElse,
+        afternoonSnack: afternoonSnack ?? orElse,
+        dinner: dinner ?? orElse,
+        bedtimeSnack: bedtimeSnack ?? orElse,
       );
 
   /// Pattern matching
@@ -101,17 +97,15 @@ enum EatingEnum with Comparable<EatingEnum> {
     T Function()? afternoonSnack,
     T Function()? dinner,
     T Function()? bedtimeSnack,
-
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        firstBreakfast: firstBreakfast,  
-        secondBreakfast: secondBreakfast,  
-        lunch: lunch,  
-        afternoonSnack: afternoonSnack,  
-        dinner: dinner,  
-        bedtimeSnack: bedtimeSnack,  
-        
+        firstBreakfast: firstBreakfast,
+        secondBreakfast: secondBreakfast,
+        lunch: lunch,
+        afternoonSnack: afternoonSnack,
+        dinner: dinner,
+        bedtimeSnack: bedtimeSnack,
       );
 
   @override
@@ -119,6 +113,4 @@ enum EatingEnum with Comparable<EatingEnum> {
 
   @override
   String toString() => value;
-   }
-
-  
+}

@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'product_db_m.freezed.dart';
 part 'product_db_m.g.dart';
 
-
 @freezed
 class ProductDbModel with _$ProductDbModel {
   const factory ProductDbModel({
@@ -13,7 +12,6 @@ class ProductDbModel with _$ProductDbModel {
     required int id_product,
     @Default('') String ru_name,
     @Default('') String en_name,
-
   }) = _ProductDbModel;
 
   /// Generate CategoryM class from Map<String, Object?>

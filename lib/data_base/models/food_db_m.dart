@@ -183,6 +183,4 @@ class FoodDbModel with _$FoodDbModel {
   /// Generate Class from Map<String, Object?>
   factory FoodDbModel.fromJson(Map<String, Object?> json) =>
       _$FoodDbModelFromJson(json);
-
-
 }

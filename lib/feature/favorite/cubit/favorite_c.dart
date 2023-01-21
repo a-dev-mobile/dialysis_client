@@ -14,12 +14,11 @@
 // class FavoriteCubit extends Cubit<FavoriteState> {
 //   FavoriteCubit({required AppDb db})
 //       : _db = db,
-       
+
 //         super(const FavoriteState());
 
 //   // ignore: unused_field
 //   final AppDb _db;
-
 
 //   FutureOr<void> load() async {
 //     emit(state.copyWith(isLoad: true));

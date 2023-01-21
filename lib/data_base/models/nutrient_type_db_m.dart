@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'nutrient_type_db_m.freezed.dart';
 part 'nutrient_type_db_m.g.dart';
 
-
 @freezed
 class NutrientTypeDbModel with _$NutrientTypeDbModel {
   const factory NutrientTypeDbModel({
@@ -13,7 +12,6 @@ class NutrientTypeDbModel with _$NutrientTypeDbModel {
     required int id_nutrient_type,
     @Default('') String ru_name,
     @Default('') String en_name,
-
   }) = _NutrientTypeDbModel;
 
   /// Generate CategoryM class from Map<String, Object?>

@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, lines_longer_than_80_chars
 
-
-
 import 'package:bloc/bloc.dart';
 import 'package:dialysis/feature/search/search.dart';
 import 'package:dialysis/navigation/app_router.dart';
@@ -11,10 +9,8 @@ import 'package:flutter/widgets.dart';
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit({required AppRouter router})
       : _go = router,
-      
         super(const CategoryState());
 
- 
   final AppRouter _go;
 
   Future<void> load() async {
@@ -53,7 +49,7 @@ class CategoryCubit extends Cubit<CategoryState> {
 }
 
 @immutable
-class CategoryState  {  
+class CategoryState {
   // init: const [] | type: List<CategoryModel>
   final List<CategoryModel> categories;
   // init: -1
@@ -61,7 +57,7 @@ class CategoryState  {
   // init: false
   final bool isLoad;
 /* end */
- 
+
   // GENERATED CODE - DO NOT MODIFY BY HAND
 
   const CategoryState({
@@ -83,18 +79,17 @@ class CategoryState  {
     bool? isLoad,
   }) {
     return CategoryState(
-      categories: categories ?? this.categories, 
-      idActive: idActive ?? this.idActive, 
-      isLoad: isLoad ?? this.isLoad, 
+      categories: categories ?? this.categories,
+      idActive: idActive ?? this.idActive,
+      isLoad: isLoad ?? this.isLoad,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'categories': categories, 
-      'idActive': idActive, 
-      'isLoad': isLoad, 
+      'categories': categories,
+      'idActive': idActive,
+      'isLoad': isLoad,
     };
   }
-
 }

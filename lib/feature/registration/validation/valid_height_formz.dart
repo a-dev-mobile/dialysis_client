@@ -10,9 +10,7 @@ class ValidHeightFormz extends FormzInput<String?, ValidHeightError> {
     return value == null ? ValidHeightError.notSelected : null;
   }
 
-
-
-factory ValidHeightFormz.fromMap(Map<String, dynamic> map) {
+  factory ValidHeightFormz.fromMap(Map<String, dynamic> map) {
     final result = map['ValidHeightFormz'].toString();
     if (result.isEmpty) return const ValidHeightFormz.pure();
 
@@ -20,10 +18,8 @@ factory ValidHeightFormz.fromMap(Map<String, dynamic> map) {
   }
 
   Map<String, dynamic> toMap() {
- return <String, dynamic>{'ValidHeightFormz': value};
+    return <String, dynamic>{'ValidHeightFormz': value};
   }
-
-
 }
 
 extension ValidHeightExtension on ValidHeightFormz {

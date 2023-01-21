@@ -2,8 +2,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
-
 part 'category_db_m.freezed.dart';
 part 'category_db_m.g.dart';
 
@@ -15,7 +13,6 @@ class CategoryDbModel with _$CategoryDbModel {
     required int id_category,
     @Default('') String ru_name,
     @Default('') String en_name,
-
   }) = _CategoryDbModel;
 
   /// Generate CategoryM class from Map<String, Object?>

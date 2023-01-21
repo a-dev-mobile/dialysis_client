@@ -71,8 +71,4 @@ class AppUtilsNumber {
 
     return mainResult;
   }
-
-
-
-
 }

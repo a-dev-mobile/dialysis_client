@@ -31,7 +31,7 @@ class LaunchLinks {
       }),
     );
 
-   final _ = await launchUrl(emailLaunchUri);
+    final _ = await launchUrl(emailLaunchUri);
   }
 
   static Future<void> launchPhoneDialer(String contactNumber) async {
@@ -52,7 +52,7 @@ class LaunchLinks {
       throw 'Could not launch $value';
     }
   }
-  
+
   static Future<void> urlInternal(String value) async {
     final url = Uri.parse(value);
     if (!await launchUrl(

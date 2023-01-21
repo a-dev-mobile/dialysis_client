@@ -27,13 +27,9 @@ class SplashCubit extends Cubit<SplashState> {
     // load and update data
     await _db.checkAndLoadUpdateDb();
 
-
-
     _go.router.goNamed(WelcomePage.name);
 
     emit(state.copyWith(isLoad: false));
-
-    
   }
 }
 

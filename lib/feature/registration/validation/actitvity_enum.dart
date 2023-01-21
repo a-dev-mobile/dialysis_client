@@ -1,13 +1,13 @@
-  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
-  /*
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
+/*
   
 enum ActivityEnum { normal, light, none }
 
   */
-  
+
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-enum ActivityEnum with Comparable<ActivityEnum> { 
+enum ActivityEnum with Comparable<ActivityEnum> {
   normal('normal'),
   light('light'),
   none('none');
@@ -38,32 +38,28 @@ enum ActivityEnum with Comparable<ActivityEnum> {
     required T Function() normal,
     required T Function() light,
     required T Function() none,
-
   }) {
     switch (this) {
       case ActivityEnum.normal:
-        return normal();     
+        return normal();
       case ActivityEnum.light:
-        return light();     
+        return light();
       case ActivityEnum.none:
-        return none();     
-
+        return none();
     }
   }
-  
+
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
     T Function()? normal,
     T Function()? light,
     T Function()? none,
-
   }) =>
       map<T>(
-      normal: normal ?? orElse,     
-      light: light ?? orElse,     
-      none: none ?? orElse,     
-
+        normal: normal ?? orElse,
+        light: light ?? orElse,
+        none: none ?? orElse,
       );
 
   /// Pattern matching
@@ -71,14 +67,12 @@ enum ActivityEnum with Comparable<ActivityEnum> {
     T Function()? normal,
     T Function()? light,
     T Function()? none,
-
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        normal: normal,  
-        light: light,  
-        none: none,  
-        
+        normal: normal,
+        light: light,
+        none: none,
       );
 
   @override
@@ -86,4 +80,4 @@ enum ActivityEnum with Comparable<ActivityEnum> {
 
   @override
   String toString() => value;
-   }
+}

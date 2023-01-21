@@ -68,7 +68,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '233829405021',
     projectId: 'prod--dialysis',
     storageBucket: 'prod--dialysis.appspot.com',
-    iosClientId: '233829405021-6goplg67oca1blqissef5kt1lmpj9g95.apps.googleusercontent.com',
+    iosClientId:
+        '233829405021-6goplg67oca1blqissef5kt1lmpj9g95.apps.googleusercontent.com',
     iosBundleId: 'a.dev.mobile.dialysis',
   );
 
@@ -78,7 +79,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '233829405021',
     projectId: 'prod--dialysis',
     storageBucket: 'prod--dialysis.appspot.com',
-    iosClientId: '233829405021-6goplg67oca1blqissef5kt1lmpj9g95.apps.googleusercontent.com',
+    iosClientId:
+        '233829405021-6goplg67oca1blqissef5kt1lmpj9g95.apps.googleusercontent.com',
     iosBundleId: 'a.dev.mobile.dialysis',
   );
 }

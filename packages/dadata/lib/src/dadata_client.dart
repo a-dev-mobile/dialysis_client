@@ -17,53 +17,56 @@ class DaDataClient {
 
   Future<AddressTooltip> fetchAddressTooltip(String value) async {
     final response = await http.post(
-        Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $_apiKey',
-        },
-        body: jsonEncode({'query': value}),);
+      Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $_apiKey',
+      },
+      body: jsonEncode({'query': value}),
+    );
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
 
   Future<AddressTooltip> fetchCityTips(String value) async {
     final response = await http.post(
-        Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $_apiKey',
-        },
-        body: jsonEncode({
-          'query': value,
-          // "count": 10,
-          'from_bound': {'value': 'city'},
-          'to_bound': {'value': 'settlement'},
-          // ignore: inference_failure_on_collection_literal
-          'locations': [],
-          'restrict_value': true
-        }),);
+      Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $_apiKey',
+      },
+      body: jsonEncode({
+        'query': value,
+        // "count": 10,
+        'from_bound': {'value': 'city'},
+        'to_bound': {'value': 'settlement'},
+        // ignore: inference_failure_on_collection_literal
+        'locations': [],
+        'restrict_value': true
+      }),
+    );
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
 
   Future<AddressTooltip> fetchStreetTips(String value, String fiasId) async {
     final response = await http.post(
-        Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $_apiKey',
-        },
-        body: jsonEncode({
-          'query': value,
-          // "count": 10,
-          'from_bound': {'value': 'street'},
-          'to_bound': {'value': 'street'},
-          'locations': [
-            {'fias_id': fiasId}
-          ],
-          'restrict_value': true
-        }),);
+      Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $_apiKey',
+      },
+      body: jsonEncode({
+        'query': value,
+        // "count": 10,
+        'from_bound': {'value': 'street'},
+        'to_bound': {'value': 'street'},
+        'locations': [
+          {'fias_id': fiasId}
+        ],
+        'restrict_value': true
+      }),
+    );
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
@@ -93,20 +96,21 @@ class DaDataClient {
     log('-- $search');
 
     final response = await http.post(
-        Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $_apiKey',
-        },
-        body: jsonEncode({
-          'query': search,
-          'count': 10,
-          'from_bound': {'value': ''},
-          'to_bound': {'value': ''},
-          // ignore: inference_failure_on_collection_literal
-          'locations': [],
-          'restrict_value': true
-        }),);
+      Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/address'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $_apiKey',
+      },
+      body: jsonEncode({
+        'query': search,
+        'count': 10,
+        'from_bound': {'value': ''},
+        'to_bound': {'value': ''},
+        // ignore: inference_failure_on_collection_literal
+        'locations': [],
+        'restrict_value': true
+      }),
+    );
 
     return AddressTooltip.fromJson(json.decode(response.body));
   }
@@ -121,7 +125,6 @@ class DaDataClient {
         result = await fetchFioTooltip(value, type);
         break;
       case DaDataEnum.all:
-      
         break;
     }
 
@@ -130,7 +133,6 @@ class DaDataClient {
 
     for (var i = 0; i < length; i++) {
       list.add(
-     
         result.suggestions[i].value,
       );
     }
@@ -155,33 +157,35 @@ class DaDataClient {
         break;
     }
     final response = await http.post(
-        Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/fio'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $_apiKey',
-        },
-        body: typeFio.isEmpty
-            ? jsonEncode({
-                'query': value,
-              })
-            : jsonEncode({
-                'query': value,
-                'parts': [typeFio],
-              }),);
+      Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/fio'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $_apiKey',
+      },
+      body: typeFio.isEmpty
+          ? jsonEncode({
+              'query': value,
+            })
+          : jsonEncode({
+              'query': value,
+              'parts': [typeFio],
+            }),
+    );
 
     return FioTooltip.fromJson(json.decode(response.body));
   }
 
   Future<PassportCodeName> fetchPassportTooltip(String value) async {
     final response = await http.post(
-        Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/fms_unit'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token $_apiKey',
-        },
-        body: jsonEncode({
-          'query': value,
-        }),);
+      Uri.https(_baseUrl, '/suggestions/api/4_1/rs/suggest/fms_unit'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $_apiKey',
+      },
+      body: jsonEncode({
+        'query': value,
+      }),
+    );
 
     return PassportCodeName.fromJson(json.decode(response.body));
   }

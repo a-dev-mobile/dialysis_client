@@ -12,12 +12,9 @@ import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:dialysis/navigation/navigation.dart';
 
-
 import 'package:formz/formz.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-
-
 
 class RegistrationCubit extends HydratedCubit<RegistrationState2> {
   RegistrationCubit({

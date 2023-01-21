@@ -33,8 +33,4 @@ class AppDropDown extends StatelessWidget {
       onChanged: onChanged,
     );
   }
-
-
-
-  
 }

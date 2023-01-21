@@ -4,17 +4,11 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 
-
-
-
 class TestAppCubit extends Cubit<TestAppState> {
-  TestAppCubit()
-      : 
-        super(const TestAppState(isLoad: true, nameNutrient: []));
+  TestAppCubit() : super(const TestAppState(isLoad: true, nameNutrient: []));
 
   Future<void> loadNameNutrient() async {
     emit(state.copyWith(isLoad: true));
-
   }
 }
 

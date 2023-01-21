@@ -1,14 +1,12 @@
 import 'dart:convert';
 
-
 import 'package:collection/collection.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 
 @immutable
-class RegistrationState2 {         
-
+class RegistrationState2 {   
 /* init: false */
   final bool isLoadPage;
 /* init: false */
@@ -39,60 +37,60 @@ init: FormzSubmissionStatus.initial
   /*init: const [false,false]  */
   final List<bool> diabetesSelected;
 /* 
-type: data
+type: model
 */
   final DateRegModel dateRegModel;
 /* 
-type: data
+type: model
 init: const ValidNameFormz.pure()
 */
   final ValidNameFormz validNameFormz;
 
 /* 
-type: data
+type: model
 init: const ValidActivityFormz.pure()
 */
   final ValidActivityFormz validActivityFormz;
 
 /* 
-type: data
+type: model
 init: const ValidGenderFormz.pure()
 */
   final ValidGenderFormz validGenderFormz;
 
 /* 
-type: data
+type: model
 init: const ValidBirthdayFormz.pure()
 */
   final ValidBirthdayFormz validBirthdayFormz;
 /* 
-type: data
+type: model
 init: const ValidHeightFormz.pure()
 */
   final ValidHeightFormz validHeightFormz;
 /* 
-type: data
+type: model
 init: const ValidWeightFormz.pure()
 */
   final ValidWeightFormz validWeightFormz;
 /* 
-type: data
+type: model
 init: const ValidCreatinineFormz.pure()
 */
   final ValidCreatinineFormz validCreatinineFormz;
 /* 
-type: data
+type: model
 init: const ValidHypertensionFormz.pure()
 */
   final ValidHypertensionFormz validHypertensionFormz;
 
 /* 
-type: data
+type: model
 init: const ValidDiabetesFormz.pure()
 */
   final ValidDiabetesFormz validDiabetesFormz;
 /* 
-type: data
+type: model
 init: const ValidCkdFormz.pure()
 */
   final ValidCkdFormz validCkdFormz;
@@ -232,16 +230,16 @@ RegistrationState2 copyWith({
       ckdSelected: (map['ckdSelected'] as List<dynamic>).map((e) => e as bool).toList(), 
       diabetesSelected: (map['diabetesSelected'] as List<dynamic>?)?.map((e) => e as bool).toList() ?? const [false,false], 
       dateRegModel: DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>), 
-      validNameFormz: map['validNameFormz'] != null ? ValidNameFormz.fromMap(map['validNameFormz'] as Map<String, dynamic>) : const ValidNameFormz.pure(), 
-      validActivityFormz: map['validActivityFormz'] != null ? ValidActivityFormz.fromMap(map['validActivityFormz'] as Map<String, dynamic>) : const ValidActivityFormz.pure(), 
-      validGenderFormz: map['validGenderFormz'] != null ? ValidGenderFormz.fromMap(map['validGenderFormz'] as Map<String, dynamic>) : const ValidGenderFormz.pure(), 
-      validBirthdayFormz: map['validBirthdayFormz'] != null ? ValidBirthdayFormz.fromMap(map['validBirthdayFormz'] as Map<String, dynamic>) : const ValidBirthdayFormz.pure(), 
-      validHeightFormz: map['validHeightFormz'] != null ? ValidHeightFormz.fromMap(map['validHeightFormz'] as Map<String, dynamic>) : const ValidHeightFormz.pure(), 
-      validWeightFormz: map['validWeightFormz'] != null ? ValidWeightFormz.fromMap(map['validWeightFormz'] as Map<String, dynamic>) : const ValidWeightFormz.pure(), 
-      validCreatinineFormz: map['validCreatinineFormz'] != null ? ValidCreatinineFormz.fromMap(map['validCreatinineFormz'] as Map<String, dynamic>) : const ValidCreatinineFormz.pure(), 
-      validHypertensionFormz: map['validHypertensionFormz'] != null ? ValidHypertensionFormz.fromMap(map['validHypertensionFormz'] as Map<String, dynamic>) : const ValidHypertensionFormz.pure(), 
-      validDiabetesFormz: map['validDiabetesFormz'] != null ? ValidDiabetesFormz.fromMap(map['validDiabetesFormz'] as Map<String, dynamic>) : const ValidDiabetesFormz.pure(), 
-      validCkdFormz: map['validCkdFormz'] != null ? ValidCkdFormz.fromMap(map['validCkdFormz'] as Map<String, dynamic>) : const ValidCkdFormz.pure(), 
+      validNameFormz: ValidNameFormz.fromMap(map['validNameFormz'] as Map<String, dynamic>), 
+      validActivityFormz: ValidActivityFormz.fromMap(map['validActivityFormz'] as Map<String, dynamic>), 
+      validGenderFormz: ValidGenderFormz.fromMap(map['validGenderFormz'] as Map<String, dynamic>), 
+      validBirthdayFormz: ValidBirthdayFormz.fromMap(map['validBirthdayFormz'] as Map<String, dynamic>), 
+      validHeightFormz: ValidHeightFormz.fromMap(map['validHeightFormz'] as Map<String, dynamic>), 
+      validWeightFormz: ValidWeightFormz.fromMap(map['validWeightFormz'] as Map<String, dynamic>), 
+      validCreatinineFormz: ValidCreatinineFormz.fromMap(map['validCreatinineFormz'] as Map<String, dynamic>), 
+      validHypertensionFormz: ValidHypertensionFormz.fromMap(map['validHypertensionFormz'] as Map<String, dynamic>), 
+      validDiabetesFormz: ValidDiabetesFormz.fromMap(map['validDiabetesFormz'] as Map<String, dynamic>), 
+      validCkdFormz: ValidCkdFormz.fromMap(map['validCkdFormz'] as Map<String, dynamic>), 
     );
   }
   @override

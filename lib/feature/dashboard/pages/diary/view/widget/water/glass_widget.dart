@@ -1,4 +1,3 @@
-
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -90,8 +89,10 @@ class _GlassStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return status.map(
       isSimple: SizedBox.shrink,
-      isGood: () => Icon(Icons.check_circle,color: Theme.of(context).colorScheme.secondary),
-      isBad: () => Icon(Icons.cancel,color: Theme.of(context).colorScheme.error),
+      isGood: () => Icon(Icons.check_circle,
+          color: Theme.of(context).colorScheme.secondary,),
+      isBad: () =>
+          Icon(Icons.cancel, color: Theme.of(context).colorScheme.error),
     );
   }
 }

@@ -80,7 +80,8 @@ class DebugMenuPage extends StatelessWidget {
                   Wrap(
                     children: const [
                       _ItemPage(name: 'splash', route: SplashPage.name),
-                      _ItemPage(name: 'регистрация', route: RegistrationPage.name),
+                      _ItemPage(
+                          name: 'регистрация', route: RegistrationPage.name,),
                       _ItemPage(
                         name: 'onboarding',
                         route: OnBoardingPage.name,

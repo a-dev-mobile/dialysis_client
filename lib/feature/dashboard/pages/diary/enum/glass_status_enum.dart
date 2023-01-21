@@ -1,5 +1,5 @@
-  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
-  /*
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
+/*
   
   enum GlassStatusEnum {
   
@@ -9,10 +9,10 @@
 }
 
   */
-  
+
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-enum GlassStatusEnum with Comparable<GlassStatusEnum> { 
+enum GlassStatusEnum with Comparable<GlassStatusEnum> {
   isSimple('isSimple'),
   isGood('isGood'),
   isBad('isBad');
@@ -43,32 +43,28 @@ enum GlassStatusEnum with Comparable<GlassStatusEnum> {
     required T Function() isSimple,
     required T Function() isGood,
     required T Function() isBad,
-
   }) {
     switch (this) {
       case GlassStatusEnum.isSimple:
-        return isSimple();     
+        return isSimple();
       case GlassStatusEnum.isGood:
-        return isGood();     
+        return isGood();
       case GlassStatusEnum.isBad:
-        return isBad();     
-
+        return isBad();
     }
   }
-  
+
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
     T Function()? isSimple,
     T Function()? isGood,
     T Function()? isBad,
-
   }) =>
       map<T>(
-      isSimple: isSimple ?? orElse,     
-      isGood: isGood ?? orElse,     
-      isBad: isBad ?? orElse,     
-
+        isSimple: isSimple ?? orElse,
+        isGood: isGood ?? orElse,
+        isBad: isBad ?? orElse,
       );
 
   /// Pattern matching
@@ -76,14 +72,12 @@ enum GlassStatusEnum with Comparable<GlassStatusEnum> {
     T Function()? isSimple,
     T Function()? isGood,
     T Function()? isBad,
-
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        isSimple: isSimple,  
-        isGood: isGood,  
-        isBad: isBad,  
-        
+        isSimple: isSimple,
+        isGood: isGood,
+        isBad: isBad,
       );
 
   @override
@@ -91,4 +85,4 @@ enum GlassStatusEnum with Comparable<GlassStatusEnum> {
 
   @override
   String toString() => value;
-   }
+}

@@ -13,10 +13,11 @@ class DiaryCubit extends Cubit<DiaryState> {
         _go = go,
         super(
           const DiaryState(
-              listDayProducts: [],
-              currentFormatDay: '',
-              currentDateStr: '',
-              isLoadPage: true,),
+            listDayProducts: [],
+            currentFormatDay: '',
+            currentDateStr: '',
+            isLoadPage: true,
+          ),
         );
   final AppRouter _go;
   final AppStorage _storage;

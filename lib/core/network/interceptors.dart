@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 
-
 class ContentTypeInterceptor extends InterceptorsWrapper {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -25,8 +24,6 @@ class ContentTypeInterceptor extends InterceptorsWrapper {
     handler.next(options);
   }
 }
-
-
 
 class UserAgentInterceptor extends InterceptorsWrapper {
   UserAgentInterceptor(this.userAgent);

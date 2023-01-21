@@ -1,14 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 import 'package:bloc/bloc.dart';
-
 
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:flutter/cupertino.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-  SearchCubit() : super(const SearchState(isLoadPage: true, isLoadNextPage: false));
+  SearchCubit()
+      : super(const SearchState(isLoadPage: true, isLoadNextPage: false));
 }
 
 @immutable

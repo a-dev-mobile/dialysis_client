@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, lines_longer_than_80_chars
 
-
 import 'package:bloc/bloc.dart';
-
 
 import 'package:dialysis/app/common_cubits/common_cubits.dart';
 
@@ -93,8 +91,6 @@ class WelcomeState with _$WelcomeState {
     required LocaleEnum localeActive,
     required ThemeMode themeActive,
   }) = _WelcomeState;
-
-
 
   factory WelcomeState.fromJson(Map<String, Object?> json) =>
       _$WelcomeStateFromJson(json);

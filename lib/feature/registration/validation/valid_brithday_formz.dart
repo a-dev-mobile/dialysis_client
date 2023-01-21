@@ -29,8 +29,7 @@ class ValidBirthdayFormz extends FormzInput<String, ValidBrithdayError> {
             : ValidBrithdayError.isNoValid;
   }
 
-
-factory ValidBirthdayFormz.fromMap(Map<String, dynamic> map) {
+  factory ValidBirthdayFormz.fromMap(Map<String, dynamic> map) {
     final result = map['ValidBirthdayFormz'].toString();
     if (result.isEmpty) return const ValidBirthdayFormz.pure();
 
@@ -38,10 +37,8 @@ factory ValidBirthdayFormz.fromMap(Map<String, dynamic> map) {
   }
 
   Map<String, dynamic> toMap() {
- return <String, dynamic>{'ValidBirthdayFormz': value};
+    return <String, dynamic>{'ValidBirthdayFormz': value};
   }
-
-
 }
 
 extension ValidBrithdayExtension on ValidBirthdayFormz {

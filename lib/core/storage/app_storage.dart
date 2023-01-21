@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:dialysis/feature/registration/model/user_info_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -110,7 +109,7 @@ class AppStorage {
 
   static const _favoriteList = '_favoriteList';
 
-  Future<List<String>> getFavorite()  {
+  Future<List<String>> getFavorite() {
     return getStringList(key: _favoriteList);
   }
 
@@ -139,7 +138,7 @@ class AppStorage {
 
   static const _path_db_update = '_path_db_update';
 
-  Future<List<String>> getPathUpdateFilesDb()  {
+  Future<List<String>> getPathUpdateFilesDb() {
     return getStringList(key: _path_db_update);
   }
 
@@ -164,8 +163,8 @@ class AppStorage {
 
   static const _categories = 'categories';
 
-  Future<List<String>> getSelectedCategories()  {
-    return  getStringList(key: _categories);
+  Future<List<String>> getSelectedCategories() {
+    return getStringList(key: _categories);
   }
 
   Future<void> setSelectedCategories(List<String> value) {
@@ -179,7 +178,7 @@ class AppStorage {
     final listRaw = await getStringList(key: _day_product);
     final listModel = <DayProductsModel>[];
     for (final i in listRaw) {
-      listModel.add(DayProductsModel.fromJson( i as Map<String, dynamic>));
+      listModel.add(DayProductsModel.fromMap(i as Map<String, dynamic>));
     }
 
     return listModel;
@@ -188,7 +187,7 @@ class AppStorage {
   Future<void> setDayProducts(List<DayProductsModel> value) {
     final listString = <String>[];
     for (final i in value) {
-      listString.add(i.toJson().toString());
+      listString.add(i.toJson());
     }
 
     return setStringList(key: _day_product, value: listString);

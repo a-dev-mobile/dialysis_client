@@ -1,5 +1,5 @@
-  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
-  /*
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
+/*
   enum CkdEnum {
   one,
   two,
@@ -12,10 +12,10 @@
 }
 
   */
-  
+
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-enum CkdEnum with Comparable<CkdEnum> { 
+enum CkdEnum with Comparable<CkdEnum> {
   one('one'),
   two('two'),
   threeA('threeA'),
@@ -66,29 +66,27 @@ enum CkdEnum with Comparable<CkdEnum> {
     required T Function() five,
     required T Function() notKnow,
     required T Function() none,
-
   }) {
     switch (this) {
       case CkdEnum.one:
-        return one();     
+        return one();
       case CkdEnum.two:
-        return two();     
+        return two();
       case CkdEnum.threeA:
-        return threeA();     
+        return threeA();
       case CkdEnum.threeB:
-        return threeB();     
+        return threeB();
       case CkdEnum.four:
-        return four();     
+        return four();
       case CkdEnum.five:
-        return five();     
+        return five();
       case CkdEnum.notKnow:
-        return notKnow();     
+        return notKnow();
       case CkdEnum.none:
-        return none();     
-
+        return none();
     }
   }
-  
+
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
@@ -100,18 +98,16 @@ enum CkdEnum with Comparable<CkdEnum> {
     T Function()? five,
     T Function()? notKnow,
     T Function()? none,
-
   }) =>
       map<T>(
-      one: one ?? orElse,     
-      two: two ?? orElse,     
-      threeA: threeA ?? orElse,     
-      threeB: threeB ?? orElse,     
-      four: four ?? orElse,     
-      five: five ?? orElse,     
-      notKnow: notKnow ?? orElse,     
-      none: none ?? orElse,     
-
+        one: one ?? orElse,
+        two: two ?? orElse,
+        threeA: threeA ?? orElse,
+        threeB: threeB ?? orElse,
+        four: four ?? orElse,
+        five: five ?? orElse,
+        notKnow: notKnow ?? orElse,
+        none: none ?? orElse,
       );
 
   /// Pattern matching
@@ -124,19 +120,17 @@ enum CkdEnum with Comparable<CkdEnum> {
     T Function()? five,
     T Function()? notKnow,
     T Function()? none,
-
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        one: one,  
-        two: two,  
-        threeA: threeA,  
-        threeB: threeB,  
-        four: four,  
-        five: five,  
-        notKnow: notKnow,  
-        none: none,  
-        
+        one: one,
+        two: two,
+        threeA: threeA,
+        threeB: threeB,
+        four: four,
+        five: five,
+        notKnow: notKnow,
+        none: none,
       );
 
   @override
@@ -144,4 +138,4 @@ enum CkdEnum with Comparable<CkdEnum> {
 
   @override
   String toString() => value;
-   }
+}

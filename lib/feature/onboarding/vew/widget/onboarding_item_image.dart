@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class OnboardingItemImage extends StatelessWidget {
   const OnboardingItemImage({super.key, required this.assetName});
   final String assetName;

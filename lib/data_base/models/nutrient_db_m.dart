@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'nutrient_db_m.freezed.dart';
 part 'nutrient_db_m.g.dart';
 
-
 @freezed
 class NutrientDbModel with _$NutrientDbModel {
   const factory NutrientDbModel({

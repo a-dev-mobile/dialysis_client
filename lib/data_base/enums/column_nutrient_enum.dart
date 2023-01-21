@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
 
-
 enum NutrientColumnEnum with Comparable<NutrientColumnEnum> {
   water('water'),
   k_potassium('k_potassium'),

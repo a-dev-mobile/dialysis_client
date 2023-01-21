@@ -337,24 +337,24 @@ class AppDb {
 //     );
 //   }
 
-  // String _getProductWhereQuery(List<String> listFind, String locale) {
-  //   var where = '';
+// String _getProductWhereQuery(List<String> listFind, String locale) {
+//   var where = '';
 
-  //   for (var i = 0; i < listFind.length; i++) {
-  //     final s = listFind[i];
+//   for (var i = 0; i < listFind.length; i++) {
+//     final s = listFind[i];
 
-  //     where = '''
-  //           $where
-  //   (
-  //   p.${locale}_name LIKE "%${s.toLowerCase()}%"
-  //   OR
-  //   p.${locale}_name LIKE "%${s.toCapitalized()}%"
-  //   )''';
-  //     // если последний проход and не добавляем
-  //     if (i != listFind.length - 1) {
-  //       where = '$where AND ';
-  //     }
-  //   }
+//     where = '''
+//           $where
+//   (
+//   p.${locale}_name LIKE "%${s.toLowerCase()}%"
+//   OR
+//   p.${locale}_name LIKE "%${s.toCapitalized()}%"
+//   )''';
+//     // если последний проход and не добавляем
+//     if (i != listFind.length - 1) {
+//       where = '$where AND ';
+//     }
+//   }
 
-  //   return where;
-  // }
+//   return where;
+// }

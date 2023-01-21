@@ -35,7 +35,6 @@ class BtnToggleText extends StatelessWidget {
                     child: Text(
                       title!,
                       style: AppTextStyles.bodyText2(),
-                    
                     ),
                   ),
                 if (dialogText != null)
