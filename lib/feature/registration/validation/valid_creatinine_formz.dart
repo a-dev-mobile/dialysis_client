@@ -19,6 +19,21 @@ class ValidCreatinineFormz extends FormzInput<double?, ValidCreatinineError> {
 
     return null;
   }
+
+
+
+factory ValidCreatinineFormz.fromMap(Map<String, dynamic> map) {
+    final result = map['ValidCreatinineFormz'] as double?;
+    if (result == null) return const ValidCreatinineFormz.pure();
+
+    return ValidCreatinineFormz.pure(value: result);
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{'ValidCreatinineFormz': value};
+  }
+
+
 }
 
 extension ValidCreatinineExtension on ValidCreatinineFormz {

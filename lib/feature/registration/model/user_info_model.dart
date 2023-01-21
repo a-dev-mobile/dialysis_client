@@ -1,111 +1,162 @@
-// ignore_for_file: non_constant_identifier_names
+import 'dart:convert';
 
 import 'package:dialysis/feature/registration/registration.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-part 'user_info_model.freezed.dart';
-part 'user_info_model.g.dart';
 
-/// UserInfoModel data class
-@freezed
-class UserInfoModel with _$UserInfoModel {
-  const factory UserInfoModel({
-    required String s,
+@immutable
+   class UserInfoModel {    
+  /*  */
+  final String name;
+  /* 
+  type:enum
+  init: GenderEnum.none
+   */
+  final GenderEnum gender;
+  /* 
+  type:enum
+  init: ActivityEnum.none
+   */
+  final ActivityEnum activity;
+  /*  */
+  final DateTime birthday;
+  /*  */
+  final int height;
+  /*  */
+  final double weight;
+/* 
+  type:enum
+  init: CkdEnum.none
+   */
+  final CkdEnum ckd;
+  /*  */
+  final double creatinin;
+  /*  */
+  final DateTime created;
+  /*  */
+  final DateTime? updated;
 
-    
-    required String? s_can_null,
-    required bool b,
-    required bool? b_can_null,
-    required int i,
-    required int? i_can_null,
-    required double d,
-    required double? d_can_null,
-    required num n,
-    required num? n_can_null,
-    required List l,
-    required List? l_can_null,
-    required List<bool> lb,
-    required List<bool?> lb_null,
-    required List<bool>? lb_can_null,
-    required List<bool?>? lb_null_can_null,
-    required List<int> li,
-    required List<int?> li_null,
-    required List<int>? li_can_null,
-    required List<int?>? li_null_can_null,
-    required List<String> ls,
-    required List<String?> ls_null,
-    required List<String>? ls_can_null,
-    required List<String?>? ls_null_can_null,
-    required List<double> ld,
-    required List<double?> ld_null,
-    required List<double>? ld_can_null,
-    required List<double?>? ld_null_can_null,
-    required List<Map<int, String>> l_map_i_s,
-    required List<Map<int, String?>> l_map_i_s_null,
-    required List<Map<int, dynamic>> l_map_i_dyn,
-    required List<Map<int, dynamic>>? l_map_i_dyn_can_null,
-    required Set set,
-    required Set? set_can_null,
-    required Set<String> set_s,
-    required Set<String?> set_s_null,
-    required Set<String>? set_s_can_null,
-    required Set<String?>? set_s_null_can_null,
-    required Set<int> set_i,
-    required Set<int?> set_i_null,
-    required Set<int>? set_i_can_null,
-    required Set<int?>? set_i_null_can_null,
-    required Set<bool> set_bool,
-    required Set<bool?> set_bool_null,
-    required Set<bool>? set_bool_can_null,
-    required Set<bool?>? set_bool_null_can_null,
-    required Set<double> set_d,
-    required Set<double?> set_d_null,
-    required Set<double>? set_d_can_null,
-    required Set<double?>? set_d_null_can_null,
-    required Map m,
-    required Map? m_can_null,
-    required Map<String, dynamic> m_s_dyn,
-    required Map<String, dynamic>? m_s_dyn_can_null,
-    required Map<String, bool> m_s_b,
-    required Map<String, bool?> m_s_b_null,
-    required Map<String, bool>? m_s_b_can_null,
-    required Map<String, bool?>? m_s_b_null_can_null,
-    required Map<String, int> m_s_i,
-    required Map<String, int?> m_s_i_null,
-    required Map<String, int>? m_s_i_can_null,
-    required Map<String, int?>? m_s_i_null_can_null,
-    required Map<String, String> m_s_s,
-    required Map<String, String?> m_s_s_null,
-    required Map<String, String>? m_s_s_can_null,
-    required Map<String, String?>? m_s_s_null_can_null,
-    required Map<String, double> m_s_d,
-    required Map<String, double?> m_s_d_null,
-    required Map<String, double>? m_s_d_can_null,
-    required Map<String, double?>? m_s_d_null_can_null,
-    required Map<int, double> m_i_d,
-    required Map<int, double?> m_i_d_null,
-    required Map<int, double>? m_i_d_can_null,
-    required Map<int, double?>? m_i_d_null_can_null,
-    required Map<int, String> m_i_s,
-    required Map<int, String?> m_i_s_null,
-    required Map<int, String>? m_i_s_can_null,
-    required Map<int, String?>? m_i_s_null_can_null,
-    required Map<int, bool> m_i_b,
-    required Map<int, bool?> m_i_b_null,
-    required Map<int, bool>? m_i_b_can_null,
-    required Map<int, bool?>? m_i_b_null_can_null,
-    required Map<int, dynamic> m_i_dyn,
-    required Map<int, dynamic>? m_i_dyn_can_null,
-    required Map<dynamic, dynamic> m_dyn_dyn,
-    required Map<dynamic, dynamic>? m_dyn_dyn_can_null,
-    required List<dynamic>? ldyn_canNull,
-    required List<Map<int, String>>? l_map_i_s_can_null,
-    required List<Map<int, String?>>? l_map_i_s_null_can_null,
-    required DateTime date_time,
-    required DateTime? date_time_canNull,
+  // end
+   
+  // GENERATED CODE BELOW - DO NOT MODIFY
+  
+  const UserInfoModel({
+    required this.name,
+    this.gender = GenderEnum.none,
+    this.activity = ActivityEnum.none,
+    required this.birthday,
+    required this.height,
+    required this.weight,
+    this.ckd = CkdEnum.none,
+    required this.creatinin,
+    required this.created,
+    this.updated,
+  });
+  /*
+   factory UserInfoModel.init() => UserInfoModel(
+        name: '',
+        birthday: DateTime.now(),
+        height: 0,
+        weight: 0,
+        creatinin: 0,
+        created: DateTime.now(),
+      ); 
+  */
+  
+UserInfoModel copyWith({
+    String? name,
+    GenderEnum? gender,
+    ActivityEnum? activity,
+    DateTime? birthday,
+    int? height,
+    double? weight,
+    CkdEnum? ckd,
+    double? creatinin,
+    DateTime? created,
+    DateTime? updated,
+  }) {
+    return UserInfoModel(
+      name: name ?? this.name, 
+      gender: gender ?? this.gender, 
+      activity: activity ?? this.activity, 
+      birthday: birthday ?? this.birthday, 
+      height: height ?? this.height, 
+      weight: weight ?? this.weight, 
+      ckd: ckd ?? this.ckd, 
+      creatinin: creatinin ?? this.creatinin, 
+      created: created ?? this.created, 
+      updated: updated ?? this.updated, 
+    );
+  }
+  
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name, 
+      'gender': gender.index, 
+      'activity': activity.index, 
+      'birthday': birthday.toIso8601String(), 
+      'height': height, 
+      'weight': weight, 
+      'ckd': ckd.index, 
+      'creatinin': creatinin, 
+      'created': created.toIso8601String(), 
+      'updated': updated?.toIso8601String(), 
+    };
+  }
+  
+  factory UserInfoModel.fromMap(Map<String, dynamic> map) {
+    return UserInfoModel(
+      name: map['name'] as String, 
+      gender: GenderEnum.values[map['gender'] as int], 
+      activity: ActivityEnum.values[map['activity'] as int], 
+      birthday: DateTime.parse(map['birthday'] as String), 
+      height: map['height'] as int, 
+      weight: (map['weight'] as num).toDouble(), 
+      ckd: CkdEnum.values[map['ckd'] as int], 
+      creatinin: (map['creatinin'] as num).toDouble(), 
+      created: DateTime.parse(map['created'] as String), 
+      updated: map['updated'] == null ? null : DateTime.parse(map['updated'] as String), 
+    );
+  }
+  @override
+  String toString() {
+    return 'UserInfoModel(name: $name, gender: $gender, activity: $activity, birthday: $birthday, height: $height, weight: $weight, ckd: $ckd, creatinin: $creatinin, created: $created, updated: $updated, )';
+  }
 
-  }) = _UserInfoModel;
+  String toJson() => json.encode(toMap());
+  
+  factory UserInfoModel.fromJson(String source) => UserInfoModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UserInfoModel &&
+            (identical(other.name, name) || other.name == name) && 
+            (identical(other.gender, gender) || other.gender == gender) && 
+            (identical(other.activity, activity) || other.activity == activity) && 
+            (identical(other.birthday, birthday) || other.birthday == birthday) && 
+            (identical(other.height, height) || other.height == height) && 
+            (identical(other.weight, weight) || other.weight == weight) && 
+            (identical(other.ckd, ckd) || other.ckd == ckd) && 
+            (identical(other.creatinin, creatinin) || other.creatinin == creatinin) && 
+            (identical(other.created, created) || other.created == created) && 
+            (identical(other.updated, updated) || other.updated == updated) );
 
-  factory UserInfoModel.fromJson(Map<String, Object?> json) =>
-      _$UserInfoModelFromJson(json);
-}
+  }
+  
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        name,
+        gender,
+        activity,
+        birthday,
+        height,
+        weight,
+        ckd,
+        creatinin,
+        created,
+        updated,
+]);
+  }

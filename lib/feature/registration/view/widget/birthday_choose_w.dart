@@ -15,7 +15,7 @@ class BirthdayChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
         buildWhen: (p, c) =>
             p.daySelected != c.daySelected ||
             p.monthSelected != c.monthSelected ||

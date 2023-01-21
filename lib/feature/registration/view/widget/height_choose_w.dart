@@ -4,6 +4,7 @@ import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class HeightChoose extends StatelessWidget {
   const HeightChoose({
     super.key,
@@ -14,7 +15,7 @@ class HeightChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
         buildWhen: (p, c) =>
             p.validHeightFormz.isPure != c.validHeightFormz.isPure ||
             p.validHeightFormz.value != c.validHeightFormz.value,

@@ -20,12 +20,12 @@ class ActivityChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
         builder: (context, state) {
           final valid = state.validActivityFormz;
 
           return BtnToggleText(
-            textList: [l.light, l.normal],
+            textList: [l.normal, l.light],
             isSelected: state.activitySelected,
             onPressed: cubit.checkActivity,
             title: 'Укажите свою физическую активность',

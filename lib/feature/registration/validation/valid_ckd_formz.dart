@@ -12,6 +12,24 @@ class ValidCkdFormz
         ? ValidCkdError.notSelected
         : null;
   }
+
+  factory ValidCkdFormz.fromMap(Map<String, dynamic> map) {
+
+    final result = CkdEnum.fromValue(
+      map['ValidCkdFormz'] as String?,
+      fallback: CkdEnum.none,
+    );
+
+    return result == CkdEnum.none
+        ? const ValidCkdFormz.pure()
+        : ValidCkdFormz.dirty(result);
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{'ValidCkdFormz': value.name};
+  }
+
+
 }
 
 extension ValidCkdX on ValidCkdFormz {

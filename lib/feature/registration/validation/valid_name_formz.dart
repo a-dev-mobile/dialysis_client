@@ -12,8 +12,20 @@ class ValidNameFormz extends FormzInput<String, ValidNameError> {
         ? ValidNameError.isEmpty
         : RegExp(r'^.{30,100}$').hasMatch(value)
             ? ValidNameError.maxLenght
-        
-                : null;
+            : null;
+  }
+
+  factory ValidNameFormz.fromMap(Map<String, dynamic> map) {
+    final result = (map['ValidNameFormz'] as String?) ?? '';
+    if (result.isEmpty) return const ValidNameFormz.pure();
+
+    return ValidNameFormz.dirty(result);
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'ValidNameFormz': value,
+    };
   }
 }
 
@@ -22,4 +34,4 @@ extension ValidNameExtension on ValidNameFormz {
   ValidNameError get maxLength => ValidNameError.maxLenght;
 }
 
-enum ValidNameError { isEmpty,  maxLenght }
+enum ValidNameError { isEmpty, maxLenght }

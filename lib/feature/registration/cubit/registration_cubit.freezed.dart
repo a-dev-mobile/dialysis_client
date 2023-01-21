@@ -65,7 +65,7 @@ mixin _$RegistrationState {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RegistrationStateCopyWith<RegistrationState> get copyWith =>
+  $RegistrationStateCopyWith<RegistrationState2> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -73,7 +73,7 @@ mixin _$RegistrationState {
 abstract class $RegistrationStateCopyWith<$Res> {
   factory $RegistrationStateCopyWith(
           RegistrationState value, $Res Function(RegistrationState) then) =
-      _$RegistrationStateCopyWithImpl<$Res, RegistrationState>;
+      _$RegistrationStateCopyWithImpl<$Res, RegistrationState2>;
   @useResult
   $Res call(
       {bool isLoadPage,
@@ -105,7 +105,7 @@ abstract class $RegistrationStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
+class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState2>
     implements $RegistrationStateCopyWith<$Res> {
   _$RegistrationStateCopyWithImpl(this._value, this._then);
 
@@ -291,7 +291,7 @@ abstract class _$$_RegistrationStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_RegistrationStateCopyWithImpl<$Res>
-    extends _$RegistrationStateCopyWithImpl<$Res, _$_RegistrationState>
+    extends _$RegistrationStateCopyWithImpl<$Res, _$_RegistrationState2>
     implements _$$_RegistrationStateCopyWith<$Res> {
   __$$_RegistrationStateCopyWithImpl(
       _$_RegistrationState _value, $Res Function(_$_RegistrationState) _then)
@@ -726,8 +726,8 @@ class _$_RegistrationState
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegistrationStateCopyWith<_$_RegistrationState> get copyWith =>
-      __$$_RegistrationStateCopyWithImpl<_$_RegistrationState>(
+  _$$_RegistrationStateCopyWith<_$_RegistrationState2> get copyWith =>
+      __$$_RegistrationStateCopyWithImpl<_$_RegistrationState2>(
           this, _$identity);
 
   @override
@@ -838,6 +838,6 @@ abstract class _RegistrationState implements RegistrationState {
   List<bool> get ckdSelected;
   @override
   @JsonKey(ignore: true)
-  _$$_RegistrationStateCopyWith<_$_RegistrationState> get copyWith =>
+  _$$_RegistrationStateCopyWith<_$_RegistrationState2> get copyWith =>
       throw _privateConstructorUsedError;
 }

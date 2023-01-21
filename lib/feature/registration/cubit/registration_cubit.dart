@@ -12,16 +12,14 @@ import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:dialysis/navigation/navigation.dart';
 
-import 'package:flutter/foundation.dart';
+
 import 'package:formz/formz.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-part 'registration_state.dart';
-part 'registration_cubit.freezed.dart';
-part 'registration_cubit.g.dart';
 
-class RegistrationCubit extends HydratedCubit<RegistrationState> {
+
+class RegistrationCubit extends HydratedCubit<RegistrationState2> {
   RegistrationCubit({
     required AppRouter router,
     required DaDataClient clienTips,
@@ -30,7 +28,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         _clienTips = clienTips,
         _storage = storage,
         super(
-          RegistrationState(
+          RegistrationState2(
             dateRegModel: DateRegModel(
               days: _initDayMonth(start: 1, end: 31),
               months: _initDayMonth(start: 1, end: 12),
@@ -445,12 +443,12 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   @override
-  RegistrationState? fromJson(Map<String, dynamic> json) {
-    return RegistrationState.fromJson(json);
+  RegistrationState2? fromJson(Map<String, dynamic> json) {
+    return RegistrationState2.fromMap(json);
   }
 
   @override
-  Map<String, dynamic>? toJson(RegistrationState state) {
-    return state.toJson();
+  Map<String, dynamic>? toJson(RegistrationState2 state) {
+    return state.toMap();
   }
 }

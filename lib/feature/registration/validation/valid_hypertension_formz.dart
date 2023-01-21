@@ -13,6 +13,21 @@ class ValidHypertensionFormz
         ? ValidHypertensionError.notSelected
         : null;
   }
+
+  factory ValidHypertensionFormz.fromMap(Map<String, dynamic> map) {
+    final result = HypertensionEnum.fromValue(
+      map['ValidHypertensionFormz'] as String?,
+      fallback: HypertensionEnum.none,
+    );
+
+    return result == HypertensionEnum.none
+        ? const ValidHypertensionFormz.pure()
+        : ValidHypertensionFormz.dirty(result);
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{'ValidHypertensionFormz': value.name};
+  }
 }
 
 extension ValidHypertensionX on ValidHypertensionFormz {

@@ -19,6 +19,23 @@ class ValidWeightFormz extends FormzInput<double?, ValidWeightError> {
 
     return null;
   }
+
+
+
+factory ValidWeightFormz.fromMap(Map<String, dynamic> map) {
+    final result = map['ValidWeightFormz'] as double?;
+    if (result == null) return const ValidWeightFormz.pure();
+
+    return ValidWeightFormz.pure(value: result);
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{'ValidWeightFormz': value};
+  }
+
+
+
+
 }
 
 extension ValidWeightExtension on ValidWeightFormz {

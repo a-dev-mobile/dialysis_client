@@ -12,6 +12,25 @@ class ValidGenderFormz
         ? ValidGenderError.notSelected
         : null;
   }
+
+factory ValidGenderFormz.fromMap(Map<String, dynamic> map) {
+
+    final result = GenderEnum.fromValue(
+      map['ValidGenderFormz'] as String?,
+      fallback: GenderEnum.none,
+    );
+    
+    return result == GenderEnum.none
+        ? const ValidGenderFormz.pure()
+        : ValidGenderFormz.dirty(result);
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'ValidGenderFormz': value.name,
+    };
+  }
+
 }
 
 extension ValidGenderX on ValidGenderFormz {

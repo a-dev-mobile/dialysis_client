@@ -6,6 +6,7 @@ import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class HypertensionChoose extends StatelessWidget {
   const HypertensionChoose({
     super.key,
@@ -17,7 +18,7 @@ class HypertensionChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
         buildWhen: (p, c) =>
             p.validHypertensionFormz.isPure !=
                 c.validHypertensionFormz.isPure ||

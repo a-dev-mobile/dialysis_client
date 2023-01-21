@@ -198,11 +198,11 @@ class AppStorage {
   static const _user_info = '_user_info';
 
   Future<UserInfoModel> getUserInfoModel() async {
-    return UserInfoModel.fromJson(await getJson(key: _user_info));
+    return UserInfoModel.fromMap(await getJson(key: _user_info));
   }
 
   Future<void> setUserInfoModel(UserInfoModel value) {
-    return setJson(key: _user_info, value: value.toJson());
+    return setJson(key: _user_info, value: value.toMap());
   }
 
 // ******************************

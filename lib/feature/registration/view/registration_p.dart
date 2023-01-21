@@ -40,7 +40,7 @@ class _RegistrationPage extends StatelessWidget {
     return ClearFocus(
       child: Scaffold(
         body: SafeArea(
-          child: BlocBuilder<RegistrationCubit, RegistrationState>(
+          child: BlocBuilder<RegistrationCubit, RegistrationState2>(
             builder: (context, state) {
               if (state.isLoadPage) return const PageStartLoad();
 

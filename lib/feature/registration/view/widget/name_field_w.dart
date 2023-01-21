@@ -38,7 +38,7 @@ class _NameFieldState extends State<NameField> {
   Widget build(BuildContext context) {
     final l = context.l10n;
 
-    return BlocBuilder<RegistrationCubit, RegistrationState>(
+    return BlocBuilder<RegistrationCubit, RegistrationState2>(
       builder: (context, state) {
         final valid = state.validNameFormz;
 

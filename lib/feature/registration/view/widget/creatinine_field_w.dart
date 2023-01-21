@@ -5,6 +5,7 @@ import 'package:dialysis/feature/registration/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class CreatinineField extends StatefulWidget {
   const CreatinineField({
     super.key,
@@ -42,7 +43,7 @@ class _CreatinineFieldState extends State<CreatinineField> {
   Widget build(BuildContext context) {
     // final l = context.l10n;
 
-    return BlocBuilder<RegistrationCubit, RegistrationState>(
+    return BlocBuilder<RegistrationCubit, RegistrationState2>(
       builder: (context, state) {
         final valid = state.validCreatinineFormz;
 
