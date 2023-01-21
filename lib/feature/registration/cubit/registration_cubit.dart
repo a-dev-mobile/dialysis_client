@@ -16,7 +16,7 @@ import 'package:formz/formz.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-class RegistrationCubit extends HydratedCubit<RegistrationState2> {
+class RegistrationCubit extends HydratedCubit<RegistrationState> {
   RegistrationCubit({
     required AppRouter router,
     required DaDataClient clienTips,
@@ -25,7 +25,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState2> {
         _clienTips = clienTips,
         _storage = storage,
         super(
-          RegistrationState2(
+          RegistrationState(
             dateRegModel: DateRegModel(
               days: _initDayMonth(start: 1, end: 31),
               months: _initDayMonth(start: 1, end: 12),
@@ -440,12 +440,12 @@ class RegistrationCubit extends HydratedCubit<RegistrationState2> {
   }
 
   @override
-  RegistrationState2? fromJson(Map<String, dynamic> json) {
-    return RegistrationState2.fromMap(json);
+  RegistrationState? fromJson(Map<String, dynamic> json) {
+    return RegistrationState.fromMap(json);
   }
 
   @override
-  Map<String, dynamic>? toJson(RegistrationState2 state) {
+  Map<String, dynamic>? toJson(RegistrationState state) {
     return state.toMap();
   }
 }

@@ -1,1 +1,1 @@
-export 'welcome_c.dart';
+export 'welcome_cubit.dart';

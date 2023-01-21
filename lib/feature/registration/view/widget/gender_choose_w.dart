@@ -18,7 +18,7 @@ class GenderChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState>(
         buildWhen: (p, c) =>
             p.validGenderFormz.isPure != c.validGenderFormz.isPure ||
             p.validGenderFormz.value != c.validGenderFormz.value,

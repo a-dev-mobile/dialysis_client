@@ -43,7 +43,7 @@ dependencies:
 
   # Code generation
   freezed_annotation: ^2.2.0
-  json_annotation: ^4.7.0
+  json_annotation: ^4.8.0
 
   # Internationalization
   intl: ^0.17.0
@@ -57,7 +57,7 @@ dependencies:
   appmetrica_plugin: ^1.1.0
 
   # Persistance
-  shared_preferences: ^2.0.16
+  shared_preferences: ^2.0.17
   sqflite_sqlcipher: ^2.1.1+1
 
   # HTTP
@@ -68,7 +68,7 @@ dependencies:
   go_router: ^6.0.1
 
   # Native
-  url_launcher: ^6.1.7
+  url_launcher: ^6.1.8
   share_plus: ^6.3.0
 
   
@@ -97,7 +97,7 @@ dependencies:
 
  # firebase
   firebase_core: ^2.4.1
-  firebase_crashlytics: ^3.0.10
+  firebase_crashlytics: ^3.0.11
   firebase_remote_config: ^3.0.9
   # firebase_messaging: ^14.2.0
   cloud_firestore: ^4.3.1
@@ -121,7 +121,7 @@ dev_dependencies:
   # Code generation
   freezed: ^2.3.2
   build_runner: ^2.3.3
-  json_serializable: ^6.5.4
+  json_serializable: ^6.6.0
 
 # Tests
   #flutter_driver:

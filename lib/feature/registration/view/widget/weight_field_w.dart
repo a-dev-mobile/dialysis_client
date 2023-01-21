@@ -46,7 +46,7 @@ class _WeightFieldState extends State<WeightField> {
     // final l = context.l10n;
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState>(
         builder: (context, state) {
           final valid = state.validWeightFormz;
 

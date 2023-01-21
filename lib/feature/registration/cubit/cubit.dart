@@ -1,3 +1,2 @@
 export 'registration_cubit.dart';
-
-export 'registration_state_2.dart';
+export 'registration_state.dart';

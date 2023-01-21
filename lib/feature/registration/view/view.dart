@@ -1,2 +1,2 @@
-export 'registration_p.dart';
+export 'registration_page.dart';
 export 'widget/widget.dart';

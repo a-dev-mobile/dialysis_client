@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dialysis/data_base/data_base.dart';
-import 'package:dialysis/feature/welcome/view/welcome_p.dart';
+import 'package:dialysis/feature/welcome/view/welcome_page.dart';
 import 'package:dialysis/navigation/app_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ class SplashCubit extends Cubit<SplashState> {
     required AppDb db,
   })  : _db = db,
         _go = router,
-        super(SplashState.init());
+        super(const SplashState());
 
   final AppRouter _go;
   final AppDb _db;
@@ -34,32 +35,63 @@ class SplashCubit extends Cubit<SplashState> {
 }
 
 @immutable
-class SplashState {
+class SplashState { 
+  /* init:false */
   final bool isLoad;
+  // end
+   
+  //  ******************************
+  // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
+  
   const SplashState({
-    required this.isLoad,
+    this.isLoad = false,
   });
-
-  SplashState copyWith({
+  /*
+   factory SplashState.init() => SplashState(
+      ); 
+  */
+  
+SplashState copyWith({
     bool? isLoad,
   }) {
     return SplashState(
-      isLoad: isLoad ?? this.isLoad,
+      isLoad: isLoad ?? this.isLoad, 
     );
   }
-
-  factory SplashState.init() => const SplashState(isLoad: true);
-
+  
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'isLoad': isLoad, 
+    };
+  }
+  
+  factory SplashState.fromMap(Map<String, dynamic> map) {
+    return SplashState(
+      isLoad: map['isLoad'] as bool? ?? false, 
+    );
+  }
   @override
-  String toString() => 'SplashState(isLoad: $isLoad)';
-
-  @override
-  bool operator ==(covariant SplashState other) {
-    if (identical(this, other)) return true;
-
-    return other.isLoad == isLoad;
+  String toString() {
+    return 'SplashState(isLoad: $isLoad, )';
   }
 
+  String toJson() => json.encode(toMap());
+  
+  factory SplashState.fromJson(String source) => SplashState.fromMap(json.decode(source) as Map<String, dynamic>);
+  
   @override
-  int get hashCode => isLoad.hashCode;
-}
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SplashState &&
+            (identical(other.isLoad, isLoad) || other.isLoad == isLoad) );
+
+  }
+  
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        isLoad,
+]);
+  }

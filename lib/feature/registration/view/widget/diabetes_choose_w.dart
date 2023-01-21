@@ -18,7 +18,7 @@ class DiabetesChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState>(
         buildWhen: (p, c) =>
             p.validDiabetesFormz.isPure != c.validDiabetesFormz.isPure ||
             p.validDiabetesFormz.value != c.validDiabetesFormz.value,

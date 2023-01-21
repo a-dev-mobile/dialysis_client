@@ -4,7 +4,7 @@ import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:flutter/cupertino.dart';
 
 @immutable
-class AddedProductModel {  
+class AddedProductModel {    
   /*  */
   final int idProduct;
   /*  */
@@ -16,7 +16,9 @@ class AddedProductModel {
 
 // end
    
+  //  ******************************
   // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
   
   const AddedProductModel({
     required this.idProduct,

@@ -15,7 +15,7 @@ class HeightChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState>(
         buildWhen: (p, c) =>
             p.validHeightFormz.isPure != c.validHeightFormz.isPure ||
             p.validHeightFormz.value != c.validHeightFormz.value,

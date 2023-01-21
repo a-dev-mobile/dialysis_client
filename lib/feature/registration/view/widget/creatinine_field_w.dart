@@ -43,7 +43,7 @@ class _CreatinineFieldState extends State<CreatinineField> {
   Widget build(BuildContext context) {
     // final l = context.l10n;
 
-    return BlocBuilder<RegistrationCubit, RegistrationState2>(
+    return BlocBuilder<RegistrationCubit, RegistrationState>(
       builder: (context, state) {
         final valid = state.validCreatinineFormz;
 

@@ -5,14 +5,16 @@ import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class DayProductsModel {  
+class DayProductsModel {   
   /*  */
   final DateTime date;
   /*  type: List<model>  */
   final List<AddedProductModel> listAddedProduct;
   // end
    
+  //  ******************************
   // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
   
   const DayProductsModel({
     required this.date,

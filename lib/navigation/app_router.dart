@@ -15,7 +15,7 @@ import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:dialysis/feature/setting/setting_tab.dart';
 import 'package:dialysis/feature/splash/splash.dart';
-import 'package:dialysis/feature/welcome/view/welcome_p.dart';
+import 'package:dialysis/feature/welcome/view/welcome_page.dart';
 import 'package:dialysis/global.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';

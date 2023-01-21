@@ -20,7 +20,7 @@ class ActivityChoose extends StatelessWidget {
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
-      child: BlocBuilder<RegistrationCubit, RegistrationState2>(
+      child: BlocBuilder<RegistrationCubit, RegistrationState>(
         builder: (context, state) {
           final valid = state.validActivityFormz;
 

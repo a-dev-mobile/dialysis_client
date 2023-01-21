@@ -8,14 +8,16 @@ class CalendarCubit extends Cubit<CalendarState> {
 }
 
 @immutable
-class CalendarState {  
+class CalendarState {   
   /* init: false  */
   final bool isLoad;
   /*  */
   final DateTime? selectedDate;
   // end
    
+  //  ******************************
   // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
   
   const CalendarState({
     this.isLoad = false,
