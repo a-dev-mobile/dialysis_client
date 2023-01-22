@@ -27,7 +27,7 @@ class LoadNextPage extends StatelessWidget {
                           filter: ui.ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                           child: const Center(
                             child: RepaintBoundary(
-                              child: PageStartLoad(),
+                              child: AppPageLoad(),
                             ),
                           ),
                         ),

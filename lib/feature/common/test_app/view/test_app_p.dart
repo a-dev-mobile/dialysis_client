@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars, avoid_print
 
-import 'package:dialysis/app/common_cubits/common_c.dart';
-import 'package:dialysis/app/style/style.dart';
+import 'package:dialysis/app/app.dart';
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/common/test_app/cubit/test_app_cubit.dart';
 import 'package:dialysis/l10n/l10n.dart';

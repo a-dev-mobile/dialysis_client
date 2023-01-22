@@ -2,14 +2,15 @@
 
 import 'dart:io';
 
-import 'package:dialysis/app/common_cubits/common_c.dart';
-import 'package:dialysis/app/style/style.dart';
+import 'package:dialysis/app/app.dart';
+
 import 'package:dialysis/core/storage/app_storage.dart';
 
 import 'package:dialysis/feature/common/test_app/test_app.dart';
 
 import 'package:dialysis/feature/onboarding/onboarding.dart';
 import 'package:dialysis/feature/registration/registration.dart';
+import 'package:dialysis/feature/search/search.dart';
 
 import 'package:dialysis/feature/splash/splash.dart';
 import 'package:dialysis/navigation/navigation.dart';
@@ -81,7 +82,9 @@ class DebugMenuPage extends StatelessWidget {
                     children: const [
                       _ItemPage(name: 'splash', route: SplashPage.name),
                       _ItemPage(
-                          name: 'регистрация', route: RegistrationPage.name,),
+                        name: 'регистрация',
+                        route: RegistrationPage.name,
+                      ),
                       _ItemPage(
                         name: 'onboarding',
                         route: OnBoardingPage.name,
@@ -90,10 +93,10 @@ class DebugMenuPage extends StatelessWidget {
                         name: 'test app',
                         route: TestAppPage.name,
                       ),
-                      // _ItemPage(
-                      //   name: 'search',
-                      //   route: SearchPage.name,
-                      // ),
+                      _ItemPage(
+                        name: 'search',
+                        route: SearchPage.name,
+                      ),
                       // _ItemPage(
                       //   name: 'favorite',
                       //   route: FavoritePage.name,

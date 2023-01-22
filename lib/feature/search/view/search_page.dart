@@ -1,132 +1,86 @@
-// import 'dart:developer';
+import 'package:dialysis/core/storage/app_storage.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dialysis/core/widget/widget.dart';
+import 'package:dialysis/data_base/app_db.dart';
+import 'package:dialysis/feature/search/search.dart';
+import 'package:dialysis/navigation/app_router.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// import 'package:dialysis/core/storage/app_storage.dart';
-// import 'package:dialysis/core/widget/clean_focus.dart';
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
 
-// import 'package:dialysis/l10n/l10n.dart';
-// import 'package:dialysis/navigation/app_router.dart';
+  static const path = '/search-page';
+  static const name = 'search_page';
 
-// class SearchPage extends StatelessWidget {
-//   const SearchPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SearchBloc(
+            storage: context.read<AppStorage>(),
+            db: context.read<AppDb>(),
+            router: context.read<AppRouter>(),
+          )..add(const SearchEventStarted()),
+        ),
+      ],
+      child: const _SearchView(),
+    );
+  }
+}
 
-//   static const path = '/search-page';
-//   static const name = 'search_page';
+class _SearchView extends StatelessWidget {
+  const _SearchView();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MultiBlocProvider(
-//       providers: [
-//         BlocProvider(
-//           create: (context) => SearchBloc(
-//             storage: context.read<AppStorage>(),
-//             db: context.read<AppDbRepository>(),
-//             router: context.read<AppRouter>(),
-//             cubitLocale: context.read(),
-//           )..add(const SearchEventStarted()),
-//         ),
-//       ],
-//       child: const _SearchView(),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return ClearFocus(
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SearchField(),
+              Expanded(
+                child: BlocBuilder<SearchBloc, SearchState>(
+                  buildWhen: (p, c) => p.statusSearch != c.statusSearch,
+                  builder: (context, state) {
+                    // print('--${state.statusSearch}');
+                    if (state.statusSearch.isInitial) {
+                      return const Center(
+                        child: Text('введите текст поиска'),
+                      );
+                    }
 
-// class _SearchView extends StatelessWidget {
-//   const _SearchView();
+                    // SUCCESS
+                    if (state.statusSearch.isSuccess) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                      );
+                    }
+                    if (state.statusSearch.isEmpty) {
+                      return const Center(child: Text('пусто'));
+                    }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final bloc = context.read<SearchBloc>();
-//     final l = context.l10n;
+                    // if (state is SearchStateError) {
+                    //   return AppErrorMsg(msg: state.msg);
+                    // }
+                    if (state.statusSearch.isFailure) {
+                      return Center(child: Text('ошибка ${state.msgError}'));
+                    }
 
-//     return ClearFocus(
-//       child: Scaffold(
-//         // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-//         // floatingActionButton: BlocBuilder<SearchBloc, SearchState>(
-//         //   buildWhen: (p, c) => p.categories.length != c.categories.length,
-//         //   builder: (context, state) {
-//         //     return Visibility(
-//         //       visible: state.categories.isNotEmpty,
-//         //       child: FloatingActionButton(
-//         //         onPressed: () {},
-//         //         child: const Icon(Icons.swap_vert),
-//         //       ),
-//         //     );
-//         //   },
-//         // ),
-//         body: SafeArea(
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               const SearchField(),
-//               Expanded(
-//                 child: BlocBuilder<SearchBloc, SearchState>(
-//                   buildWhen: (p, c) => p.statusSearch != c.statusSearch,
-//                   builder: (context, state) {
-//                     // print('--${state.statusSearch}');
-//                     if (state.statusSearch.isInitial) {
-//                       if (state.lastEnterTexts.isEmpty) {
-//                         return const Center(
-//                           child: Text('введите текст поиска'),
-//                         );
-//                       }
-
-//                       return ListView(
-//                         children: [
-//                           ListTile(
-//                             title: Text(
-//                               l.you_recently_searched,
-//                               style: AppTextStyles.h4(),
-//                             ),
-//                           ),
-//                           for (var item in state.lastEnterTexts)
-//                             ListTile(
-//                               title: Text(item),
-//                               onTap: () =>
-//                                   bloc.add(SearchEventFind(find: item, l: l)),
-//                               leading: const Icon(Icons.history),
-//                               trailing: IconButton(
-//                                 icon: const Icon(Icons.clear),
-//                                 onPressed: () {},
-//                               ),
-//                             ),
-//                         ],
-//                       );
-//                     }
-//                     // SUCCESS
-//                     if (state.statusSearch.isSuccess) {
-//                       return Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: const [
-//                           _BuildCategories(),
-//                           _BuildListProducts(),
-//                         ],
-//                       );
-//                     }
-//                     if (state.statusSearch.isEmpty) {
-//                       return const Center(child: Text('пусто'));
-//                     }
-
-//                     // if (state is SearchStateError) {
-//                     //   return AppErrorMsg(msg: state.msg);
-//                     // }
-//                     if (state.statusSearch.isFailure) {
-//                       return Center(child: Text('ошибка ${state.msgError}'));
-//                     }
-
-//                     return const PageLoad();
-//                   },
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+                    return const AppPageLoad();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 // class _BuildListProducts extends StatefulWidget {
 //   const _BuildListProducts();

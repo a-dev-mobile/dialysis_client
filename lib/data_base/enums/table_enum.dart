@@ -1,5 +1,5 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
-/*
+  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
+  /*
   
   enum TableEnum {
   food,
@@ -10,9 +10,14 @@
   nutrient_type,
 
 }
+  
   */
+  
+  //  ******************************
+  // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
 
-enum TableEnum with Comparable<TableEnum> {
+enum TableEnum with Comparable<TableEnum> { 
   food('food'),
   source('source'),
   product('product'),
@@ -55,23 +60,25 @@ enum TableEnum with Comparable<TableEnum> {
     required T Function() category,
     required T Function() nutrient,
     required T Function() nutrient_type,
+
   }) {
     switch (this) {
       case TableEnum.food:
-        return food();
+        return food();     
       case TableEnum.source:
-        return source();
+        return source();     
       case TableEnum.product:
-        return product();
+        return product();     
       case TableEnum.category:
-        return category();
+        return category();     
       case TableEnum.nutrient:
-        return nutrient();
+        return nutrient();     
       case TableEnum.nutrient_type:
-        return nutrient_type();
+        return nutrient_type();     
+
     }
   }
-
+  
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
@@ -81,14 +88,16 @@ enum TableEnum with Comparable<TableEnum> {
     T Function()? category,
     T Function()? nutrient,
     T Function()? nutrient_type,
+
   }) =>
       map<T>(
-        food: food ?? orElse,
-        source: source ?? orElse,
-        product: product ?? orElse,
-        category: category ?? orElse,
-        nutrient: nutrient ?? orElse,
-        nutrient_type: nutrient_type ?? orElse,
+      food: food ?? orElse,     
+      source: source ?? orElse,     
+      product: product ?? orElse,     
+      category: category ?? orElse,     
+      nutrient: nutrient ?? orElse,     
+      nutrient_type: nutrient_type ?? orElse,     
+
       );
 
   /// Pattern matching
@@ -99,15 +108,17 @@ enum TableEnum with Comparable<TableEnum> {
     T Function()? category,
     T Function()? nutrient,
     T Function()? nutrient_type,
+
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        food: food,
-        source: source,
-        product: product,
-        category: category,
-        nutrient: nutrient,
-        nutrient_type: nutrient_type,
+        food: food,  
+        source: source,  
+        product: product,  
+        category: category,  
+        nutrient: nutrient,  
+        nutrient_type: nutrient_type,  
+        
       );
 
   @override
@@ -115,4 +126,4 @@ enum TableEnum with Comparable<TableEnum> {
 
   @override
   String toString() => value;
-}
+   }

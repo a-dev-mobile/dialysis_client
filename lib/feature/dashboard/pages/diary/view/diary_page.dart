@@ -1,5 +1,5 @@
 import 'package:dialysis/app/style/extensions/extensions.dart';
-import 'package:dialysis/core/widget/progress_indicator/page.dart';
+import 'package:dialysis/core/widget/progress_indicator/app_page_load.dart';
 import 'package:dialysis/feature/common/common.dart';
 
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
@@ -41,7 +41,7 @@ class _DiaryPage extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<DiaryCubit, DiaryState>(
           builder: (context, state) {
-            if (state.isLoadPage) return const PageStartLoad();
+            if (state.isLoadPage) return const AppPageLoad();
 
             return Padding(
               padding: const EdgeInsets.all(10),

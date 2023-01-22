@@ -1,2 +1,2 @@
-export 'search_p.dart';
+export 'search_page.dart';
 export 'widgets/widgets.dart';

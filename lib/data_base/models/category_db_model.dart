@@ -5,45 +5,43 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 @immutable
-class CategoryDbModel { 
+class CategoryDbModel {   
   /*  */
   final int id;
   /*  */
   final int id_category;
   /*  */
-  final String ru_name;
-  /*  */
-  final String en_name;
+  final String name;
+
+
   // end
    
+  //  ******************************
   // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
   
   const CategoryDbModel({
     required this.id,
     required this.id_category,
-    required this.ru_name,
-    required this.en_name,
+    required this.name,
   });
   /*
    factory CategoryDbModel.init() => CategoryDbModel(
         id: 0,
         id_category: 0,
-        ru_name: '',
-        en_name: '',
+        name: '',
       ); 
   */
   
 CategoryDbModel copyWith({
     int? id,
     int? id_category,
-    String? ru_name,
-    String? en_name,
+    String? name,
   }) {
     return CategoryDbModel(
       id: id ?? this.id, 
       id_category: id_category ?? this.id_category, 
-      ru_name: ru_name ?? this.ru_name, 
-      en_name: en_name ?? this.en_name, 
+      name: name ?? this.name, 
     );
   }
   
@@ -51,8 +49,7 @@ CategoryDbModel copyWith({
     return <String, dynamic>{
       'id': id, 
       'id_category': id_category, 
-      'ru_name': ru_name, 
-      'en_name': en_name, 
+      'name': name, 
     };
   }
   
@@ -60,13 +57,12 @@ CategoryDbModel copyWith({
     return CategoryDbModel(
       id: map['id'] as int, 
       id_category: map['id_category'] as int, 
-      ru_name: map['ru_name'] as String, 
-      en_name: map['en_name'] as String, 
+      name: map['name'] as String, 
     );
   }
   @override
   String toString() {
-    return 'CategoryDbModel(id: $id, id_category: $id_category, ru_name: $ru_name, en_name: $en_name, )';
+    return 'CategoryDbModel(id: $id, id_category: $id_category, name: $name, )';
   }
 
   String toJson() => json.encode(toMap());
@@ -80,8 +76,7 @@ CategoryDbModel copyWith({
             other is CategoryDbModel &&
             (identical(other.id, id) || other.id == id) && 
             (identical(other.id_category, id_category) || other.id_category == id_category) && 
-            (identical(other.ru_name, ru_name) || other.ru_name == ru_name) && 
-            (identical(other.en_name, en_name) || other.en_name == en_name) );
+            (identical(other.name, name) || other.name == name) );
 
   }
   
@@ -90,7 +85,6 @@ CategoryDbModel copyWith({
         runtimeType,
         id,
         id_category,
-        ru_name,
-        en_name,
+        name,
 ]);
   }

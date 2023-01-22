@@ -40,9 +40,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
             icon: const Icon(Icons.home_filled),
             label: l.main,
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.favorite),
-            label: l.favorite,
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Продукты',
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings),

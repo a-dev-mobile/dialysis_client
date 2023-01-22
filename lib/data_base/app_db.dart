@@ -160,47 +160,51 @@ class AppDb {
       }
     }
   }
-}
-// *******************************
 
-//   Future<SearchModel> getProduct({
-//     required String find,
-//     required String locale,
-//   }) async {
-//     final products = <FoodDbModel>[];
-//     final categories = <CategoryDbModel>[];
-//     //  getting favorite product and use only id product
-//     final favorites = await  _storage.getFavorite();
-//     final favoritesIdProduct = favorites.map((v) => v.idProduct).toList();
+  Future<List<String>> getTestName() async {
+    // final db = await openDB();
 
-//     final listEnumNutrient = [
-//       NutrientName.calorie.name,
-//       NutrientName.carbohydrates.name,
-//       NutrientName.proteins.name,
-//       NutrientName.water.name,
-//       NutrientName.fats.name,
-//       NutrientName.k_potassium.name,
-//       NutrientName.na_sodium.name,
-//     ];
+    return <String>[];
+  }
 
-//     // делаем  название колонок
-//     final buffer = StringBuffer();
-//     for (final v in listEnumNutrient) {
-//       buffer
-//         ..write('f.')
-//         ..write(v)
-//         ..write(', ');
+//   Future<SearchModel> getProduct ({
+//   required String find,
+//   required String locale,
+// }) async {
+//   final products = <FoodDbModel>[];
+//   final categories = <CategoryDbModel>[];
+//   //  getting favorite product and use only id product
+//   final favorites = await _storage.getFavorite();
+//   final favoritesIdProduct = favorites.map((v) => v.idProduct).toList();
 
-//       // = '$listNutrient f.$v,';
-//     }
-//     final listNutrient = buffer.toString().removeLastChars().removeLastChars();
+//   final listEnumNutrient = [
+//     NutrientColumnEnum.calorie.name,
+//     NutrientColumnEnum.carbohydrates.name,
+//     NutrientColumnEnum.proteins.name,
+//     NutrientColumnEnum.water.name,
+//     NutrientColumnEnum.fats.name,
+//     NutrientColumnEnum.k_potassium.name,
+//     NutrientColumnEnum.na_sodium.name,
+//   ];
 
-//     final db = await _openDB();
+//   // делаем  название колонок
+//   final buffer = StringBuffer();
+//   for (final v in listEnumNutrient) {
+//     buffer
+//       ..write('f.')
+//       ..write(v)
+//       ..write(', ');
 
-//     final findClean = find.trim()..replaceAll(RegExp(' +'), ' ');
-//     final listFind = findClean.split(' ');
+//     // = '$listNutrient f.$v,';
+//   }
+//   final listNutrient = buffer.toString().removeLastChars().removeLastChars();
 
-//     final query = '''
+//   final db = await _openDB();
+
+//   final findClean = find.trim()..replaceAll(RegExp(' +'), ' ');
+//   final listFind = findClean.split(' ');
+
+//   final query = '''
 // SELECT
 // p.id as idProduct,
 
@@ -230,112 +234,114 @@ class AppDb {
 
 // ''';
 // // I make a request to receive all nutrients
-//     final dbNutrient = await db.rawQuery(
-//       '''
+//   final dbNutrient = await db.rawQuery(
+//     '''
 // SELECT
 // nutrient,
 // ${locale}_name as name,
 // id_type as idType,
 // ${locale}_unit as unit from nutrient''',
-//     );
+//   );
 
-//     final listAllNutrient = <NutrientDbModel>[];
+//   final listAllNutrient = <NutrientDbModel>[];
 
-//     for (var i = 0; i < dbNutrient.length; i++) {
-//       final row = dbNutrient[i];
-//       listAllNutrient.add(
-//         NutrientDbModel(
-//           name: row['name'].toString(),
-//           unit: row['unit'].toString(),
-//           value: '',
-//           valueBase: '',
-//           idType: (row['idType'] as int?) ?? 0,
-//           nutrient: row['nutrient'].toString(),
-//         ),
-//       );
-//     }
-
-//     var sourceName = '';
-//     var sourceAbbrev = '';
-//     var sourceId = -1;
-
-//     var categoryName = '';
-//     var categoryId = -1;
-//     var product = '';
-//     var idProduct = -1;
-
-//     final dbProduct = await db.rawQuery(query);
-
-//     for (var i = 0; i < dbProduct.length; i++) {
-//       final row = dbProduct[i];
-
-//       final nutrients = <NutrientDbModel>[];
-//       // data for the main product parameters
-//       sourceName = row['sourceName'].toString();
-//       sourceAbbrev = row['sourceAbbrev'].toString();
-//       sourceId = int.parse(row['sourceId'].toString());
-
-//       categoryName = row['categoryName'].toString();
-//       categoryId = int.parse(row['categoryId'].toString());
-//       product = row['product'].toString();
-//       idProduct = int.parse(row['idProduct'].toString());
-
-//       // список всех категорий
-//       categories.add(CategoryDbModel(id: categoryId, name: categoryName));
-
-//       // nutrient enumeration
-//       for (var i = 0; i < listEnumNutrient.length; i++) {
-//         final nutrientItemEnum = listEnumNutrient[i];
-//         final value = row[nutrientItemEnum].toString();
-//         if (value == 'null' || value.isEmpty) continue;
-
-//         if (row.keys.contains(nutrientItemEnum)) {
-//           // pulling the right one out of the list nutrient
-//           final findNutrient =
-//               listAllNutrient.firstWhere((e) => e.nutrient == nutrientItemEnum);
-
-//           final valueFormat = MyNumberFormat.nutrient(double.parse(value));
-
-//           //  filling out a new
-//           nutrients.add(
-//             NutrientDbModel(
-//               name: findNutrient.name,
-//               unit: findNutrient.unit,
-//               value: valueFormat,
-//               idType: findNutrient.idType,
-//               nutrient: findNutrient.nutrient,
-//               valueBase: valueFormat,
-//             ),
-//           );
-//         }
-//       }
-
-//       products.add(
-//         FoodDbModel(
-//           category: categoryName,
-//           idCategory: categoryId,
-//           product: product,
-//           id: idProduct,
-//           // если содержиться в списке значит favorite
-//           isFavorite: favoritesIdProduct.contains(idProduct),
-//           source: SourceDbModel(
-//             abbrev: sourceAbbrev,
-//             idSource: sourceId,
-//             name: sourceName,
-//           ),
-//           nutrients: nutrients,
-//         ),
-//       );
-//     }
-
-//     await db.close();
-
-//     // category in uniq
-//     return SearchModel(
-//       categories: categories.toSet().toList(),
-//       products: products,
+//   for (var i = 0; i < dbNutrient.length; i++) {
+//     final row = dbNutrient[i];
+//     listAllNutrient.add(
+//       NutrientDbModel(
+//         name: row['name'].toString(),
+//         unit: row['unit'].toString(),
+//         value: '',
+//         valueBase: '',
+//         idType: (row['idType'] as int?) ?? 0,
+//         nutrient: row['nutrient'].toString(),
+//       ),
 //     );
 //   }
+
+//   var sourceName = '';
+//   var sourceAbbrev = '';
+//   var sourceId = -1;
+
+//   var categoryName = '';
+//   var categoryId = -1;
+//   var product = '';
+//   var idProduct = -1;
+
+//   final dbProduct = await db.rawQuery(query);
+
+//   for (var i = 0; i < dbProduct.length; i++) {
+//     final row = dbProduct[i];
+
+//     final nutrients = <NutrientDbModel>[];
+//     // data for the main product parameters
+//     sourceName = row['sourceName'].toString();
+//     sourceAbbrev = row['sourceAbbrev'].toString();
+//     sourceId = int.parse(row['sourceId'].toString());
+
+//     categoryName = row['categoryName'].toString();
+//     categoryId = int.parse(row['categoryId'].toString());
+//     product = row['product'].toString();
+//     idProduct = int.parse(row['idProduct'].toString());
+
+//     // список всех категорий
+//     categories.add(CategoryDbModel(id: categoryId, name: categoryName));
+
+//     // nutrient enumeration
+//     for (var i = 0; i < listEnumNutrient.length; i++) {
+//       final nutrientItemEnum = listEnumNutrient[i];
+//       final value = row[nutrientItemEnum].toString();
+//       if (value == 'null' || value.isEmpty) continue;
+
+//       if (row.keys.contains(nutrientItemEnum)) {
+//         // pulling the right one out of the list nutrient
+//         final findNutrient =
+//             listAllNutrient.firstWhere((e) => e.nutrient == nutrientItemEnum);
+
+//         final valueFormat = MyNumberFormat.nutrient(double.parse(value));
+
+//         //  filling out a new
+//         nutrients.add(
+//           NutrientDbModel(
+//             name: findNutrient.name,
+//             unit: findNutrient.unit,
+//             value: valueFormat,
+//             idType: findNutrient.idType,
+//             nutrient: findNutrient.nutrient,
+//             valueBase: valueFormat,
+//           ),
+//         );
+//       }
+//     }
+
+//     products.add(
+//       FoodDbModel(
+//         category: categoryName,
+//         idCategory: categoryId,
+//         product: product,
+//         id: idProduct,
+//         // если содержиться в списке значит favorite
+//         isFavorite: favoritesIdProduct.contains(idProduct),
+//         source: SourceDbModel(
+//           abbrev: sourceAbbrev,
+//           idSource: sourceId,
+//           name: sourceName,
+//         ),
+//         nutrients: nutrients,
+//       ),
+//     );
+//   }
+
+//   await db.close();
+
+//   // category in uniq
+//   return SearchModel(
+//     categories: categories.toSet().toList(),
+//     products: products,
+//   );
+// }
+// }
+// *******************************
 
 // String _getProductWhereQuery(List<String> listFind, String locale) {
 //   var where = '';
@@ -358,3 +364,4 @@ class AppDb {
 
 //   return where;
 // }
+}

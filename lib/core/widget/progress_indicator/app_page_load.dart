@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class PageStartLoad extends StatelessWidget {
-  const PageStartLoad({
+class AppPageLoad extends StatelessWidget {
+  const AppPageLoad({
     super.key,
     this.size,
     this.title,

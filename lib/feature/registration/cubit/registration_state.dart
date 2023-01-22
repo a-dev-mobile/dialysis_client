@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 
 @immutable
-class RegistrationState {     
+class RegistrationState { 
 /* init: false */
   final bool isLoadPage;
 /* init: false */
@@ -37,60 +37,60 @@ init: FormzSubmissionStatus.initial
   /*init: const [false,false]  */
   final List<bool> diabetesSelected;
 /* 
-type: model
+type: data
 */
   final DateRegModel dateRegModel;
 /* 
-type: model
+type: data
 init: const ValidNameFormz.pure()
 */
   final ValidNameFormz validNameFormz;
 
 /* 
-type: model
+type: data
 init: const ValidActivityFormz.pure()
 */
   final ValidActivityFormz validActivityFormz;
 
 /* 
-type: model
+type: data
 init: const ValidGenderFormz.pure()
 */
   final ValidGenderFormz validGenderFormz;
 
 /* 
-type: model
+type: data
 init: const ValidBirthdayFormz.pure()
 */
   final ValidBirthdayFormz validBirthdayFormz;
 /* 
-type: model
+type: data
 init: const ValidHeightFormz.pure()
 */
   final ValidHeightFormz validHeightFormz;
 /* 
-type: model
+type: data
 init: const ValidWeightFormz.pure()
 */
   final ValidWeightFormz validWeightFormz;
 /* 
-type: model
+type: data
 init: const ValidCreatinineFormz.pure()
 */
   final ValidCreatinineFormz validCreatinineFormz;
 /* 
-type: model
+type: data
 init: const ValidHypertensionFormz.pure()
 */
   final ValidHypertensionFormz validHypertensionFormz;
 
 /* 
-type: model
+type: data
 init: const ValidDiabetesFormz.pure()
 */
   final ValidDiabetesFormz validDiabetesFormz;
 /* 
-type: model
+type: data
 init: const ValidCkdFormz.pure()
 */
   final ValidCkdFormz validCkdFormz;

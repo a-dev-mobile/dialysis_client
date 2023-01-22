@@ -1,5 +1,5 @@
 import 'package:dialysis/core/utils/app_utils.dart';
-import 'package:dialysis/core/widget/progress_indicator/page.dart';
+import 'package:dialysis/core/widget/progress_indicator/app_page_load.dart';
 import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/dashboard/pages/diary/diary.dart';
 
@@ -17,7 +17,7 @@ class WaterWidget extends StatelessWidget {
 
     return BlocBuilder<WaterCubit, WaterState>(
       builder: (context, state) {
-        if (state.isLoadPage) return const PageStartLoad();
+        if (state.isLoadPage) return const AppPageLoad();
 
         final maxWaterFormat =
             AppUtilsNumber.getFormatNumber(num: cubitWater.state.maxWater);
@@ -41,7 +41,7 @@ class WaterWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [_BuildWrapGlass(), _BuildBtn()],
+                  children: const [_BuildWrapGlass(), _BuildIncrDecrBtn()],
                 ),
               ],
             ),
@@ -53,8 +53,8 @@ class WaterWidget extends StatelessWidget {
   }
 }
 
-class _BuildBtn extends StatelessWidget {
-  const _BuildBtn();
+class _BuildIncrDecrBtn extends StatelessWidget {
+  const _BuildIncrDecrBtn();
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +84,7 @@ class _BuildWrapGlass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: BlocBuilder<WaterCubit, WaterState>(
+        buildWhen: (p, c) => p.glassList != c.glassList,
         builder: (context, state) {
           return Stack(
             children: [
@@ -98,34 +99,33 @@ class _BuildWrapGlass extends StatelessWidget {
                     ),
                 ],
               ),
-              _BuildEmptyRecomendGlass(
-                sumEmptyRecomendGlass: state.sumRecomendGlass,
-              ),
+              // _BuildEmptyRecomendGlass(
+              //   sumEmptyRecomendGlass: state.sumRecomendGlass,
+              // ),
             ],
           );
         },
-        buildWhen: (p, c) => p.glassList != c.glassList,
       ),
     );
   }
 }
 
-class _BuildEmptyRecomendGlass extends StatelessWidget {
-  const _BuildEmptyRecomendGlass({
-    required this.sumEmptyRecomendGlass,
-  });
-  final int sumEmptyRecomendGlass;
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      children: [
-        for (int i = 0; i < sumEmptyRecomendGlass; i++)
-          GlassWidget(
-            number: i,
-            status: GlassStatusEnum.isSimple,
-            isEmpty: true,
-          ),
-      ],
-    );
-  }
-}
+// class _BuildEmptyRecomendGlass extends StatelessWidget {
+//   const _BuildEmptyRecomendGlass({
+//     required this.sumEmptyRecomendGlass,
+//   });
+//   final int sumEmptyRecomendGlass;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Wrap(
+//       children: [
+//         for (int i = 0; i < sumEmptyRecomendGlass; i++)
+//           GlassWidget(
+//             number: i,
+//             status: GlassStatusEnum.isSimple,
+//             isEmpty: true,
+//           ),
+//       ],
+//     );
+//   }
+// }

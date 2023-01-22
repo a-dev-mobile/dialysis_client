@@ -1,2 +1,2 @@
-export 'page.dart';
-export 'part.dart';
+export 'app_page_load.dart';
+export 'app_part_load.dart';

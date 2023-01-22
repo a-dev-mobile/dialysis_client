@@ -1,6 +1,5 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:dialysis/app/common_cubits/common_c.dart';
-import 'package:dialysis/app/style/style.dart';
+import 'package:dialysis/app/app.dart';
 import 'package:dialysis/l10n/app_localizations.dart';
 import 'package:dialysis/l10n/l10n.dart';
 import 'package:dialysis/navigation/navigation.dart';

@@ -42,7 +42,7 @@ class _RegistrationPage extends StatelessWidget {
         body: SafeArea(
           child: BlocBuilder<RegistrationCubit, RegistrationState>(
             builder: (context, state) {
-              if (state.isLoadPage) return const PageStartLoad();
+              if (state.isLoadPage) return const AppPageLoad();
 
               return LoadNextPage(
                 isLoad: state.isLoadNextPage,

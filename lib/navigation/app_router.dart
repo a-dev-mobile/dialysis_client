@@ -13,6 +13,7 @@ import 'package:dialysis/feature/debug_menu/debug_menu.dart';
 import 'package:dialysis/feature/onboarding/vew/vew.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';
 import 'package:dialysis/feature/registration/registration.dart';
+import 'package:dialysis/feature/search/search.dart';
 import 'package:dialysis/feature/setting/setting_tab.dart';
 import 'package:dialysis/feature/splash/splash.dart';
 import 'package:dialysis/feature/welcome/view/welcome_page.dart';
@@ -31,6 +32,15 @@ class AppRouter {
   final AppStorage _storage;
 
   final GoRouter router = GoRouter(
+    // initialLocation: DashBoardPage.path,
+    initialLocation: SplashPage.path,
+    observers: <NavigatorObserver>[
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ],
+    // ignore: avoid_redundant_argument_values
+    debugLogDiagnostics: DartDefine.IS_DEBUG,
+    navigatorKey: _rootNavigatorKey,
+
     routes: [
       ShellRoute(
         builder: (_, GoRouterState state, child) {
@@ -93,6 +103,14 @@ class AppRouter {
               child: const SettingPage(),
             ),
           ),
+             GoRoute(
+            path: SearchPage.path,
+            name: SearchPage.name,
+            pageBuilder: (context, state) => MaterialPage<void>(
+              key: state.pageKey,
+              child: const SearchPage(),
+            ),
+          ),
           GoRoute(
             path: DebugMenuPage.path,
             name: DebugMenuPage.name,
@@ -137,13 +155,6 @@ class AppRouter {
       key: state.pageKey,
       child: Center(child: Text(state.error.toString())),
     ),
-    initialLocation: DashBoardPage.path,
-    observers: <NavigatorObserver>[
-      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-    ],
-    // ignore: avoid_redundant_argument_values
-    debugLogDiagnostics: DartDefine.IS_DEBUG,
-    navigatorKey: _rootNavigatorKey,
   );
 
   Future<void> selectedRouter() async {

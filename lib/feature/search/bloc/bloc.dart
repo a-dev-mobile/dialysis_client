@@ -1,1 +1,1 @@
-export 'search_b.dart';
+export 'search_bloc.dart';

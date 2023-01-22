@@ -155,12 +155,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get light => 'ЛЕГКАЯ';
 
   @override
-  String get info_diabets =>
-      'Наличие диабета влияет на количество потребления нутриентов.';
+  String get info_diabets => 'Наличие диабета влияет на количество потребления нутриентов.';
 
   @override
-  String get info_hypertension =>
-      'Наличие гипертензии (высокое кровяное давление) влияет на количество потребления нутриентов.';
+  String get info_hypertension => 'Наличие гипертензии (высокое кровяное давление) влияет на количество потребления нутриентов.';
 
   @override
   String get month_january => 'January';

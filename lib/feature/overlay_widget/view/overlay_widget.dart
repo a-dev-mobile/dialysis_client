@@ -1,5 +1,4 @@
-import 'package:dialysis/app/common_cubits/common_c.dart';
-import 'package:dialysis/app/style/style.dart';
+import 'package:dialysis/app/app.dart';
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/debug_menu/debug_menu.dart';
 import 'package:dialysis/feature/overlay_widget/overlay_widget.dart';

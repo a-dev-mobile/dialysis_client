@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, lines_longer_than_80_chars
 
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:dialysis/feature/search/search.dart';
 import 'package:dialysis/navigation/app_router.dart';
 
@@ -50,28 +53,30 @@ class CategoryCubit extends Cubit<CategoryState> {
 
 @immutable
 class CategoryState {
-  // init: const [] | type: List<CategoryModel>
+  /* 
+  init: const [] 
+   type: List<data> 
+   */
   final List<CategoryModel> categories;
-  // init: -1
+  /* init: -1 */
   final int idActive;
-  // init: false
+  /*  init: false */
   final bool isLoad;
-/* end */
+// end
 
-  // GENERATED CODE - DO NOT MODIFY BY HAND
+  //  ******************************
+  // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
 
   const CategoryState({
     this.categories = const [],
     this.idActive = -1,
     this.isLoad = false,
   });
-/*
-   factory CategoryState.init() => const CategoryState(
-        categories: const [],
-        idActive: -1,
-        isLoad: false,
+  /*
+   factory CategoryState.init() => CategoryState(
       ); 
-*/
+  */
 
   CategoryState copyWith({
     List<CategoryModel>? categories,
@@ -87,9 +92,48 @@ class CategoryState {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'categories': categories,
+      'categories': categories.map((e) => e.toJson()).toList(),
       'idActive': idActive,
       'isLoad': isLoad,
     };
   }
+
+  factory CategoryState.fromMap(Map<String, dynamic> map) {
+    return CategoryState(
+      categories: (map['categories'] as List<dynamic>)
+          .map((e) => CategoryModel.fromMap(e as Map<String, dynamic>))
+          .toList(),
+      idActive: map['idActive'] as int? ?? -1,
+      isLoad: map['isLoad'] as bool? ?? false,
+    );
+  }
+  @override
+  String toString() {
+    return 'CategoryState(categories: $categories, idActive: $idActive, isLoad: $isLoad, )';
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory CategoryState.fromJson(String source) =>
+      CategoryState.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CategoryState &&
+            const DeepCollectionEquality()
+                .equals(other.categories, categories) &&
+            (identical(other.idActive, idActive) ||
+                other.idActive == idActive) &&
+            (identical(other.isLoad, isLoad) || other.isLoad == isLoad));
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(categories),
+        idActive,
+        isLoad,
+      ]);
 }
