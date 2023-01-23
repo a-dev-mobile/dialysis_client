@@ -197,5 +197,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get month_december => 'December';
 
   @override
+  String get welcome_msg => 'Congratulations! You have taken a new step toward a healthier lifestyle';
+
+  @override
   String get g => 'g';
 }

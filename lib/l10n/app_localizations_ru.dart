@@ -197,5 +197,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get month_december => 'Декабрь';
 
   @override
+  String get welcome_msg => 'Поздравляем! Вы сделали новый шаг на пути к более здоровому образу жизни';
+
+  @override
   String get g => 'г';
 }

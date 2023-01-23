@@ -9,16 +9,16 @@ class BtnToggleText extends StatelessWidget {
     required this.textList,
     required this.isSelected,
     required this.onPressed,
-    this.title,
+    this.title = '',
     this.errorText,
-    this.infoBottom,
-    this.dialogText,
+    this.infoBottom = '',
+    this.dialogText = '',
   });
   final List<String> textList;
-  final String? title;
+  final String title;
   final String? errorText;
-  final String? dialogText;
-  final String? infoBottom;
+  final String dialogText;
+  final String infoBottom;
   final List<bool> isSelected;
   final void Function(int)? onPressed;
   @override
@@ -30,29 +30,30 @@ class BtnToggleText extends StatelessWidget {
             Row(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (title != null)
+                if (title.isNotEmpty)
                   Expanded(
                     child: Text(
-                      title!,
+                      title,
                       style: AppTextStyles.bodyText2(),
                     ),
                   ),
-                if (dialogText != null)
+                if (dialogText.isNotEmpty)
                   IconButton(
                     onPressed: () => _showInfoDialog(
                       context: context,
-                      text: dialogText!,
+                      text: dialogText,
                     ),
                     icon: Icon(
                       Icons.info_outline,
                       color: context.theme.colorScheme.primary,
                     ),
-                  )
+                  ),
               ],
             ),
-            if (dialogText == null) const SizedBox(height: 10),
+            if (dialogText.isEmpty) const SizedBox(height: 10),
             ToggleButtons(
               constraints: BoxConstraints.expand(
+                // number 3 = becouse if less - ovverflow
                 width: (constraint.maxWidth / textList.length) - 3,
               ),
               isSelected: isSelected,
@@ -69,14 +70,14 @@ class BtnToggleText extends StatelessWidget {
                     .copyWith(color: context.theme.errorColor),
               ),
             ],
-            if (infoBottom != null) ...[
+            if (infoBottom.isNotEmpty) ...[
               const SizedBox(height: 6),
               Text(
-                infoBottom!,
+                infoBottom,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.caption(),
               ),
-            ]
+            ],
           ],
         );
       },

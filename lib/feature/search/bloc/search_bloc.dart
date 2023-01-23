@@ -37,7 +37,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   // ignore: unused_field
   final AppRouter _go;
   final AppStorage _storage;
-// 
+//
   // ignore: unused_field
   String _locale = '';
   //
@@ -88,10 +88,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     // https://github.com/felangel/bloc/issues/3349#issuecomment-1128950124
     if (emit.isDone) return;
 
-
-
     try {
-      final result = await _db.getTestName();
+      final result = await _db.getListProductsFound(find);
 
       if (result.isEmpty) {
         _statusEmpty(emit);
@@ -99,7 +97,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         return;
       } else {
         emit(
-          state.copyWith(testName: []),
+          state.copyWith(testName: result.map((e) => e.product_name).toList()),
         );
         _statusSuccess(emit);
       }

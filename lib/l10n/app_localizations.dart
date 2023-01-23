@@ -477,6 +477,12 @@ abstract class AppLocalizations {
   /// **'Декабрь'**
   String get month_december;
 
+  /// No description provided for @welcome_msg.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поздравляем! Вы сделали новый шаг на пути к более здоровому образу жизни'**
+  String get welcome_msg;
+
   /// No description provided for @g.
   ///
   /// In ru, this message translates to:

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dialysis/app/app.dart';
@@ -13,10 +14,10 @@ class LocaleCubit extends Cubit<LocaleEnum> {
 
   Future<void> load() async {
     final selectedLocale = await _storage.getLocale();
-
     if (selectedLocale.isNotEmpty) {
       setLocale(LocaleEnum.fromValue(selectedLocale));
     } else {
+      unawaited(_storage.setLocale(state.value));
       setLocale(state);
     }
   }

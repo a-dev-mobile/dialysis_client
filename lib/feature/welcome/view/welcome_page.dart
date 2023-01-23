@@ -2,6 +2,7 @@
 
 import 'package:dialysis/app/style/style.dart';
 import 'package:dialysis/core/widget/widget.dart';
+import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/welcome/welcome.dart';
 import 'package:dialysis/l10n/l10n.dart';
 import 'package:dialysis/navigation/navigation.dart';
@@ -37,6 +38,7 @@ class _WelcomePage extends StatelessWidget {
     final cubit = context.read<WelcomeCubit>();
 
     final l = context.l10n;
+
     return Scaffold(
       body: SafeArea(
         child: ClearFocus(
@@ -48,40 +50,43 @@ class _WelcomePage extends StatelessWidget {
                 Text(
                   l.welcome,
                   style: AppTextStyles.h4(),
+                  textAlign: TextAlign.center,
                 ),
                 Text(
-                  'Поздравляем! Вы сделали новый шаг на пути к более здоровому образу жизни',
+                  l.welcome_msg,
                   style: AppTextStyles.h6(),
                 ),
                 const Spacer(),
                 const AppLogo(),
                 const Spacer(),
-                BlocBuilder<WelcomeCubit, WelcomeState>(
-                  buildWhen: (p, c) => p.themeActive != c.themeActive,
-                  builder: (context, state) {
-                    return BtnToggleText(
-                      onPressed: cubit.changeTheme,
-                      textList: const ['Светлая', 'Темная'],
-                      isSelected: state.boolsTheme,
-                      title: 'Выберите тему приложения',
-                    );
-                  },
+                CardCustom(
+                  child: BlocBuilder<WelcomeCubit, WelcomeState>(
+                    buildWhen: (p, c) => p.themeActive != c.themeActive,
+                    builder: (context, state) {
+                      return BtnToggleText(
+                        onPressed: cubit.changeTheme,
+                        textList: const ['Светлая', 'Темная'],
+                        isSelected: state.boolsTheme,
+                        title: 'Выберите тему приложения',
+                      );
+                    },
+                  ),
                 ),
-                const SizedBox(height: 20),
-                BlocBuilder<WelcomeCubit, WelcomeState>(
-                  buildWhen: (p, c) => p.localeActive != c.localeActive,
-                  builder: (context, state) {
-                    return BtnToggleText(
-                      onPressed: cubit.changeLocale,
-                      textList: const [
-                        'Английский',
-                        'Руский',
-                      ],
-                      isSelected: state.boolsLocale,
-                      title: 'Выберите язык приложения',
-                    );
-                  },
-                ),
+                // const SizedBox(height: 20),
+                // BlocBuilder<WelcomeCubit, WelcomeState>(
+                //   buildWhen: (p, c) => p.localeActive != c.localeActive,
+                //   builder: (context, state) {
+                //     return BtnToggleText(
+                //       onPressed: cubit.changeLocale,
+                //       textList: const [
+                //         'Английский',
+                //         'Руский',
+                //       ],
+                //       isSelected: state.boolsLocale,
+                //       title: 'Выберите язык приложения',
+                //     );
+                //   },
+                // ),
                 const SizedBox(height: 5),
                 Text(
                   '(Вы можете изменить параметры в личном кабинете)',

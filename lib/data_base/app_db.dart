@@ -24,14 +24,23 @@ class AppDb {
   static const _nameDb = 'product.dbe';
   String _fullPathFileDb = '';
   String _folderDB = '';
+  String _locale = '';
 
   Future<void> load() async {
     _fullPathFileDb = await _storage.getDbPatch();
     _folderDB = await getDatabasesPath();
 
+    await _updateLocaleVariable();
+
     if (_fullPathFileDb.isEmpty) {
       _fullPathFileDb = join(_folderDB, _nameDb);
     }
+  }
+// if locale is empty from storage use platform locale
+  Future<void> _updateLocaleVariable() async {
+    _locale = await _storage.getLocale();
+    if (_locale.isEmpty) _locale = Platform.localeName;
+    _locale = _locale.split('_').first;
   }
 
   Future<void> checkAndCopyDbFromAssets({bool isForceDelete = false}) async {
@@ -161,10 +170,88 @@ class AppDb {
     }
   }
 
-  Future<List<String>> getTestName() async {
-    // final db = await openDB();
+  Future<List<ProductDbModel>> getDbAllProduct() async {
+    final db = await openDB();
+    final productMap =
+        await db.rawQuery('SELECT * from ${TableEnum.product.value}');
 
-    return <String>[];
+    return productMap.map(ProductDbModel.fromMap).toList();
+  }
+
+  Future<List<ProductDbModel>> getListProductsFound(String textRaw) async {
+    final searchText = textRaw.trim()..replaceAll(RegExp(' +'), ' ');
+
+    final searchWords = searchText.split(' ');
+
+    final db = await openDB();
+    final query = _getQuerySearchProduct(searchWords);
+
+    final productMap = await db.rawQuery(query);
+
+    return productMap.map(ProductDbModel.fromMap).toList();
+  }
+
+  String _getQuerySearchProduct(List<String> searchWords) {
+    final buffer = StringBuffer();
+//   final buffer = StringBuffer();
+//   for (final v in listEnumNutrient) {
+
+    for (final i in NutrientColumnEnum.values) {
+      buffer
+        ..write('f.')
+        ..write(i)
+        ..write(', ');
+    }
+// deleted comma for query
+    final textNameNutrient =
+        buffer.toString().removeLastChars().removeLastChars();
+
+    var where = '';
+
+    for (var i = 0; i < searchWords.length; i++) {
+      final s = searchWords[i];
+
+      where = '''
+          $where
+  (
+  p.${_locale}_name LIKE "%${s.toLowerCase()}%"
+  OR
+  p.${_locale}_name LIKE "%${s.toCapitalized()}%"
+  )''';
+      // если последний проход and не добавляем
+      if (i != searchWords.length - 1) {
+        where = '$where AND ';
+      }
+    }
+
+    return '''
+
+SELECT
+p.id as product_id,
+s.id as source_id,
+c.id as category_id,
+
+s.${_locale}_name as source_name,
+s.${_locale}_abbrev as source_abbrev,
+c.${_locale}_name as category_name,
+p.${_locale}_name as product_name,
+
+$textNameNutrient
+
+FROM food as f
+
+JOIN category as c
+on f.id_category = c.id
+
+JOIN source as s
+on f.id_source = s.id
+
+JOIN product as p
+on p.id=f.id_product
+
+WHERE $where
+
+''';
   }
 
 //   Future<SearchModel> getProduct ({
@@ -343,25 +430,4 @@ class AppDb {
 // }
 // *******************************
 
-// String _getProductWhereQuery(List<String> listFind, String locale) {
-//   var where = '';
-
-//   for (var i = 0; i < listFind.length; i++) {
-//     final s = listFind[i];
-
-//     where = '''
-//           $where
-//   (
-//   p.${locale}_name LIKE "%${s.toLowerCase()}%"
-//   OR
-//   p.${locale}_name LIKE "%${s.toCapitalized()}%"
-//   )''';
-//     // если последний проход and не добавляем
-//     if (i != listFind.length - 1) {
-//       where = '$where AND ';
-//     }
-//   }
-
-//   return where;
-// }
 }

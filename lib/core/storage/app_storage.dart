@@ -44,7 +44,7 @@ class AppStorage {
   static const _locale = 'locale';
 
   Future<String> getLocale() {
-    return getString(key: _locale, defaultValue: 'en_US');
+    return getString(key: _locale);
   }
 
   Future<void> setLocale(String locale) {

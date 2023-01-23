@@ -55,8 +55,13 @@ class _SearchView extends StatelessWidget {
 
                     // SUCCESS
                     if (state.statusSearch.isSuccess) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      return ListView.builder(
+                        itemCount: state.testName.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(state.testName[index]),
+                          );
+                        },
                       );
                     }
                     if (state.statusSearch.isEmpty) {
