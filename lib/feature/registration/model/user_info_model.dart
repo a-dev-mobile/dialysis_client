@@ -11,7 +11,7 @@ class UserInfoModel {
   type:enum
   init: GenderEnum.none
    */
-  final GenderEnum gender;
+  final EnumGender gender;
   /* 
   type:enum
   init: ActivityEnum.none
@@ -41,7 +41,7 @@ class UserInfoModel {
 
   const UserInfoModel({
     required this.name,
-    this.gender = GenderEnum.none,
+    this.gender = EnumGender.none,
     this.activity = ActivityEnum.none,
     required this.birthday,
     required this.height,
@@ -64,7 +64,7 @@ class UserInfoModel {
 
   UserInfoModel copyWith({
     String? name,
-    GenderEnum? gender,
+    EnumGender? gender,
     ActivityEnum? activity,
     DateTime? birthday,
     int? height,
@@ -106,7 +106,7 @@ class UserInfoModel {
   factory UserInfoModel.fromMap(Map<String, dynamic> map) {
     return UserInfoModel(
       name: map['name'] as String,
-      gender: GenderEnum.values[map['gender'] as int],
+      gender: EnumGender.values[map['gender'] as int],
       activity: ActivityEnum.values[map['activity'] as int],
       birthday: DateTime.parse(map['birthday'] as String),
       height: map['height'] as int,

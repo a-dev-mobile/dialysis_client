@@ -24,7 +24,7 @@ class _NameFieldState extends State<NameField> {
   @override
   void initState() {
     controller =
-        TextEditingController(text: widget.cubit.state.validNameFormz.value);
+        TextEditingController(text: widget.cubit.state.validName.value);
     super.initState();
   }
 
@@ -40,7 +40,7 @@ class _NameFieldState extends State<NameField> {
 
     return BlocBuilder<RegistrationCubit, RegistrationState>(
       builder: (context, state) {
-        final valid = state.validNameFormz;
+        final valid = state.validName;
 
         return CardCustom(
           child: Column(
@@ -80,8 +80,8 @@ class _NameFieldState extends State<NameField> {
         );
       },
       buildWhen: (p, c) =>
-          p.validNameFormz.isPure != c.validNameFormz.isPure ||
-          p.validNameFormz.value != c.validNameFormz.value,
+          p.validName.isPure != c.validName.isPure ||
+          p.validName.value != c.validName.value,
     );
   }
 }

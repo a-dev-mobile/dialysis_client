@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 
 @immutable
-class RegistrationState { 
+class RegistrationState {   
 /* init: false */
   final bool isLoadPage;
 /* init: false */
@@ -19,6 +19,8 @@ class RegistrationState {
   final List<bool> genderSelected;
 /* init: const [false,false] */
   final List<bool> hypertensionSelected;
+/* init: const [false,false,false,false] */
+  final List<bool> dailyDiuresisSelected;
 /* 
 type: enum
 init: FormzSubmissionStatus.initial
@@ -42,58 +44,65 @@ type: data
   final DateRegModel dateRegModel;
 /* 
 type: data
-init: const ValidNameFormz.pure()
+init: const ValidName.pure()
 */
-  final ValidNameFormz validNameFormz;
+  final ValidName validName;
 
 /* 
 type: data
-init: const ValidActivityFormz.pure()
+init: const ValidActivity.pure()
 */
-  final ValidActivityFormz validActivityFormz;
+  final ValidActivity validActivity;
 
 /* 
 type: data
-init: const ValidGenderFormz.pure()
+init: const ValidGender.pure()
 */
-  final ValidGenderFormz validGenderFormz;
+  final ValidGender validGender;
 
 /* 
 type: data
-init: const ValidBirthdayFormz.pure()
+init: const ValidBirthday.pure()
 */
-  final ValidBirthdayFormz validBirthdayFormz;
+  final ValidBirthday validBirthday;
 /* 
 type: data
-init: const ValidHeightFormz.pure()
+init: const ValidHeight.pure()
 */
-  final ValidHeightFormz validHeightFormz;
+  final ValidHeight validHeight;
 /* 
 type: data
-init: const ValidWeightFormz.pure()
+init: const ValidWeight.pure()
 */
-  final ValidWeightFormz validWeightFormz;
+  final ValidWeight validWeight;
 /* 
 type: data
-init: const ValidCreatinineFormz.pure()
+init: const ValidCreatinine.pure()
 */
-  final ValidCreatinineFormz validCreatinineFormz;
+  final ValidCreatinine validCreatinine;
 /* 
 type: data
-init: const ValidHypertensionFormz.pure()
+init: const ValidHypertension.pure()
 */
-  final ValidHypertensionFormz validHypertensionFormz;
+  final ValidHypertension validHypertension;
 
 /* 
 type: data
-init: const ValidDiabetesFormz.pure()
+init: const ValidDiabetes.pure()
 */
-  final ValidDiabetesFormz validDiabetesFormz;
+  final ValidDiabetes validDiabetes;
 /* 
 type: data
-init: const ValidCkdFormz.pure()
+init: const ValidCkd.pure()
 */
-  final ValidCkdFormz validCkdFormz;
+  final ValidCkd validCkd;
+
+/* 
+type: data
+init: const ValidDailyDiuresis.pure()
+*/
+  final ValidDailyDiuresis validDailyDiuresis;
+
   // end
    
   //  ******************************
@@ -107,6 +116,7 @@ init: const ValidCkdFormz.pure()
     this.activitySelected = const [false,false],
     this.genderSelected = const [false,false],
     this.hypertensionSelected = const [false,false],
+    this.dailyDiuresisSelected = const [false,false,false,false],
     this.status = FormzSubmissionStatus.initial,
     this.daySelected,
     this.yearSelected,
@@ -115,16 +125,17 @@ init: const ValidCkdFormz.pure()
     required this.ckdSelected,
     this.diabetesSelected = const [false,false],
     required this.dateRegModel,
-    this.validNameFormz = const ValidNameFormz.pure(),
-    this.validActivityFormz = const ValidActivityFormz.pure(),
-    this.validGenderFormz = const ValidGenderFormz.pure(),
-    this.validBirthdayFormz = const ValidBirthdayFormz.pure(),
-    this.validHeightFormz = const ValidHeightFormz.pure(),
-    this.validWeightFormz = const ValidWeightFormz.pure(),
-    this.validCreatinineFormz = const ValidCreatinineFormz.pure(),
-    this.validHypertensionFormz = const ValidHypertensionFormz.pure(),
-    this.validDiabetesFormz = const ValidDiabetesFormz.pure(),
-    this.validCkdFormz = const ValidCkdFormz.pure(),
+    this.validName = const ValidName.pure(),
+    this.validActivity = const ValidActivity.pure(),
+    this.validGender = const ValidGender.pure(),
+    this.validBirthday = const ValidBirthday.pure(),
+    this.validHeight = const ValidHeight.pure(),
+    this.validWeight = const ValidWeight.pure(),
+    this.validCreatinine = const ValidCreatinine.pure(),
+    this.validHypertension = const ValidHypertension.pure(),
+    this.validDiabetes = const ValidDiabetes.pure(),
+    this.validCkd = const ValidCkd.pure(),
+    this.validDailyDiuresis = const ValidDailyDiuresis.pure(),
   });
   /*
    factory RegistrationState.init() => RegistrationState(
@@ -140,6 +151,7 @@ RegistrationState copyWith({
     List<bool>? activitySelected,
     List<bool>? genderSelected,
     List<bool>? hypertensionSelected,
+    List<bool>? dailyDiuresisSelected,
     FormzSubmissionStatus? status,
     String? daySelected,
     String? yearSelected,
@@ -148,16 +160,17 @@ RegistrationState copyWith({
     List<bool>? ckdSelected,
     List<bool>? diabetesSelected,
     DateRegModel? dateRegModel,
-    ValidNameFormz? validNameFormz,
-    ValidActivityFormz? validActivityFormz,
-    ValidGenderFormz? validGenderFormz,
-    ValidBirthdayFormz? validBirthdayFormz,
-    ValidHeightFormz? validHeightFormz,
-    ValidWeightFormz? validWeightFormz,
-    ValidCreatinineFormz? validCreatinineFormz,
-    ValidHypertensionFormz? validHypertensionFormz,
-    ValidDiabetesFormz? validDiabetesFormz,
-    ValidCkdFormz? validCkdFormz,
+    ValidName? validName,
+    ValidActivity? validActivity,
+    ValidGender? validGender,
+    ValidBirthday? validBirthday,
+    ValidHeight? validHeight,
+    ValidWeight? validWeight,
+    ValidCreatinine? validCreatinine,
+    ValidHypertension? validHypertension,
+    ValidDiabetes? validDiabetes,
+    ValidCkd? validCkd,
+    ValidDailyDiuresis? validDailyDiuresis,
   }) {
     return RegistrationState(
       isLoadPage: isLoadPage ?? this.isLoadPage, 
@@ -166,6 +179,7 @@ RegistrationState copyWith({
       activitySelected: activitySelected ?? this.activitySelected, 
       genderSelected: genderSelected ?? this.genderSelected, 
       hypertensionSelected: hypertensionSelected ?? this.hypertensionSelected, 
+      dailyDiuresisSelected: dailyDiuresisSelected ?? this.dailyDiuresisSelected, 
       status: status ?? this.status, 
       daySelected: daySelected ?? this.daySelected, 
       yearSelected: yearSelected ?? this.yearSelected, 
@@ -174,16 +188,17 @@ RegistrationState copyWith({
       ckdSelected: ckdSelected ?? this.ckdSelected, 
       diabetesSelected: diabetesSelected ?? this.diabetesSelected, 
       dateRegModel: dateRegModel ?? this.dateRegModel, 
-      validNameFormz: validNameFormz ?? this.validNameFormz, 
-      validActivityFormz: validActivityFormz ?? this.validActivityFormz, 
-      validGenderFormz: validGenderFormz ?? this.validGenderFormz, 
-      validBirthdayFormz: validBirthdayFormz ?? this.validBirthdayFormz, 
-      validHeightFormz: validHeightFormz ?? this.validHeightFormz, 
-      validWeightFormz: validWeightFormz ?? this.validWeightFormz, 
-      validCreatinineFormz: validCreatinineFormz ?? this.validCreatinineFormz, 
-      validHypertensionFormz: validHypertensionFormz ?? this.validHypertensionFormz, 
-      validDiabetesFormz: validDiabetesFormz ?? this.validDiabetesFormz, 
-      validCkdFormz: validCkdFormz ?? this.validCkdFormz, 
+      validName: validName ?? this.validName, 
+      validActivity: validActivity ?? this.validActivity, 
+      validGender: validGender ?? this.validGender, 
+      validBirthday: validBirthday ?? this.validBirthday, 
+      validHeight: validHeight ?? this.validHeight, 
+      validWeight: validWeight ?? this.validWeight, 
+      validCreatinine: validCreatinine ?? this.validCreatinine, 
+      validHypertension: validHypertension ?? this.validHypertension, 
+      validDiabetes: validDiabetes ?? this.validDiabetes, 
+      validCkd: validCkd ?? this.validCkd, 
+      validDailyDiuresis: validDailyDiuresis ?? this.validDailyDiuresis, 
     );
   }
   
@@ -195,6 +210,7 @@ RegistrationState copyWith({
       'activitySelected': activitySelected, 
       'genderSelected': genderSelected, 
       'hypertensionSelected': hypertensionSelected, 
+      'dailyDiuresisSelected': dailyDiuresisSelected, 
       'status': status.index, 
       'daySelected': daySelected, 
       'yearSelected': yearSelected, 
@@ -203,16 +219,17 @@ RegistrationState copyWith({
       'ckdSelected': ckdSelected, 
       'diabetesSelected': diabetesSelected, 
       'dateRegModel': dateRegModel.toMap(), 
-      'validNameFormz': validNameFormz.toMap(), 
-      'validActivityFormz': validActivityFormz.toMap(), 
-      'validGenderFormz': validGenderFormz.toMap(), 
-      'validBirthdayFormz': validBirthdayFormz.toMap(), 
-      'validHeightFormz': validHeightFormz.toMap(), 
-      'validWeightFormz': validWeightFormz.toMap(), 
-      'validCreatinineFormz': validCreatinineFormz.toMap(), 
-      'validHypertensionFormz': validHypertensionFormz.toMap(), 
-      'validDiabetesFormz': validDiabetesFormz.toMap(), 
-      'validCkdFormz': validCkdFormz.toMap(), 
+      'validName': validName.toMap(), 
+      'validActivity': validActivity.toMap(), 
+      'validGender': validGender.toMap(), 
+      'validBirthday': validBirthday.toMap(), 
+      'validHeight': validHeight.toMap(), 
+      'validWeight': validWeight.toMap(), 
+      'validCreatinine': validCreatinine.toMap(), 
+      'validHypertension': validHypertension.toMap(), 
+      'validDiabetes': validDiabetes.toMap(), 
+      'validCkd': validCkd.toMap(), 
+      'validDailyDiuresis': validDailyDiuresis.toMap(), 
     };
   }
   
@@ -224,6 +241,7 @@ RegistrationState copyWith({
       activitySelected: (map['activitySelected'] as List<dynamic>?)?.map((e) => e as bool).toList() ?? const [false,false], 
       genderSelected: (map['genderSelected'] as List<dynamic>?)?.map((e) => e as bool).toList() ?? const [false,false], 
       hypertensionSelected: (map['hypertensionSelected'] as List<dynamic>?)?.map((e) => e as bool).toList() ?? const [false,false], 
+      dailyDiuresisSelected: (map['dailyDiuresisSelected'] as List<dynamic>?)?.map((e) => e as bool).toList() ?? const [false,false,false,false], 
       status: FormzSubmissionStatus.values[map['status'] as int], 
       daySelected: map['daySelected'] as String?, 
       yearSelected: map['yearSelected'] as String?, 
@@ -232,21 +250,22 @@ RegistrationState copyWith({
       ckdSelected: (map['ckdSelected'] as List<dynamic>).map((e) => e as bool).toList(), 
       diabetesSelected: (map['diabetesSelected'] as List<dynamic>?)?.map((e) => e as bool).toList() ?? const [false,false], 
       dateRegModel: DateRegModel.fromMap(map['dateRegModel'] as Map<String, dynamic>), 
-      validNameFormz: ValidNameFormz.fromMap(map['validNameFormz'] as Map<String, dynamic>), 
-      validActivityFormz: ValidActivityFormz.fromMap(map['validActivityFormz'] as Map<String, dynamic>), 
-      validGenderFormz: ValidGenderFormz.fromMap(map['validGenderFormz'] as Map<String, dynamic>), 
-      validBirthdayFormz: ValidBirthdayFormz.fromMap(map['validBirthdayFormz'] as Map<String, dynamic>), 
-      validHeightFormz: ValidHeightFormz.fromMap(map['validHeightFormz'] as Map<String, dynamic>), 
-      validWeightFormz: ValidWeightFormz.fromMap(map['validWeightFormz'] as Map<String, dynamic>), 
-      validCreatinineFormz: ValidCreatinineFormz.fromMap(map['validCreatinineFormz'] as Map<String, dynamic>), 
-      validHypertensionFormz: ValidHypertensionFormz.fromMap(map['validHypertensionFormz'] as Map<String, dynamic>), 
-      validDiabetesFormz: ValidDiabetesFormz.fromMap(map['validDiabetesFormz'] as Map<String, dynamic>), 
-      validCkdFormz: ValidCkdFormz.fromMap(map['validCkdFormz'] as Map<String, dynamic>), 
+      validName: ValidName.fromMap(map['validName'] as Map<String, dynamic>), 
+      validActivity: ValidActivity.fromMap(map['validActivity'] as Map<String, dynamic>), 
+      validGender: ValidGender.fromMap(map['validGender'] as Map<String, dynamic>), 
+      validBirthday: ValidBirthday.fromMap(map['validBirthday'] as Map<String, dynamic>), 
+      validHeight: ValidHeight.fromMap(map['validHeight'] as Map<String, dynamic>), 
+      validWeight: ValidWeight.fromMap(map['validWeight'] as Map<String, dynamic>), 
+      validCreatinine: ValidCreatinine.fromMap(map['validCreatinine'] as Map<String, dynamic>), 
+      validHypertension: ValidHypertension.fromMap(map['validHypertension'] as Map<String, dynamic>), 
+      validDiabetes: ValidDiabetes.fromMap(map['validDiabetes'] as Map<String, dynamic>), 
+      validCkd: ValidCkd.fromMap(map['validCkd'] as Map<String, dynamic>), 
+      validDailyDiuresis: ValidDailyDiuresis.fromMap(map['validDailyDiuresis'] as Map<String, dynamic>), 
     );
   }
   @override
   String toString() {
-    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, activitySelected: $activitySelected, genderSelected: $genderSelected, hypertensionSelected: $hypertensionSelected, status: $status, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, ckdSelected: $ckdSelected, diabetesSelected: $diabetesSelected, dateRegModel: $dateRegModel, validNameFormz: $validNameFormz, validActivityFormz: $validActivityFormz, validGenderFormz: $validGenderFormz, validBirthdayFormz: $validBirthdayFormz, validHeightFormz: $validHeightFormz, validWeightFormz: $validWeightFormz, validCreatinineFormz: $validCreatinineFormz, validHypertensionFormz: $validHypertensionFormz, validDiabetesFormz: $validDiabetesFormz, validCkdFormz: $validCkdFormz, )';
+    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, activitySelected: $activitySelected, genderSelected: $genderSelected, hypertensionSelected: $hypertensionSelected, dailyDiuresisSelected: $dailyDiuresisSelected, status: $status, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, ckdSelected: $ckdSelected, diabetesSelected: $diabetesSelected, dateRegModel: $dateRegModel, validName: $validName, validActivity: $validActivity, validGender: $validGender, validBirthday: $validBirthday, validHeight: $validHeight, validWeight: $validWeight, validCreatinine: $validCreatinine, validHypertension: $validHypertension, validDiabetes: $validDiabetes, validCkd: $validCkd, validDailyDiuresis: $validDailyDiuresis, )';
   }
 
   String toJson() => json.encode(toMap());
@@ -264,6 +283,7 @@ RegistrationState copyWith({
             const DeepCollectionEquality().equals(other.activitySelected, activitySelected) && 
             const DeepCollectionEquality().equals(other.genderSelected, genderSelected) && 
             const DeepCollectionEquality().equals(other.hypertensionSelected, hypertensionSelected) && 
+            const DeepCollectionEquality().equals(other.dailyDiuresisSelected, dailyDiuresisSelected) && 
             (identical(other.status, status) || other.status == status) && 
             (identical(other.daySelected, daySelected) || other.daySelected == daySelected) && 
             (identical(other.yearSelected, yearSelected) || other.yearSelected == yearSelected) && 
@@ -272,16 +292,17 @@ RegistrationState copyWith({
             const DeepCollectionEquality().equals(other.ckdSelected, ckdSelected) && 
             const DeepCollectionEquality().equals(other.diabetesSelected, diabetesSelected) && 
             (identical(other.dateRegModel, dateRegModel) || other.dateRegModel == dateRegModel) && 
-            (identical(other.validNameFormz, validNameFormz) || other.validNameFormz == validNameFormz) && 
-            (identical(other.validActivityFormz, validActivityFormz) || other.validActivityFormz == validActivityFormz) && 
-            (identical(other.validGenderFormz, validGenderFormz) || other.validGenderFormz == validGenderFormz) && 
-            (identical(other.validBirthdayFormz, validBirthdayFormz) || other.validBirthdayFormz == validBirthdayFormz) && 
-            (identical(other.validHeightFormz, validHeightFormz) || other.validHeightFormz == validHeightFormz) && 
-            (identical(other.validWeightFormz, validWeightFormz) || other.validWeightFormz == validWeightFormz) && 
-            (identical(other.validCreatinineFormz, validCreatinineFormz) || other.validCreatinineFormz == validCreatinineFormz) && 
-            (identical(other.validHypertensionFormz, validHypertensionFormz) || other.validHypertensionFormz == validHypertensionFormz) && 
-            (identical(other.validDiabetesFormz, validDiabetesFormz) || other.validDiabetesFormz == validDiabetesFormz) && 
-            (identical(other.validCkdFormz, validCkdFormz) || other.validCkdFormz == validCkdFormz) );
+            (identical(other.validName, validName) || other.validName == validName) && 
+            (identical(other.validActivity, validActivity) || other.validActivity == validActivity) && 
+            (identical(other.validGender, validGender) || other.validGender == validGender) && 
+            (identical(other.validBirthday, validBirthday) || other.validBirthday == validBirthday) && 
+            (identical(other.validHeight, validHeight) || other.validHeight == validHeight) && 
+            (identical(other.validWeight, validWeight) || other.validWeight == validWeight) && 
+            (identical(other.validCreatinine, validCreatinine) || other.validCreatinine == validCreatinine) && 
+            (identical(other.validHypertension, validHypertension) || other.validHypertension == validHypertension) && 
+            (identical(other.validDiabetes, validDiabetes) || other.validDiabetes == validDiabetes) && 
+            (identical(other.validCkd, validCkd) || other.validCkd == validCkd) && 
+            (identical(other.validDailyDiuresis, validDailyDiuresis) || other.validDailyDiuresis == validDailyDiuresis) );
 
   }
   
@@ -294,6 +315,7 @@ RegistrationState copyWith({
         const DeepCollectionEquality().hash(activitySelected),
         const DeepCollectionEquality().hash(genderSelected),
         const DeepCollectionEquality().hash(hypertensionSelected),
+        const DeepCollectionEquality().hash(dailyDiuresisSelected),
         status,
         daySelected,
         yearSelected,
@@ -302,15 +324,16 @@ RegistrationState copyWith({
         const DeepCollectionEquality().hash(ckdSelected),
         const DeepCollectionEquality().hash(diabetesSelected),
         dateRegModel,
-        validNameFormz,
-        validActivityFormz,
-        validGenderFormz,
-        validBirthdayFormz,
-        validHeightFormz,
-        validWeightFormz,
-        validCreatinineFormz,
-        validHypertensionFormz,
-        validDiabetesFormz,
-        validCkdFormz,
+        validName,
+        validActivity,
+        validGender,
+        validBirthday,
+        validHeight,
+        validWeight,
+        validCreatinine,
+        validHypertension,
+        validDiabetes,
+        validCkd,
+        validDailyDiuresis,
 ]);
   }

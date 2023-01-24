@@ -6,8 +6,8 @@ import 'package:dialysis/feature/registration/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CkdChoose extends StatelessWidget {
-  const CkdChoose({
+class WidgetCkd extends StatelessWidget {
+  const WidgetCkd({
     super.key,
   });
 
@@ -20,7 +20,7 @@ class CkdChoose extends StatelessWidget {
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
         builder: (context, state) {
           final booles = state.ckdSelected;
-          final valid = state.validCkdFormz;
+          final valid = state.validCkd;
 
           return Column(
             children: [
@@ -50,8 +50,8 @@ class CkdChoose extends StatelessWidget {
           );
         },
         buildWhen: (p, c) =>
-            p.validCkdFormz.isPure != c.validCkdFormz.isPure ||
-            p.validCkdFormz.value != c.validCkdFormz.value,
+            p.validCkd.isPure != c.validCkd.isPure ||
+            p.validCkd.value != c.validCkd.value,
       ),
     );
   }

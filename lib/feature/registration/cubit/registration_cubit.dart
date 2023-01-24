@@ -114,10 +114,10 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void checkHeight(String? value) {
-    final valid = ValidHeightFormz.dirty(value);
+    final valid = ValidHeight.dirty(value);
     emit(
       state.copyWith(
-        validHeightFormz: valid,
+        validHeight: valid,
       ),
     );
   }
@@ -138,11 +138,11 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void checkName(String value) {
-    final validNameFormz = ValidNameFormz.dirty(value);
+    final validName = ValidName.dirty(value);
     emit(
       state.copyWith(
-        validNameFormz: validNameFormz,
-        // isValid: Formz.validate([validNameFormz, state.validNameFormz,state.]),
+        validName: validName,
+        // isValid: .validate([validName, state.validName,state.]),
       ),
     );
   }
@@ -150,14 +150,14 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   Future<void> nextPage() async {
     emit(state.copyWith(isLoadNextPage: true));
     final userInfo = UserInfoModel(
-      name: state.validNameFormz.value,
-      gender: state.validGenderFormz.value,
-      activity: state.validActivityFormz.value,
-      birthday: DateTime.parse(state.validBirthdayFormz.value),
-      height: int.tryParse(state.validHeightFormz.value ?? '0') ?? 0,
-      weight: state.validWeightFormz.value ?? 0,
-      ckd: state.validCkdFormz.value,
-      creatinin: state.validCreatinineFormz.value ?? 0,
+      name: state.validName.value,
+      gender: state.validGender.value,
+      activity: state.validActivity.value,
+      birthday: DateTime.parse(state.validBirthday.value),
+      height: int.tryParse(state.validHeight.value ?? '0') ?? 0,
+      weight: state.validWeight.value ?? 0,
+      ckd: state.validCkd.value,
+      creatinin: state.validCreatinine.value ?? 0,
       created: DateTime.now(),
       updated: DateTime.now(),
     );
@@ -169,53 +169,48 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   bool isValid() {
-    final validNameFormz = ValidNameFormz.dirty(state.validNameFormz.value);
-    final validWeightFormz =
-        ValidWeightFormz.dirty(value: state.validWeightFormz.value);
-    final validGenderFormz =
-        ValidGenderFormz.dirty(state.validGenderFormz.value);
+    final validName = ValidName.dirty(state.validName.value);
+    final validWeight = ValidWeight.dirty(value: state.validWeight.value);
+    final validGender = ValidGender.dirty(state.validGender.value);
 
-    final validHypertensionFormz =
-        ValidHypertensionFormz.dirty(state.validHypertensionFormz.value);
+    final validHypertension =
+        ValidHypertension.dirty(state.validHypertension.value);
 
-    final validDiabetesFormz =
-        ValidDiabetesFormz.dirty(state.validDiabetesFormz.value);
+    final validDiabetes = ValidDiabetes.dirty(state.validDiabetes.value);
 
-    final validActivityFormz =
-        ValidActivityFormz.dirty(state.validActivityFormz.value);
+    final validActivity = ValidActivity.dirty(state.validActivity.value);
 
-    final validBirthdayFormz = ValidBirthdayFormz.dirty(_getDateRaw());
-    final validHeightFormz =
-        ValidHeightFormz.dirty(state.validHeightFormz.value);
-    final validCkdFormz = ValidCkdFormz.dirty(state.validCkdFormz.value);
+    final validBirthday = ValidBirthday.dirty(_getDateRaw());
+    final validHeight = ValidHeight.dirty(state.validHeight.value);
+    final validCkd = ValidCkd.dirty(state.validCkd.value);
 // todo исправить узнать как считать
-    final validCreatinineFormz = ValidCreatinineFormz.dirty(
-      value: state.validCreatinineFormz.value ?? 0,
+    final validCreatinine = ValidCreatinine.dirty(
+      value: state.validCreatinine.value ?? 0,
     );
     emit(
       state.copyWith(
-        validActivityFormz: validActivityFormz,
-        validNameFormz: validNameFormz,
-        validGenderFormz: validGenderFormz,
-        validDiabetesFormz: validDiabetesFormz,
-        validHypertensionFormz: validHypertensionFormz,
-        validBirthdayFormz: validBirthdayFormz,
-        validHeightFormz: validHeightFormz,
-        validWeightFormz: validWeightFormz,
-        validCkdFormz: validCkdFormz,
-        validCreatinineFormz: validCreatinineFormz,
+        validActivity: validActivity,
+        validName: validName,
+        validGender: validGender,
+        validDiabetes: validDiabetes,
+        validHypertension: validHypertension,
+        validBirthday: validBirthday,
+        validHeight: validHeight,
+        validWeight: validWeight,
+        validCkd: validCkd,
+        validCreatinine: validCreatinine,
         isValid: Formz.validate(
           [
-            validHypertensionFormz,
-            validDiabetesFormz,
-            validGenderFormz,
-            validNameFormz,
-            validActivityFormz,
-            validBirthdayFormz,
-            validHeightFormz,
-            validWeightFormz,
-            validCkdFormz,
-            validCreatinineFormz,
+            validHypertension,
+            validDiabetes,
+            validGender,
+            validName,
+            validActivity,
+            validBirthday,
+            validHeight,
+            validWeight,
+            validCkd,
+            validCreatinine,
           ],
         ),
       ),
@@ -237,9 +232,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void checkGender(int value) {
-    final gender = GenderEnum.values[value];
+    final gender = EnumGender.values[value];
 
-    final validGenderFormz = ValidGenderFormz.dirty(gender);
+    final validGender = ValidGender.dirty(gender);
 
     final genderSelected = gender.map(
       male: () => [false, true],
@@ -250,9 +245,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     emit(
       state.copyWith(
         genderSelected: genderSelected,
-        validGenderFormz: validGenderFormz,
-        // isValid: Formz.validate(
-        //   [state.validNameFormz, validGenderFormz, state.validActivityFormz],
+        validGender: validGender,
+        // isValid: .validate(
+        //   [state.validName, validGender, state.validActivity],
         // ),
       ),
     );
@@ -261,7 +256,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   void checkHypertension(int index) {
     final value = HypertensionEnum.values[index];
 
-    final valid = ValidHypertensionFormz.dirty(value);
+    final valid = ValidHypertension.dirty(value);
 
     final listBool = value.map(
       yes: () => [true, false],
@@ -272,7 +267,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     emit(
       state.copyWith(
         hypertensionSelected: listBool,
-        validHypertensionFormz: valid,
+        validHypertension: valid,
       ),
     );
   }
@@ -280,7 +275,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   void checkDiabetes(int index) {
     final value = DiabetesEnum.values[index];
 
-    final valid = ValidDiabetesFormz.dirty(value);
+    final valid = ValidDiabetes.dirty(value);
 
     final listBool = value.map(
       yes: () => [true, false],
@@ -291,7 +286,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     emit(
       state.copyWith(
         diabetesSelected: listBool,
-        validDiabetesFormz: valid,
+        validDiabetes: valid,
       ),
     );
   }
@@ -299,7 +294,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   void checkCkd(int value) {
     final ckdEnum = CkdEnum.values[value];
 
-    final validCkdFormz = ValidCkdFormz.dirty(ckdEnum);
+    final validCkd = ValidCkd.dirty(ckdEnum);
 
     var ckdSelected = <bool>[];
 
@@ -307,7 +302,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     emit(
       state.copyWith(
         ckdSelected: ckdSelected,
-        validCkdFormz: validCkdFormz,
+        validCkd: validCkd,
       ),
     );
   }
@@ -329,7 +324,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   void checkActivity(int value) {
     final enumValue = ActivityEnum.values[value];
 
-    final validActivityFormz = ValidActivityFormz.dirty(enumValue);
+    final validActivity = ValidActivity.dirty(enumValue);
 
     final activitySelected = enumValue.map(
       light: () => [false, true],
@@ -340,7 +335,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     emit(
       state.copyWith(
         activitySelected: activitySelected,
-        validActivityFormz: validActivityFormz,
+        validActivity: validActivity,
       ),
     );
   }
@@ -360,9 +355,9 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void _checkBridghday() {
-    final validBirthdayFormz = ValidBirthdayFormz.dirty(_getDateRaw());
+    final validBirthday = ValidBirthday.dirty(_getDateRaw());
 
-    emit(state.copyWith(validBirthdayFormz: validBirthdayFormz));
+    emit(state.copyWith(validBirthday: validBirthday));
   }
 
   void changeDay(String? value) {
@@ -384,7 +379,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     if (value.isEmpty) {
       emit(
         state.copyWith(
-          validWeightFormz: const ValidWeightFormz.dirty(
+          validWeight: const ValidWeight.dirty(
             externalError: ValidWeightError.isEmpty,
           ),
         ),
@@ -395,17 +390,17 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
     final doubleValue = double.tryParse(value);
 
-    ValidWeightFormz validWeightFormz;
+    ValidWeight validWeight;
 
-    validWeightFormz = doubleValue == null
-        ? const ValidWeightFormz.dirty(
+    validWeight = doubleValue == null
+        ? const ValidWeight.dirty(
             externalError: ValidWeightError.isNoValid,
           )
-        : ValidWeightFormz.dirty(value: doubleValue);
+        : ValidWeight.dirty(value: doubleValue);
 
     emit(
       state.copyWith(
-        validWeightFormz: validWeightFormz,
+        validWeight: validWeight,
       ),
     );
   }
@@ -414,7 +409,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     if (value.isEmpty) {
       emit(
         state.copyWith(
-          validCreatinineFormz: const ValidCreatinineFormz.dirty(
+          validCreatinine: const ValidCreatinine.dirty(
             externalError: ValidCreatinineError.isEmpty,
           ),
         ),
@@ -425,17 +420,17 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
 
     final doubleValue = double.tryParse(value);
 
-    ValidCreatinineFormz validCreatinineFormz;
+    ValidCreatinine validCreatinine;
 
-    validCreatinineFormz = doubleValue == null
-        ? const ValidCreatinineFormz.dirty(
+    validCreatinine = doubleValue == null
+        ? const ValidCreatinine.dirty(
             externalError: ValidCreatinineError.isNoValid,
           )
-        : ValidCreatinineFormz.dirty(value: doubleValue);
+        : ValidCreatinine.dirty(value: doubleValue);
 
     emit(
       state.copyWith(
-        validCreatinineFormz: validCreatinineFormz,
+        validCreatinine: validCreatinine,
       ),
     );
   }
@@ -448,5 +443,8 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   @override
   Map<String, dynamic>? toJson(RegistrationState state) {
     return state.toMap();
+  }
+
+  void checkDailyDiuresis(int p1) {
   }
 }

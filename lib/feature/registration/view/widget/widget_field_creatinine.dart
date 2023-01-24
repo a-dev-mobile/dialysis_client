@@ -24,7 +24,7 @@ class _CreatinineFieldState extends State<CreatinineField> {
   @override
   void initState() {
     var initValue = '';
-    final initDouble = widget.cubit.state.validCreatinineFormz.value;
+    final initDouble = widget.cubit.state.validCreatinine.value;
     if (initDouble != null) {
       initValue = initDouble.toString();
     }
@@ -45,10 +45,10 @@ class _CreatinineFieldState extends State<CreatinineField> {
 
     return BlocBuilder<RegistrationCubit, RegistrationState>(
       builder: (context, state) {
-        final valid = state.validCreatinineFormz;
+        final valid = state.validCreatinine;
 
         return Visibility(
-          visible: state.validCkdFormz.value == CkdEnum.notKnow,
+          visible: state.validCkd.value == CkdEnum.notKnow,
           child: CardCustom(
             child: Column(
               children: [
@@ -85,9 +85,9 @@ class _CreatinineFieldState extends State<CreatinineField> {
         );
       },
       buildWhen: (p, c) =>
-          p.validCreatinineFormz.isPure != c.validCreatinineFormz.isPure ||
-          p.validCreatinineFormz.value != c.validCreatinineFormz.value ||
-          p.validCkdFormz.value != c.validCkdFormz.value,
+          p.validCreatinine.isPure != c.validCreatinine.isPure ||
+          p.validCreatinine.value != c.validCreatinine.value ||
+          p.validCkd.value != c.validCkd.value,
     );
   }
 }

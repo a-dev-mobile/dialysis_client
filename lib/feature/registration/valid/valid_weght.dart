@@ -1,10 +1,10 @@
 import 'package:formz/formz.dart';
 
 ///
-class ValidWeightFormz extends FormzInput<double?, ValidWeightError> {
-  const ValidWeightFormz.pure({this.externalError, double? value})
+class ValidWeight extends FormzInput<double?, ValidWeightError> {
+  const ValidWeight.pure({this.externalError, double? value})
       : super.pure(value);
-  const ValidWeightFormz.dirty({this.externalError, double? value})
+  const ValidWeight.dirty({this.externalError, double? value})
       : super.dirty(value);
   final ValidWeightError? externalError;
   @override
@@ -20,11 +20,11 @@ class ValidWeightFormz extends FormzInput<double?, ValidWeightError> {
     return null;
   }
 
-  factory ValidWeightFormz.fromMap(Map<String, dynamic> map) {
+  factory ValidWeight.fromMap(Map<String, dynamic> map) {
     final result = map['ValidWeightFormz'] as double?;
-    if (result == null) return const ValidWeightFormz.pure();
+    if (result == null) return const ValidWeight.pure();
 
-    return ValidWeightFormz.pure(value: result);
+    return ValidWeight.pure(value: result);
   }
 
   Map<String, dynamic> toMap() {
@@ -32,7 +32,7 @@ class ValidWeightFormz extends FormzInput<double?, ValidWeightError> {
   }
 }
 
-extension ValidWeightExtension on ValidWeightFormz {
+extension ValidWeightExtension on ValidWeight {
   ValidWeightError get isEmpty => ValidWeightError.isEmpty;
   ValidWeightError get isMax => ValidWeightError.isMax;
   ValidWeightError get isMin => ValidWeightError.isMin;

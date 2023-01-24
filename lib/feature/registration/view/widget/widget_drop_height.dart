@@ -17,10 +17,10 @@ class HeightChoose extends StatelessWidget {
     return CardCustom(
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
         buildWhen: (p, c) =>
-            p.validHeightFormz.isPure != c.validHeightFormz.isPure ||
-            p.validHeightFormz.value != c.validHeightFormz.value,
+            p.validHeight.isPure != c.validHeight.isPure ||
+            p.validHeight.value != c.validHeight.value,
         builder: (context, state) {
-          final valid = state.validHeightFormz;
+          final valid = state.validHeight;
 
           return Column(
             children: [
@@ -30,7 +30,7 @@ class HeightChoose extends StatelessWidget {
                 children: [
                   AppDropDown(
                     hint: 'Рост',
-                    value: state.validHeightFormz.value,
+                    value: state.validHeight.value,
                     onChanged: cubit.checkHeight,
                     values: state.heightList,
                   ),

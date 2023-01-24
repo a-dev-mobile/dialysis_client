@@ -26,7 +26,7 @@ class _WeightFieldState extends State<WeightField> {
   @override
   void initState() {
     var initValue = '';
-    final initDouble = widget.cubit.state.validWeightFormz.value;
+    final initDouble = widget.cubit.state.validWeight.value;
     if (initDouble != null) {
       initValue = initDouble.toString();
     }
@@ -48,7 +48,7 @@ class _WeightFieldState extends State<WeightField> {
     return CardCustom(
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
         builder: (context, state) {
-          final valid = state.validWeightFormz;
+          final valid = state.validWeight;
 
           return Column(
             children: [
@@ -80,8 +80,8 @@ class _WeightFieldState extends State<WeightField> {
           );
         },
         buildWhen: (p, c) =>
-            p.validWeightFormz.isPure != c.validWeightFormz.isPure ||
-            p.validWeightFormz.value != c.validWeightFormz.value,
+            p.validWeight.isPure != c.validWeight.isPure ||
+            p.validWeight.value != c.validWeight.value,
       ),
     );
   }

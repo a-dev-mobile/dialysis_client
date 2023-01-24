@@ -16,9 +16,9 @@ import 'package:formz/formz.dart';
 /// * `"-123450101 00:00:00 Z"`: in the year -12345.
 /// * `"2002-02-27T14:00:00-0500"`: Same as `"2002-02-27T19:00:00Z"`
 ///
-class ValidBirthdayFormz extends FormzInput<String, ValidBrithdayError> {
-  const ValidBirthdayFormz.pure() : super.pure('');
-  const ValidBirthdayFormz.dirty(super.value) : super.dirty();
+class ValidBirthday extends FormzInput<String, ValidBrithdayError> {
+  const ValidBirthday.pure() : super.pure('');
+  const ValidBirthday.dirty(super.value) : super.dirty();
 
   @override
   ValidBrithdayError? validator(String value) {
@@ -29,11 +29,11 @@ class ValidBirthdayFormz extends FormzInput<String, ValidBrithdayError> {
             : ValidBrithdayError.isNoValid;
   }
 
-  factory ValidBirthdayFormz.fromMap(Map<String, dynamic> map) {
+  factory ValidBirthday.fromMap(Map<String, dynamic> map) {
     final result = map['ValidBirthdayFormz'].toString();
-    if (result.isEmpty) return const ValidBirthdayFormz.pure();
+    if (result.isEmpty) return const ValidBirthday.pure();
 
-    return ValidBirthdayFormz.dirty(result);
+    return ValidBirthday.dirty(result);
   }
 
   Map<String, dynamic> toMap() {
@@ -41,7 +41,7 @@ class ValidBirthdayFormz extends FormzInput<String, ValidBrithdayError> {
   }
 }
 
-extension ValidBrithdayExtension on ValidBirthdayFormz {
+extension ValidBrithdayExtension on ValidBirthday {
   ValidBrithdayError get isNoValid => ValidBrithdayError.isNoValid;
   ValidBrithdayError get isEmpty => ValidBrithdayError.isEmpty;
 }

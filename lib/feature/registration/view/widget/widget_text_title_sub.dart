@@ -29,7 +29,7 @@ class TitleSub extends StatelessWidget {
               Icons.info_outline,
               color: context.theme.colorScheme.primary,
             ),
-          )
+          ),
       ],
     );
   }

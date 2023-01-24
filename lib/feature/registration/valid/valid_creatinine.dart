@@ -1,12 +1,16 @@
 import 'package:formz/formz.dart';
 
 ///
-class ValidCreatinineFormz extends FormzInput<double?, ValidCreatinineError> {
-  const ValidCreatinineFormz.pure({this.externalError, double? value})
+class ValidCreatinine extends FormzInput<double?, ValidCreatinineError> {
+  const ValidCreatinine.pure({this.externalError, double? value})
       : super.pure(value);
-  const ValidCreatinineFormz.dirty({this.externalError, double? value})
+  
+  const ValidCreatinine.dirty({this.externalError, double? value})
       : super.dirty(value);
+  
   final ValidCreatinineError? externalError;
+  
+  
   @override
   ValidCreatinineError? validator(double? value) {
     if (externalError != null) {
@@ -20,19 +24,19 @@ class ValidCreatinineFormz extends FormzInput<double?, ValidCreatinineError> {
     return null;
   }
 
-  factory ValidCreatinineFormz.fromMap(Map<String, dynamic> map) {
-    final result = map['ValidCreatinineFormz'] as double?;
-    if (result == null) return const ValidCreatinineFormz.pure();
+  factory ValidCreatinine.fromMap(Map<String, dynamic> map) {
+    final result = map['ValidCreatinine'] as double?;
+    if (result == null) return const ValidCreatinine.pure();
 
-    return ValidCreatinineFormz.pure(value: result);
+    return ValidCreatinine.pure(value: result);
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'ValidCreatinineFormz': value};
+    return <String, dynamic>{'ValidCreatinine': value};
   }
 }
 
-extension ValidCreatinineExtension on ValidCreatinineFormz {
+extension ValidCreatinineExtension on ValidCreatinine {
   ValidCreatinineError get isEmpty => ValidCreatinineError.isEmpty;
   ValidCreatinineError get isMax => ValidCreatinineError.isMax;
   ValidCreatinineError get isMin => ValidCreatinineError.isMin;

@@ -2,9 +2,9 @@
 
 import 'package:formz/formz.dart';
 
-class ValidNameFormz extends FormzInput<String, ValidNameError> {
-  const ValidNameFormz.pure() : super.pure('');
-  const ValidNameFormz.dirty([super.value = '']) : super.dirty();
+class ValidName extends FormzInput<String, ValidNameError> {
+  const ValidName.pure() : super.pure('');
+  const ValidName.dirty([super.value = '']) : super.dirty();
 
   @override
   ValidNameError? validator(String value) {
@@ -15,11 +15,11 @@ class ValidNameFormz extends FormzInput<String, ValidNameError> {
             : null;
   }
 
-  factory ValidNameFormz.fromMap(Map<String, dynamic> map) {
+  factory ValidName.fromMap(Map<String, dynamic> map) {
     final result = (map['ValidNameFormz'] as String?) ?? '';
-    if (result.isEmpty) return const ValidNameFormz.pure();
+    if (result.isEmpty) return const ValidName.pure();
 
-    return ValidNameFormz.dirty(result);
+    return ValidName.dirty(result);
   }
 
   Map<String, dynamic> toMap() {
@@ -29,7 +29,7 @@ class ValidNameFormz extends FormzInput<String, ValidNameError> {
   }
 }
 
-extension ValidNameExtension on ValidNameFormz {
+extension ValidNameExtension on ValidName {
   ValidNameError get isEmpty => ValidNameError.isEmpty;
   ValidNameError get maxLength => ValidNameError.maxLenght;
 }

@@ -1,24 +1,24 @@
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:formz/formz.dart';
 
-class ValidCkdFormz extends FormzInput<CkdEnum, ValidCkdError> {
-  const ValidCkdFormz.pure() : super.pure(CkdEnum.none);
-  const ValidCkdFormz.dirty([super.value = CkdEnum.none]) : super.dirty();
+class ValidCkd extends FormzInput<CkdEnum, ValidCkdError> {
+  const ValidCkd.pure() : super.pure(CkdEnum.none);
+  const ValidCkd.dirty([super.value = CkdEnum.none]) : super.dirty();
 
   @override
   ValidCkdError? validator(CkdEnum value) {
     return value == CkdEnum.none ? ValidCkdError.notSelected : null;
   }
 
-  factory ValidCkdFormz.fromMap(Map<String, dynamic> map) {
+  factory ValidCkd.fromMap(Map<String, dynamic> map) {
     final result = CkdEnum.fromValue(
       map['ValidCkdFormz'] as String?,
       fallback: CkdEnum.none,
     );
 
     return result == CkdEnum.none
-        ? const ValidCkdFormz.pure()
-        : ValidCkdFormz.dirty(result);
+        ? const ValidCkd.pure()
+        : ValidCkd.dirty(result);
   }
 
   Map<String, dynamic> toMap() {
@@ -26,7 +26,7 @@ class ValidCkdFormz extends FormzInput<CkdEnum, ValidCkdError> {
   }
 }
 
-extension ValidCkdX on ValidCkdFormz {
+extension ValidCkdX on ValidCkd {
   ValidCkdError get notSelected => ValidCkdError.notSelected;
 }
 

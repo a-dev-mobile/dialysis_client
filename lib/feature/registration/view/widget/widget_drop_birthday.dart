@@ -5,8 +5,8 @@ import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BirthdayChoose extends StatelessWidget {
-  const BirthdayChoose({
+class Birthday extends StatelessWidget {
+  const Birthday({
     super.key,
   });
 
@@ -20,10 +20,10 @@ class BirthdayChoose extends StatelessWidget {
             p.daySelected != c.daySelected ||
             p.monthSelected != c.monthSelected ||
             p.yearSelected != c.yearSelected ||
-            p.validBirthdayFormz.isPure != c.validBirthdayFormz.isPure ||
-            p.validBirthdayFormz.value != c.validBirthdayFormz.value,
+            p.validBirthday.isPure != c.validBirthday.isPure ||
+            p.validBirthday.value != c.validBirthday.value,
         builder: (context, state) {
-          final valid = state.validBirthdayFormz;
+          final valid = state.validBirthday;
 
           return Column(
             children: [

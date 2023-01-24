@@ -20,10 +20,10 @@ class DiabetesChoose extends StatelessWidget {
     return CardCustom(
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
         buildWhen: (p, c) =>
-            p.validDiabetesFormz.isPure != c.validDiabetesFormz.isPure ||
-            p.validDiabetesFormz.value != c.validDiabetesFormz.value,
+            p.validDiabetes.isPure != c.validDiabetes.isPure ||
+            p.validDiabetes.value != c.validDiabetes.value,
         builder: (context, state) {
-          final valid = state.validDiabetesFormz;
+          final valid = state.validDiabetes;
 
           return BtnToggleText(
             textList: [l.yes_caps, l.no_caps],
