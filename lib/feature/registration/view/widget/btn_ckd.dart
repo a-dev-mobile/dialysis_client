@@ -3,6 +3,7 @@
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/registration/registration.dart';
+import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ class BtnCkd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final l = context.l10n;
+    final l = context.l10n;
     final cubit = context.read<RegistrationCubit>();
 
     return CardCustom(
@@ -33,18 +34,13 @@ class BtnCkd extends StatelessWidget {
                     'Установив данное приложение. Вы скорее уже знаете свою стадию ХБП, если нет - выберите последнее значение и введите свой креатинин',
               ),
               BtnToggleText(
-                textList: const ['Я не знаю'],
+                textList: const ['Определить'],
                 isSelected: booles.sublist(booles.length - 1, booles.length),
                 // ignore: prefer-extracting-callbacks
                 onPressed: (v) {
                   cubit.checkCkd(v + booles.length - 1);
                 },
-                errorText: valid.isPure
-                    ? null
-                    // ignore: avoid-nested-conditional-expressions
-                    : valid.error == valid.notSelected
-                        ? 'Стадия ХБП не выбрана'
-                        : null,
+                errorText: valid.errorText(l: l),
               ),
             ],
           );

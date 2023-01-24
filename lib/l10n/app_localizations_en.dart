@@ -140,9 +140,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gender_not_selected => 'Пол не выбран';
 
   @override
-  String get activity_not_selected => 'Физическая активность не выбрана';
-
-  @override
   String get male => 'МУЖСКОЙ';
 
   @override
@@ -198,6 +195,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcome_msg => 'Congratulations! You have taken a new step toward a healthier lifestyle';
+
+  @override
+  String get no_stage_skd_selected => 'Стадия ХБП не выбрана';
+
+  @override
+  String get activity_not_selected => 'Physical activity is not selected';
 
   @override
   String get g => 'g';

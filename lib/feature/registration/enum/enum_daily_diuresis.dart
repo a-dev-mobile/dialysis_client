@@ -1,18 +1,16 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
-/*
-  
-  enum EnumDailyDiuresis { no, low, normal, unknown, none }
+  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
+  /*
+  enum EnumDailyDiuresis { normal, no, unknown, none }
 
   */
+  
+  //  ******************************
+  // GENERATED CODE BELOW - DO NOT MODIFY
+  //  ******************************
 
-//  ******************************
-// GENERATED CODE BELOW - DO NOT MODIFY
-//  ******************************
-
-enum EnumDailyDiuresis with Comparable<EnumDailyDiuresis> {
-  no('no'),
-  low('low'),
+enum EnumDailyDiuresis with Comparable<EnumDailyDiuresis> { 
   normal('normal'),
+  no('no'),
   unknown('unknown'),
   none('none');
 
@@ -25,12 +23,10 @@ enum EnumDailyDiuresis with Comparable<EnumDailyDiuresis> {
     EnumDailyDiuresis? fallback,
   }) {
     switch (value) {
-      case 'no':
-        return no;
-      case 'low':
-        return low;
       case 'normal':
         return normal;
+      case 'no':
+        return no;
       case 'unknown':
         return unknown;
       case 'none':
@@ -43,58 +39,57 @@ enum EnumDailyDiuresis with Comparable<EnumDailyDiuresis> {
 
   /// Pattern matching
   T map<T>({
-    required T Function() no,
-    required T Function() low,
     required T Function() normal,
+    required T Function() no,
     required T Function() unknown,
     required T Function() none,
+
   }) {
     switch (this) {
-      case EnumDailyDiuresis.no:
-        return no();
-      case EnumDailyDiuresis.low:
-        return low();
       case EnumDailyDiuresis.normal:
-        return normal();
+        return normal();     
+      case EnumDailyDiuresis.no:
+        return no();     
       case EnumDailyDiuresis.unknown:
-        return unknown();
+        return unknown();     
       case EnumDailyDiuresis.none:
-        return none();
+        return none();     
+
     }
   }
-
+  
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
-    T Function()? no,
-    T Function()? low,
     T Function()? normal,
+    T Function()? no,
     T Function()? unknown,
     T Function()? none,
+
   }) =>
       map<T>(
-        no: no ?? orElse,
-        low: low ?? orElse,
-        normal: normal ?? orElse,
-        unknown: unknown ?? orElse,
-        none: none ?? orElse,
+      normal: normal ?? orElse,     
+      no: no ?? orElse,     
+      unknown: unknown ?? orElse,     
+      none: none ?? orElse,     
+
       );
 
   /// Pattern matching
   T? maybeMapOrNull<T>({
-    T Function()? no,
-    T Function()? low,
     T Function()? normal,
+    T Function()? no,
     T Function()? unknown,
     T Function()? none,
+
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        no: no,
-        low: low,
-        normal: normal,
-        unknown: unknown,
-        none: none,
+        normal: normal,  
+        no: no,  
+        unknown: unknown,  
+        none: none,  
+        
       );
 
   @override
@@ -102,4 +97,4 @@ enum EnumDailyDiuresis with Comparable<EnumDailyDiuresis> {
 
   @override
   String toString() => value;
-}
+   }

@@ -4,7 +4,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 ///ToggleThemeCubit
 class ThemeCubit extends HydratedCubit<ThemeMode> {
   /// default
-  ThemeCubit() : super(ThemeMode.light);
+  ThemeCubit() : super(ThemeMode.dark);
 
   /// switch theme 1
   void toggleTheme({required ThemeMode theme}) {

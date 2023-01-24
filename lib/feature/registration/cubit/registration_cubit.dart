@@ -3,21 +3,15 @@ import 'dart:async';
 
 import 'package:dadata/dadata.dart';
 import 'package:dialysis/app/app.dart';
-
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/core/utils/launch_links.dart';
 import 'package:dialysis/core/widget/widget.dart';
-
+import 'package:dialysis/feature/common/valid/valid.dart';
 import 'package:dialysis/feature/dashboard/view/view.dart';
-
 import 'package:dialysis/feature/registration/registration.dart';
-
+import 'package:dialysis/l10n/l10n.dart';
 import 'package:dialysis/navigation/navigation.dart';
-
 import 'package:flutter/widgets.dart';
-
-import 'package:formz/formz.dart';
-
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 class RegistrationCubit extends HydratedCubit<RegistrationState> {
@@ -206,7 +200,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void checkHypertension(int index) {
-    final value = HypertensionEnum.values[index];
+    final value = EnumHypertension.values[index];
 
     final valid = ValidHypertension.dirty(value);
 
@@ -225,7 +219,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void checkDiabetes(int index) {
-    final value = DiabetesEnum.values[index];
+    final value = EnumDiabetes.values[index];
 
     final valid = ValidDiabetes.dirty(value);
 
@@ -255,13 +249,13 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       state.copyWith(
         dailyDiuresisSelected: listBoolSelected,
         validDailyDiuresis: valid,
-        isVisibleUrineOutput: valueEnum == EnumDailyDiuresis.low,
+        isVisibleUrineOutput: valueEnum == EnumDailyDiuresis.unknown,
       ),
     );
   }
 
   void checkCkd(int value) {
-    final enumValue = CkdEnum.values[value];
+    final enumValue = EnumCkd.values[value];
 
     final validCkd = ValidCkd.dirty(enumValue);
 
@@ -272,7 +266,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
       state.copyWith(
         ckdSelected: ckdSelected,
         validCkd: validCkd,
-        isVisibleCreatinine: enumValue == CkdEnum.notKnow,
+        isVisibleCreatinine: enumValue == EnumCkd.notKnow,
       ),
     );
   }
@@ -280,7 +274,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   static List<bool> _getListBoolByIndexTrue({required int? indexTrue}) {
     final list = <bool>[];
 
-    for (var i = 0; i < CkdEnum.values.length - 1; i++) {
+    for (var i = 0; i < EnumCkd.values.length - 1; i++) {
       if (i == indexTrue) {
         list.add(true);
       } else {
@@ -292,7 +286,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
   }
 
   void checkActivity(int value) {
-    final enumValue = ActivityEnum.values[value];
+    final enumValue = EnumActivity.values[value];
 
     final validActivity = ValidActivity.dirty(enumValue);
 
@@ -466,6 +460,22 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         ValidCreatinine.dirty(value: state.validCreatinine.value);
     final validUrineOutput =
         ValidUrineOutput.dirty(value: state.validUrineOutput.value);
+
+    final listValidate = <FormzInput<dynamic, dynamic>>[
+      validName,
+      validHypertension,
+      validDiabetes,
+      validGender,
+      validActivity,
+      validBirthday,
+      validHeight,
+      validWeight,
+      validCkd,
+      validDailyDiuresis,
+      if (state.isVisibleCreatinine) validCreatinine,
+      if (state.isVisibleUrineOutput) validUrineOutput,
+    ];
+
     emit(
       state.copyWith(
         validActivity: validActivity,
@@ -480,32 +490,26 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         validCreatinine: validCreatinine,
         validDailyDiuresis: validDailyDiuresis,
         validUrineOutput: validUrineOutput,
-        isValid: Formz.validate(
-          [
-            validHypertension,
-            validDiabetes,
-            validGender,
-            validName,
-            validActivity,
-            validBirthday,
-            validHeight,
-            validWeight,
-            validCkd,
-            validDailyDiuresis,
-            if (state.isVisibleCreatinine) validCreatinine,
-            if (state.isVisibleUrineOutput) validUrineOutput,
-          ],
-        ),
+        isValid: Formz.validate(listValidate),
       ),
     );
+//  error enumeration and display 
+    final buffer = StringBuffer();
+    String? error;
+    for (final v in listValidate) {
+      error = v.errorText(l: context.l10n);
+      if (error != null) {
+        buffer
+          ..write(error)
+          ..write('\n');
+      }
+    }
 
     MySnackBar.show(
       context: context,
-     
-      msg: 'Ошибка 1\nОшибка 1\nОшибка 1\nОшибка 1\n',
       alertType: AlertType.error,
       duration: const Duration(seconds: 5),
-      title: 'Проверте введеные данные',
+      title: buffer.toString(),
     );
 
     return state.isValid;

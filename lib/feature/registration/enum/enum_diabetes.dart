@@ -2,24 +2,24 @@
 /*
    
 
-  enum DiabetesEnum { yes, no,none }
+  enum EnumDiabetes { yes, no,none }
 
 
 
   */
 
-enum DiabetesEnum with Comparable<DiabetesEnum> {
+enum EnumDiabetes with Comparable<EnumDiabetes> {
   yes('yes'),
   no('no'),
   none('none');
 
-  const DiabetesEnum(this.value);
+  const EnumDiabetes(this.value);
 
   final String value;
 
-  static DiabetesEnum fromValue(
+  static EnumDiabetes fromValue(
     String? value, {
-    DiabetesEnum? fallback,
+    EnumDiabetes? fallback,
   }) {
     switch (value) {
       case 'yes':
@@ -41,11 +41,11 @@ enum DiabetesEnum with Comparable<DiabetesEnum> {
     required T Function() none,
   }) {
     switch (this) {
-      case DiabetesEnum.yes:
+      case EnumDiabetes.yes:
         return yes();
-      case DiabetesEnum.no:
+      case EnumDiabetes.no:
         return no();
-      case DiabetesEnum.none:
+      case EnumDiabetes.none:
         return none();
     }
   }
@@ -77,7 +77,7 @@ enum DiabetesEnum with Comparable<DiabetesEnum> {
       );
 
   @override
-  int compareTo(DiabetesEnum other) => index.compareTo(other.index);
+  int compareTo(EnumDiabetes other) => index.compareTo(other.index);
 
   @override
   String toString() => value;

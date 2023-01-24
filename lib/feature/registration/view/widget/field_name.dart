@@ -62,13 +62,7 @@ class _FieldNameState extends State<FieldName> {
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     labelText: l.name,
-                    errorText: valid.isPure
-                        ? null
-                        : valid.error == valid.maxLength
-                            ? l.max_text_length
-                            : valid.error == valid.isEmpty
-                                ? l.enter_name
-                                : null,
+                    errorText: valid.errorText(l: l),
                   ),
                 ),
                 hideOnLoading: true,

@@ -72,21 +72,21 @@ class _WelcomePage extends StatelessWidget {
                     },
                   ),
                 ),
-                // const SizedBox(height: 20),
-                // BlocBuilder<WelcomeCubit, WelcomeState>(
-                //   buildWhen: (p, c) => p.localeActive != c.localeActive,
-                //   builder: (context, state) {
-                //     return BtnToggleText(
-                //       onPressed: cubit.changeLocale,
-                //       textList: const [
-                //         'Английский',
-                //         'Руский',
-                //       ],
-                //       isSelected: state.boolsLocale,
-                //       title: 'Выберите язык приложения',
-                //     );
-                //   },
-                // ),
+                const SizedBox(height: 20),
+                BlocBuilder<WelcomeCubit, WelcomeState>(
+                  buildWhen: (p, c) => p.localeActive != c.localeActive,
+                  builder: (context, state) {
+                    return BtnToggleText(
+                      onPressed: cubit.changeLocale,
+                      textList: const [
+                        'Английский',
+                        'Руский',
+                      ],
+                      isSelected: state.boolsLocale,
+                      title: 'Выберите язык приложения',
+                    );
+                  },
+                ),
                 const SizedBox(height: 5),
                 Text(
                   '(Вы можете изменить параметры в личном кабинете)',

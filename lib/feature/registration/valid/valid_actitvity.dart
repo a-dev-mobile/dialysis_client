@@ -1,22 +1,23 @@
+import 'package:dialysis/feature/common/valid/valid.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-import 'package:formz/formz.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
-class ValidActivity extends FormzInput<ActivityEnum, ValidActivityError> {
-  const ValidActivity.pure() : super.pure(ActivityEnum.none);
-  const ValidActivity.dirty([super.value = ActivityEnum.none]) : super.dirty();
+class ValidActivity extends FormzInput<EnumActivity, ValidActivityError> {
+  const ValidActivity.pure() : super.pure(EnumActivity.none);
+  const ValidActivity.dirty([super.value = EnumActivity.none]) : super.dirty();
 
   @override
-  ValidActivityError? validator(ActivityEnum value) {
-    return value == ActivityEnum.none ? ValidActivityError.notSelected : null;
+  ValidActivityError? validator(EnumActivity value) {
+    return value == EnumActivity.none ? ValidActivityError.notSelected : null;
   }
 
   factory ValidActivity.fromMap(Map<String, dynamic> map) {
-    final result = ActivityEnum.fromValue(
+    final result = EnumActivity.fromValue(
       map['ValidActivityFormz'] as String?,
-      fallback: ActivityEnum.none,
+      fallback: EnumActivity.none,
     );
 
-    return result == ActivityEnum.none
+    return result == EnumActivity.none
         ? const ValidActivity.pure()
         : ValidActivity.dirty(result);
   }
@@ -26,14 +27,23 @@ class ValidActivity extends FormzInput<ActivityEnum, ValidActivityError> {
       'ValidActivityFormz': value.name,
     };
   }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return isPure
+        ? null
+        : error == notSelected
+            ? l.activity_not_selected
+            : null;
+  }
 }
 
 extension ValidActivityX on ValidActivity {
   ValidActivityError get notSelected => ValidActivityError.notSelected;
 
-  ActivityEnum get activityLight => ActivityEnum.light;
-  ActivityEnum get activityNormal => ActivityEnum.normal;
-  ActivityEnum get activityNone => ActivityEnum.none;
+  EnumActivity get activityLight => EnumActivity.light;
+  EnumActivity get activityNormal => EnumActivity.normal;
+  EnumActivity get activityNone => EnumActivity.none;
 }
 
 enum ValidActivityError {

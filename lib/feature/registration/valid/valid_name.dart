@@ -1,6 +1,7 @@
 // ignore_for_file: avoid-nested-conditional-expressions
 
-import 'package:formz/formz.dart';
+import 'package:dialysis/feature/common/valid/valid.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
 class ValidName extends FormzInput<String, ValidNameError> {
   const ValidName.pure() : super.pure('');
@@ -26,6 +27,17 @@ class ValidName extends FormzInput<String, ValidNameError> {
     return <String, dynamic>{
       'ValidNameFormz': value,
     };
+  }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return isPure
+        ? null
+        : error == maxLength
+            ? l.max_text_length
+            : error == isEmpty
+                ? l.enter_name
+                : null;
   }
 }
 

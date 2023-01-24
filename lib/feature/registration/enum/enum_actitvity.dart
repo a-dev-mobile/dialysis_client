@@ -7,18 +7,18 @@ enum ActivityEnum { normal, light, none }
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-enum ActivityEnum with Comparable<ActivityEnum> {
+enum EnumActivity with Comparable<EnumActivity> {
   normal('normal'),
   light('light'),
   none('none');
 
-  const ActivityEnum(this.value);
+  const EnumActivity(this.value);
 
   final String value;
 
-  static ActivityEnum fromValue(
+  static EnumActivity fromValue(
     String? value, {
-    ActivityEnum? fallback,
+    EnumActivity? fallback,
   }) {
     switch (value) {
       case 'normal':
@@ -40,11 +40,11 @@ enum ActivityEnum with Comparable<ActivityEnum> {
     required T Function() none,
   }) {
     switch (this) {
-      case ActivityEnum.normal:
+      case EnumActivity.normal:
         return normal();
-      case ActivityEnum.light:
+      case EnumActivity.light:
         return light();
-      case ActivityEnum.none:
+      case EnumActivity.none:
         return none();
     }
   }
@@ -76,7 +76,7 @@ enum ActivityEnum with Comparable<ActivityEnum> {
       );
 
   @override
-  int compareTo(ActivityEnum other) => index.compareTo(other.index);
+  int compareTo(EnumActivity other) => index.compareTo(other.index);
 
   @override
   String toString() => value;

@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
+import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:flutter/foundation.dart';
-import 'package:formz/formz.dart';
+
 
 @immutable
 class RegistrationState { 

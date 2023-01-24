@@ -16,7 +16,7 @@ class UserInfoModel {
   type:enum
   init: ActivityEnum.none
    */
-  final ActivityEnum activity;
+  final EnumActivity activity;
   /*  */
   final DateTime birthday;
   /*  */
@@ -27,7 +27,7 @@ class UserInfoModel {
   type:enum
   init: CkdEnum.none
    */
-  final CkdEnum ckd;
+  final EnumCkd ckd;
   /*  */
   final double creatinin;
   /*  */
@@ -42,11 +42,11 @@ class UserInfoModel {
   const UserInfoModel({
     required this.name,
     this.gender = EnumGender.none,
-    this.activity = ActivityEnum.none,
+    this.activity = EnumActivity.none,
     required this.birthday,
     required this.height,
     required this.weight,
-    this.ckd = CkdEnum.none,
+    this.ckd = EnumCkd.none,
     required this.creatinin,
     required this.created,
     this.updated,
@@ -65,11 +65,11 @@ class UserInfoModel {
   UserInfoModel copyWith({
     String? name,
     EnumGender? gender,
-    ActivityEnum? activity,
+    EnumActivity? activity,
     DateTime? birthday,
     int? height,
     double? weight,
-    CkdEnum? ckd,
+    EnumCkd? ckd,
     double? creatinin,
     DateTime? created,
     DateTime? updated,
@@ -107,11 +107,11 @@ class UserInfoModel {
     return UserInfoModel(
       name: map['name'] as String,
       gender: EnumGender.values[map['gender'] as int],
-      activity: ActivityEnum.values[map['activity'] as int],
+      activity: EnumActivity.values[map['activity'] as int],
       birthday: DateTime.parse(map['birthday'] as String),
       height: map['height'] as int,
       weight: (map['weight'] as num).toDouble(),
-      ckd: CkdEnum.values[map['ckd'] as int],
+      ckd: EnumCkd.values[map['ckd'] as int],
       creatinin: (map['creatinin'] as num).toDouble(),
       created: DateTime.parse(map['created'] as String),
       updated: map['updated'] == null

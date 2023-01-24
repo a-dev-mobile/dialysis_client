@@ -4,18 +4,18 @@
 
   */
 
-enum HypertensionEnum with Comparable<HypertensionEnum> {
+enum EnumHypertension with Comparable<EnumHypertension> {
   yes('yes'),
   no('no'),
   none('none');
 
-  const HypertensionEnum(this.value);
+  const EnumHypertension(this.value);
 
   final String value;
 
-  static HypertensionEnum fromValue(
+  static EnumHypertension fromValue(
     String? value, {
-    HypertensionEnum? fallback,
+    EnumHypertension? fallback,
   }) {
     switch (value) {
       case 'yes':
@@ -37,11 +37,11 @@ enum HypertensionEnum with Comparable<HypertensionEnum> {
     required T Function() none,
   }) {
     switch (this) {
-      case HypertensionEnum.yes:
+      case EnumHypertension.yes:
         return yes();
-      case HypertensionEnum.no:
+      case EnumHypertension.no:
         return no();
-      case HypertensionEnum.none:
+      case EnumHypertension.none:
         return none();
     }
   }
@@ -73,7 +73,7 @@ enum HypertensionEnum with Comparable<HypertensionEnum> {
       );
 
   @override
-  int compareTo(HypertensionEnum other) => index.compareTo(other.index);
+  int compareTo(EnumHypertension other) => index.compareTo(other.index);
 
   @override
   String toString() => value;

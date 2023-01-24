@@ -45,7 +45,7 @@
   "name": "Ваше имя",
   "what_gender": "Ваш пол",
   "gender_not_selected": "Пол не выбран",
-  "activity_not_selected": "Физическая активность не выбрана",
+
   "male": "МУЖСКОЙ",
   "female": "ЖЕНСКИЙ",
   "normal": "ОБЫЧНАЯ",
@@ -65,6 +65,8 @@
   "month_november":"Ноябрь",
   "month_december":"Декабрь",
   "welcome_msg":"Поздравляем! Вы сделали новый шаг на пути к более здоровому образу жизни",
+  "no_stage_skd_selected":"Стадия ХБП не выбрана",
+  "activity_not_selected": "Физическая активность не выбрана",
   
 
   "g": "г"

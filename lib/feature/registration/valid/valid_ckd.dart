@@ -1,22 +1,31 @@
+import 'package:dialysis/feature/common/common.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-import 'package:formz/formz.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
-class ValidCkd extends FormzInput<CkdEnum, ValidCkdError> {
-  const ValidCkd.pure() : super.pure(CkdEnum.none);
-  const ValidCkd.dirty([super.value = CkdEnum.none]) : super.dirty();
+class ValidCkd extends FormzInput<EnumCkd, ValidCkdError> {
+  const ValidCkd.pure() : super.pure(EnumCkd.none);
+  const ValidCkd.dirty([super.value = EnumCkd.none]) : super.dirty();
 
   @override
-  ValidCkdError? validator(CkdEnum value) {
-    return value == CkdEnum.none ? ValidCkdError.notSelected : null;
+  ValidCkdError? validator(EnumCkd value) {
+    return value == EnumCkd.none ? ValidCkdError.notSelected : null;
   }
 
+  @override
+  String? errorText({ required AppLocalizations l}) =>
+      isPure
+          ? null
+          : error == notSelected
+              ? l.no_stage_skd_selected
+              : null;
+
   factory ValidCkd.fromMap(Map<String, dynamic> map) {
-    final result = CkdEnum.fromValue(
+    final result = EnumCkd.fromValue(
       map['ValidCkdFormz'] as String?,
-      fallback: CkdEnum.none,
+      fallback: EnumCkd.none,
     );
 
-    return result == CkdEnum.none
+    return result == EnumCkd.none
         ? const ValidCkd.pure()
         : ValidCkd.dirty(result);
   }

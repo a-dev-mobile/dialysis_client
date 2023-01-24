@@ -29,21 +29,21 @@ class BtnDailyDiuresis extends StatelessWidget {
             children: [
               BtnToggleText(
                 textList: const [
+                  'Нормальный',
                   'Отсутствует',
-                  'Снижен',
                 ],
                 isSelected: [boolValues.first, boolValues[1]],
                 onPressed: cubit.checkDailyDiuresis,
-                title: 'Укажите уровень суточного диуреза',
+                title: 'Укажите уровень суточного диуреза (обьем выделяемой мочи)',
                 dialogText:
                     'Суточный диурез – количество выделенной мочи за сутки (сумма показателей дневного и ночного диуреза), в норме составляет 1000-2000 мл для мужчин, 1000–1600 мл для женщин',
               ),
               BtnToggleText(
                 textList: const [
-                  'Нормальный',
-                  'Неизвестно',
+                  'Ввести значение',
+                 
                 ],
-                isSelected: [boolValues[2], boolValues[3]],
+                isSelected: [boolValues[2]],
                 // 2 because they are separated by two options 
                 onPressed: (v) => cubit.checkDailyDiuresis(v + 2),
                 errorText: valid.isPure

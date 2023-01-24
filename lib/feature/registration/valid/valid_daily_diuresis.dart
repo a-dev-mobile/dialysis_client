@@ -1,5 +1,6 @@
+import 'package:dialysis/feature/common/valid/valid.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-import 'package:formz/formz.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
 class ValidDailyDiuresis
     extends FormzInput<EnumDailyDiuresis, DailyDiuresisError> {
@@ -27,6 +28,11 @@ class ValidDailyDiuresis
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{'ValidDailyDiuresis': value.name};
+  }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return null;
   }
 }
 

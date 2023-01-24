@@ -1,5 +1,6 @@
+import 'package:dialysis/feature/common/valid/valid.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-import 'package:formz/formz.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
 class ValidGender extends FormzInput<EnumGender, ValidGenderError> {
   const ValidGender.pure() : super.pure(EnumGender.none);
@@ -25,6 +26,15 @@ class ValidGender extends FormzInput<EnumGender, ValidGenderError> {
     return <String, dynamic>{
       'ValidGenderFormz': value.name,
     };
+  }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return isPure
+        ? null
+        : error == notSelected
+            ? l.gender_not_selected
+            : null;
   }
 }
 

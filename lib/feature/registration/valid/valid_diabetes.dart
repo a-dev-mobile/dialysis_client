@@ -1,28 +1,34 @@
+import 'package:dialysis/feature/common/valid/valid.dart';
 import 'package:dialysis/feature/registration/registration.dart';
-import 'package:formz/formz.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
-class ValidDiabetes extends FormzInput<DiabetesEnum, ValidDiabetesError> {
-  const ValidDiabetes.pure() : super.pure(DiabetesEnum.none);
-  const ValidDiabetes.dirty([super.value = DiabetesEnum.none]) : super.dirty();
+class ValidDiabetes extends FormzInput<EnumDiabetes, ValidDiabetesError> {
+  const ValidDiabetes.pure() : super.pure(EnumDiabetes.none);
+  const ValidDiabetes.dirty([super.value = EnumDiabetes.none]) : super.dirty();
 
   @override
-  ValidDiabetesError? validator(DiabetesEnum value) {
-    return value == DiabetesEnum.none ? ValidDiabetesError.notSelected : null;
+  ValidDiabetesError? validator(EnumDiabetes value) {
+    return value == EnumDiabetes.none ? ValidDiabetesError.notSelected : null;
   }
 
-  factory ValidDiabetes.fromMap(Map<String, dynamic> map) {
-    final result = DiabetesEnum.fromValue(
+   factory ValidDiabetes.fromMap(Map<String, dynamic> map) {
+    final result = EnumDiabetes.fromValue(
       map['ValidDiabetesFormz'] as String?,
-      fallback: DiabetesEnum.none,
+      fallback: EnumDiabetes.none,
     );
 
-    return result == DiabetesEnum.none
+    return result == EnumDiabetes.none
         ? const ValidDiabetes.pure()
         : ValidDiabetes.dirty(result);
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{'ValidDiabetesFormz': value.name};
+  }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+       return null;
   }
 }
 

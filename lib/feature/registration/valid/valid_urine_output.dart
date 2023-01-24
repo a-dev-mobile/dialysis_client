@@ -1,16 +1,16 @@
-import 'package:formz/formz.dart';
+import 'package:dialysis/feature/common/valid/valid.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
 ///
 class ValidUrineOutput extends FormzInput<double?, ValidUrineOutputError> {
   const ValidUrineOutput.pure({this.externalError, double? value})
       : super.pure(value);
-  
+
   const ValidUrineOutput.dirty({this.externalError, double? value})
       : super.dirty(value);
-  
+
   final ValidUrineOutputError? externalError;
-  
-  
+
   @override
   ValidUrineOutputError? validator(double? value) {
     if (externalError != null) {
@@ -33,6 +33,11 @@ class ValidUrineOutput extends FormzInput<double?, ValidUrineOutputError> {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{'ValidUrineOutput': value};
+  }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return null;
   }
 }
 

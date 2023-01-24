@@ -363,12 +363,6 @@ abstract class AppLocalizations {
   /// **'Пол не выбран'**
   String get gender_not_selected;
 
-  /// No description provided for @activity_not_selected.
-  ///
-  /// In ru, this message translates to:
-  /// **'Физическая активность не выбрана'**
-  String get activity_not_selected;
-
   /// No description provided for @male.
   ///
   /// In ru, this message translates to:
@@ -482,6 +476,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Поздравляем! Вы сделали новый шаг на пути к более здоровому образу жизни'**
   String get welcome_msg;
+
+  /// No description provided for @no_stage_skd_selected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Стадия ХБП не выбрана'**
+  String get no_stage_skd_selected;
+
+  /// No description provided for @activity_not_selected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Физическая активность не выбрана'**
+  String get activity_not_selected;
 
   /// No description provided for @g.
   ///

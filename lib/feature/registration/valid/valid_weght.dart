@@ -1,4 +1,5 @@
-import 'package:formz/formz.dart';
+import 'package:dialysis/feature/common/valid/valid.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
 ///
 class ValidWeight extends FormzInput<double?, ValidWeightError> {
@@ -29,6 +30,11 @@ class ValidWeight extends FormzInput<double?, ValidWeightError> {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{'ValidWeightFormz': value};
+  }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return null;
   }
 }
 

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid-nested-conditional-expressions
 
-import 'package:formz/formz.dart';
+import 'package:dialysis/feature/common/valid/valid.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
 class ValidSearchFormz extends FormzInput<String, ValidSearchError> {
   const ValidSearchFormz.pure({this.externalError}) : super.pure('');
@@ -25,7 +26,6 @@ class ValidSearchFormz extends FormzInput<String, ValidSearchError> {
                 : null;
   }
 
-
   factory ValidSearchFormz.fromMap(Map<String, dynamic> map) {
     final result = (map['ValidSearchFormz'] as String?) ?? '';
     if (result.isEmpty) return const ValidSearchFormz.pure();
@@ -39,7 +39,10 @@ class ValidSearchFormz extends FormzInput<String, ValidSearchError> {
     };
   }
 
-
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return null;
+  }
 }
 
 extension ValidSearchExtension on ValidSearchFormz {

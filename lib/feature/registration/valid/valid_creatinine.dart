@@ -1,16 +1,16 @@
-import 'package:formz/formz.dart';
+import 'package:dialysis/feature/common/valid/valid.dart';
+import 'package:dialysis/l10n/app_localizations.dart';
 
 ///
 class ValidCreatinine extends FormzInput<double?, ValidCreatinineError> {
   const ValidCreatinine.pure({this.externalError, double? value})
       : super.pure(value);
-  
+
   const ValidCreatinine.dirty({this.externalError, double? value})
       : super.dirty(value);
-  
+
   final ValidCreatinineError? externalError;
-  
-  
+
   @override
   ValidCreatinineError? validator(double? value) {
     if (externalError != null) {
@@ -33,6 +33,11 @@ class ValidCreatinine extends FormzInput<double?, ValidCreatinineError> {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{'ValidCreatinine': value};
+  }
+
+  @override
+  String? errorText({required AppLocalizations l}) {
+    return null;
   }
 }
 

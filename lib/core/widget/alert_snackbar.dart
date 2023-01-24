@@ -125,7 +125,7 @@ class MyAlert extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                             textMsg!,
-                            style: AppTextStyles.s14w400h20(colorText),
+                            style: AppTextStyles.s11w400h14(colorText),
                           ),
                   ),
   

@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
 /*
-  enum CkdEnum {
+  enum EnumCkd {
   one,
   two,
   threeA,
@@ -15,7 +15,7 @@
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-enum CkdEnum with Comparable<CkdEnum> {
+enum EnumCkd with Comparable<EnumCkd> {
   one('one'),
   two('two'),
   threeA('threeA'),
@@ -25,13 +25,13 @@ enum CkdEnum with Comparable<CkdEnum> {
   notKnow('notKnow'),
   none('none');
 
-  const CkdEnum(this.value);
+  const EnumCkd(this.value);
 
   final String value;
 
-  static CkdEnum fromValue(
+  static EnumCkd fromValue(
     String? value, {
-    CkdEnum? fallback,
+    EnumCkd? fallback,
   }) {
     switch (value) {
       case 'one':
@@ -68,21 +68,21 @@ enum CkdEnum with Comparable<CkdEnum> {
     required T Function() none,
   }) {
     switch (this) {
-      case CkdEnum.one:
+      case EnumCkd.one:
         return one();
-      case CkdEnum.two:
+      case EnumCkd.two:
         return two();
-      case CkdEnum.threeA:
+      case EnumCkd.threeA:
         return threeA();
-      case CkdEnum.threeB:
+      case EnumCkd.threeB:
         return threeB();
-      case CkdEnum.four:
+      case EnumCkd.four:
         return four();
-      case CkdEnum.five:
+      case EnumCkd.five:
         return five();
-      case CkdEnum.notKnow:
+      case EnumCkd.notKnow:
         return notKnow();
-      case CkdEnum.none:
+      case EnumCkd.none:
         return none();
     }
   }
@@ -134,7 +134,7 @@ enum CkdEnum with Comparable<CkdEnum> {
       );
 
   @override
-  int compareTo(CkdEnum other) => index.compareTo(other.index);
+  int compareTo(EnumCkd other) => index.compareTo(other.index);
 
   @override
   String toString() => value;
