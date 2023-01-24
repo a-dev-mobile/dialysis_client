@@ -5,8 +5,8 @@ import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Birthday extends StatelessWidget {
-  const Birthday({
+class DropBirthday extends StatelessWidget {
+  const DropBirthday({
     super.key,
   });
 

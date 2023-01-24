@@ -6,12 +6,15 @@ import 'package:dialysis/app/app.dart';
 
 import 'package:dialysis/core/storage/app_storage.dart';
 import 'package:dialysis/core/utils/launch_links.dart';
+import 'package:dialysis/core/widget/widget.dart';
 
 import 'package:dialysis/feature/dashboard/view/view.dart';
 
 import 'package:dialysis/feature/registration/registration.dart';
 
 import 'package:dialysis/navigation/navigation.dart';
+
+import 'package:flutter/widgets.dart';
 
 import 'package:formz/formz.dart';
 
@@ -33,7 +36,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
               years: _initYears(),
             ),
             heightList: _initHeight(),
-            ckdSelected: _getListBoolCkd(indexTrue: null),
+            ckdSelected: _getListBoolByIndexTrue(indexTrue: null),
           ),
         );
   final DaDataClient _clienTips;
@@ -168,57 +171,6 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     // emit(state.copyWith(isLoadNextPage: false));
   }
 
-  bool isValid() {
-    final validName = ValidName.dirty(state.validName.value);
-    final validWeight = ValidWeight.dirty(value: state.validWeight.value);
-    final validGender = ValidGender.dirty(state.validGender.value);
-
-    final validHypertension =
-        ValidHypertension.dirty(state.validHypertension.value);
-
-    final validDiabetes = ValidDiabetes.dirty(state.validDiabetes.value);
-
-    final validActivity = ValidActivity.dirty(state.validActivity.value);
-
-    final validBirthday = ValidBirthday.dirty(_getDateRaw());
-    final validHeight = ValidHeight.dirty(state.validHeight.value);
-    final validCkd = ValidCkd.dirty(state.validCkd.value);
-// todo исправить узнать как считать
-    final validCreatinine = ValidCreatinine.dirty(
-      value: state.validCreatinine.value ?? 0,
-    );
-    emit(
-      state.copyWith(
-        validActivity: validActivity,
-        validName: validName,
-        validGender: validGender,
-        validDiabetes: validDiabetes,
-        validHypertension: validHypertension,
-        validBirthday: validBirthday,
-        validHeight: validHeight,
-        validWeight: validWeight,
-        validCkd: validCkd,
-        validCreatinine: validCreatinine,
-        isValid: Formz.validate(
-          [
-            validHypertension,
-            validDiabetes,
-            validGender,
-            validName,
-            validActivity,
-            validBirthday,
-            validHeight,
-            validWeight,
-            validCkd,
-            validCreatinine,
-          ],
-        ),
-      ),
-    );
-
-    return state.isValid;
-  }
-
   String _getDateRaw() {
     final day = state.daySelected;
     final monthNumber = state.monthSelected;
@@ -291,23 +243,41 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     );
   }
 
-  void checkCkd(int value) {
-    final ckdEnum = CkdEnum.values[value];
+  void checkDailyDiuresis(int value) {
+    final valueEnum = EnumDailyDiuresis.values[value];
 
-    final validCkd = ValidCkd.dirty(ckdEnum);
+    final valid = ValidDailyDiuresis.dirty(valueEnum);
 
-    var ckdSelected = <bool>[];
+    var listBoolSelected = <bool>[];
 
-    ckdSelected = _getListBoolCkd(indexTrue: ckdEnum.index);
+    listBoolSelected = _getListBoolByIndexTrue(indexTrue: valueEnum.index);
     emit(
       state.copyWith(
-        ckdSelected: ckdSelected,
-        validCkd: validCkd,
+        dailyDiuresisSelected: listBoolSelected,
+        validDailyDiuresis: valid,
+        isVisibleUrineOutput: valueEnum == EnumDailyDiuresis.low,
       ),
     );
   }
 
-  static List<bool> _getListBoolCkd({required int? indexTrue}) {
+  void checkCkd(int value) {
+    final enumValue = CkdEnum.values[value];
+
+    final validCkd = ValidCkd.dirty(enumValue);
+
+    var ckdSelected = <bool>[];
+
+    ckdSelected = _getListBoolByIndexTrue(indexTrue: enumValue.index);
+    emit(
+      state.copyWith(
+        ckdSelected: ckdSelected,
+        validCkd: validCkd,
+        isVisibleCreatinine: enumValue == CkdEnum.notKnow,
+      ),
+    );
+  }
+
+  static List<bool> _getListBoolByIndexTrue({required int? indexTrue}) {
     final list = <bool>[];
 
     for (var i = 0; i < CkdEnum.values.length - 1; i++) {
@@ -405,6 +375,34 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     );
   }
 
+  void checkUrineOutput(String value) {
+    if (value.isEmpty) {
+      emit(
+        state.copyWith(
+          validUrineOutput: const ValidUrineOutput.dirty(
+            externalError: ValidUrineOutputError.isEmpty,
+          ),
+        ),
+      );
+
+      return;
+    }
+
+    final doubleValue = double.tryParse(value);
+
+    final validUrineOutput = doubleValue == null
+        ? const ValidUrineOutput.dirty(
+            externalError: ValidUrineOutputError.isNoValid,
+          )
+        : ValidUrineOutput.dirty(value: doubleValue);
+
+    emit(
+      state.copyWith(
+        validUrineOutput: validUrineOutput,
+      ),
+    );
+  }
+
   void checkCreatinine(String value) {
     if (value.isEmpty) {
       emit(
@@ -445,6 +443,71 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
     return state.toMap();
   }
 
-  void checkDailyDiuresis(int p1) {
+  bool isValid(BuildContext context) {
+    final validName = ValidName.dirty(state.validName.value);
+    final validWeight = ValidWeight.dirty(value: state.validWeight.value);
+    final validGender = ValidGender.dirty(state.validGender.value);
+
+    final validHypertension =
+        ValidHypertension.dirty(state.validHypertension.value);
+
+    final validDiabetes = ValidDiabetes.dirty(state.validDiabetes.value);
+
+    final validActivity = ValidActivity.dirty(state.validActivity.value);
+
+    final validBirthday = ValidBirthday.dirty(_getDateRaw());
+    final validHeight = ValidHeight.dirty(state.validHeight.value);
+    final validCkd = ValidCkd.dirty(state.validCkd.value);
+    final validDailyDiuresis =
+        ValidDailyDiuresis.dirty(state.validDailyDiuresis.value);
+// todo исправить узнать как считать
+
+    final validCreatinine =
+        ValidCreatinine.dirty(value: state.validCreatinine.value);
+    final validUrineOutput =
+        ValidUrineOutput.dirty(value: state.validUrineOutput.value);
+    emit(
+      state.copyWith(
+        validActivity: validActivity,
+        validName: validName,
+        validGender: validGender,
+        validDiabetes: validDiabetes,
+        validHypertension: validHypertension,
+        validBirthday: validBirthday,
+        validHeight: validHeight,
+        validWeight: validWeight,
+        validCkd: validCkd,
+        validCreatinine: validCreatinine,
+        validDailyDiuresis: validDailyDiuresis,
+        validUrineOutput: validUrineOutput,
+        isValid: Formz.validate(
+          [
+            validHypertension,
+            validDiabetes,
+            validGender,
+            validName,
+            validActivity,
+            validBirthday,
+            validHeight,
+            validWeight,
+            validCkd,
+            validDailyDiuresis,
+            if (state.isVisibleCreatinine) validCreatinine,
+            if (state.isVisibleUrineOutput) validUrineOutput,
+          ],
+        ),
+      ),
+    );
+
+    MySnackBar.show(
+      context: context,
+     
+      msg: 'Ошибка 1\nОшибка 1\nОшибка 1\nОшибка 1\n',
+      alertType: AlertType.error,
+      duration: const Duration(seconds: 5),
+      title: 'Проверте введеные данные',
+    );
+
+    return state.isValid;
   }
 }

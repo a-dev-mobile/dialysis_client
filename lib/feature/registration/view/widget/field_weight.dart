@@ -8,8 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 //  ignore_for_file: avoid-nested-conditional-expressions
-class WeightField extends StatefulWidget {
-  const WeightField({
+class FieldWeight extends StatefulWidget {
+  const FieldWeight({
     super.key,
     required this.cubit,
   });
@@ -17,10 +17,10 @@ class WeightField extends StatefulWidget {
   final RegistrationCubit cubit;
 
   @override
-  State<WeightField> createState() => _WeightFieldState();
+  State<FieldWeight> createState() => _FieldWeightState();
 }
 
-class _WeightFieldState extends State<WeightField> {
+class _FieldWeightState extends State<FieldWeight> {
   late final TextEditingController controller;
 
   @override

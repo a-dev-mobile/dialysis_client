@@ -1,27 +1,28 @@
-  // ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
-  /*
-  enum DailyDiuresisEnum { no, low, normal, notKnow, none }
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names, lines_longer_than_80_chars
+/*
+  
+  enum EnumDailyDiuresis { no, low, normal, unknown, none }
 
   */
-  
-  //  ******************************
-  // GENERATED CODE BELOW - DO NOT MODIFY
-  //  ******************************
 
-enum DailyDiuresisEnum with Comparable<DailyDiuresisEnum> { 
+//  ******************************
+// GENERATED CODE BELOW - DO NOT MODIFY
+//  ******************************
+
+enum EnumDailyDiuresis with Comparable<EnumDailyDiuresis> {
   no('no'),
   low('low'),
   normal('normal'),
-  notKnow('notKnow'),
+  unknown('unknown'),
   none('none');
 
-  const DailyDiuresisEnum(this.value);
+  const EnumDailyDiuresis(this.value);
 
   final String value;
 
-  static DailyDiuresisEnum fromValue(
+  static EnumDailyDiuresis fromValue(
     String? value, {
-    DailyDiuresisEnum? fallback,
+    EnumDailyDiuresis? fallback,
   }) {
     switch (value) {
       case 'no':
@@ -30,8 +31,8 @@ enum DailyDiuresisEnum with Comparable<DailyDiuresisEnum> {
         return low;
       case 'normal':
         return normal;
-      case 'notKnow':
-        return notKnow;
+      case 'unknown':
+        return unknown;
       case 'none':
         return none;
 
@@ -45,42 +46,38 @@ enum DailyDiuresisEnum with Comparable<DailyDiuresisEnum> {
     required T Function() no,
     required T Function() low,
     required T Function() normal,
-    required T Function() notKnow,
+    required T Function() unknown,
     required T Function() none,
-
   }) {
     switch (this) {
-      case DailyDiuresisEnum.no:
-        return no();     
-      case DailyDiuresisEnum.low:
-        return low();     
-      case DailyDiuresisEnum.normal:
-        return normal();     
-      case DailyDiuresisEnum.notKnow:
-        return notKnow();     
-      case DailyDiuresisEnum.none:
-        return none();     
-
+      case EnumDailyDiuresis.no:
+        return no();
+      case EnumDailyDiuresis.low:
+        return low();
+      case EnumDailyDiuresis.normal:
+        return normal();
+      case EnumDailyDiuresis.unknown:
+        return unknown();
+      case EnumDailyDiuresis.none:
+        return none();
     }
   }
-  
+
   /// Pattern matching
   T maybeMap<T>({
     required T Function() orElse,
     T Function()? no,
     T Function()? low,
     T Function()? normal,
-    T Function()? notKnow,
+    T Function()? unknown,
     T Function()? none,
-
   }) =>
       map<T>(
-      no: no ?? orElse,     
-      low: low ?? orElse,     
-      normal: normal ?? orElse,     
-      notKnow: notKnow ?? orElse,     
-      none: none ?? orElse,     
-
+        no: no ?? orElse,
+        low: low ?? orElse,
+        normal: normal ?? orElse,
+        unknown: unknown ?? orElse,
+        none: none ?? orElse,
       );
 
   /// Pattern matching
@@ -88,23 +85,21 @@ enum DailyDiuresisEnum with Comparable<DailyDiuresisEnum> {
     T Function()? no,
     T Function()? low,
     T Function()? normal,
-    T Function()? notKnow,
+    T Function()? unknown,
     T Function()? none,
-
   }) =>
       maybeMap<T?>(
         orElse: () => null,
-        no: no,  
-        low: low,  
-        normal: normal,  
-        notKnow: notKnow,  
-        none: none,  
-        
+        no: no,
+        low: low,
+        normal: normal,
+        unknown: unknown,
+        none: none,
       );
 
   @override
-  int compareTo(DailyDiuresisEnum other) => index.compareTo(other.index);
+  int compareTo(EnumDailyDiuresis other) => index.compareTo(other.index);
 
   @override
   String toString() => value;
-   }
+}

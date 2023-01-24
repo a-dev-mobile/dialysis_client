@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:formz/formz.dart';
 
 @immutable
-class RegistrationState {   
+class RegistrationState { 
 /* init: false */
   final bool isLoadPage;
 /* init: false */
@@ -75,11 +75,7 @@ type: data
 init: const ValidWeight.pure()
 */
   final ValidWeight validWeight;
-/* 
-type: data
-init: const ValidCreatinine.pure()
-*/
-  final ValidCreatinine validCreatinine;
+
 /* 
 type: data
 init: const ValidHypertension.pure()
@@ -103,6 +99,20 @@ init: const ValidDailyDiuresis.pure()
 */
   final ValidDailyDiuresis validDailyDiuresis;
 
+/* 
+type: data
+init: const ValidUrineOutput.pure()
+*/
+  final ValidUrineOutput validUrineOutput;
+/* init: false */
+  final bool isVisibleUrineOutput;
+/* 
+type: data
+init: const ValidCreatinine.pure()
+*/
+  final ValidCreatinine validCreatinine;
+  /* init: false */
+  final bool isVisibleCreatinine;
   // end
    
   //  ******************************
@@ -131,11 +141,14 @@ init: const ValidDailyDiuresis.pure()
     this.validBirthday = const ValidBirthday.pure(),
     this.validHeight = const ValidHeight.pure(),
     this.validWeight = const ValidWeight.pure(),
-    this.validCreatinine = const ValidCreatinine.pure(),
     this.validHypertension = const ValidHypertension.pure(),
     this.validDiabetes = const ValidDiabetes.pure(),
     this.validCkd = const ValidCkd.pure(),
     this.validDailyDiuresis = const ValidDailyDiuresis.pure(),
+    this.validUrineOutput = const ValidUrineOutput.pure(),
+    this.isVisibleUrineOutput = false,
+    this.validCreatinine = const ValidCreatinine.pure(),
+    this.isVisibleCreatinine = false,
   });
   /*
    factory RegistrationState.init() => RegistrationState(
@@ -166,11 +179,14 @@ RegistrationState copyWith({
     ValidBirthday? validBirthday,
     ValidHeight? validHeight,
     ValidWeight? validWeight,
-    ValidCreatinine? validCreatinine,
     ValidHypertension? validHypertension,
     ValidDiabetes? validDiabetes,
     ValidCkd? validCkd,
     ValidDailyDiuresis? validDailyDiuresis,
+    ValidUrineOutput? validUrineOutput,
+    bool? isVisibleUrineOutput,
+    ValidCreatinine? validCreatinine,
+    bool? isVisibleCreatinine,
   }) {
     return RegistrationState(
       isLoadPage: isLoadPage ?? this.isLoadPage, 
@@ -194,11 +210,14 @@ RegistrationState copyWith({
       validBirthday: validBirthday ?? this.validBirthday, 
       validHeight: validHeight ?? this.validHeight, 
       validWeight: validWeight ?? this.validWeight, 
-      validCreatinine: validCreatinine ?? this.validCreatinine, 
       validHypertension: validHypertension ?? this.validHypertension, 
       validDiabetes: validDiabetes ?? this.validDiabetes, 
       validCkd: validCkd ?? this.validCkd, 
       validDailyDiuresis: validDailyDiuresis ?? this.validDailyDiuresis, 
+      validUrineOutput: validUrineOutput ?? this.validUrineOutput, 
+      isVisibleUrineOutput: isVisibleUrineOutput ?? this.isVisibleUrineOutput, 
+      validCreatinine: validCreatinine ?? this.validCreatinine, 
+      isVisibleCreatinine: isVisibleCreatinine ?? this.isVisibleCreatinine, 
     );
   }
   
@@ -225,11 +244,14 @@ RegistrationState copyWith({
       'validBirthday': validBirthday.toMap(), 
       'validHeight': validHeight.toMap(), 
       'validWeight': validWeight.toMap(), 
-      'validCreatinine': validCreatinine.toMap(), 
       'validHypertension': validHypertension.toMap(), 
       'validDiabetes': validDiabetes.toMap(), 
       'validCkd': validCkd.toMap(), 
       'validDailyDiuresis': validDailyDiuresis.toMap(), 
+      'validUrineOutput': validUrineOutput.toMap(), 
+      'isVisibleUrineOutput': isVisibleUrineOutput, 
+      'validCreatinine': validCreatinine.toMap(), 
+      'isVisibleCreatinine': isVisibleCreatinine, 
     };
   }
   
@@ -256,16 +278,19 @@ RegistrationState copyWith({
       validBirthday: ValidBirthday.fromMap(map['validBirthday'] as Map<String, dynamic>), 
       validHeight: ValidHeight.fromMap(map['validHeight'] as Map<String, dynamic>), 
       validWeight: ValidWeight.fromMap(map['validWeight'] as Map<String, dynamic>), 
-      validCreatinine: ValidCreatinine.fromMap(map['validCreatinine'] as Map<String, dynamic>), 
       validHypertension: ValidHypertension.fromMap(map['validHypertension'] as Map<String, dynamic>), 
       validDiabetes: ValidDiabetes.fromMap(map['validDiabetes'] as Map<String, dynamic>), 
       validCkd: ValidCkd.fromMap(map['validCkd'] as Map<String, dynamic>), 
       validDailyDiuresis: ValidDailyDiuresis.fromMap(map['validDailyDiuresis'] as Map<String, dynamic>), 
+      validUrineOutput: ValidUrineOutput.fromMap(map['validUrineOutput'] as Map<String, dynamic>), 
+      isVisibleUrineOutput: map['isVisibleUrineOutput'] as bool? ?? false, 
+      validCreatinine: ValidCreatinine.fromMap(map['validCreatinine'] as Map<String, dynamic>), 
+      isVisibleCreatinine: map['isVisibleCreatinine'] as bool? ?? false, 
     );
   }
   @override
   String toString() {
-    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, activitySelected: $activitySelected, genderSelected: $genderSelected, hypertensionSelected: $hypertensionSelected, dailyDiuresisSelected: $dailyDiuresisSelected, status: $status, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, ckdSelected: $ckdSelected, diabetesSelected: $diabetesSelected, dateRegModel: $dateRegModel, validName: $validName, validActivity: $validActivity, validGender: $validGender, validBirthday: $validBirthday, validHeight: $validHeight, validWeight: $validWeight, validCreatinine: $validCreatinine, validHypertension: $validHypertension, validDiabetes: $validDiabetes, validCkd: $validCkd, validDailyDiuresis: $validDailyDiuresis, )';
+    return 'RegistrationState(isLoadPage: $isLoadPage, isLoadNextPage: $isLoadNextPage, isValid: $isValid, activitySelected: $activitySelected, genderSelected: $genderSelected, hypertensionSelected: $hypertensionSelected, dailyDiuresisSelected: $dailyDiuresisSelected, status: $status, daySelected: $daySelected, yearSelected: $yearSelected, monthSelected: $monthSelected, heightList: $heightList, ckdSelected: $ckdSelected, diabetesSelected: $diabetesSelected, dateRegModel: $dateRegModel, validName: $validName, validActivity: $validActivity, validGender: $validGender, validBirthday: $validBirthday, validHeight: $validHeight, validWeight: $validWeight, validHypertension: $validHypertension, validDiabetes: $validDiabetes, validCkd: $validCkd, validDailyDiuresis: $validDailyDiuresis, validUrineOutput: $validUrineOutput, isVisibleUrineOutput: $isVisibleUrineOutput, validCreatinine: $validCreatinine, isVisibleCreatinine: $isVisibleCreatinine, )';
   }
 
   String toJson() => json.encode(toMap());
@@ -298,11 +323,14 @@ RegistrationState copyWith({
             (identical(other.validBirthday, validBirthday) || other.validBirthday == validBirthday) && 
             (identical(other.validHeight, validHeight) || other.validHeight == validHeight) && 
             (identical(other.validWeight, validWeight) || other.validWeight == validWeight) && 
-            (identical(other.validCreatinine, validCreatinine) || other.validCreatinine == validCreatinine) && 
             (identical(other.validHypertension, validHypertension) || other.validHypertension == validHypertension) && 
             (identical(other.validDiabetes, validDiabetes) || other.validDiabetes == validDiabetes) && 
             (identical(other.validCkd, validCkd) || other.validCkd == validCkd) && 
-            (identical(other.validDailyDiuresis, validDailyDiuresis) || other.validDailyDiuresis == validDailyDiuresis) );
+            (identical(other.validDailyDiuresis, validDailyDiuresis) || other.validDailyDiuresis == validDailyDiuresis) && 
+            (identical(other.validUrineOutput, validUrineOutput) || other.validUrineOutput == validUrineOutput) && 
+            (identical(other.isVisibleUrineOutput, isVisibleUrineOutput) || other.isVisibleUrineOutput == isVisibleUrineOutput) && 
+            (identical(other.validCreatinine, validCreatinine) || other.validCreatinine == validCreatinine) && 
+            (identical(other.isVisibleCreatinine, isVisibleCreatinine) || other.isVisibleCreatinine == isVisibleCreatinine) );
 
   }
   
@@ -330,10 +358,13 @@ RegistrationState copyWith({
         validBirthday,
         validHeight,
         validWeight,
-        validCreatinine,
         validHypertension,
         validDiabetes,
         validCkd,
         validDailyDiuresis,
+        validUrineOutput,
+        isVisibleUrineOutput,
+        validCreatinine,
+        isVisibleCreatinine,
 ]);
   }

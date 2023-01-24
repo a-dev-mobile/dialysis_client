@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreatinineField extends StatefulWidget {
-  const CreatinineField({
+class FieldUrineOutput extends StatefulWidget {
+  const FieldUrineOutput({
     super.key,
     required this.cubit,
   });
@@ -15,16 +15,16 @@ class CreatinineField extends StatefulWidget {
   final RegistrationCubit cubit;
 
   @override
-  State<CreatinineField> createState() => _CreatinineFieldState();
+  State<FieldUrineOutput> createState() => _FieldUrineOutputState();
 }
 
-class _CreatinineFieldState extends State<CreatinineField> {
+class _FieldUrineOutputState extends State<FieldUrineOutput> {
   late final TextEditingController controller;
 
   @override
   void initState() {
     var initValue = '';
-    final initDouble = widget.cubit.state.validCreatinine.value;
+    final initDouble = widget.cubit.state.validUrineOutput.value;
     if (initDouble != null) {
       initValue = initDouble.toString();
     }
@@ -44,50 +44,56 @@ class _CreatinineFieldState extends State<CreatinineField> {
     // final l = context.l10n;
 
     return BlocBuilder<RegistrationCubit, RegistrationState>(
+      buildWhen: (p, c) =>
+          p.validUrineOutput.isPure != c.validUrineOutput.isPure ||
+          p.validUrineOutput.value != c.validUrineOutput.value ||
+          p.validDailyDiuresis.value != c.validDailyDiuresis.value ||
+          p.isVisibleUrineOutput != c.isVisibleUrineOutput,
       builder: (context, state) {
-        final valid = state.validCreatinine;
+        final valid = state.validUrineOutput;
+
+        const errorMaxLines2 = 2;
+        const maxLength = 6;
 
         return Visibility(
-          visible: state.validCkd.value == CkdEnum.notKnow,
+          visible: state.isVisibleUrineOutput,
           child: CardCustom(
             child: Column(
               children: [
                 const TitleSub(
-                  text: 'Укажите свой креатинин',
+                  text: 'Укажите количество выделяемой мочи',
                   dialogText:
-                      'Мы используем эти сведения для расчета клубочковой фильтрации',
+                      'Мы используем эти сведения для расчета суточной нормы потребления воды',
                 ),
                 TextField(
                   controller: controller,
                   decoration: InputDecoration(
-                    labelText: 'Креатинин',
+                    // labelText: 'Моча',
                     errorText: valid.isPure
                         ? null
                         : valid.error == valid.isEmpty
-                            ? 'Креатинин не указан'
+                            ? 'Не указано количестов выделяемой мочи '
                             : valid.error == valid.isMax
-                                ? 'Указанный креатинин не поддерживается приложением'
+                                ? 'Указанное значение мочи не поддерживается приложением'
                                 : valid.error == valid.isMin
-                                    ? 'Указанный креатинин не поддерживается приложением'
+                                    ? 'Указанное значение мочи не поддерживается приложением'
                                     : valid.error == valid.isNoValid
                                         ? 'Неправильное значение'
                                         : null,
-                    errorMaxLines: 2,
-                    suffixText: 'мкмоль/л',
+                    errorMaxLines: errorMaxLines2,
+                    suffixText: 'мл',
                   ),
                   keyboardType: TextInputType.number,
-                  onChanged: widget.cubit.checkCreatinine,
-                  inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                  onChanged: widget.cubit.checkUrineOutput,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(maxLength),
+                  ],
                 ),
               ],
             ),
           ),
         );
       },
-      buildWhen: (p, c) =>
-          p.validCreatinine.isPure != c.validCreatinine.isPure ||
-          p.validCreatinine.value != c.validCreatinine.value ||
-          p.validCkd.value != c.validCkd.value,
     );
   }
 }

@@ -14,10 +14,12 @@ class TitleSub extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          text,
-          style: AppTextStyles.bodyText2(),
-          textAlign: TextAlign.center,
+        Expanded(
+          child: Text(
+            text,
+            style: AppTextStyles.bodyText2(),
+            // textAlign: TextAlign.center,
+          ),
         ),
         if (dialogText != null)
           IconButton(

@@ -53,23 +53,25 @@ class _RegistrationPage extends StatelessWidget {
                       const SizedBox(height: 10),
                       const _TitleMain(),
                       const SizedBox(height: 20),
-                      NameField(cubit: cubit),
-                      const GenderChoose(),
-                      const Activity(),
-                      const HypertensionChoose(),
-                      const DiabetesChoose(),
-                      const Birthday(),
-                      const HeightChoose(),
-                      WeightField(cubit: cubit),
-                      const WidgetCkd(),
-                      CreatinineField(cubit: cubit),
+                      FieldName(cubit: cubit),
+                      const BtnGender(),
+                      const DropBirthday(),
+                      const DropHeight(),
+                      FieldWeight(cubit: cubit),
+                      const BtnActivity(),
+                      const BtnHypertension(),
+                      const BtnDiabetes(),
+                      const BtnDailyDiuresis(),
+                      FieldUrineOutput(cubit: cubit),
+                      const BtnCkd(),
+                      FieldCreatinine(cubit: cubit),
                       const SizedBox(height: 20),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           // ignore: prefer-extracting-callbacks
                           onPressed: () {
-                            if (cubit.isValid()) {
+                            if (cubit.isValid(context)) {
                               cubit.nextPage();
                             }
                           },

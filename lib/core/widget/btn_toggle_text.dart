@@ -26,6 +26,7 @@ class BtnToggleText extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraint) {
         return Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               // crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,10 +65,13 @@ class BtnToggleText extends StatelessWidget {
             ),
             if (errorText != null) ...[
               const SizedBox(height: 6),
-              Text(
-                errorText!,
-                style: context.textTheme.bodySmall!
-                    .copyWith(color: context.theme.errorColor),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  errorText!,
+                  style: context.textTheme.bodySmall!
+                      .copyWith(color: context.theme.errorColor),
+                ),
               ),
             ],
             if (infoBottom.isNotEmpty) ...[
@@ -83,19 +87,19 @@ class BtnToggleText extends StatelessWidget {
       },
     );
   }
-}
 
-Future<void> _showInfoDialog({
-  required BuildContext context,
-  required String text,
-}) async {
-  return showDialog<void>(
-    context: context,
-    useRootNavigator: false,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        content: Text(text),
-      );
-    },
-  );
+  Future<void> _showInfoDialog({
+    required BuildContext context,
+    required String text,
+  }) async {
+    return showDialog<void>(
+      context: context,
+      useRootNavigator: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(text),
+        );
+      },
+    );
+  }
 }

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-class NameField extends StatefulWidget {
-  const NameField({
+class FieldName extends StatefulWidget {
+  const FieldName({
     super.key,
     required this.cubit,
   });
@@ -15,10 +15,10 @@ class NameField extends StatefulWidget {
   final RegistrationCubit cubit;
 
   @override
-  State<NameField> createState() => _NameFieldState();
+  State<FieldName> createState() => _FieldNameState();
 }
 
-class _NameFieldState extends State<NameField> {
+class _FieldNameState extends State<FieldName> {
   late final TextEditingController controller;
 
   @override

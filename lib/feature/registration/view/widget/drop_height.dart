@@ -5,8 +5,8 @@ import 'package:dialysis/feature/registration/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HeightChoose extends StatelessWidget {
-  const HeightChoose({
+class DropHeight extends StatelessWidget {
+  const DropHeight({
     super.key,
   });
 

@@ -155,8 +155,7 @@ class _TestFlashLibPage extends StatelessWidget {
                 'dd sds s d12sdfsdfsdfsd a sd das das das das dfsd sd fssdf 3',
             // textMsg: ' s s s s msd fsd fsd sasda sd as as as as  sd s sd sg',
             // textBtn: '333 bsd fsd dsasdasdasd asd as da ds sd s sd s tn',
-            isVisible: true,
-            onPressedClose: controller.dismiss,
+           context: context,
           ),
         );
       },

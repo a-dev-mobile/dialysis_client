@@ -1,14 +1,16 @@
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars,
 
 import 'package:dialysis/core/widget/widget.dart';
 import 'package:dialysis/feature/common/common.dart';
+
 import 'package:dialysis/feature/registration/registration.dart';
+
 import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HypertensionChoose extends StatelessWidget {
-  const HypertensionChoose({
+class BtnActivity extends StatelessWidget {
+  const BtnActivity({
     super.key,
   });
 
@@ -19,26 +21,26 @@ class HypertensionChoose extends StatelessWidget {
 
     return CardCustom(
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
-        buildWhen: (p, c) =>
-            p.validHypertension.isPure !=
-                c.validHypertension.isPure ||
-            p.validHypertension.value != c.validHypertension.value,
         builder: (context, state) {
-          final valid = state.validHypertension;
+          final valid = state.validActivity;
 
           return BtnToggleText(
-            textList: [l.yes_caps, l.no_caps],
-            isSelected: state.hypertensionSelected,
-            onPressed: cubit.checkHypertension,
-            dialogText: l.info_hypertension,
+            textList: [l.normal, l.light],
+            isSelected: state.activitySelected,
+            onPressed: cubit.checkActivity,
+            title: 'Укажите свою физическую активность',
             errorText: valid.isPure
                 ? null
                 : valid.error == valid.notSelected
-                    ? 'Подтвердите отсутствие или наличие гипертензии'
+                    ? l.activity_not_selected
                     : null,
-            title: 'Наличие гипертензии (высокое кровяное давление)',
+            dialogText:
+                'Физическая активность влияет для расчета суточной нормы нутриентов.',
           );
         },
+        buildWhen: (p, c) =>
+            p.validActivity.isPure != c.validActivity.isPure ||
+            p.validActivity.value != c.validActivity.value,
       ),
     );
   }

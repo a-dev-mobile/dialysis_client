@@ -1,22 +1,26 @@
 import 'package:dialysis/feature/registration/registration.dart';
 import 'package:formz/formz.dart';
 
-class ValidDailyDiuresis extends FormzInput<DailyDiuresisEnum, DailyDiuresisError> {
-  const ValidDailyDiuresis.pure() : super.pure(DailyDiuresisEnum.none);
-  const ValidDailyDiuresis.dirty([super.value = DailyDiuresisEnum.none]) : super.dirty();
+class ValidDailyDiuresis
+    extends FormzInput<EnumDailyDiuresis, DailyDiuresisError> {
+  const ValidDailyDiuresis.pure() : super.pure(EnumDailyDiuresis.none);
+  const ValidDailyDiuresis.dirty([super.value = EnumDailyDiuresis.none])
+      : super.dirty();
 
   @override
-  DailyDiuresisError? validator(DailyDiuresisEnum value) {
-    return value == DailyDiuresisEnum.none ? DailyDiuresisError.notSelected : null;
+  DailyDiuresisError? validator(EnumDailyDiuresis value) {
+    return value == EnumDailyDiuresis.none
+        ? DailyDiuresisError.notSelected
+        : null;
   }
 
   factory ValidDailyDiuresis.fromMap(Map<String, dynamic> map) {
-    final result = DailyDiuresisEnum.fromValue(
+    final result = EnumDailyDiuresis.fromValue(
       map['ValidDailyDiuresis'] as String?,
-      fallback: DailyDiuresisEnum.none,
+      fallback: EnumDailyDiuresis.none,
     );
 
-    return result == DailyDiuresisEnum.none
+    return result == EnumDailyDiuresis.none
         ? const ValidDailyDiuresis.pure()
         : ValidDailyDiuresis.dirty(result);
   }

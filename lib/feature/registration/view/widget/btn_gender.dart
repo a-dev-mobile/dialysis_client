@@ -7,8 +7,8 @@ import 'package:dialysis/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DiabetesChoose extends StatelessWidget {
-  const DiabetesChoose({
+class BtnGender extends StatelessWidget {
+  const BtnGender({
     super.key,
   });
 
@@ -20,22 +20,24 @@ class DiabetesChoose extends StatelessWidget {
     return CardCustom(
       child: BlocBuilder<RegistrationCubit, RegistrationState>(
         buildWhen: (p, c) =>
-            p.validDiabetes.isPure != c.validDiabetes.isPure ||
-            p.validDiabetes.value != c.validDiabetes.value,
+            p.validGender.isPure != c.validGender.isPure ||
+            p.validGender.value != c.validGender.value,
         builder: (context, state) {
-          final valid = state.validDiabetes;
+          final valid = state.validGender;
 
           return BtnToggleText(
-            textList: [l.yes_caps, l.no_caps],
-            isSelected: state.diabetesSelected,
-            onPressed: cubit.checkDiabetes,
-            dialogText: l.info_diabets,
+            textList: [l.female, l.male],
+            isSelected: state.genderSelected,
+            onPressed: cubit.checkGender,
+            dialogText:
+                'Пол влияет на скорость метаболизма. Вот почему эта информация нужна для расчета суточной нормы.',
             errorText: valid.isPure
                 ? null
                 : valid.error == valid.notSelected
-                    ? 'Подтвердите отсутствие или наличие диабета'
+                    ? l.gender_not_selected
                     : null,
-            title: 'Наличие диабета',
+            title:
+                'Для человека какого пола следует рассчитывать рекомендации?',
           );
         },
       ),
