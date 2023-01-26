@@ -493,7 +493,7 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
         isValid: Formz.validate(listValidate),
       ),
     );
-//  error enumeration and display 
+//  error enumeration and display
     final buffer = StringBuffer();
     String? error;
     for (final v in listValidate) {
@@ -504,13 +504,14 @@ class RegistrationCubit extends HydratedCubit<RegistrationState> {
           ..write('\n');
       }
     }
-
-    MySnackBar.show(
-      context: context,
-      alertType: AlertType.error,
-      duration: const Duration(seconds: 5),
-      title: buffer.toString(),
-    );
+    if (!state.isValid) {
+      MySnackBar.show(
+        context: context,
+        alertType: AlertType.error,
+        duration: const Duration(seconds: 5),
+        title: buffer.toString(),
+      );
+    }
 
     return state.isValid;
   }

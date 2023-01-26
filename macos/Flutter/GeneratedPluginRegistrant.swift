@@ -14,7 +14,7 @@ import firebase_crashlytics
 import firebase_remote_config
 import firebase_storage
 import package_info_plus
-import path_provider_macos
+import path_provider_foundation
 import share_plus
 import shared_preferences_foundation
 import sqflite_sqlcipher

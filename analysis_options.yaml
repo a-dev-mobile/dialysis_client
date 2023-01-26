@@ -19,7 +19,6 @@ analyzer:
   # implicit-dynamic: true
   # implicit-casts: true
 
-
   exclude:
     # Generated code
     - "packages/**"
